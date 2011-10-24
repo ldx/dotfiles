@@ -1,0 +1,204 @@
+################################
+# G L O B A L  S E T T I N G S #
+################################
+setopt ALWAYS_LAST_PROMPT ALWAYS_TO_END APPEND_HISTORY AUTO_CD AUTO_LIST \
+	AUTO_MENU AUTO_NAME_DIRS AUTO_PARAM_SLASH AUTO_RESUME BANG_HIST \
+	NO_CHECK_JOBS NO_HUP CLOBBER CORRECT CORRECT_ALL PRINTEXITVALUE \
+	EXTENDED_HISTORY FUNCTION_ARGZERO GLOB HIST_IGNORE_DUPS \
+	COMPLETE_IN_WORD HIST_REDUCE_BLANKS MAIL_WARNING POSIX_BUILTINS \
+	PRINT_EIGHT_BIT NO_BEEP EXTENDEDGLOB SH_WORD_SPLIT
+
+unsetopt CHASE_DOTS CHASE_LINKS BG_NICE IGNORE_BRACES PROMPT_CR NOMATCH
+
+SAVEHIST=20000
+HISTSIZE=20000
+HISTFILE=~/.zsh_history
+WATCH=notme
+WATCHFMT="%n has %a tty%l from %M at %D %T"
+WORDCHARS='*?_-.[]~=&;!#$%^(){}<>'
+
+PAGER="less -r"
+LESSCHARSET=utf-8
+CVS_RSH=ssh
+LC_ALL=hu_HU.UTF-8
+EDITOR=vim
+VISUAL=vim
+
+case `uname -s` in
+    [Dd][Aa][Rr][Ww][Ii][Nn])
+        export JAVA_HOME=/System/Library/Frameworks/JavaVM.framework/Home
+        alias sed="sed -E"
+        ;;
+    [Ll][Ii][Nn][Uu][Xx])
+        alias open=xdg-open
+        alias sed="sed -r"
+        ;;
+esac
+
+if [ "$TERM" = "xterm" ]; then
+	TERM=xterm-color
+	export TERM
+fi
+
+path=( ~/bin /usr/local/bin /usr/local/sbin /sbin /usr/sbin \
+    /Library/Frameworks/Python.framework/Versions/Current/bin \
+    $JAVA_HOME/bin \
+    /usr/local/git/bin \
+    /usr/local/git/libexec/git-core \
+    /opt/android-sdk-linux_x86/tools \
+    /opt/android-sdk-linux_x86/platform-tools \
+    $path )
+
+PATH=~/bin:/Library/Frameworks/Python.framework/Versions/Current/bin:/usr/local/bin:/usr/local/sbin:/sbin:/usr/sbin:$JAVA_HOME/bin:/usr/local/git/bin:/usr/local/git/libexec/git-core:~/SDKs/android/tools:$MAGICK_HOME/bin:/usr/local/mysql/bin:$PATH
+
+export PAGER LESSCHARSET CVS_RSH LC_ALL PATH
+
+# want core files
+#ulimit -c unlimited
+ulimit -c 0
+
+#autoload -U promptinit
+#promptinit
+#prompt adam2 magenta cyan cyan
+
+export MallocBadFreeAbort=1
+
+#################
+# A L I A S E S #
+#################
+case `uname -s` in
+[Ll][Ii][Nn][Uu][Xx])
+	alias ls='ls --color -F'
+	;;
+[Ff][Rr][Ee][Ee][Bb][Ss][Dd])
+	alias ls='ls -G -F'
+	;;
+[Dd][Aa][Rr][Ww][Ii][Nn])
+	alias ls='ls -G -F'
+	;;
+esac
+alias la='ls -al'
+alias l='ls -l'
+alias screen='TERM=screen screen'
+alias scpresume="rsync --partial --progress --rsh=ssh"
+alias grep='grep --color'
+
+#####################
+# F U N C T I O N S #
+#####################
+alias calc="noglob _calc" calcfx="noglob _calcfx"
+
+function _calc()
+{
+    gawk "BEGIN { print $* ; }"
+}
+
+function _calcfx () {
+    gawk -v CONVFMT="%12.2f" -v OFMT="%.9g"  "BEGIN { print $* ; }"
+}
+
+#######################
+# C O M P L E T I O N #
+#######################
+autoload multicomp mtoolsmatch insmodcomp
+autoload -U compinit
+autoload -Uz vcs_info
+compinit
+zstyle ':completion:*:processes-names' command 'ps -e -o comm='
+
+##########################
+# K E Y  B I N D I N G S #
+##########################
+bindkey '^[[A'	 history-beginning-search-backward	# Up
+bindkey '^[[B'   history-beginning-search-forward 	# Down
+bindkey '^[^I'   reverse-menu-complete			# ESC TAB
+bindkey ' '      magic-space
+bindkey '^A'  	 beginning-of-line
+bindkey '^E'     end-of-line
+bindkey '^D'     logout
+bindkey '^L'     clear-screen
+bindkey '^J'     self-insert				# LF
+bindkey '^U'     kill-whole-line
+bindkey '^W'	 backward-kill-word
+bindkey '^f'     forward-word
+bindkey '^b'     backward-word
+bindkey '^/'     undo
+bindkey '^x'     kill-word
+bindkey '^[[^@'  beginning-of-line
+bindkey '^[[e'   end-of-line
+
+#########################
+# T M U X / S C R E E N #
+#########################
+
+reattach_tmux() {
+    found=0
+    my_session="my_session"
+    sessions="`tmux list-session|awk '{print $1$11}'`"
+    for s in $sessions; do
+        name="`echo $s|cut -d ':' -f 1`"
+        attached="`echo $s|cut -d ':' -f 2`"
+        if [[ "$name" == "$my_session" ]]; then
+            found=1
+            if [[ "$attached" != "(attached)" ]]; then
+                tmux -2 attach -t $my_session
+            fi
+        fi
+    done
+    if [ "$found" -eq "0" ]; then
+        tmux -2 new-session -s $my_session
+    fi
+}
+
+reattach_screen() {
+    detached=`screen -ls|grep '^	[0-9]\+\.my_screen.*(Detached)$'|head -n1|sed 's/^	([0-9]+)\..*$/\1/'`
+    attached=`screen -ls|grep '^	[0-9]\+\.my_screen.*(Attached)$'|head -n1|sed 's/^	([0-9]+)\..*$/\1/'`
+    if [ ! -z "$detached" ]; then
+        screen -r my_screen
+    else
+        if [ -z "$attached" ]; then
+            screen -S my_screen
+        fi
+    fi
+}
+
+# reattach tmux/screen session
+tmux_installed=0
+screen_installed=0
+hash tmux 2>/dev/null && tmux_installed=1
+hash screen 2>/dev/null && screen_installed=1
+if [ $tmux_installed -ne 0 ]; then
+    reattach_tmux
+else
+    if [ $screen_installed -ne 0 ]; then
+        reattach_screen
+    fi
+fi
+
+###############
+# P R O M P T #
+###############
+
+setopt prompt_subst
+zstyle ':vcs_info:*' actionformats '[%B%b:%F{1}%a%f%%b]'
+zstyle ':vcs_info:*' formats '[%F{3}%b%f]'
+zstyle ':vcs_info:(sv[nk]|bzr):*' branchformat '%b:%F{3}%r%f'
+zstyle ':vcs_info:*' enable git cvs svn
+
+# or use pre_cmd, see man zshcontrib
+autoload -U is-at-least
+vcs_info_wrapper() {
+    if is-at-least 4.3.7; then
+        vcs_info
+        if [ -n "$vcs_info_msg_0_" ]; then
+            echo "${vcs_info_msg_0_}"
+        fi
+    fi
+}
+
+lsb_release_codename() {
+    hash lsb_release 2>/dev/null && lsb_release -c|awk '{print $2}'
+}
+
+PROMPT='[%B%n%b@%B%m%b:%B$(lsb_release_codename)%b]%18<..<%~%<<$(vcs_info_wrapper)%# '
+
