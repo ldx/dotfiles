@@ -5,17 +5,19 @@
 # your ~.
 #
 
-CP = cp -rf
+CP = cp -a
 RM = rm -rf
+INSTALL = install -d -p
 
-EXCLUDE = . .. .git .gitmodules Makefile
-ALL = $(wildcard .* *)
-SRC = $(filter-out $(EXCLUDE), $(ALL))
+TOP_EXCLUDE = . .. .git .gitmodules Makefile
+EXCLUDE= $(foreach x, .git .gitmodules .gitignore, -path "*/$(x)" -prune -o)
+ALL = $(filter-out $(TOP_EXCLUDE), $(wildcard .* *))
+SRC = $(foreach x, $(ALL), $(shell find $(x) $(EXCLUDE) -type f -print;))
 DST = $(addprefix $(HOME)/, $(SRC))
 
 $(HOME)/%: %
 	@echo "$< -> $@"
-	@$(RM) $@
+	@$(INSTALL) $(shell dirname $@)
 	@$(CP) $< $@
 
 install: $(DST)
