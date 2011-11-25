@@ -163,15 +163,21 @@ reattach_screen() {
 }
 
 # reattach tmux/screen session
+remote_session=0
 tmux_installed=0
 screen_installed=0
 hash tmux 2>/dev/null && tmux_installed=1
 hash screen 2>/dev/null && screen_installed=1
-if [ $tmux_installed -ne 0 ]; then
-    reattach_tmux
-else
-    if [ $screen_installed -ne 0 ]; then
-        reattach_screen
+if [ -n "$SSH_CONNECTION" ]; then
+    remote_session=1
+fi
+if [ $remote_session -eq 0 ]; then
+    if [ $tmux_installed -ne 0 ]; then
+        reattach_tmux
+    else
+        if [ $screen_installed -ne 0 ]; then
+            reattach_screen
+        fi
     fi
 fi
 
