@@ -45,13 +45,15 @@ path=( ~/bin /usr/local/bin /usr/local/sbin /sbin /usr/sbin \
     $JAVA_HOME/bin \
     /usr/local/git/bin \
     /usr/local/git/libexec/git-core \
-    /opt/android-sdk-linux_x86/tools \
-    /opt/android-sdk-linux_x86/platform-tools \
+    /opt/android-sdk-linux/platform-tools/ \
+    /opt/android-sdk-linux/tools/ \
     $path )
 
-PATH=~/bin:/Library/Frameworks/Python.framework/Versions/Current/bin:/usr/local/bin:/usr/local/sbin:/sbin:/usr/sbin:$JAVA_HOME/bin:/usr/local/git/bin:/usr/local/git/libexec/git-core:~/SDKs/android/tools:$MAGICK_HOME/bin:/usr/local/mysql/bin:$PATH
+PATH=~/bin:/Library/Frameworks/Python.framework/Versions/Current/bin:/usr/local/bin:/usr/local/sbin:/sbin:/usr/sbin:$JAVA_HOME/bin:/usr/local/git/bin:/usr/local/git/libexec/git-core:/opt/android-sdk-linux/platform-tools:/opt/android-sdk-linux/tools/:$MAGICK_HOME/bin:/usr/local/mysql/bin:$PATH
 
-export PAGER LESSCHARSET CVS_RSH LC_ALL PATH
+ANDROID_SDK_ROOT=/opt/android-sdk-linux
+
+export PAGER LESSCHARSET CVS_RSH LC_ALL PATH ANDROID_SDK_ROOT
 
 # want core files
 #ulimit -c unlimited
