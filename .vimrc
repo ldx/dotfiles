@@ -84,6 +84,9 @@ autocmd InsertEnter * match ExtraWhitespace /\s\+\%#\@<!$/
 autocmd InsertLeave * match ExtraWhitespace /\s\+$/
 autocmd BufWinLeave * call clearmatches()
 
+" Arduino .pde files
+autocmd BufWinEnter *.pde setf arduino
+
 " disable arrow keys
 :map <left> <Nop>
 :map <right> <Nop>
