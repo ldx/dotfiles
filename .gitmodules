@@ -37,3 +37,6 @@
 [submodule ".vim/bundle/vim-statline"]
 	path = .vim/bundle/vim-statline
 	url = git@github.com:ldx/vim-statline.git
+[submodule ".vim/bundle/Arduino-syntax-file"]
+	path = .vim/bundle/Arduino-syntax-file
+	url = https://github.com/vim-scripts/Arduino-syntax-file.git
