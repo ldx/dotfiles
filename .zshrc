@@ -106,7 +106,7 @@ autoload multicomp mtoolsmatch insmodcomp
 autoload -U compinit
 autoload -Uz vcs_info
 compinit
-zstyle ':completion:*:processes-names' command 'ps -e -o comm='
+#zstyle ':completion:*:processes-names' command 'ps -e -o comm='
 
 ##########################
 # K E Y  B I N D I N G S #
