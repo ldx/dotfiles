@@ -183,6 +183,21 @@ if [ $remote_session -eq 0 ]; then
     fi
 fi
 
+#############
+# O T H E R #
+#############
+
+dexify() {
+    for f in $*; do
+        tmpdir="`mktemp -d`"
+        tmpfile="${tmpdir}/classes.dex"
+        dx --dex --output=${tmpfile} ${f}
+        aapt add ${f} ${tmpfile}
+        rm -f ${tmpfile}
+        rmdir ${tmpdir}
+    done
+}
+
 ###############
 # P R O M P T #
 ###############
