@@ -46,6 +46,9 @@ set formatoptions=tcroqn
 set cinoptions=(0,u0,U0
 "set cinoptions=:0,l1,t0,g0	"linux kernel style
 
+" clipboard
+set clipboard=unnamedplus
+
 " colors
 set t_Co=256
 set background=dark
