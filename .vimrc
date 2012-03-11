@@ -49,6 +49,12 @@ set cinoptions=(0,u0,U0
 " clipboard
 set clipboard=unnamedplus
 
+" complete options (disable preview scratch window)
+set completeopt=menu,menuone,longest
+
+" limit popup menu height
+set pumheight=15
+
 " colors
 set t_Co=256
 set background=dark
