@@ -135,8 +135,12 @@ augroup EN
 let g:SuperTabDefaultCompletionType = "context" "<c-x><c-u>
 
 " clang_complete
-let g:clang_snippets = 1
-let g:clang_conceal_snippets = 1
+"let g:clang_snippets = 1
+"let g:clang_conceal_snippets = 1
+" Disable auto popup, use <Tab> to autocomplete
+let g:clang_complete_auto = 0
+" Show clang errors in the quickfix window
+let g:clang_complete_copen = 1
 
 " statline
 let g:statline_fugitive = 1
