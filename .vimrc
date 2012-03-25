@@ -131,6 +131,9 @@ augroup resCur
   autocmd BufWinEnter * call ResCur()
 augroup EN
 
+" ctags
+set tags=./tags;/
+
 " supertab
 let g:SuperTabDefaultCompletionType = "context" "<c-x><c-u>
 
