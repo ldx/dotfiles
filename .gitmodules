@@ -43,3 +43,6 @@
 [submodule ".vim/bundle/javacomplete"]
 	path = .vim/bundle/javacomplete
 	url = https://github.com/vim-scripts/javacomplete.git
+[submodule ".vim/bundle/vim-manage-classpath"]
+	path = .vim/bundle/vim-manage-classpath
+	url = https://github.com/ldx/vim-manage-classpath.git
