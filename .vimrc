@@ -149,3 +149,10 @@ let g:clang_complete_copen = 1
 
 " statline
 let g:statline_fugitive = 1
+
+" javacomplete
+augroup jcomp
+  autocmd!
+  autocmd FileType java setlocal omnifunc=javacomplete#Complete
+  autocmd FileType java call classpath#UpdateClasspath('<afile>:p')
+augroup END
