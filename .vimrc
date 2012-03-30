@@ -66,7 +66,7 @@ colorscheme springforest
 "set list
 "set listchars=tab:▸\ ,eol:¬
 
-if version >= 730
+if version >= 703
   set undofile
   set colorcolumn=80
 endif
