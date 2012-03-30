@@ -152,6 +152,9 @@ let g:clang_complete_copen = 1
 " statline
 let g:statline_fugitive = 1
 
+" syntastic
+let g:syntastic_c_config_file = ".clang_complete"
+
 " javacomplete
 augroup jcomp
   autocmd!
