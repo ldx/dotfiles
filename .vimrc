@@ -68,7 +68,7 @@ colorscheme springforest
 
 if version >= 703
   set undofile
-  set colorcolumn=80
+  "set colorcolumn=80
 endif
 
 " statusline
