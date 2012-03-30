@@ -76,14 +76,14 @@ endif
 set laststatus=2
 
 " remember certain things when we exit
-"  '1000:  marks will be remembered for up to 1000 previously edited files
-"  "1000:  will save up to 1000 lines for each register
-"  :500 :  up to 500 lines of command-line history will be remembered
-"  @500 :  number of lines to save from the input line history
-"  /500 :  number of lines to save from the search history
-"  %    :  saves and restores the buffer list
-"  n... :  where to save the viminfo files
-set viminfo='1000,\"1000,:500,@500,/500,%,n~/.viminfo
+"  ': number of previously edited files marks will be remembered for
+"  ": number of lines to save each register
+"  :: command-line history length
+"  @: number of lines to save from the input line history
+"  /: number of lines to save from the search history
+"  %: save and restore the buffer list
+"  n: where to save viminfo
+set viminfo='1000,\"1000,:1000,@1000,/1000,%,n~/.viminfo
 
 " switch syntax highlighting on
 syntax on
