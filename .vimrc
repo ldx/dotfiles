@@ -9,6 +9,8 @@ set nocompatible		" vim defaults
 set encoding=utf-8
 set ttyfast
 
+set history=1000
+
 set cm=blowfish	    " use Blowfish for encryption
 
 set backspace=2			" backspacing over everything in insert mode
