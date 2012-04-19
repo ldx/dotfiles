@@ -128,6 +128,11 @@ bindkey '^/'     undo
 bindkey '^x'     kill-word
 bindkey '^[[^@'  beginning-of-line
 bindkey '^[[e'   end-of-line
+# vi style incremental search
+bindkey '^R'     history-incremental-search-backward
+bindkey '^S'     history-incremental-search-forward
+bindkey '^P'     history-search-backward
+bindkey '^N'     history-search-forward
 
 #########################
 # T M U X / S C R E E N #
