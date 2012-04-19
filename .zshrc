@@ -53,7 +53,7 @@ PATH=~/bin:/Library/Frameworks/Python.framework/Versions/Current/bin:/usr/local/
 
 ANDROID_SDK_ROOT=/opt/android-sdk-linux
 
-export PAGER LESSCHARSET CVS_RSH LC_ALL PATH ANDROID_SDK_ROOT
+export PAGER LESSCHARSET CVS_RSH LC_ALL PATH EDITOR VISUAL ANDROID_SDK_ROOT
 
 # want core files
 #ulimit -c unlimited
