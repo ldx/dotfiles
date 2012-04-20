@@ -27,16 +27,16 @@
 	url = https://github.com/tpope/vim-fugitive.git
 [submodule ".vim/bundle/vim-indentfinder"]
 	path = .vim/bundle/vim-indentfinder
-	url = git@github.com:ldx/vim-indentfinder.git
+	url = https://github.com/ldx/vim-indentfinder.git
 [submodule ".vim/bundle/vim-pathogen"]
 	path = .vim/bundle/vim-pathogen
 	url = https://github.com/tpope/vim-pathogen.git
 [submodule ".vim/bundle/vim-springforest"]
 	path = .vim/bundle/vim-springforest
-	url = git@github.com:ldx/vim-springforest.git
+	url = https://github.com/ldx/vim-springforest.git
 [submodule ".vim/bundle/vim-statline"]
 	path = .vim/bundle/vim-statline
-	url = git@github.com:ldx/vim-statline.git
+	url = https://github.com/millermedeiros/vim-statline.git
 [submodule ".vim/bundle/Arduino-syntax-file"]
 	path = .vim/bundle/Arduino-syntax-file
 	url = https://github.com/vim-scripts/Arduino-syntax-file.git
