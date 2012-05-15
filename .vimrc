@@ -13,6 +13,10 @@ set history=1000
 
 set cm=blowfish	    " use Blowfish for encryption
 
+set directory=~/.tmp//,~/tmp//,/var/tmp//,/tmp//
+set backupdir=~/.tmp//,~/tmp//,/var/tmp//,/tmp//
+set undodir=~/.tmp//,~/tmp//,/var/tmp//,/tmp//
+
 set backspace=2			" backspacing over everything in insert mode
 set autoindent			" always set autoindenting on
 set syntax=c
