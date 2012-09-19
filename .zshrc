@@ -203,6 +203,11 @@ dexify() {
     done
 }
 
+scanify() {
+    fuzz_value="50%"
+    convert ${1} -fuzz ${3-50%} -trim +repage -modulate 130,130,130 ${2:-$(echo ${1}|awk -F . 'sub(FS $NF,x)')_scan.jpg}
+}
+
 ###############
 # P R O M P T #
 ###############
