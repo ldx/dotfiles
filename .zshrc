@@ -65,6 +65,15 @@ ulimit -c 0
 
 export MallocBadFreeAbort=1
 
+export WORKON_HOME=~/.virtualenvs
+if [ ! -d $WORKON_HOME ]; then
+    mkdir $WORKON_HOME
+fi
+
+if [ -x /usr/local/bin/virtualenvwrapper.sh ]; then
+    source /usr/local/bin/virtualenvwrapper.sh
+fi
+
 #################
 # A L I A S E S #
 #################
