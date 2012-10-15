@@ -11,11 +11,15 @@ set ttyfast
 
 set history=1000
 
-set cm=blowfish	    " use Blowfish for encryption
+if version >= 703
+  set cm=blowfish	    " use Blowfish for encryption
+endif
 
 set directory=~/.tmp//,~/tmp//,/var/tmp//,/tmp//
 set backupdir=~/.tmp//,~/tmp//,/var/tmp//,/tmp//
-set undodir=~/.tmp//,~/tmp//,/var/tmp//,/tmp//
+if version >= 703
+  set undodir=~/.tmp//,~/tmp//,/var/tmp//,/tmp//
+endif
 
 set backspace=2			" backspacing over everything in insert mode
 set autoindent			" always set autoindenting on
@@ -53,7 +57,9 @@ set cinoptions=(0,u0,U0
 "set cinoptions=:0,l1,t0,g0	"linux kernel style
 
 " clipboard
-set clipboard=unnamedplus
+if version >= 703
+  set clipboard=unnamedplus
+endif
 
 " complete options (disable preview scratch window)
 set completeopt=menu,menuone,longest
