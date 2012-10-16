@@ -120,8 +120,8 @@ compinit
 ##########################
 # K E Y  B I N D I N G S #
 ##########################
-bindkey '^[[A'	 history-beginning-search-backward	# Up
-bindkey '^[[B'   history-beginning-search-forward 	# Down
+bindkey '^[OA'	 history-beginning-search-backward	# Up
+bindkey '^[OB'   history-beginning-search-forward 	# Down
 bindkey '^[^I'   reverse-menu-complete			# ESC TAB
 bindkey ' '      magic-space
 bindkey '^A'  	 beginning-of-line
