@@ -140,8 +140,8 @@ bindkey '^[[e'   end-of-line
 # vi style incremental search
 bindkey '^R'     history-incremental-search-backward
 bindkey '^S'     history-incremental-search-forward
-bindkey '^P'     history-search-backward
-bindkey '^N'     history-search-forward
+bindkey '^P'     history-beginning-search-backward
+bindkey '^N'     history-beginning-search-forward
 
 #########################
 # T M U X / S C R E E N #
