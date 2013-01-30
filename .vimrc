@@ -149,7 +149,7 @@ augroup EN
 set tags=./tags;/
 
 " supertab
-let g:SuperTabDefaultCompletionType = "context" "<c-x><c-u>
+let g:SuperTabDefaultCompletionType = "<c-x><c-u>" "context
 
 " clang_complete
 "let g:clang_snippets = 1
