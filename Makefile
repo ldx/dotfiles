@@ -9,6 +9,7 @@ CP = cp -a
 RM = rm
 INSTALL = install -d -p
 CMP = cmp -s
+RMDIR = rmdir -p --ignore-fail-on-non-empty
 
 TOP_EXCLUDE = . .. .git .gitmodules Makefile
 EXCLUDE= $(foreach x, .git .gitmodules .gitignore, -path "*/$(x)" -prune -o)
@@ -25,6 +26,6 @@ install: $(DST)
 
 clean:
 	@$(foreach f, $(SRC), ($(CMP) $(f) $(HOME)/$(f) && \
-		echo "removing $(f)" && $(RM) $(HOME)/$(f)) || echo -n "";)
+		echo "removing $(f)" && $(RM) $(HOME)/$(f) && echo "removing $(shell dirname $(f))" && $(RMDIR) $(shell dirname $(HOME)/$(f))) || :;)
 
 .PHONY: clean
