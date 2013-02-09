@@ -43,3 +43,6 @@
 [submodule ".vim/bundle/vim-manage-classpath"]
 	path = .vim/bundle/vim-manage-classpath
 	url = https://github.com/ldx/vim-manage-classpath.git
+[submodule ".vim/bundle/vim-markdown"]
+	path = .vim/bundle/vim-markdown
+	url = https://github.com/plasticboy/vim-markdown.git
