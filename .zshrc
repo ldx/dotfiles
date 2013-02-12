@@ -70,8 +70,11 @@ if [ ! -d $WORKON_HOME ]; then
     mkdir $WORKON_HOME
 fi
 
-if [ -x /usr/local/bin/virtualenvwrapper.sh ]; then
+if [ -e /usr/local/bin/virtualenvwrapper.sh ]; then
     source /usr/local/bin/virtualenvwrapper.sh
+fi
+if [ -e /etc/bash_completion.d/virtualenvwrapper ]; then
+    source /etc/bash_completion.d/virtualenvwrapper
 fi
 
 #################
