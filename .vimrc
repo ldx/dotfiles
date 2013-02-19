@@ -167,6 +167,10 @@ let g:statline_fugitive = 1
 " syntastic
 let g:syntastic_c_config_file = ".clang_complete"
 
+" python-mode
+let g:pymode_folding = 0
+let g:pymode_options = 0
+
 " javacomplete
 augroup jcomp
   autocmd!
