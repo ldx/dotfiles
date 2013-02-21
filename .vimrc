@@ -9,7 +9,7 @@ set nocompatible		" vim defaults
 set encoding=utf-8
 set ttyfast
 
-set history=1000
+set history=10000
 
 if version >= 703
   set cm=blowfish	    " use Blowfish for encryption
