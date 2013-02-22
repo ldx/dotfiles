@@ -170,6 +170,7 @@ let g:syntastic_c_config_file = ".clang_complete"
 " python-mode
 let g:pymode_folding = 0
 let g:pymode_options = 0
+let g:pymode_lint_ignore = "E125"
 
 " javacomplete
 augroup jcomp
