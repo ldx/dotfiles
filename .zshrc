@@ -118,7 +118,19 @@ autoload multicomp mtoolsmatch insmodcomp
 autoload -U compinit
 autoload -Uz vcs_info
 compinit
-#zstyle ':completion:*:processes-names' command 'ps -e -o comm='
+
+# Tab completion from both ends
+setopt completeinword
+
+# Tab completion should be case-insensitive
+zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}'
+
+# Better completion for killall
+zstyle ':completion:*:killall:*' command 'ps -u $USER -o cmd'
+
+# What zsh considers a word
+autoload select-word-style
+select-word-style normal
 
 ##########################
 # K E Y  B I N D I N G S #
