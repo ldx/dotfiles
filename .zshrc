@@ -15,7 +15,7 @@ HISTSIZE=20000
 HISTFILE=~/.zsh_history
 WATCH=notme
 WATCHFMT="%n has %a tty%l from %M at %D %T"
-WORDCHARS='*?_-.[]~=&;!#$%^(){}<>'
+WORDCHARS='*?_-.[]~=&;!#$%^(){}<>'  # removed /
 
 PAGER="less -r"
 LESSCHARSET=utf-8
