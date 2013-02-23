@@ -145,9 +145,9 @@ bindkey '^D'     logout
 bindkey '^L'     clear-screen
 bindkey '^J'     self-insert				# LF
 bindkey '^U'     kill-whole-line
-bindkey '^W'	 backward-kill-word
-bindkey '^f'     forward-word
-bindkey '^b'     backward-word
+bindkey '^W'	 vi-backward-kill-word
+bindkey '^f'     vi-forward-word
+bindkey '^b'     vi-backward-word
 bindkey '^/'     undo
 bindkey '^x'     kill-word
 bindkey '^[[^@'  beginning-of-line
