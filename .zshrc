@@ -158,14 +158,14 @@ bindkey '^S'     history-incremental-search-forward
 bindkey '^P'     history-beginning-search-backward
 bindkey '^N'     history-beginning-search-forward
 
-my-word-chars=''
+SEPCHARS='[/ ]'
 
 my-forward-word() {
-    if [[ "${BUFFER[CURSOR + 1]}" =~ "[/ ]" ]]; then
+    if [[ "${BUFFER[CURSOR + 1]}" =~ "${SEPCHARS}" ]]; then
         (( CURSOR += 1 ))
         return
     fi
-    while [[ CURSOR -lt "${#BUFFER}" && ! "${BUFFER[CURSOR + 1]}" =~ "[/ ]" ]]; do
+    while [[ CURSOR -lt "${#BUFFER}" && ! "${BUFFER[CURSOR + 1]}" =~ "${SEPCHARS}" ]]; do
         (( CURSOR += 1 ))
     done
 }
@@ -174,11 +174,11 @@ zle -N my-forward-word
 bindkey '^f' my-forward-word
 
 my-backward-word() {
-    if [[ "${BUFFER[CURSOR]}" =~ "[/ ]" ]]; then
+    if [[ "${BUFFER[CURSOR]}" =~ "${SEPCHARS}" ]]; then
         (( CURSOR -= 1 ))
         return
     fi
-    while [[ CURSOR -gt 0 && ! "${BUFFER[CURSOR]}" =~ "[/ ]" ]]; do
+    while [[ CURSOR -gt 0 && ! "${BUFFER[CURSOR]}" =~ "${SEPCHARS}" ]]; do
         (( CURSOR -= 1 ))
     done
 }
@@ -187,11 +187,11 @@ zle -N my-backward-word
 bindkey '^b' my-backward-word
 
 my-backward-kill-word() {
-    if [[ "${LBUFFER[CURSOR]}" =~ "[/ ]" ]]; then
-            LBUFFER="${LBUFFER[1, CURSOR - 1]}"
-            return
+    if [[ "${LBUFFER[CURSOR]}" =~ "${SEPCHARS}" ]]; then
+        LBUFFER="${LBUFFER[1, CURSOR - 1]}"
+        return
     fi
-    while [[ CURSOR -gt 0 && ! "${LBUFFER[CURSOR]}" =~ "[/ ]" ]]; do
+    while [[ CURSOR -gt 0 && ! "${LBUFFER[CURSOR]}" =~ "${SEPCHARS}" ]]; do
             LBUFFER="${LBUFFER[1, CURSOR - 1]}"
     done
 }
