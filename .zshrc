@@ -158,6 +158,47 @@ bindkey '^S'     history-incremental-search-forward
 bindkey '^P'     history-beginning-search-backward
 bindkey '^N'     history-beginning-search-forward
 
+my-word-chars=''
+
+my-forward-word() {
+    if [[ "${BUFFER[CURSOR + 1]}" =~ "[/ ]" ]]; then
+        (( CURSOR += 1 ))
+        return
+    fi
+    while [[ CURSOR -lt "${#BUFFER}" && ! "${BUFFER[CURSOR + 1]}" =~ "[/ ]" ]]; do
+        (( CURSOR += 1 ))
+    done
+}
+
+zle -N my-forward-word
+bindkey '^f' my-forward-word
+
+my-backward-word() {
+    if [[ "${BUFFER[CURSOR]}" =~ "[/ ]" ]]; then
+        (( CURSOR -= 1 ))
+        return
+    fi
+    while [[ CURSOR -gt 0 && ! "${BUFFER[CURSOR]}" =~ "[/ ]" ]]; do
+        (( CURSOR -= 1 ))
+    done
+}
+
+zle -N my-backward-word
+bindkey '^b' my-backward-word
+
+my-backward-kill-word() {
+    if [[ "${LBUFFER[CURSOR]}" =~ "[/ ]" ]]; then
+            LBUFFER="${LBUFFER[1, CURSOR - 1]}"
+            return
+    fi
+    while [[ CURSOR -gt 0 && ! "${LBUFFER[CURSOR]}" =~ "[/ ]" ]]; do
+            LBUFFER="${LBUFFER[1, CURSOR - 1]}"
+    done
+}
+
+zle -N my-backward-kill-word
+bindkey '^W' my-backward-kill-word
+
 #########################
 # T M U X / S C R E E N #
 #########################
