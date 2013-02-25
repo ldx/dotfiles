@@ -129,8 +129,8 @@ zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}'
 zstyle ':completion:*:killall:*' command 'ps -u $USER -o cmd'
 
 # What zsh considers a word
-autoload select-word-style
-select-word-style normal
+#autoload select-word-style
+#select-word-style normal
 
 ##########################
 # K E Y  B I N D I N G S #
