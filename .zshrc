@@ -2,11 +2,11 @@
 # G L O B A L  S E T T I N G S #
 ################################
 setopt ALWAYS_LAST_PROMPT ALWAYS_TO_END APPEND_HISTORY AUTO_CD AUTO_LIST \
-	AUTO_MENU AUTO_NAME_DIRS AUTO_PARAM_SLASH AUTO_RESUME BANG_HIST \
-	NO_CHECK_JOBS NO_HUP CLOBBER CORRECT CORRECT_ALL PRINTEXITVALUE \
-	EXTENDED_HISTORY FUNCTION_ARGZERO GLOB HIST_IGNORE_DUPS \
-	COMPLETE_IN_WORD HIST_REDUCE_BLANKS MAIL_WARNING POSIX_BUILTINS \
-	PRINT_EIGHT_BIT NO_BEEP EXTENDEDGLOB SH_WORD_SPLIT
+    AUTO_MENU AUTO_NAME_DIRS AUTO_PARAM_SLASH AUTO_RESUME BANG_HIST \
+    NO_CHECK_JOBS NO_HUP CLOBBER CORRECT CORRECT_ALL PRINTEXITVALUE \
+    EXTENDED_HISTORY FUNCTION_ARGZERO GLOB HIST_IGNORE_DUPS \
+    COMPLETE_IN_WORD HIST_REDUCE_BLANKS MAIL_WARNING POSIX_BUILTINS \
+    PRINT_EIGHT_BIT NO_BEEP EXTENDEDGLOB SH_WORD_SPLIT
 
 unsetopt CHASE_DOTS CHASE_LINKS BG_NICE IGNORE_BRACES PROMPT_CR NOMATCH
 
@@ -36,8 +36,8 @@ case `uname -s` in
 esac
 
 if [ "$TERM" = "xterm" ]; then
-	TERM=xterm-color
-	export TERM
+    TERM=xterm-color
+    export TERM
 fi
 
 path=( ~/bin /usr/local/bin /usr/local/sbin /sbin /usr/sbin \
@@ -82,14 +82,14 @@ fi
 #################
 case `uname -s` in
 [Ll][Ii][Nn][Uu][Xx])
-	alias ls='ls --color -F'
-	;;
+    alias ls='ls --color -F'
+    ;;
 [Ff][Rr][Ee][Ee][Bb][Ss][Dd])
-	alias ls='ls -G -F'
-	;;
+    alias ls='ls -G -F'
+    ;;
 [Dd][Aa][Rr][Ww][Ii][Nn])
-	alias ls='ls -G -F'
-	;;
+    alias ls='ls -G -F'
+    ;;
 esac
 alias la='ls -al'
 alias l='ls -l'
@@ -135,17 +135,17 @@ select-word-style normal
 ##########################
 # K E Y  B I N D I N G S #
 ##########################
-bindkey '^[OA'	 history-beginning-search-backward	# Up
-bindkey '^[OB'   history-beginning-search-forward 	# Down
-bindkey '^[^I'   reverse-menu-complete			# ESC TAB
+bindkey '^[OA'   history-beginning-search-backward  # Up
+bindkey '^[OB'   history-beginning-search-forward  # Down
+bindkey '^[^I'   reverse-menu-complete  # ESC TAB
 bindkey ' '      magic-space
-bindkey '^A'  	 beginning-of-line
+bindkey '^A'       beginning-of-line
 bindkey '^E'     end-of-line
 bindkey '^D'     logout
 bindkey '^L'     clear-screen
-bindkey '^J'     self-insert				# LF
+bindkey '^J'     self-insert  # LF
 bindkey '^U'     kill-whole-line
-bindkey '^W'	 vi-backward-kill-word
+bindkey '^W'     vi-backward-kill-word
 bindkey '^f'     vi-forward-word
 bindkey '^b'     vi-backward-word
 bindkey '^/'     undo
@@ -182,8 +182,8 @@ reattach_tmux() {
 }
 
 reattach_screen() {
-    detached=`screen -ls|grep '^	[0-9]\+\.my_screen.*(Detached)$'|head -n1|sed 's/^	([0-9]+)\..*$/\1/'`
-    attached=`screen -ls|grep '^	[0-9]\+\.my_screen.*(Attached)$'|head -n1|sed 's/^	([0-9]+)\..*$/\1/'`
+    detached=`screen -ls|grep '^    [0-9]\+\.my_screen.*(Detached)$'|head -n1|sed 's/^    ([0-9]+)\..*$/\1/'`
+    attached=`screen -ls|grep '^    [0-9]\+\.my_screen.*(Attached)$'|head -n1|sed 's/^    ([0-9]+)\..*$/\1/'`
     if [ ! -z "$detached" ]; then
         screen -r my_screen
     else
