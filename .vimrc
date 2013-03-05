@@ -61,6 +61,9 @@ if version >= 703
   set clipboard=unnamedplus
 endif
 
+" mouse
+set mouse=a
+
 " complete options (disable preview scratch window)
 set completeopt=menu,menuone,longest
 
