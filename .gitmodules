@@ -55,3 +55,6 @@
 [submodule ".vim/bundle/cscope.vim"]
 	path = .vim/bundle/cscope.vim
 	url = https://github.com/vim-scripts/cscope.vim.git
+[submodule ".vim/bundle/jedi-vim"]
+	path = .vim/bundle/jedi-vim
+	url = https://github.com/davidhalter/jedi-vim.git
