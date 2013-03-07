@@ -52,3 +52,6 @@
 [submodule ".vim/bundle/vim-scala"]
 	path = .vim/bundle/vim-scala
 	url = https://github.com/derekwyatt/vim-scala.git
+[submodule ".vim/bundle/cscope.vim"]
+	path = .vim/bundle/cscope.vim
+	url = https://github.com/vim-scripts/cscope.vim.git
