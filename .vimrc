@@ -98,6 +98,9 @@ set laststatus=2
 "  n: where to save viminfo
 set viminfo='1000,\"1000,:1000,@1000,/1000,%,n~/.viminfo
 
+" leader key
+:let mapleader=","
+
 " switch syntax highlighting on
 syntax on
 
