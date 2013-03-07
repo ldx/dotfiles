@@ -177,6 +177,7 @@ let g:syntastic_c_config_file = ".clang_complete"
 let g:pymode_folding = 0
 let g:pymode_options = 0
 let g:pymode_lint_ignore = "E125"
+let g:pymode_rope = 0 " disable, it can freeze Vim for minutes
 
 " javacomplete
 augroup jcomp
