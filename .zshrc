@@ -222,34 +222,16 @@ reattach_tmux() {
     fi
 }
 
-reattach_screen() {
-    detached=`screen -ls|grep '^    [0-9]\+\.my_screen.*(Detached)$'|head -n1|sed 's/^    ([0-9]+)\..*$/\1/'`
-    attached=`screen -ls|grep '^    [0-9]\+\.my_screen.*(Attached)$'|head -n1|sed 's/^    ([0-9]+)\..*$/\1/'`
-    if [ ! -z "$detached" ]; then
-        screen -r my_screen
-    else
-        if [ -z "$attached" ]; then
-            screen -S my_screen
-        fi
-    fi
-}
-
-# reattach tmux/screen session
+# reattach tmux session
 remote_session=0
 tmux_installed=0
-screen_installed=0
 hash tmux 2>/dev/null && tmux_installed=1
-hash screen 2>/dev/null && screen_installed=1
 if [ -n "$SSH_CONNECTION" ]; then
     remote_session=1
 fi
 if [ $remote_session -eq 0 ]; then
     if [ $tmux_installed -ne 0 ]; then
         reattach_tmux
-    else
-        if [ $screen_installed -ne 0 ]; then
-            reattach_screen
-        fi
     fi
 fi
 
