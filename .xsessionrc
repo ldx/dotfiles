@@ -1,7 +1,6 @@
-echo 'xkb_keymap {
-	xkb_keycodes  { include "evdev+aliases(qwertz)"	};
-	xkb_types     { include "complete"	};
-	xkb_compat    { include "complete"	};
-	xkb_symbols   { include "pc+hu+us:2+inet(evdev)+altwin(alt_super_win)+level3(alt_switch)+terminate(ctrl_alt_bksp)"	};
-	xkb_geometry  { include "pc(pc105)"	};
-};'|xkbcomp - $DISPLAY
+setxkbmap \
+-rules evdev \
+-model pc105 \
+-layout hu \
+-option -option lv3:alt_switch -option terminate:ctrl_alt_bksp \
+-option altwin:swap_lalt_lwin -option altwin:alt_super_win
