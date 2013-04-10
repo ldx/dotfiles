@@ -11,18 +11,24 @@ INSTALL = install -d -p
 CMP = cmp -s
 RMDIR = rmdir -p --ignore-fail-on-non-empty
 
-TOP_EXCLUDE = . .. .git .gitmodules Makefile
+TOP_EXCLUDE = . .. .git .gitmodules terminfo Makefile
 EXCLUDE= $(foreach x, .git .gitmodules .gitignore, -path "*/$(x)" -prune -o)
 ALL = $(filter-out $(TOP_EXCLUDE), $(wildcard .* *))
 SRC = $(foreach x, $(ALL), $(shell find $(x) $(EXCLUDE) -type f -print;))
 DST = $(addprefix $(HOME)/, $(SRC))
+TISRC = $(wildcard terminfo/*.terminfo)
+TIDST = $(foreach x, $(TISRC), $(HOME)/.terminfo/$(shell basename $x|cut -c 1)/$(shell basename $x .terminfo))
+
+$(HOME)/.terminfo/%: $(TISRC)
+	@echo "$< -> $@"
+	@tic $<
 
 $(HOME)/%: %
 	@echo "$< -> $@"
 	@$(INSTALL) $(shell dirname $@)
 	@$(CP) $< $@
 
-install: $(DST)
+install: $(DST) $(TIDST)
 
 clean:
 	@$(foreach f, $(SRC), ($(CMP) $(f) $(HOME)/$(f) && \
