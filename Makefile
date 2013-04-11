@@ -19,8 +19,8 @@ DST = $(addprefix $(HOME)/, $(SRC))
 TISRC = $(wildcard terminfo/*.terminfo)
 TIDST = $(foreach x, $(TISRC), $(HOME)/.terminfo/$(shell basename $x|cut -c 1)/$(shell basename $x .terminfo))
 
-$(HOME)/.terminfo/%: $(TISRC)
-	@echo "$< -> $@"
+$(HOME)/.terminfo/s/%: terminfo/%.terminfo
+	@echo "$< => $@"
 	@tic $<
 
 $(HOME)/%: %
