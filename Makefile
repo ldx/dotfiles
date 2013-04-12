@@ -19,10 +19,6 @@ DST = $(addprefix $(HOME)/, $(SRC))
 TISRC = $(wildcard terminfo/*.terminfo)
 TIDST = $(foreach x, $(TISRC), $(HOME)/.terminfo/$(shell basename $x|cut -c 1)/$(shell basename $x .terminfo))
 
-$(HOME)/.terminfo/s/%: terminfo/%.terminfo
-	@echo "$< => $@"
-	@tic $<
-
 $(HOME)/%: %
 	@echo "$< -> $@"
 	@$(INSTALL) $(shell dirname $@)
@@ -35,3 +31,8 @@ clean:
 		echo "removing $(f)" && $(RM) $(HOME)/$(f) && echo "removing $(shell dirname $(f))" && $(RMDIR) $(shell dirname $(HOME)/$(f))) || :;)
 
 .PHONY: clean
+
+.SECONDEXPANSION:
+${HOME}/.terminfo/%: terminfo/$$(notdir $$*).terminfo
+	@echo "$< => $@"
+	@tic $<
