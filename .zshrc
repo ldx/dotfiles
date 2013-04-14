@@ -40,20 +40,15 @@ if [ "$TERM" = "xterm" ]; then
     export TERM
 fi
 
-path=( ~/bin /usr/local/bin /usr/local/sbin /sbin /usr/sbin \
-    /Library/Frameworks/Python.framework/Versions/Current/bin \
-    $JAVA_HOME/bin \
-    /usr/local/git/bin \
-    /usr/local/git/libexec/git-core \
-    /opt/android-sdk-linux/platform-tools/ \
-    /opt/android-sdk-linux/tools/ \
-    $path )
+CFLAGS=-I$HOME/.local/include
+LDFLAGS=-L$HOME/.local/lib
+LD_LIBRARY_PATH=$HOME/.local/lib:$LD_LIBRARY_PATH
+MANPATH=$HOME/.local/share/man
 
-PATH=~/bin:/Library/Frameworks/Python.framework/Versions/Current/bin:/usr/local/bin:/usr/local/sbin:/sbin:/usr/sbin:$JAVA_HOME/bin:/usr/local/git/bin:/usr/local/git/libexec/git-core:/opt/android-sdk-linux/platform-tools:/opt/android-sdk-linux/tools/:$MAGICK_HOME/bin:/usr/local/mysql/bin:$PATH
+path=($HOME/bin $HOME/.local/bin /usr/local/bin /usr/local/sbin $JAVA_HOME/bin $path)
+PATH=$HOME/bin:$HOME/.local/bin:/usr/local/bin:/usr/local/sbin:$JAVA_HOME/bin:$PATH
 
-ANDROID_SDK_ROOT=/opt/android-sdk-linux
-
-export PAGER LESSCHARSET CVS_RSH LC_ALL PATH EDITOR VISUAL ANDROID_SDK_ROOT
+export PAGER LESSCHARSET CVS_RSH LC_ALL PATH EDITOR VISUAL LD_LIBRARY_PATH
 
 # want core files
 #ulimit -c unlimited
