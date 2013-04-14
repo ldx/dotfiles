@@ -19,6 +19,12 @@ DST = $(addprefix $(HOME)/, $(SRC))
 TISRC = $(wildcard terminfo/*.terminfo)
 TIDST = $(foreach x, $(TISRC), $(HOME)/.terminfo/$(shell basename $x|cut -c 1)/$(shell basename $x .terminfo))
 
+$(HOME)/.local/share/applications/%: .local/share/applications/%
+	@echo "$< -> $@"
+	@$(INSTALL) $(shell dirname $@)
+	@$(CP) $< $@
+	@gsettings set com.canonical.Unity.Launcher favorites $(shell echo "import os.path\nlauncher='application://' + os.path.basename('$<')\nli=`gsettings get com.canonical.Unity.Launcher favorites`\nif launcher not in li:\n  li.insert(1, launcher)\nprint '%s%s%s' % (chr(34), li, chr(34))"|python)
+
 $(HOME)/%: %
 	@echo "$< -> $@"
 	@$(INSTALL) $(shell dirname $@)
