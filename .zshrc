@@ -205,7 +205,7 @@ bindkey '^W' my-backward-kill-word
 
 reattach_tmux() {
     found=0
-    my_session="my_session"
+    my_session="work"
     sessions="`tmux list-session|awk '{print $1$11}'`"
     for s in $sessions; do
         name="`echo $s|cut -d ':' -f 1`"
