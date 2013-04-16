@@ -17,16 +17,26 @@ WATCH=notme
 WATCHFMT="%n has %a tty%l from %M at %D %T"
 WORDCHARS='*?_-.[]~=&;!#$%^(){}<>'  # removed /
 
-PAGER="less -r"
-LESSCHARSET=utf-8
-CVS_RSH=ssh
-LC_ALL=hu_HU.UTF-8
-EDITOR=vim
-VISUAL=vim
+export PAGER="less -r"
+export LESSCHARSET=utf-8
+
+export CVS_RSH=ssh
+
+export LANG=en_US.UTF-8
+export LC_ALL=hu_HU.UTF-8
+
+export EDITOR=vim
+export VISUAL=vim
+
+LOCAL_PREFIX=$HOME/.local
+export CFLAGS=-I$LOCAL_PREFIX/include
+export LDFLAGS=-L$LOCAL_PREFIX/lib
+export LD_LIBRARY_PATH=$LOCAL_PREFIX/lib:$LD_LIBRARY_PATH
 
 case `uname -s` in
     [Dd][Aa][Rr][Ww][Ii][Nn])
         export JAVA_HOME=/System/Library/Frameworks/JavaVM.framework/Home
+        export MallocBadFreeAbort=1
         alias sed="sed -E"
         ;;
     [Ll][Ii][Nn][Uu][Xx])
@@ -40,26 +50,6 @@ if [ "$TERM" = "xterm" ]; then
     export TERM
 fi
 
-CFLAGS=-I$HOME/.local/include
-LDFLAGS=-L$HOME/.local/lib
-LD_LIBRARY_PATH=$HOME/.local/lib:$LD_LIBRARY_PATH
-MANPATH=$HOME/.local/share/man
-
-path=($HOME/bin $HOME/.local/bin /usr/local/bin /usr/local/sbin $JAVA_HOME/bin $path)
-PATH=$HOME/bin:$HOME/.local/bin:/usr/local/bin:/usr/local/sbin:$JAVA_HOME/bin:$PATH
-
-export PAGER LESSCHARSET CVS_RSH LC_ALL PATH EDITOR VISUAL LD_LIBRARY_PATH
-
-# want core files
-#ulimit -c unlimited
-ulimit -c 0
-
-#autoload -U promptinit
-#promptinit
-#prompt adam2 magenta cyan cyan
-
-export MallocBadFreeAbort=1
-
 export WORKON_HOME=~/.virtualenvs
 if [ ! -d $WORKON_HOME ]; then
     mkdir $WORKON_HOME
@@ -71,6 +61,44 @@ fi
 if [ -e /etc/bash_completion.d/virtualenvwrapper ]; then
     source /etc/bash_completion.d/virtualenvwrapper
 fi
+
+# prepend_colon(val, var)
+prepend_colon() {
+    if [ -z "$2" ]; then
+        echo $1
+    else
+        echo $1:$2
+    fi
+}
+
+# unshift_path(path)
+unshift_path() {
+    if [ -d $1/sbin ]; then
+        export PATH=$(prepend_colon "$1/sbin" $PATH)
+    fi
+    if [ -d $1/bin ]; then
+        export PATH=$(prepend_colon "$1/bin" $PATH)
+    fi
+
+    if [ -d $1/share/man ]; then
+        export MANPATH=$(prepend_colon "$1/share/man" $MANPATH)
+    fi
+}
+
+export PATH=""
+export MANPATH=""
+
+unshift_path ""
+unshift_path "/usr"
+unshift_path "/usr/local"
+unshift_path "/usr/X11"
+unshift_path "/opt"
+unshift_path "/opt/local"
+unshift_path "$HOME/.local"
+
+# want core files
+#ulimit -c unlimited
+ulimit -c 0
 
 #################
 # A L I A S E S #
@@ -277,3 +305,6 @@ lsb_release_codename() {
 
 PROMPT='[%B%n%b@%B%m%b:%B$(lsb_release_codename)%b]%18<..<%~%<<$(vcs_info_wrapper)%# '
 
+#autoload -U promptinit
+#promptinit
+#prompt adam2 magenta cyan cyan
