@@ -253,7 +253,7 @@ if [ -n "$SSH_CONNECTION" ]; then
     remote_session=1
 fi
 if [ $remote_session -eq 0 ]; then
-    if [ $tmux_installed -ne 0 ]; then
+    if [ $tmux_installed -ne 0 -a -z "$TMUX" ]; then
         reattach_tmux
     fi
 fi
