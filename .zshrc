@@ -95,6 +95,9 @@ unshift_path "/usr/X11"
 unshift_path "/opt"
 unshift_path "/opt/local"
 unshift_path "$HOME/.local"
+if which ruby > /dev/null && which gem >/dev/null; then
+    unshift_path "$(ruby -rubygems -e 'puts Gem.user_dir')"
+fi
 
 # want core files
 #ulimit -c unlimited
