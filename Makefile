@@ -7,7 +7,7 @@
 
 CP = cp -a
 RM = rm
-INSTALL = install -d -p
+INSTALL = install -p
 CMP = cmp -s
 RMDIR = rmdir -p --ignore-fail-on-non-empty
 
@@ -21,16 +21,14 @@ TIDST = $(foreach x, $(TISRC), $(HOME)/.terminfo/$(shell basename $x|cut -c 1)/$
 
 $(HOME)/.local/share/applications/%: .local/share/applications/%
 	@echo "$< -> $@"
-	@$(INSTALL) $(shell dirname $@)
-	@$(CP) $< $@
+	@$(INSTALL) -m $(shell stat -c %a $<) $< $@
 ifneq ($(shell which gsettings > /dev/null),)
 	@gsettings set com.canonical.Unity.Launcher favorites $(shell echo "import os.path\nlauncher='application://' + os.path.basename('$<')\nli=`gsettings get com.canonical.Unity.Launcher favorites`\nif launcher not in li:\n  li.insert(1, launcher)\nprint '%s%s%s' % (chr(34), li, chr(34))"|python)
 endif
 
 $(HOME)/%: %
 	@echo "$< -> $@"
-	@$(INSTALL) $(shell dirname $@)
-	@$(CP) $< $@
+	@$(INSTALL) -m $(shell stat -c %a $<) $< $@
 
 install: $(DST) $(TIDST)
 
