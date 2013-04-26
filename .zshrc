@@ -62,6 +62,9 @@ if [ -e /etc/bash_completion.d/virtualenvwrapper ]; then
     source /etc/bash_completion.d/virtualenvwrapper
 fi
 
+export GEM_HOME=$HOME/.gem
+export BUNDLE_PATH=$GEM_HOME
+
 # prepend_colon(val, var)
 prepend_colon() {
     if [ -z "$2" ]; then
@@ -95,6 +98,7 @@ unshift_path "/usr/X11"
 unshift_path "/opt"
 unshift_path "/opt/local"
 unshift_path "$HOME/.local"
+unshift_path "$BUNDLE_PATH"
 if which ruby > /dev/null && which gem >/dev/null; then
     unshift_path "$(ruby -rubygems -e 'puts Gem.user_dir')"
 fi
