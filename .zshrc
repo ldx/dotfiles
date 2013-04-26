@@ -310,7 +310,7 @@ lsb_release_codename() {
     hash lsb_release 2>/dev/null && lsb_release -c|awk '{print $2}'
 }
 
-PROMPT='[%B%n%b@%B%m%b:%B$(lsb_release_codename)%b]%18<..<%~%<<$(vcs_info_wrapper)%# '
+PROMPT='[%B%n%b@%B%m%b]%18<..<%~%<<$(vcs_info_wrapper)%# '
 
 #autoload -U promptinit
 #promptinit
