@@ -7,7 +7,7 @@
 
 CP = cp -a
 RM = rm
-INSTALL = install -p
+INSTALL = install -p -D
 CMP = cmp -s
 RMDIR = rmdir -p --ignore-fail-on-non-empty
 
