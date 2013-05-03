@@ -265,6 +265,12 @@ if [ $remote_session -eq 0 ]; then
     fi
 fi
 
+send_command_to_tmux() {
+    cmd="$1"
+    tmux_session="$(tmux list-panes -F '#{session_name}')"
+    tmux list-windows -t $tmux_session|cut -d: -f1|xargs -I{} tmux send-keys -t $tmux_session:{} $cmd Enter
+}
+
 #############
 # O T H E R #
 #############
