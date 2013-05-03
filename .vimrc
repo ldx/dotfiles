@@ -11,6 +11,8 @@ set ttyfast
 
 set history=10000
 
+set hidden
+
 if version >= 703
   set cm=blowfish	    " use Blowfish for encryption
 endif
