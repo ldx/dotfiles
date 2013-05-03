@@ -199,3 +199,6 @@ augroup md
   autocmd FileType mkd setlocal tw=0
   autocmd FileType mkd setlocal nocursorline
 augroup END
+
+" NERDTree
+map <C-n> :NERDTreeToggle<CR>
