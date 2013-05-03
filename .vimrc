@@ -153,6 +153,9 @@ augroup resCur
   autocmd BufWinEnter * call ResCur()
 augroup EN
 
+" git commit messages
+au FileType gitcommit set tw=72
+
 " ctags
 set tags=./tags;/
 
