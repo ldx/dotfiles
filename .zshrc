@@ -1,6 +1,11 @@
 ################################
 # G L O B A L  S E T T I N G S #
 ################################
+
+# in case we're installed locally, set up fpath and module_path
+fpath=($fpath $HOME/.local/share/zsh/site-functions $HOME/.local/share/zsh/*/functions)
+module_path=($module_path $HOME/.local/lib/zsh/*)
+
 setopt ALWAYS_LAST_PROMPT ALWAYS_TO_END APPEND_HISTORY AUTO_CD AUTO_LIST \
     AUTO_MENU AUTO_NAME_DIRS AUTO_PARAM_SLASH AUTO_RESUME BANG_HIST \
     NO_CHECK_JOBS NO_HUP CLOBBER CORRECT CORRECT_ALL PRINTEXITVALUE \
