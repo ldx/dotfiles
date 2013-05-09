@@ -166,7 +166,7 @@ import vim
 vim.command("let pyversion = %d" % (sys.hexversion))
 EOF
 
-if pyversion < 0x020500
+if pyversion < 0x02050000
   let g:pymode = 0
   let g:jedi#auto_initialization = 0
 endif
