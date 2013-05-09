@@ -159,6 +159,18 @@ au FileType gitcommit set tw=72
 " ctags
 set tags=./tags;/
 
+" disable certain plugins if python versions is old
+:py << EOF
+import sys
+import vim
+vim.command("let pyversion = %d" % (sys.hexversion))
+EOF
+
+if pyversion < 0x020500
+  let g:pymode = 0
+  let g:jedi#auto_initialization = 0
+endif
+
 " supertab
 let g:SuperTabDefaultCompletionType = "context" "<c-x><c-u>
 
