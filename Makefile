@@ -28,7 +28,7 @@ endif
 
 $(HOME)/%: %
 	@echo "$< -> $@"
-	@$(INSTALL) -m $(shell stat -c %a $<) $< $@
+	$(INSTALL) -m $(shell stat -c %a "$<") "$<" "$@"
 
 install: $(DST) $(TIDST)
 
