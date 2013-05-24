@@ -213,5 +213,8 @@ augroup md
   autocmd FileType mkd setlocal nocursorline
 augroup END
 
+" puppet
+autocmd FileType puppet setlocal equalprg=puppet-tidy
+
 " NERDTree
 map <C-n> :NERDTreeToggle<CR>

@@ -108,6 +108,14 @@ if which ruby > /dev/null && which gem >/dev/null; then
     unshift_path "$(ruby -rubygems -e 'puts Gem.user_dir')"
 fi
 
+unset _PERLLIBS
+for x in $HOME/.local/lib/perl/* $HOME/.local/share/perl/*; do
+    if [ -d "$x" ]; then
+        _PERLLIBS=$(prepend_colon "$x" $_PERLLIBS)
+    fi
+done
+export PERL5LIB=$_PERLLIBS
+
 # want core files
 #ulimit -c unlimited
 ulimit -c 0
