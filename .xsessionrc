@@ -29,5 +29,5 @@ if [ `which trayer` ]; then
 fi
 
 if [ `which google-chrome` ]; then
-    google-chrome &
+    (sleep 15 && google-chrome) &
 fi
