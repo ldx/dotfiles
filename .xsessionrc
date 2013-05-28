@@ -7,7 +7,7 @@ setxkbmap \
 
 if [ `which conky` -a `which dzen2` ]; then
     export FG='white'
-    export BG='#121212'
+    export BG='#002b36'
     export FONT='-*-terminus-*-*-*-*-12-*-*-*-*-*-utf8-*'
     export LC_ALL=hu_HU.UTF-8
     sleep 3 && conky -c $HOME/.conkyrc | dzen2 -e - -x '500' -ta r -fg $FG -bg $BG -fn $FONT &
