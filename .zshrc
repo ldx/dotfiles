@@ -1,3 +1,8 @@
+# start tmux automatically
+if [ `which tmux` -a -z "$TMUX" ]; then
+    exec tmux -2
+fi
+
 ################################
 # G L O B A L  S E T T I N G S #
 ################################
@@ -242,42 +247,9 @@ my-backward-kill-word() {
 zle -N my-backward-kill-word
 bindkey '^W' my-backward-kill-word
 
-#########################
-# T M U X / S C R E E N #
-#########################
-
-reattach_tmux() {
-    found=0
-    my_session="work"
-    sessions="`tmux list-session|awk '{print $1$11}'`"
-    for s in $sessions; do
-        name="`echo $s|cut -d ':' -f 1`"
-        attached="`echo $s|cut -d ':' -f 2`"
-        if [[ "$name" == "$my_session" ]]; then
-            found=1
-            if [[ "$attached" != "(attached)" ]]; then
-                tmux -2 attach -t $my_session
-            fi
-        fi
-    done
-    if [ "$found" -eq "0" ]; then
-        tmux -2 new-session -s $my_session
-    fi
-}
-
-# reattach tmux session
-remote_session=0
-tmux_installed=0
-hash tmux 2>/dev/null && tmux_installed=1
-if [ -n "$SSH_CONNECTION" ]; then
-    remote_session=1
-fi
-if [ $remote_session -eq 0 ]; then
-    if [ $tmux_installed -ne 0 -a -z "$TMUX" ]; then
-        reattach_tmux
-    fi
-fi
-
+###########
+# T M U X #
+###########
 send_command_to_tmux() {
     cmd="$1"
     tmux_session="$(tmux list-panes -F '#{session_name}')"
