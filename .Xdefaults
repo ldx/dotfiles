@@ -3,8 +3,9 @@ URxvt*saveLines: 512
 URxvt*tintColor: Blue
 #URxvt*shading: 40
 
-URxvt*background: #2b2b2b
-URxvt*foreground: #dedede
+URxvt*background: #2f0b24
+URxvt*foreground: White
+#dedede
 #URxvt*color4: RoyalBlue
 #URxvt*color12: RoyalBlue
 ! black
@@ -29,8 +30,9 @@ URxvt*color13 : #ad7fa8
 URxvt*color6  : #06989a
 URxvt*color14 : #34e2e2
 ! white
-URxvt*color7  : #d3d7cf
-URxvt*color15 : #eeeeec
+#URxvt*color7  : #d9d7cf
+#URxvt*color15 : #f0eeec
+
 URxvt*scrollBar: false
 URxvt*scrollBar_right: true
 URxvt*scrollstyle: rxvt
