@@ -1,6 +1,6 @@
 # start tmux automatically
-if [ `which tmux` -a -z "$TMUX" ]; then
-    exec tmux -2
+if [ -z "$TMUX" ]; then
+    which tmux && exec tmux -2
 fi
 
 ################################
