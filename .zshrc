@@ -256,9 +256,9 @@ send_command_to_tmux() {
     tmux list-windows -t $tmux_session|cut -d: -f1|xargs -I{} tmux send-keys -t $tmux_session:{} $cmd Enter
 }
 
-#############
-# O T H E R #
-#############
+###########
+# M I S C #
+###########
 
 dexify() {
     for f in $*; do
