@@ -1,0 +1,54 @@
+URxvt*saveLines: 512
+
+URxvt*tintColor: Blue
+#URxvt*shading: 40
+
+URxvt*background: #2b2b2b
+URxvt*foreground: #dedede
+#URxvt*color4: RoyalBlue
+#URxvt*color12: RoyalBlue
+! black
+URxvt*color0  : #2e3436
+URxvt*color8  : #555753
+! red
+URxvt*color1  : #cc0000
+URxvt*color9  : #ef2929
+! green
+URxvt*color2  : #4e9a06
+URxvt*color10 : #8ae234
+! yellow
+URxvt*color3  : #c4a000
+URxvt*color11 : #fce94f
+! blue
+URxvt*color4  : #3465a4
+URxvt*color12 : #729fcf
+! magenta
+URxvt*color5  : #75507b
+URxvt*color13 : #ad7fa8
+! cyan
+URxvt*color6  : #06989a
+URxvt*color14 : #34e2e2
+! white
+URxvt*color7  : #d3d7cf
+URxvt*color15 : #eeeeec
+URxvt*scrollBar: false
+URxvt*scrollBar_right: true
+URxvt*scrollstyle: rxvt
+
+#URxvt*font: xft:Bitstream Vera Sans Mono:pixelsize=12:antialias=true:hinting=true
+#URxvt*boldFont: xft:Bitstream Vera Sans Mono:bold:pixelsize=12:antialias=true:hinting=true
+URxvt*font: xft:Ubuntu Mono:pixelsize=16:antialias=true:hinting=true
+URxvt*boldFont: xft:Ubuntu Mono:bold:pixelsize=16:antialias=true:hinting=true
+#URxvt*font: xft:Liberation Mono:pixelsize=13:antialias=true:hinting=true
+#URxvt*boldFont: xft:Liberation Mono:bold:pixelsize=13:antialias=true:hinting=true
+#URxvt*font: xft:terminus:pixelsize=15
+#URxvt*boldFont: xft:terminus:bold:pixelsize=15
+#URxvt*font:-*-courier-medium-r-normal-*-14-*-*-*-*-*-iso8859-1
+#URxvt*boldFont:-*-courier-bold-r-normal-*-14-*-*-*-*-*-iso8859-1
+
+# these three lines enable clicking on links to open them
+## if you want to enable tab support, append ,tabbed to the next line
+## then use shift+down arrow to create tabs and shift+{left,right} arrows to switch between them
+URxvt*perl-ext-common: default,matcher,-option-popup,-selection-popup,-realine
+URxvt*matcher.button: 1
+URxvt*urlLauncher: google-chrome
