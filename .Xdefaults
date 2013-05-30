@@ -1,5 +1,7 @@
 URxvt*saveLines: 512
 
+URxvt.letterSpace: -1
+
 URxvt*tintColor: Blue
 #URxvt*shading: 40
 
