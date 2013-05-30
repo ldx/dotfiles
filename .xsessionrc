@@ -5,30 +5,23 @@ setxkbmap \
     -option -option lv3:alt_switch -option terminate:ctrl_alt_bksp \
     -option altwin:swap_lalt_lwin -option altwin:alt_super_win
 
-if [ `which conky` -a `which dzen2` ]; then
+type "conky" > /dev/null 2>&1 && type "dzen2" > /dev/null 2>&1 && while :; do
     export FG='white'
     export BG='#002b36'
     export FONT='-*-terminus-*-*-*-*-12-*-*-*-*-*-utf8-*'
     export LC_ALL=hu_HU.UTF-8
     (sleep 3 && conky -c $HOME/.conkyrc | dzen2 -e - -x '500' -ta r -fg $FG \
         -bg $BG -fn $FONT) &
-fi
+    break
+done
 
-if [ `which trayer` ]; then
-    trayer --widthtype request --align right --height 32 --transparent true \
-        --alpha 0 --tint 0x0B0B0B &
-    if [ `which skype` ]; then
-        skype &
-    fi
-    if [ `which dropbox` ]; then
-        dropbox stop
-        dropbox start &
-    fi
-    if [ `which nm-applet` ]; then
-        nm-applet &
-    fi
-fi
+type "trayer" > /dev/null 2>&1 && trayer --widthtype request --align right \
+    --height 32 --transparent true --alpha 0 --tint 0x0B0B0B &
 
-if [ `which google-chrome` ]; then
-    (sleep 15 && google-chrome) &
-fi
+type "skype" > /dev/null 2>&1 && skype &
+
+type "dropbox" > /dev/null 2>&1 && (dropbox stop; dropbox start &)
+
+type "nm-applet" > /dev/null 2>&1 && nm-applet &
+
+type "google-chrome" > /dev/null 2>&1 && (sleep 15 && google-chrome) &
