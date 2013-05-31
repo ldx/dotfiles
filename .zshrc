@@ -1,5 +1,6 @@
 # start tmux automatically
-if [ -z "$TMUX" ]; then
+parent="$(ps -o comm= $PPID)"
+if [ -z "$TMUX" -a "$parent" != "sshd" -a "$parent" != "su" ]; then
     which tmux > /dev/null 2>&1 && exec tmux -2
 fi
 
