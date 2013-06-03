@@ -4,13 +4,28 @@ if [ -z "$TMUX" -a "$parent" != "sshd" -a "$parent" != "su" ]; then
     which tmux > /dev/null 2>&1 && exec tmux -2
 fi
 
+# in case we're installed locally, set up fpath and module_path
+arch=$(uname -m)
+case $arch in
+    i?86)
+        if [ -d $HOME/.local/zsh32 ]; then
+            _zsh_path="$HOME/.local/zsh32"
+        fi
+        ;;
+    x86_64)
+        if [ -d $HOME/.local/zsh64 ]; then
+            _zsh_path="$HOME/.local/zsh64"
+        fi
+        ;;
+    *)
+        ;;
+esac
+fpath=($fpath $_zsh_path/share/site-functions $_zsh_path/share/zsh/*/functions)
+module_path=($module_path $_zsh_path/lib/zsh/*)
+
 ################################
 # G L O B A L  S E T T I N G S #
 ################################
-
-# in case we're installed locally, set up fpath and module_path
-fpath=($fpath $HOME/.local/share/zsh/site-functions $HOME/.local/share/zsh/*/functions)
-module_path=($module_path $HOME/.local/lib/zsh/*)
 
 setopt ALWAYS_LAST_PROMPT ALWAYS_TO_END APPEND_HISTORY AUTO_CD AUTO_LIST \
     AUTO_MENU AUTO_NAME_DIRS AUTO_PARAM_SLASH AUTO_RESUME BANG_HIST \
