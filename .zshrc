@@ -49,6 +49,7 @@ export LESSCHARSET=utf-8
 export CVS_RSH=ssh
 
 export LANG=en_US.UTF-8
+export LANGUAGE=en_US.UTF-8
 export LC_ALL=hu_HU.UTF-8
 
 export EDITOR=vim
