@@ -41,8 +41,8 @@ URxvt*scrollstyle: rxvt
 
 #URxvt*font: xft:Bitstream Vera Sans Mono:pixelsize=12:antialias=true:hinting=true
 #URxvt*boldFont: xft:Bitstream Vera Sans Mono:bold:pixelsize=12:antialias=true:hinting=true
-URxvt*font: xft:Ubuntu Mono:pixelsize=17:antialias=true:hinting=true
-URxvt*boldFont: xft:Ubuntu Mono:bold:pixelsize=17:antialias=true:hinting=true
+URxvt*font: xft:Liberation Mono:pixelsize=14:antialias=true:hinting=true
+URxvt*boldFont: xft:Liberation Mono:bold:pixelsize=14:antialias=true:hinting=true
 #URxvt*font: xft:Liberation Mono:pixelsize=13:antialias=true:hinting=true
 #URxvt*boldFont: xft:Liberation Mono:bold:pixelsize=13:antialias=true:hinting=true
 #URxvt*font: xft:terminus:pixelsize=15
