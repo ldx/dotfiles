@@ -5,6 +5,8 @@ setxkbmap \
     -option -option lv3:alt_switch -option terminate:ctrl_alt_bksp \
     -option altwin:swap_lalt_lwin -option altwin:alt_super_win
 
+type "synclient" > /dev/null 2>&1 && synclient TapButton1=1 && synclient TapButton2=3
+
 type "conky" > /dev/null 2>&1 && type "dzen2" > /dev/null 2>&1 && while :; do
     export FG='white'
     export BG='#002b36'
