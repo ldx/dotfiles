@@ -213,7 +213,10 @@ augroup md
 augroup END
 
 " puppet
-autocmd FileType puppet setlocal equalprg=puppet-tidy
+augroup puppet
+  autocmd FileType puppet setlocal equalprg=puppet-tidy
+  autocmd FileType puppet :map <Leader>t :Tabularize /=>/l1<CR>
+augroup END
 
 " NERDTree
 map <C-n> :NERDTreeToggle<CR>
