@@ -170,7 +170,6 @@ if pyversion < 0x02050000
   let g:pymode = 0
   let g:jedi#auto_initialization = 0
 endif
-let g:pymode = 0 " disable python-mode for now, it has bugs
 
 " supertab
 let g:SuperTabDefaultCompletionType = "context" "<c-x><c-u>
