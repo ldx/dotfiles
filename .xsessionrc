@@ -16,6 +16,8 @@ for p in $(pidof gnome-screensaver xscreensaver conky trayer skype nm-applet chr
     kill $p
 done
 
+type "xscreensaver" > /dev/null 2>&1 && xscreensaver -no-splash &
+
 type "conky" > /dev/null 2>&1 && type "dzen2" > /dev/null 2>&1 && while :; do
     export FG='white'
     export BG='#002b36'
