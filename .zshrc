@@ -88,6 +88,9 @@ fi
 if [ -e /etc/bash_completion.d/virtualenvwrapper ]; then
     source /etc/bash_completion.d/virtualenvwrapper
 fi
+if [ -e $HOME/.local/bin/virtualenvwrapper.sh ]; then
+    source $HOME/.local/bin/virtualenvwrapper.sh
+fi
 
 export GEM_HOME=$HOME/.gem
 export BUNDLE_PATH=$GEM_HOME
