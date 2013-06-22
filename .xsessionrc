@@ -38,5 +38,3 @@ type "dropbox" > /dev/null 2>&1 && (dropbox stop; dropbox start &)
 type "nm-applet" > /dev/null 2>&1 && nm-applet &
 
 type "google-chrome" > /dev/null 2>&1 && (sleep 15 && google-chrome) &
-
-urxvt &
