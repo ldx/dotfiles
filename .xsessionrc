@@ -12,6 +12,10 @@ type "synclient" > /dev/null 2>&1 && while :; do
     break
 done
 
+for p in $(pidof gnome-screensaver xscreensaver conky trayer skype nm-applet chrome); do
+    kill $p
+done
+
 type "conky" > /dev/null 2>&1 && type "dzen2" > /dev/null 2>&1 && while :; do
     export FG='white'
     export BG='#002b36'
