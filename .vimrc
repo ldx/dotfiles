@@ -64,7 +64,7 @@ if version >= 703
 endif
 
 " mouse
-set mouse=a
+"set mouse=a
 
 " complete options (disable preview scratch window)
 set completeopt=menu,menuone,longest
