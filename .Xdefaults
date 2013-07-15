@@ -39,10 +39,18 @@ URxvt*scrollBar: false
 URxvt*scrollBar_right: true
 URxvt*scrollstyle: rxvt
 
+URxvt*font: xft:Liberation Mono:pixelsize=15:antialias=true:hinting=true
+URxvt*boldFont: xft:Liberation Mono:pixelsize=15:antialias=true:bold:hinting=true
+URxvt*italicFont: xft:Liberation Mono:pixelsize=15:antialias=true:italic:autohint=true:hinting=true
+URxvt*bolditalicFont: xft:Liberation Mono:pixelsize=15:antialias=true:bold:italic:autohint=true:hinting=true
 #URxvt*font: xft:Bitstream Vera Sans Mono:pixelsize=12:antialias=true:hinting=true
 #URxvt*boldFont: xft:Bitstream Vera Sans Mono:bold:pixelsize=12:antialias=true:hinting=true
-URxvt*font: xft:Liberation Mono:pixelsize=14:antialias=true:hinting=true
-URxvt*boldFont: xft:Liberation Mono:bold:pixelsize=14:antialias=true:hinting=true
+#URxvt*font: xft:Inconsolata:pixelsize=20:antialias=true:hinting=true
+#URxvt*boldFont: xft:Inconsolata:pixelsize=20:antialias=true:bold:hinting=true
+#URxvt*italicFont: xft:Inconsolata:pixelsize=20:antialias=true:italic:autohint=true:hinting=true
+#URxvt*bolditalicFont: xft:Inconsolata:pixelsize=20:antialias=true:bold:italic:autohint=true:hinting=true
+#URxvt*font: xft:Liberation Mono:pixelsize=14:antialias=true:hinting=true
+#URxvt*boldFont: xft:Liberation Mono:bold:pixelsize=14:antialias=true:hinting=true
 #URxvt*font: xft:Liberation Mono:pixelsize=13:antialias=true:hinting=true
 #URxvt*boldFont: xft:Liberation Mono:bold:pixelsize=13:antialias=true:hinting=true
 #URxvt*font: xft:terminus:pixelsize=15
