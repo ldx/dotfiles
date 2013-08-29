@@ -64,3 +64,9 @@ URxvt*bolditalicFont: xft:Liberation Mono:pixelsize=15:antialias=true:bold:itali
 !URxvt*perl-ext-common: default,matcher,-option-popup,-selection-popup,-realine
 !URxvt*matcher.button: 1
 !URxvt*urlLauncher: google-chrome
+
+Xft.dpi: 96
+Xft.antialias: true
+Xft.rgba: rgb
+Xft.hinting: true
+Xft.hintstyle: hintslight
