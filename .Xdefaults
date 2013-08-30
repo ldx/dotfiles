@@ -96,7 +96,7 @@ Xft.hintstyle: hintslight
 *xterm*scrollBar: false
 *xterm*scrollstyle: rxvt
 *xterm*faceName: Liberation Mono
-*xterm*faceSize: 12
+*xterm*faceSize: 11
 *xterm*cursorColor: white
 *xterm*utf8: 2
 *xterm*termName: xterm-256color
