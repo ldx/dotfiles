@@ -14,6 +14,10 @@ type "synclient" > /dev/null 2>&1 && while :; do
     break
 done
 
+if [ -f "$HOME/.Xdefaults" ]; then
+    xrdb $HOME/.Xdefaults
+fi
+
 for p in $(pidof gnome-screensaver conky trayer skype nm-applet chrome); do
     kill $p
 done
