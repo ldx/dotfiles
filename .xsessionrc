@@ -57,4 +57,6 @@ type "dropbox" > /dev/null 2>&1 && (dropbox stop; dropbox start &)
 
 type "nm-applet" > /dev/null 2>&1 && nm-applet &
 
+type "parcellite" > /dev/null 2>&1 && parcellite &
+
 type "firefox" > /dev/null 2>&1 && (sleep 10 && firefox) &
