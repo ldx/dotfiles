@@ -32,7 +32,7 @@ set showmode
 set wildmenu
 set wildmode=list:longest
 
-set cursorline			" show current line
+"set cursorline			" show current line
 set scrolloff=3     " scroll at 3 lines from top/bottom of screen
 set visualbell			" do not beep
 
