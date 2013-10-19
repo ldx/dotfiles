@@ -53,7 +53,7 @@ type "trayer" > /dev/null 2>&1 && trayer --widthtype request --align right \
 
 type "skype" > /dev/null 2>&1 && skype &
 
-type "dropbox" > /dev/null 2>&1 && (dropbox stop; dropbox start &)
+type "btsync" > /dev/null 2>&1 && btsync
 
 type "nm-applet" > /dev/null 2>&1 && nm-applet &
 
