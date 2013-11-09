@@ -36,7 +36,7 @@ set wildmode=list:longest
 set scrolloff=3     " scroll at 3 lines from top/bottom of screen
 set visualbell			" do not beep
 
-"set hlsearch			  " highlight search results
+set hlsearch			  " highlight search results
 set showmatch			  " jump emacs style to matching bracket
 set incsearch			  " show match for the pattern while typing
 set ignorecase
@@ -139,6 +139,9 @@ nmap k gk
 " use ~/.vbuf as persistent buffer
 vmap <C-y> :w! ~/.vbuf<CR>
 nmap <C-p> :r ~/.vbuf<CR>
+
+" <Ctrl-l> redraws the screen and removes any search highlighting.
+ nnoremap <silent> <C-l> :nohl<CR><C-l>
 
 " restore cursor position
 function! ResCur()
