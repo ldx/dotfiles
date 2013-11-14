@@ -296,6 +296,18 @@ scanify() {
     convert ${1} -fuzz ${3-50%} -trim +repage -modulate 130,130,130 ${2:-$(echo ${1}|awk -F . 'sub(FS $NF,x)')_scan.jpg}
 }
 
+update_dotfiles() {
+    type "curl" > /dev/null 2>&1 && while :; do
+        curl -k -L https://gist.github.com/ldx/5466020/raw/|sh
+        return 0
+    done
+    type "wget" > /dev/null 2>&1 && while :; do
+        wget -O - https://gist.github.com/ldx/5466020/raw/|sh
+        return 0
+    done
+    return 1
+}
+
 ###############
 # P R O M P T #
 ###############
