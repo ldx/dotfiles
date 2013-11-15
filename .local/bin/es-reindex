@@ -1,0 +1,10 @@
+#!/usr/bin/env ruby
+#
+require 'rubygems'
+require 'tire'
+
+puts "Reindexing #{ARGV[0]} -> #{ARGV[1]}"
+Tire.index(ARGV[0]).reindex(ARGV[1])
+
+puts "Removing #{ARGV[0]}"
+Tire.index(ARGV[0]).delete
