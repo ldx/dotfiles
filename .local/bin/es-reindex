@@ -1,10 +1,17 @@
 #!/usr/bin/env ruby
-#
+
 require 'rubygems'
 require 'tire'
 
-puts "Reindexing #{ARGV[0]} -> #{ARGV[1]}"
-Tire.index(ARGV[0]).reindex(ARGV[1])
+Tire.configure do
+  #logger 'elasticsearch.log'
+  #logger STDOUT
+  #url "http://mag-lab12:9200"
+  url ARGV[0]
+end
 
-puts "Removing #{ARGV[0]}"
-Tire.index(ARGV[0]).delete
+puts "Reindexing #{ARGV[1]} -> #{ARGV[2]}"
+Tire.index(ARGV[1]).reindex(ARGV[2])
+
+puts "Removing #{ARGV[1]}"
+Tire.index(ARGV[1]).delete
