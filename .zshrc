@@ -179,6 +179,52 @@ function _calcfx () {
     gawk -v CONVFMT="%12.2f" -v OFMT="%.9g"  "BEGIN { print $* ; }"
 }
 
+function stdev() {
+    awk '{delta = $1 - avg; avg += delta / NR; mean2 += delta * ($1 - avg); } END { printf "%.2f\n", sqrt(mean2/NR); }'
+}
+
+function avg() {
+    awk '{sum+=$1} END {printf "%.2f\n", sum/NR}'
+}
+
+function median() {
+    gawk \
+        'function median(c, v,  d) {
+            asort(v, d);
+            if (c % 2) {
+                return d[(c+1)/2];
+            } else {
+                return (d[c/2+1]+d[c/2])/2.0;
+            }
+        }
+        {
+            count++;
+            values[count]=$1;
+        }
+        END {
+            print median(count, values);
+        }'
+}
+
+function percentile() {
+    gawk \
+        "function percentile(c, v, p,  d) {
+            asort(v, d);
+            n=int(c * p - 0.5);
+            return d[n];
+        }
+        BEGIN {
+            count=0
+        }
+        {
+            count++;
+            values[count]=\$1;
+        }
+        END {
+            print percentile(count, values, 0.95);
+        }"
+}
+
 #######################
 # C O M P L E T I O N #
 #######################
