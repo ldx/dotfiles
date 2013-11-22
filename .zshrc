@@ -164,6 +164,7 @@ alias l='ls -l'
 alias screen='TERM=screen screen'
 alias scpresume="rsync --partial --progress --rsh=ssh"
 alias grep='grep --color'
+alias killall='nocorrect killall'
 
 #####################
 # F U N C T I O N S #
