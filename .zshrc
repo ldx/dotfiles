@@ -60,6 +60,9 @@ export CFLAGS=-I$LOCAL_PREFIX/include
 export LDFLAGS=-L$LOCAL_PREFIX/lib
 export LD_LIBRARY_PATH=$LOCAL_PREFIX/lib:$LD_LIBRARY_PATH
 
+export GPU_MAX_ALLOC_PERCENT=100
+export GPU_USE_SYNC_OBJECTS=1
+
 case `uname -s` in
     [Dd][Aa][Rr][Ww][Ii][Nn])
         export JAVA_HOME=/System/Library/Frameworks/JavaVM.framework/Home
