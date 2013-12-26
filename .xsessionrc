@@ -57,6 +57,9 @@ type "dropbox" > /dev/null 2>&1 && (dropbox stop; dropbox start &)
 
 type "nm-applet" > /dev/null 2>&1 && nm-applet &
 
-type "autocutsel" > /dev/null 2>&1 && autocutsel -fork
+type "autocutsel" > /dev/null 2>&1 && while :; do
+    autocutsel -fork
+    autocutsel -s PRIMARY -fork
+done
 
 type "firefox" > /dev/null 2>&1 && (sleep 10 && firefox) &
