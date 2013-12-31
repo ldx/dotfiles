@@ -60,6 +60,7 @@ type "nm-applet" > /dev/null 2>&1 && nm-applet &
 type "autocutsel" > /dev/null 2>&1 && while :; do
     autocutsel -fork
     autocutsel -s PRIMARY -fork
+    break
 done
 
 type "firefox" > /dev/null 2>&1 && (sleep 10 && firefox) &
