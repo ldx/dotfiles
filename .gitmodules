@@ -79,3 +79,6 @@
 [submodule ".vim/bundle/vimerl"]
 	path = .vim/bundle/vimerl
 	url = https://github.com/jimenezrick/vimerl.git
+[submodule ".vim/bundle/SWTC"]
+	path = .vim/bundle/SWTC
+	url = https://github.com/shinokada/SWTC.vim.git
