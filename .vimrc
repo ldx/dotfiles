@@ -176,7 +176,7 @@ vmap <C-y> :w! ~/.vbuf<CR>
 nmap <C-p> :r ~/.vbuf<CR>
 
 " <Ctrl-l> redraws the screen and removes any search highlighting.
- nnoremap <silent> <C-l> :nohl<CR><C-l>
+nnoremap <silent> <C-l> :nohl<CR><C-l>
 
 " restore cursor position
 function! ResCur()
