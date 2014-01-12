@@ -84,6 +84,8 @@ colorscheme springforest
 if version >= 703
   set undofile
   "set colorcolumn=80
+  highlight ColorColumn ctermbg=magenta
+  call matchadd('ColorColumn', '\%81v', 100)
 endif
 
 " statusline
