@@ -88,6 +88,29 @@ if version >= 703
   call matchadd('ColorColumn', '\%81v', 100)
 endif
 
+" better match highlight
+highlight WhiteOnRed ctermbg=red ctermfg=white
+
+function! HLNext (blinktime)
+    let [bufnum, lnum, col, off] = getpos('.')
+    let matchlen = strlen(matchstr(strpart(getline('.'),col-1),@/))
+    let target_pat = '\c\%#'.@/
+    let ring = matchadd('WhiteOnRed', target_pat, 101)
+    redraw
+    exec 'sleep ' . float2nr(a:blinktime * 1000) . 'm'
+    call matchdelete(ring)
+    redraw
+    exec 'sleep ' . float2nr(a:blinktime * 1000) . 'm'
+    let ring = matchadd('WhiteOnRed', target_pat, 101)
+    redraw
+    exec 'sleep ' . float2nr(a:blinktime * 1000) . 'm'
+    call matchdelete(ring)
+    redraw
+endfunction
+
+nnoremap <silent> n   n:call HLNext(0.1)<cr>
+nnoremap <silent> N   N:call HLNext(0.1)<cr>
+
 " statusline
 "set statusline=%F%m%r%h%w\ [buf\ #%n]\ [%Y/%{&ff}]\ [%l/%L[%p%%]\ %v]\ [\%03.3b/0x\%02.2B]
 set laststatus=2
