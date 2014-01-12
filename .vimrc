@@ -198,6 +198,7 @@ au FileType gitcommit set tw=72
 set tags=./tags;/
 
 " disable certain plugins if python versions is old
+let pyversion = 0
 :py << EOF
 import sys
 import vim
