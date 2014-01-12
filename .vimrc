@@ -221,7 +221,7 @@ let g:clang_complete_auto = 0
 " Show clang errors in the quickfix window
 let g:clang_complete_copen = 1
 "let g:clang_use_library = 1
-"let g:clang_library_path = /usr/lib/libclang.so.1
+let g:clang_library_path = "/usr/lib/llvm-3.3/lib"
 
 " statline
 let g:statline_fugitive = 1
