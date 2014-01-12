@@ -146,6 +146,16 @@ autocmd BufWinLeave * call clearmatches()
 autocmd BufWinEnter *.pde setf arduino
 autocmd BufWinEnter *.ino setf arduino
 
+" Open any file with a pre-existing swapfile in readonly mode
+augroup NoSimultaneousEdits
+    autocmd!
+    autocmd SwapExists * let v:swapchoice = 'o'
+    autocmd SwapExists * echomsg ErrorMsg
+    autocmd SwapExists * echo 'Duplicate edit session (readonly)'
+    autocmd SwapExists * echohl None
+    autocmd SwapExists * sleep 2
+augroup END
+
 " disable arrow keys
 :map <left> <Nop>
 :map <right> <Nop>
