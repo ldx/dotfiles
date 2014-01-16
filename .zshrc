@@ -325,12 +325,12 @@ history-fuzzy-search() {
     autoload -Uz read-from-minibuffer
     zmodload -i zsh/parameter
 
-    local char line index
+    local char line lines
 
     while true; do
         # Show match if any.
         if [[ -n $line ]]; then
-            BUFFER=$line[2,-1]
+            BUFFER=$line
         else
             zle kill-buffer
         fi
@@ -340,25 +340,36 @@ history-fuzzy-search() {
 
         read -k char
 
-        if [[ $char = "" ]]; then
+        if (( #char == ##\r )); then
             unset _last_pattern
             if [[ -z $line ]]; then
                 zle -R ''
                 BUFFER=$_last_pattern
-                return 1
+                return 0
             else
                 zle -R ''
-                BUFFER=$line[2,-1]
+                BUFFER=$line
                 zle accept-line
                 return 0
             fi
+        elif (( #char == ##\C-g )); then
+            unset _last_pattern
+            zle -R ''
+            BUFFER=""
+            zle kill-buffer
+            return 0
+        elif (( #char == ##\C-u )); then
+            unset _last_pattern
+            zle -R ''
+            BUFFER=""
+            zle kill-buffer
+        else
+            _last_pattern=$_last_pattern$char
+            lines=$(echo $_last_pattern|simstring -q -d $HOME/.hist.db \
+                -t 0.75 -s cosine|uniq -c|sort -k 1 -n -r| \
+                awk '{s = ""; for (i=2; i<=NF; i++) s = s $i " "; print s}')
+            line=$(echo $lines|head -n1)
         fi
-
-        _last_pattern=$_last_pattern$char
-
-        # get match for $REPLY
-        line=$(echo $_last_pattern| \
-            simstring -d $HOME/sim.db -t 0.7 -q -s cosine|head -n1)
 
         # We extract the first key match via (k) from $history searching in
         # values via (r).
