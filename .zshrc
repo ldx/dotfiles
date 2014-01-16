@@ -317,6 +317,60 @@ my-backward-kill-word() {
 zle -N my-backward-kill-word
 bindkey '^W' my-backward-kill-word
 
+history-fuzzy-search() {
+    emulate -L zsh
+    setopt extendedglob
+
+    # Load required features.
+    autoload -Uz read-from-minibuffer
+    zmodload -i zsh/parameter
+
+    local char line index
+
+    while true; do
+        # Show match if any.
+        if [[ -n $line ]]; then
+            BUFFER=$line[2,-1]
+        else
+            zle kill-buffer
+        fi
+
+        # Read pattern.  Prompt could be made customisable.
+        zle -R "fuzzy: $_last_pattern"
+
+        read -k char
+
+        if [[ $char = "" ]]; then
+            unset _last_pattern
+            if [[ -z $line ]]; then
+                zle -R ''
+                BUFFER=$_last_pattern
+                return 1
+            else
+                zle -R ''
+                BUFFER=$line[2,-1]
+                zle accept-line
+                return 0
+            fi
+        fi
+
+        _last_pattern=$_last_pattern$char
+
+        # get match for $REPLY
+        line=$(echo $_last_pattern| \
+            simstring -d $HOME/sim.db -t 0.7 -q -s cosine|head -n1)
+
+        # We extract the first key match via (k) from $history searching in
+        # values via (r).
+        #index=${(k)history[(r)$line]}
+        #if [[ -n $index ]]; then
+        #    HISTNO=$index
+    done
+}
+
+zle -N history-fuzzy-search
+bindkey '^y' history-fuzzy-search
+
 ###########
 # T M U X #
 ###########
