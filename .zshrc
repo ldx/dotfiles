@@ -321,11 +321,12 @@ history-fuzzy-search() {
     emulate -L zsh
     setopt extendedglob
 
-    # Load required features.
     autoload -Uz read-from-minibuffer
     zmodload -i zsh/parameter
 
-    local char line lines
+    local char line words first word
+    integer index
+    typeset -a lines
 
     while true; do
         # Show match if any.
@@ -335,16 +336,16 @@ history-fuzzy-search() {
             zle kill-buffer
         fi
 
-        # Read pattern.  Prompt could be made customisable.
-        zle -R "fuzzy: $_last_pattern"
+        # Read one character.
+        zle -R "fuzzy: $last_pattern"
 
         read -k char
 
         if (( #char == ##\r )); then
-            unset _last_pattern
+            unset last_pattern
             if [[ -z $line ]]; then
                 zle -R ''
-                BUFFER=$_last_pattern
+                BUFFER=$last_pattern
                 return 0
             else
                 zle -R ''
@@ -352,30 +353,38 @@ history-fuzzy-search() {
                 zle accept-line
                 return 0
             fi
-        elif (( #char == ##\C-g )); then
-            unset _last_pattern
+        elif (( #char == ##\C-u )); then
+            unset last_pattern
+            zle -R ''
+            BUFFER=""
+            zle kill-buffer
+        elif (( #char == ##\C-y )); then
+            index=$((index+1))
+            line=${lines[$index]}
+        elif (( #char < 32 )); then
+            unset last_pattern
             zle -R ''
             BUFFER=""
             zle kill-buffer
             return 0
-        elif (( #char == ##\C-u )); then
-            unset _last_pattern
-            zle -R ''
-            BUFFER=""
-            zle kill-buffer
         else
-            _last_pattern=$_last_pattern$char
-            lines=$(echo $_last_pattern|simstring -q -d $HOME/.hist.db \
-                -t 0.75 -s cosine|uniq -c|sort -k 1 -n -r| \
-                awk '{s = ""; for (i=2; i<=NF; i++) s = s $i " "; print s}')
-            line=$(echo $lines|head -n1)
+            index=1
+            if (( #char == ##\b || #char == 127 )); then
+                last_pattern="${last_pattern%?}"
+            else
+                last_pattern=$last_pattern$char
+            fi
+            words=("${(s/ /)last_pattern}")
+            first=${words[1]}
+            lines=(${(@v)history[(R)*$first*]})
+            if [ ${#words} -gt 1 ]; then
+                for i in {2..${#words}}; do
+                    word=${words[$i]}
+                    lines=(${lines[(R)*$word*]})
+                done
+            fi
+            line=${lines[$index]}
         fi
-
-        # We extract the first key match via (k) from $history searching in
-        # values via (r).
-        #index=${(k)history[(r)$line]}
-        #if [[ -n $index ]]; then
-        #    HISTNO=$index
     done
 }
 
