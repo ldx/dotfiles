@@ -355,9 +355,6 @@ history-fuzzy-search() {
             fi
         elif (( #char == ##\C-u )); then
             unset last_pattern
-            zle -R ''
-            BUFFER=""
-            zle kill-buffer
         elif (( #char == ##\C-y )); then
             index=$((index+1))
             line=${lines[$index]}
