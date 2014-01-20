@@ -327,6 +327,7 @@ history-fuzzy-search() {
     local char line words first word
     integer index
     typeset -a lines
+    typeset -A lines_hash
 
     while true; do
         # Show match if any.
@@ -372,13 +373,14 @@ history-fuzzy-search() {
             fi
             words=("${(s/ /)last_pattern}")
             first=${words[1]}
-            lines=(${(@v)history[(R)*$first*]})
+            lines_hash=(${(kv)history[(R)*$first*]})
             if [ ${#words} -gt 1 ]; then
                 for i in {2..${#words}}; do
                     word=${words[$i]}
-                    lines=(${lines[(R)*$word*]})
+                    lines_hash=(${(kv)lines_hash[(R)*$word*]})
                 done
             fi
+            lines=(${(vu)lines_hash})
             line=${lines[$index]}
         fi
     done
