@@ -364,8 +364,7 @@ history-fuzzy-search() {
         elif (( #char < 32 )); then
             unset last_pattern
             zle -R ''
-            BUFFER=""
-            zle kill-buffer
+            BUFFER=$line
             return 0
         else
             index=1
