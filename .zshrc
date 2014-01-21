@@ -382,7 +382,7 @@ history-fuzzy-search() {
                     lines_hash=(${(kv)lines_hash[(R)*$word*]})
                 done
             fi
-            lines=(${(vu)lines_hash})
+            lines=(${(vou)lines_hash})
             line=${lines[$index]}
         fi
     done
