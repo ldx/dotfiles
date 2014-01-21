@@ -357,7 +357,7 @@ history-fuzzy-search() {
         elif (( #char == ##\C-u )); then
             unset last_pattern
         elif (( #char == ##\C-y )); then
-            if [ ${#lines} -gt $index ]; then
+            if [[ ${#lines} -gt $index ]]; then
                 index=$((index+1))
                 line=${lines[$index]}
             fi
@@ -376,7 +376,7 @@ history-fuzzy-search() {
             words=("${(s/ /)last_pattern}")
             first=${words[1]}
             lines_hash=(${(kv)history[(R)*$first*]})
-            if [ ${#words} -gt 1 ]; then
+            if [[ ${#words} -gt 1 ]]; then
                 for i in {2..${#words}}; do
                     word=${words[$i]}
                     lines_hash=(${(kv)lines_hash[(R)*$word*]})
