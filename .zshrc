@@ -357,8 +357,10 @@ history-fuzzy-search() {
         elif (( #char == ##\C-u )); then
             unset last_pattern
         elif (( #char == ##\C-y )); then
-            index=$((index+1))
-            line=${lines[$index]}
+            if [ ${#lines} -gt $index ]; then
+                index=$((index+1))
+                line=${lines[$index]}
+            fi
         elif (( #char < 32 )); then
             unset last_pattern
             zle -R ''
