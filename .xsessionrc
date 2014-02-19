@@ -43,16 +43,6 @@ type "gnome-keyring-daemon" > /dev/null 2>&1 && while :; do
     break
 done
 
-type "conky" > /dev/null 2>&1 && type "dzen2" > /dev/null 2>&1 && while :; do
-    export FG='white'
-    export BG='#002b36'
-    export FONT='-*-terminus-medium-r-*-*-14-*-*-*-*-*-*-*'
-    export LC_ALL=hu_HU.UTF-8
-    (sleep 3 && conky -c $HOME/.conkyrc | dzen2 -e - -x '500' -ta r -fg $FG \
-        -bg $BG -fn $FONT) &
-    break
-done
-
 type "trayer" > /dev/null 2>&1 && trayer --widthtype request --align right \
     --height 32 --transparent true --alpha 0 --tint 0x0B0B0B &
 
@@ -69,3 +59,16 @@ type "autocutsel" > /dev/null 2>&1 && while :; do
 done
 
 type "firefox" > /dev/null 2>&1 && (sleep 10 && firefox) &
+
+N_SCREENS=$(xrandr|grep '\<connected\>'|wc -l)
+for screen in $(seq 1 $N_SCREENS); do
+    type "conky" > /dev/null 2>&1 && type "dzen2" > /dev/null 2>&1 && while :; do
+        export FG='white'
+        export BG='#002b36'
+        export FONT='-*-terminus-medium-r-*-*-14-*-*-*-*-*-*-*'
+        export LC_ALL=hu_HU.UTF-8
+        (sleep 5 && conky -c $HOME/.conkyrc | dzen2 -e - -x '500' -ta r -fg $FG \
+            -bg $BG -fn $FONT -xs $screen) &
+        break
+    done
+done
