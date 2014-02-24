@@ -82,3 +82,6 @@
 [submodule ".vim/bundle/SWTC"]
 	path = .vim/bundle/SWTC
 	url = https://github.com/shinokada/SWTC.vim.git
+[submodule ".vim/bundle/vim-golang"]
+	path = .vim/bundle/vim-golang
+	url = https://github.com/jnwhiteh/vim-golang
