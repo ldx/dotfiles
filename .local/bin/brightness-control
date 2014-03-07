@@ -11,7 +11,7 @@ case "$1" in
         # increase brightness by 5%
         _brightness=$((CURBR+STEP))
         if [ $_brightness -gt $MAXBR ]; then
-            _brightness=0
+            _brightness=$MAXBR
         fi
         echo $_brightness > $CURBR_FILE
         ;;
