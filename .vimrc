@@ -60,7 +60,8 @@ set cinoptions=(0,u0,U0
 
 " clipboard
 if version >= 703
-  set clipboard=unnamedplus
+  "set clipboard=unnamedplus
+  set clipboard=unnamed
 endif
 
 " mouse
