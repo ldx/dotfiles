@@ -1,0 +1,35 @@
+#!/bin/sh
+
+BRDIR="/sys/class/backlight/$(ls -1 /sys/class/backlight/|head -n 1)"
+MAXBR="$(cat $BRDIR/max_brightness)"
+CURBR_FILE="$BRDIR/brightness"
+CURBR="$(cat $CURBR_FILE)"
+STEP=$((MAXBR/20))
+
+case "$1" in
+    U|u|[U,u]p)
+        # increase brightness by 5%
+        _brightness=$((CURBR+STEP))
+        if [ $_brightness -gt $MAXBR ]; then
+            _brightness=0
+        fi
+        echo $_brightness > $CURBR_FILE
+        ;;
+    D|d|[D,d]own|[D,d]o)
+        # increase brightness by 5%
+        _brightness=$((CURBR-STEP))
+        if [ $_brightness -lt 0 ]; then
+            _brightness=0
+        fi
+        echo $_brightness > $CURBR_FILE
+        ;;
+    *)
+        echo "Usage: $0 [up|down]"
+        exit 1
+        ;;
+esac
+
+_percent=$((CURBR*100/MAXBR))
+echo $_percent
+
+exit 0
