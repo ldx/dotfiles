@@ -46,7 +46,7 @@ done
 type "trayer" > /dev/null 2>&1 && trayer --widthtype request --align right \
     --height 32 --transparent true --alpha 0 --tint 0x0B0B0B &
 
-type "skype" > /dev/null 2>&1 && skype &
+type "skype" > /dev/null 2>&1 && PULSE_LATENCY_MSEC=30 skype &
 
 type "dropbox" > /dev/null 2>&1 && (dropbox stop; dropbox start &)
 
