@@ -57,17 +57,20 @@ case "$1" in
     setup
     [[ "$CURVOL" -ge 100 ]] && exit 0 ||
       pactl set-sink-volume "$SINK" -- +5%
+      PULSE_LATENCY_MSEC=30 padsp play $HOME/.local/share/sound/Volume.wav > /dev/null 2>&1
     ;;
   D|d|[D,d]own|[D,d]o)
     # lowers volume by 5%
     setup
     [[ "$CURVOL" -le 0 ]] && exit 0 ||
       pactl set-sink-volume "$SINK" -- -5%
+      PULSE_LATENCY_MSEC=30 padsp play $HOME/.local/share/sound/Volume.wav > /dev/null 2>&1
     ;;
   M|m|[M,m]u|[M,m]ute)
     # mutes the volume entirely
     setup
     pactl set-sink-mute "$SINK" toggle
+    PULSE_LATENCY_MSEC=30 padsp play $HOME/.local/share/sound/Volume.wav > /dev/null 2>&1
     ;;
   [M,m]i|[M,m]ute-[I,i]nput)
     # mutes the microphone entirely
