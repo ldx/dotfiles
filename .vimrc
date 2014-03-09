@@ -260,3 +260,7 @@ augroup END
 
 " NERDTree
 map <C-n> :NERDTreeToggle<CR>
+
+:au! CursorHold * exe "silent! GitGutterSignsEnable"
+:au! CursorHoldI * exe "silent! GitGutterSignsEnable"
+:au! CursorMoved * exe "silent! GitGutterSignsEnable"
