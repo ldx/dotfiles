@@ -259,3 +259,8 @@ map <C-n> :NERDTreeToggle<CR>
 " Always show gutter.
 "autocmd BufEnter * sign define dummy
 "autocmd BufEnter * execute 'sign place 9999 line=1 name=dummy buffer=' . bufnr('')
+
+" YCM clears up all signs in gutter, which messes up other plugins.
+let g:ycm_show_diagnostics_ui=0
+let g:ycm_enable_diagnostic_signs=0
+let g:ycm_confirm_extra_conf=0
