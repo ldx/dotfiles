@@ -135,28 +135,6 @@ syntax on
 " indenting
 filetype indent plugin on
 
-" highlight extra whitespace at end of line
-highlight ExtraWhitespace ctermbg=1 guibg=red
-match ExtraWhitespace /\s\+$/
-autocmd BufWinEnter * match ExtraWhitespace /\s\+$/
-autocmd InsertEnter * match ExtraWhitespace /\s\+\%#\@<!$/
-autocmd InsertLeave * match ExtraWhitespace /\s\+$/
-autocmd BufWinLeave * call clearmatches()
-
-" Arduino .pde files
-autocmd BufWinEnter *.pde setf arduino
-autocmd BufWinEnter *.ino setf arduino
-
-" Open any file with a pre-existing swapfile in readonly mode
-augroup NoSimultaneousEdits
-    autocmd!
-    autocmd SwapExists * let v:swapchoice = 'o'
-    autocmd SwapExists * echomsg ErrorMsg
-    autocmd SwapExists * echo 'Duplicate edit session (readonly)'
-    autocmd SwapExists * echohl None
-    autocmd SwapExists * sleep 2
-augroup END
-
 " disable arrow keys
 :map <left> <Nop>
 :map <right> <Nop>
@@ -258,9 +236,26 @@ augroup puppet
   autocmd FileType puppet :map <Leader>t :Tabularize /=>/l1<CR>
 augroup END
 
+" highlight extra whitespace at end of line
+highlight ExtraWhitespace ctermbg=1 guibg=red
+match ExtraWhitespace /\s\+$/
+autocmd BufWinEnter * match ExtraWhitespace /\s\+$/
+autocmd InsertEnter * match ExtraWhitespace /\s\+\%#\@<!$/
+autocmd InsertLeave * match ExtraWhitespace /\s\+$/
+autocmd BufWinLeave * call clearmatches()
+
+" Arduino .pde files
+autocmd BufWinEnter *.pde setf arduino
+autocmd BufWinEnter *.ino setf arduino
+
 " NERDTree
 map <C-n> :NERDTreeToggle<CR>
 
-:au! CursorHold * exe "silent! GitGutterSignsEnable"
-:au! CursorHoldI * exe "silent! GitGutterSignsEnable"
-:au! CursorMoved * exe "silent! GitGutterSignsEnable"
+" Make sure gitgutter signs are shown.
+"autocmd CursorHold * exe "silent! GitGutterSignsEnable"
+"autocmd CursorHoldI * exe "silent! GitGutterSignsEnable"
+"autocmd CursorMoved * exe "silent! GitGutterSignsEnable"
+
+" Always show gutter.
+"autocmd BufEnter * sign define dummy
+"autocmd BufEnter * execute 'sign place 9999 line=1 name=dummy buffer=' . bufnr('')
