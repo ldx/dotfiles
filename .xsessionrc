@@ -15,7 +15,9 @@ xset b off
 type "synclient" > /dev/null 2>&1 && while :; do
     synclient TapButton1=1
     synclient TapButton2=3
+    synclient TapButton3=2
     synclient VertTwoFingerScroll=1
+    synclient LockedDrags=1
     break
 done
 
@@ -23,7 +25,8 @@ if [ -f "$HOME/.Xdefaults" ]; then
     xrdb $HOME/.Xdefaults
 fi
 
-for p in $(pidof gnome-screensaver conky trayer skype nm-applet chrome); do
+for p in $(pidof gnome-screensaver conky trayer skype nm-applet chrome \
+           autocutsel); do
     kill $p
 done
 
@@ -34,7 +37,6 @@ type "xscreensaver" > /dev/null 2>&1 && while :; do
 done
 
 type "gnome-keyring-daemon" > /dev/null 2>&1 && while :; do
-    killall gnome-keyring-daemon
     eval "$(gnome-keyring-daemon -r)"
     export GNOME_KEYRING_CONTROL
     export SSH_AUTH_SOCK
@@ -46,7 +48,10 @@ done
 type "trayer" > /dev/null 2>&1 && trayer --widthtype request --align right \
     --height 32 --transparent true --alpha 0 --tint 0x0B0B0B &
 
-type "skype" > /dev/null 2>&1 && PULSE_LATENCY_MSEC=30 skype &
+type "skype" > /dev/null 2>&1 && while :; do
+    (sleep 3 && PULSE_LATENCY_MSEC=30 skype &)
+    break
+done
 
 type "dropbox" > /dev/null 2>&1 && (dropbox stop; dropbox start &)
 
@@ -58,7 +63,13 @@ type "autocutsel" > /dev/null 2>&1 && while :; do
     break
 done
 
-type "firefox" > /dev/null 2>&1 && (sleep 10 && firefox) &
+type "iceweasel" > /dev/null 2>&1 && while :; do
+    if [ -n "$(pidof iceweasel)" ]; then
+        break
+    fi
+    (sleep 10 && iceweasel) &
+    break
+done
 
 N_SCREENS=$(xrandr|grep '\<connected\>'|wc -l)
 for screen in $(seq 1 $N_SCREENS); do
