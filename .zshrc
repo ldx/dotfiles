@@ -56,7 +56,7 @@ export EDITOR=vim
 export VISUAL=vim
 
 LOCAL_PREFIX=$HOME/.local
-export CFLAGS=-I$LOCAL_PREFIX/include
+export CPPFLAGS=-I$LOCAL_PREFIX/include
 export LDFLAGS=-L$LOCAL_PREFIX/lib
 export LD_LIBRARY_PATH=$LOCAL_PREFIX/lib:$LD_LIBRARY_PATH
 
