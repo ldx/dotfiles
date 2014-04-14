@@ -95,6 +95,8 @@ if [ -e $HOME/.local/bin/virtualenvwrapper.sh ]; then
     source $HOME/.local/bin/virtualenvwrapper.sh
 fi
 
+export GOPATH=$HOME/Projects/go
+
 export GEM_HOME=$HOME/.gem
 export BUNDLE_PATH=$GEM_HOME
 
@@ -130,7 +132,9 @@ unshift_path "/usr/local"
 unshift_path "/usr/X11"
 unshift_path "/opt"
 unshift_path "/opt/local"
+unshift_path "$HOME"
 unshift_path "$HOME/.local"
+unshift_path "$GOPATH"
 unshift_path "$BUNDLE_PATH"
 if which ruby > /dev/null && which gem >/dev/null; then
     unshift_path "$(ruby -rubygems -e 'puts Gem.user_dir')"
