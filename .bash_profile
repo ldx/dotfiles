@@ -1,5 +1,10 @@
 #parent=$(ps -o comm= $PPID)
 #if  [ $parent = "sshd" -o $parent = "su" ]; then
+_s="$(which zsh 2> /dev/null)"
+if [ $? -eq 0 ]; then
+    exec $_s
+fi
+
 arch=$(uname -m)
 case $arch in
     i?86)
