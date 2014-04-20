@@ -28,7 +28,7 @@ if [ -f "$HOME/.Xdefaults" ]; then
 fi
 
 for p in $(pidof gnome-screensaver conky trayer skype nm-applet chrome \
-           autocutsel); do
+           autocutsel parcellite); do
     kill $p
 done
 
@@ -59,9 +59,8 @@ type "dropbox" > /dev/null 2>&1 && (dropbox stop; dropbox start &)
 
 type "nm-applet" > /dev/null 2>&1 && nm-applet &
 
-type "autocutsel" > /dev/null 2>&1 && while :; do
-    autocutsel -fork
-    autocutsel -s PRIMARY -fork
+type "parcellite" > /dev/null 2>&1 && while :; do
+    parcellite > /dev/null 2>&1 &
     break
 done
 
