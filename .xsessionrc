@@ -18,6 +18,8 @@ type "synclient" > /dev/null 2>&1 && while :; do
     synclient TapButton3=2
     synclient VertTwoFingerScroll=1
     synclient LockedDrags=1
+    synclient LockedDragTimeout=500
+    synclient PalmDetect=1
     break
 done
 
