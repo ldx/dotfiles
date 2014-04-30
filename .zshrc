@@ -23,13 +23,6 @@ esac
 fpath=($fpath $_zsh_path/share/site-functions $_zsh_path/share/zsh/*/functions)
 module_path=($module_path $_zsh_path/lib/zsh/*)
 
-# Check for files with local environment settings.
-for f in .setenv setenv setenv.sh; do
-    if [ -f "$HOME/$f" ]; then
-        . "$HOME/$f"
-    fi
-done
-
 ################################
 # G L O B A L  S E T T I N G S #
 ################################
@@ -473,3 +466,10 @@ PROMPT='[%B%n%b@%B%m%b]%18<..<%~%<<$(vcs_info_wrapper)%# '
 #autoload -U promptinit
 #promptinit
 #prompt adam2 magenta cyan cyan
+
+# Check for files with local environment settings.
+for f in .setenv setenv setenv.sh; do
+    if [ -f "$HOME/$f" ]; then
+        . "$HOME/$f"
+    fi
+done
