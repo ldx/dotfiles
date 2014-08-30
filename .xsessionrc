@@ -66,13 +66,31 @@ type "parcellite" > /dev/null 2>&1 && while :; do
     break
 done
 
-FIREFOX="firefox"
+FIREFOX="$HOME/.local/bin/firefox"
 type "$FIREFOX" > /dev/null 2>&1 || FIREFOX="iceweasel"
 type "$FIREFOX" > /dev/null 2>&1 && while :; do
     if [ -n "$(pidof $FIREFOX)" ]; then
         break
     fi
     (sleep 10 && $FIREFOX) &
+    break
+done
+
+XFLUX=$HOME/.local/bin/xflux
+type $XFLUX > /dev/null 2>&1 && while :; do
+    if [ -n "$(pidof xflux)" ]; then
+        break
+    fi
+    geo=$(curl 'http://www.geobytes.com/IpLocator.htm?GetLocation&template=php3.txt')
+    lat=$(echo "$geo"|tr '\r' '\n'|grep latitude|sed 's/.*content="([0-9.,]+)".*/\1/')
+    lon=$(echo "$geo"|tr '\r' '\n'|grep longitude|sed 's/.*content="([0-9.,]+)".*/\1/')
+    if [ -z "$lat" ]; then
+        lat="47.4925"
+    fi
+    if [ -z "$lon" ]; then
+        lon="19.0514"
+    fi
+    $XFLUX -l $lat -g $lon
     break
 done
 
