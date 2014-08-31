@@ -189,6 +189,9 @@ if pyversion < 0x02050000
   let g:jedi#auto_initialization = 0
 endif
 
+" powerline
+set rtp+=~/.vim/bundle/powerline/powerline/bindings/vim
+
 " supertab
 let g:SuperTabDefaultCompletionType = "context" "<c-x><c-u>
 
