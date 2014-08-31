@@ -39,20 +39,20 @@ URxvt*scrollBar: false
 URxvt*scrollBar_right: true
 URxvt*scrollstyle: rxvt
 
-URxvt*font: xft:Liberation Mono:pixelsize=15:antialias=true:hinting=true
-URxvt*boldFont: xft:Liberation Mono:pixelsize=15:antialias=true:bold:hinting=true
-URxvt*italicFont: xft:Liberation Mono:pixelsize=15:antialias=true:italic:autohint=true:hinting=true
-URxvt*bolditalicFont: xft:Liberation Mono:pixelsize=15:antialias=true:bold:italic:autohint=true:hinting=true
-!URxvt*font: xft:Bitstream Vera Sans Mono:pixelsize=12:antialias=true:hinting=true
-!URxvt*boldFont: xft:Bitstream Vera Sans Mono:bold:pixelsize=12:antialias=true:hinting=true
+URxvt*font: xft:Liberation Mono for Powerline:pixelsize=15:antialias=true:hinting=true
+URxvt*boldFont: xft:Liberation Mono for Powerline:pixelsize=15:antialias=true:bold:hinting=true
+URxvt*italicFont: xft:Liberation Mono for Powerline:pixelsize=15:antialias=true:italic:autohint=true:hinting=true
+URxvt*bolditalicFont: xft:Liberation Mono for Powerline:pixelsize=15:antialias=true:bold:italic:autohint=true:hinting=true
+!URxvt*font: xft:Bitstream Vera Sans Mono for Powerline:pixelsize=12:antialias=true:hinting=true
+!URxvt*boldFont: xft:Bitstream Vera Sans Mono for Powerline:bold:pixelsize=12:antialias=true:hinting=true
 !URxvt*font: xft:Inconsolata:pixelsize=20:antialias=true:hinting=true
 !URxvt*boldFont: xft:Inconsolata:pixelsize=20:antialias=true:bold:hinting=true
 !URxvt*italicFont: xft:Inconsolata:pixelsize=20:antialias=true:italic:autohint=true:hinting=true
 !URxvt*bolditalicFont: xft:Inconsolata:pixelsize=20:antialias=true:bold:italic:autohint=true:hinting=true
-!URxvt*font: xft:Liberation Mono:pixelsize=14:antialias=true:hinting=true
-!URxvt*boldFont: xft:Liberation Mono:bold:pixelsize=14:antialias=true:hinting=true
-!URxvt*font: xft:Liberation Mono:pixelsize=13:antialias=true:hinting=true
-!URxvt*boldFont: xft:Liberation Mono:bold:pixelsize=13:antialias=true:hinting=true
+!URxvt*font: xft:Liberation Mono for Powerline:pixelsize=14:antialias=true:hinting=true
+!URxvt*boldFont: xft:Liberation Mono for Powerline:bold:pixelsize=14:antialias=true:hinting=true
+!URxvt*font: xft:Liberation Mono for Powerline:pixelsize=13:antialias=true:hinting=true
+!URxvt*boldFont: xft:Liberation Mono for Powerline:bold:pixelsize=13:antialias=true:hinting=true
 !URxvt*font: xft:terminus:pixelsize=15
 !URxvt*boldFont: xft:terminus:bold:pixelsize=15
 !URxvt*font:-*-courier-medium-r-normal-*-14-*-*-*-*-*-iso8859-1
@@ -95,8 +95,8 @@ Xft.hintstyle: hintslight
 ! white
 *xterm*scrollBar: false
 *xterm*scrollstyle: rxvt
-*xterm*faceName: Liberation Mono
-*xterm*faceSize: 11
+*xterm*faceName: Liberation Mono for Powerline
+*xterm*faceSize: 13
 *xterm*cursorColor: white
 *xterm*utf8: 2
 *xterm*termName: xterm-256color
