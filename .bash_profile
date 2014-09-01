@@ -1,5 +1,8 @@
-#parent=$(ps -o comm= $PPID)
-#if  [ $parent = "sshd" -o $parent = "su" ]; then
+parent="$(ps -p $PPID -o comm=)"
+if [ "$parent" != "xterm" -a "$parent" != "tmux" ]; then
+    return
+fi
+
 _s="$(which zsh 2> /dev/null)"
 if [ $? -eq 0 ]; then
     exec $_s
@@ -22,4 +25,3 @@ case $arch in
     *)
         ;;
 esac
-#fi
