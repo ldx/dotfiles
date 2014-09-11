@@ -47,7 +47,7 @@ $(HOME)/%: %
 	@$(INSTALL) -m $(shell $(STAT) "$<"|$(STAT_MOD)) "$<" "$@"
 
 install: $(DST) $(TIDST)
-	fc-cache ~/.fonts
+	type fc-cache > /dev/null 2>&1 && fc-cache ~/.fonts || true
 
 clean:
 	@$(foreach f, $(SRC), ($(CMP) $(f) $(HOME)/$(f) && \
