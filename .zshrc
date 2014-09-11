@@ -96,7 +96,7 @@ if [ -e $HOME/.local/bin/virtualenvwrapper.sh ]; then
 fi
 
 export GOPATH=$HOME/Projects/go
-export GOROOT=$HOME/.local/go
+#export GOROOT=$HOME/.local/go
 
 export GEM_HOME=$HOME/.gem
 export BUNDLE_PATH=$GEM_HOME
@@ -263,7 +263,7 @@ bindkey '^[OA'   history-beginning-search-backward  # Up
 bindkey '^[OB'   history-beginning-search-forward  # Down
 bindkey '^[^I'   reverse-menu-complete  # ESC TAB
 bindkey ' '      magic-space
-bindkey '^A'       beginning-of-line
+bindkey '^A'     beginning-of-line
 bindkey '^E'     end-of-line
 bindkey '^D'     logout
 bindkey '^L'     clear-screen
@@ -475,3 +475,6 @@ for f in .setenv setenv setenv.sh; do
         . "$HOME/$f"
     fi
 done
+
+# added by travis gem
+[ -f ~/.travis/travis.sh ] && source ~/.travis/travis.sh
