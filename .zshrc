@@ -235,6 +235,12 @@ function percentile() {
         }"
 }
 
+function join() {
+    IFS=$1
+    shift
+    echo "$*"
+}
+
 #######################
 # C O M P L E T I O N #
 #######################
