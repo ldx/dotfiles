@@ -1293,7 +1293,6 @@ xkb_symbols "pc+hu+inet(evdev)" {
     key <RWIN> {         [           Alt_L,          Meta_L ] };
     key <MENU> {         [           Alt_L,          Meta_L ] };
     key <SPCE> {         [           space ] };
-    key <CAPS> {         [       Caps_Lock ] };
     key <FK01> {
         type= "CTRL+ALT",
         symbols[Group1]= [              F1,              F1,              F1,              F1, XF86Switch_VT_1 ]
@@ -1528,7 +1527,6 @@ xkb_symbols "pc+hu+inet(evdev)" {
     modifier_map Mod1 { <LWIN> };
     modifier_map Mod1 { <RWIN> };
     modifier_map Mod1 { <MENU> };
-    modifier_map Lock { <CAPS> };
     modifier_map Mod2 { <NMLK> };
     modifier_map Mod5 { <LVL3> };
     modifier_map Control { <RCTL> };
@@ -1536,6 +1534,9 @@ xkb_symbols "pc+hu+inet(evdev)" {
     modifier_map Mod1 { <META> };
     modifier_map Mod4 { <SUPR> };
     modifier_map Mod4 { <HYPR> };
+
+    key.type = "ONE_LEVEL";
+    key <CAPS> { [ Escape ] };
 };
 
 xkb_geometry "pc(pc105)" {
