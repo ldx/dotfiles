@@ -87,12 +87,10 @@ fi
 
 if [ -e /usr/local/bin/virtualenvwrapper.sh ]; then
     source /usr/local/bin/virtualenvwrapper.sh
-fi
-if [ -e /etc/bash_completion.d/virtualenvwrapper ]; then
-    source /etc/bash_completion.d/virtualenvwrapper
-fi
-if [ -e $HOME/.local/bin/virtualenvwrapper.sh ]; then
+elif [ -e $HOME/.local/bin/virtualenvwrapper.sh ]; then
     source $HOME/.local/bin/virtualenvwrapper.sh
+elif [ -e /etc/bash_completion.d/virtualenvwrapper ]; then
+    source /etc/bash_completion.d/virtualenvwrapper
 fi
 
 export GOPATH=$HOME/Projects/go
