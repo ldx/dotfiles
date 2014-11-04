@@ -15,17 +15,26 @@ template1         /home/vili/.dzen/
 
 TEXT
 ${if_match ${exec grep -c eth0 /proc/net/route} > 0}\
-^fg(\#${template1})^i(${template0}wired_connected.xbm)^fg() ${addr eth0}\
-${endif}\
- \
+^fg(\#${template1})^i(${template0}wired_connected.xbm)^fg() \
+${addr eth0} \
+${endif} \
 ${if_match ${exec grep -c wlan0 /proc/net/route} > 0}\
-^fg(\#${template1})^i(${template0}wifi.xbm)^fg() ${addr wlan0}\
-${endif}\
+^fg(\#${template1})^i(${template0}wifi.xbm)^fg() \
+${addr wlan0} \
+${endif} \
+${if_existing /sys/class/power_supply/BAT0}\
+^fg(\#${template1})^i(${template0}battery_full.xbm)^fg()\
+${battery_percent BAT0}% \
+${endif} \
+${if_existing /sys/class/power_supply/BAT1}\
+^fg(\#${template1})^i(${template0}battery_full.xbm)^fg()\
+${battery_percent BAT1}% \
+${endif} \
+^fg(\#${template1})^i(${template0}cpu.xbm)^fg()\
+${cpu cpu0}% \
  \
-^fg(\#${template1})^i(${template0}battery_full.xbm)^fg() ${battery_percent}%\
- \
-^fg(\#${template1})^i(${template0}cpu.xbm)^fg() ${cpu cpu0}%\
- \
-^fg(\#${template1})^i(${template0}mem.xbm)^fg() ${mem}\
- \
-^fg(\#${template1})^i(${template0}clock.xbm)^fg() ${time %A %B %d, %H:%M}\
+^fg(\#${template1})^i(${template0}mem.xbm)^fg() \
+${mem} \
+ \
+^fg(\#${template1})^i(${template0}clock.xbm)^fg() \
+${time %A %B %d, %H:%M} \
