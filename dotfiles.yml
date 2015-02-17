@@ -1,8 +1,10 @@
 ---
 # ansible-playbook -c local -i localhost, dotfiles.yml
 - hosts: localhost
+
   vars:
     homedir: "{{ lookup('env','HOME') }}"
+
   tasks:
     - name: create base directory
       file: path={{ homedir }} state=directory mode=0755
@@ -29,16 +31,20 @@
 
     - name: remove dotfiles.yml
       file: path={{ homedir }}/dotfiles.yml state=absent
+
     - name: create .terminfo directory
       file: path={{ homedir }}/.terminfo state=directory mode=0755
+
     - name: copy terminfo files
       copy: src={{ item }} dest={{ homedir }}/.terminfo/
       with_fileglob:
         - terminfo/*.terminfo
+
     - name: compile terminfo
       shell: tic {{ item }}
       with_fileglob:
         - "{{ homedir }}/.terminfo/*.terminfo"
+
     - name: finish YCM installation
       shell: ./install.sh --clang-completer
       args:
