@@ -49,6 +49,12 @@ $(HOME)/%: %
 install: $(DST) $(TIDST)
 	type fc-cache > /dev/null 2>&1 && fc-cache ~/.fonts || true
 
+vim-bundle-backup:
+	echo "Backing up ~/.vim/bundle if already exists"
+	bash -c "[[ -d ~/.vim/bundle ]] && mv ~/.vim/bundle ~/.vim/bundle-\$(date +%s)"
+
+all: vim-bundle-backup install
+
 clean:
 	@$(foreach f, $(SRC), ($(CMP) $(f) $(HOME)/$(f) && \
 		echo "removing $(f)" && $(RM) $(HOME)/$(f) && echo "removing $(shell dirname $(f))" && $(RMDIR) $(shell dirname $(HOME)/$(f))) || :;)
