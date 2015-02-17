@@ -6,8 +6,27 @@
   tasks:
     - name: create base directory
       file: path={{ homedir }} state=directory mode=0755
+
+    - name: check files/directories in dotfiles/
+      shell: find dotfiles -maxdepth 1|grep -v '^dotfiles$'
+      register: dotfiles
+
     - name: copy dotfiles
-      synchronize: src=dotfiles/ dest={{ homedir }}/ archive=yes delete=no
+      synchronize: src={{ item }}
+                   dest={{ homedir }}/
+                   archive=yes
+                   delete=yes
+      with_items: "{{ dotfiles.stdout.split('\n') }}"
+
+    - name: create .local directory
+      file: path={{ homedir }}/.local state=directory mode=0755
+
+    - name: copy local/* to {{ homedir }}/.local/
+      synchronize: src=local/
+                   dest={{ homedir }}/.local/
+                   archive=yes
+                   delete=no
+
     - name: remove dotfiles.yml
       file: path={{ homedir }}/dotfiles.yml state=absent
     - name: create .terminfo directory
