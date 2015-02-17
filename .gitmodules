@@ -1,96 +1,96 @@
 [submodule ".vim/bundle/gnupg.vim"]
-	path = .vim/bundle/gnupg.vim
+	path = dotfiles/.vim/bundle/gnupg.vim
 	url = https://github.com/vim-scripts/gnupg.vim.git
 [submodule ".vim/bundle/rainbow_parentheses.vim"]
-	path = .vim/bundle/rainbow_parentheses.vim
+	path = dotfiles/.vim/bundle/rainbow_parentheses.vim
 	url = https://github.com/kien/rainbow_parentheses.vim.git
 [submodule ".vim/bundle/syntastic"]
-	path = .vim/bundle/syntastic
+	path = dotfiles/.vim/bundle/syntastic
 	url = https://github.com/scrooloose/syntastic.git
 [submodule ".vim/bundle/taglist.vim"]
-	path = .vim/bundle/taglist.vim
+	path = dotfiles/.vim/bundle/taglist.vim
 	url = https://github.com/vim-scripts/taglist.vim.git
 [submodule ".vim/bundle/vim-colors-solarized"]
-	path = .vim/bundle/vim-colors-solarized
+	path = dotfiles/.vim/bundle/vim-colors-solarized
 	url = https://github.com/altercation/vim-colors-solarized.git
 [submodule ".vim/bundle/vim-fugitive"]
-	path = .vim/bundle/vim-fugitive
+	path = dotfiles/.vim/bundle/vim-fugitive
 	url = https://github.com/tpope/vim-fugitive.git
 [submodule ".vim/bundle/vim-indentfinder"]
-	path = .vim/bundle/vim-indentfinder
+	path = dotfiles/.vim/bundle/vim-indentfinder
 	url = https://github.com/ldx/vim-indentfinder.git
 [submodule ".vim/bundle/vim-pathogen"]
-	path = .vim/bundle/vim-pathogen
+	path = dotfiles/.vim/bundle/vim-pathogen
 	url = https://github.com/tpope/vim-pathogen.git
 [submodule ".vim/bundle/vim-springforest"]
-	path = .vim/bundle/vim-springforest
+	path = dotfiles/.vim/bundle/vim-springforest
 	url = https://github.com/ldx/vim-springforest.git
 [submodule ".vim/bundle/vim-statline"]
-	path = .vim/bundle/vim-statline
+	path = dotfiles/.vim/bundle/vim-statline
 	url = https://github.com/millermedeiros/vim-statline.git
 [submodule ".vim/bundle/Arduino-syntax-file"]
-	path = .vim/bundle/Arduino-syntax-file
+	path = dotfiles/.vim/bundle/Arduino-syntax-file
 	url = https://github.com/vim-scripts/Arduino-syntax-file.git
 [submodule ".vim/bundle/javacomplete"]
-	path = .vim/bundle/javacomplete
+	path = dotfiles/.vim/bundle/javacomplete
 	url = https://github.com/vim-scripts/javacomplete.git
 [submodule ".vim/bundle/vim-manage-classpath"]
-	path = .vim/bundle/vim-manage-classpath
+	path = dotfiles/.vim/bundle/vim-manage-classpath
 	url = https://github.com/ldx/vim-manage-classpath.git
 [submodule ".vim/bundle/vim-markdown"]
-	path = .vim/bundle/vim-markdown
+	path = dotfiles/.vim/bundle/vim-markdown
 	url = https://github.com/plasticboy/vim-markdown.git
 [submodule ".vim/bundle/python-mode"]
-	path = .vim/bundle/python-mode
+	path = dotfiles/.vim/bundle/python-mode
 	url = https://github.com/klen/python-mode.git
 [submodule ".vim/bundle/vim-scala"]
-	path = .vim/bundle/vim-scala
+	path = dotfiles/.vim/bundle/vim-scala
 	url = https://github.com/derekwyatt/vim-scala.git
 [submodule ".vim/bundle/cscope.vim"]
-	path = .vim/bundle/cscope.vim
+	path = dotfiles/.vim/bundle/cscope.vim
 	url = https://github.com/vim-scripts/cscope.vim.git
 [submodule ".vim/bundle/jedi-vim"]
-	path = .vim/bundle/jedi-vim
+	path = dotfiles/.vim/bundle/jedi-vim
 	url = https://github.com/davidhalter/jedi-vim.git
 [submodule ".vim/bundle/vim-git"]
-	path = .vim/bundle/vim-git
+	path = dotfiles/.vim/bundle/vim-git
 	url = https://github.com/tpope/vim-git.git
 [submodule ".vim/bundle/vim-gitgutter"]
-	path = .vim/bundle/vim-gitgutter
+	path = dotfiles/.vim/bundle/vim-gitgutter
 	url = https://github.com/airblade/vim-gitgutter.git
 [submodule ".vim/bundle/vim-puppet"]
-	path = .vim/bundle/vim-puppet
+	path = dotfiles/.vim/bundle/vim-puppet
 	url = https://github.com/rodjek/vim-puppet.git
 [submodule ".vim/bundle/vim-startify"]
-	path = .vim/bundle/vim-startify
+	path = dotfiles/.vim/bundle/vim-startify
 	url = https://github.com/mhinz/vim-startify.git
 [submodule ".vim/bundle/nerdtree"]
-	path = .vim/bundle/nerdtree
+	path = dotfiles/.vim/bundle/nerdtree
 	url = https://github.com/scrooloose/nerdtree.git
 [submodule ".vim/bundle/tabular"]
-	path = .vim/bundle/tabular
+	path = dotfiles/.vim/bundle/tabular
 	url = https://github.com/godlygeek/tabular
 [submodule ".vim/bundle/vimerl"]
-	path = .vim/bundle/vimerl
+	path = dotfiles/.vim/bundle/vimerl
 	url = https://github.com/jimenezrick/vimerl.git
 [submodule ".vim/bundle/SWTC"]
-	path = .vim/bundle/SWTC
+	path = dotfiles/.vim/bundle/SWTC
 	url = https://github.com/shinokada/SWTC.vim.git
 [submodule ".vim/bundle/vim-golang"]
-	path = .vim/bundle/vim-golang
+	path = dotfiles/.vim/bundle/vim-golang
 	url = https://github.com/jnwhiteh/vim-golang
 [submodule ".vim/bundle/YouCompleteMe"]
-	path = .vim/bundle/YouCompleteMe
+	path = dotfiles/.vim/bundle/YouCompleteMe
 	url = git@github.com:Valloric/YouCompleteMe.git
 [submodule ".vim/bundle/vim-gocode"]
-	path = .vim/bundle/vim-gocode
+	path = dotfiles/.vim/bundle/vim-gocode
 	url = git@github.com:Blackrush/vim-gocode.git
 [submodule ".vim/bundle/powerline"]
-	path = .vim/bundle/powerline
+	path = dotfiles/.vim/bundle/powerline
 	url = https://github.com/Lokaltog/powerline.git
 [submodule ".tmux/plugins/tmux-yank"]
-	path = .tmux/plugins/tmux-yank
+	path = dotfiles/.tmux/plugins/tmux-yank
 	url = https://github.com/tmux-plugins/tmux-yank
 [submodule ".vim/bundle/vim-ansible-yaml"]
-	path = .vim/bundle/vim-ansible-yaml
+	path = dotfiles/.vim/bundle/vim-ansible-yaml
 	url = https://github.com/chase/vim-ansible-yaml.git
