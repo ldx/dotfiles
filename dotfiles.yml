@@ -28,6 +28,9 @@
         - python-pip
       when: ansible_os_family == 'Darwin'
 
+    - name: change shell to zsh
+      command: /usr/bin/chsh -s /bin/zsh {{ ansible_env.SUDO_USER }}
+
 - hosts: all
   sudo: no
 
