@@ -30,9 +30,6 @@
                    archive=yes
                    delete=no
 
-    - name: remove dotfiles.yml
-      file: path={{ homedir }}/dotfiles.yml state=absent
-
     - name: create .terminfo directory
       file: path={{ homedir }}/.terminfo state=directory mode=0755
 
