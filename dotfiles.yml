@@ -1,5 +1,5 @@
 ---
-# ansible-playbook -c local -i localhost, dotfiles.yml
+# ansible-playbook -K -c local -i localhost, dotfiles.yml
 - hosts: all
   sudo: yes
 
