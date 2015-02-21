@@ -11,7 +11,7 @@
       file: path={{ homedir }} state=directory mode=0755
 
     - name: check files/directories in dotfiles/
-      shell: find dotfiles -maxdepth 1|grep -v '^dotfiles$'
+      local_action: shell find dotfiles -maxdepth 1|grep -v '^dotfiles$'
       register: dotfiles
 
     - name: copy dotfiles
