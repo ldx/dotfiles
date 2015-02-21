@@ -47,3 +47,5 @@
       shell: ./install.sh --clang-completer
       args:
         chdir: "{{ homedir }}/.vim/bundle/YouCompleteMe"
+      environment:
+        PATH: "/usr/local/bin:{{ ansible_env.PATH }}"
