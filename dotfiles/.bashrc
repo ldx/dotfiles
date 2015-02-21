@@ -114,3 +114,5 @@ if ! shopt -oq posix; then
 fi
 
 set -o vi
+
+PATH=~/.local/bin:/usr/local/bin:$PATH
