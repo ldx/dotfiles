@@ -19,15 +19,6 @@
         - zsh
       when: ansible_os_family == 'Debian'
 
-    - name: install packages on Debian/Ubuntu
-      apt: name={{ item }} state=present
-      with_items:
-        - cmake
-        - gawk
-        - git
-        - python-pip
-      when: ansible_os_family == 'Darwin'
-
     - name: change shell to zsh
       command: /usr/bin/chsh -s /bin/zsh {{ ansible_env.SUDO_USER }}
 
@@ -38,6 +29,16 @@
     homedir: "{{ ansible_env.HOME }}"
 
   tasks:
+    - name: install packages on Mac OS X
+      homebrew: name={{ item }} state=present
+      with_items:
+        - cmake
+        - gawk
+        - git
+        - python
+      when: ansible_os_family == 'Darwin'
+      ignore_errors: yes
+
     - name: create base directory
       file: path={{ homedir }} state=directory mode=0755
 
