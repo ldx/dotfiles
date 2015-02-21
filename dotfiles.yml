@@ -3,7 +3,7 @@
 - hosts: all
 
   vars:
-    homedir: "{{ lookup('env','HOME') }}"
+    homedir: "{{ ansible_env.HOME }}"
 
   tasks:
     - name: create base directory
