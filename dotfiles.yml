@@ -19,7 +19,7 @@
                    dest={{ homedir }}/
                    archive=yes
                    delete=yes
-      with_items: "{{ dotfiles.stdout.split('\n') }}"
+      with_items: dotfiles.stdout.split('\n')
 
     - name: create .local directory
       file: path={{ homedir }}/.local state=directory mode=0755
