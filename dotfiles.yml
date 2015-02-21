@@ -1,6 +1,6 @@
 ---
 # ansible-playbook -c local -i localhost, dotfiles.yml
-- hosts: localhost
+- hosts: all
 
   vars:
     homedir: "{{ lookup('env','HOME') }}"
