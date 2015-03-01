@@ -42,8 +42,12 @@
       with_fileglob:
         - "{{ homedir }}/.terminfo/*.terminfo"
 
+    - name: set YCM parameters
+      set_fact: ycm_params=--clang-completer
+      when: ycm_with_clang is defined
+
     - name: finish YCM installation
-      shell: ./install.sh --clang-completer
+      shell: ./install.sh {{ ycm_params | default('') }}
       args:
         chdir: "{{ homedir }}/.vim/bundle/YouCompleteMe"
       environment:
