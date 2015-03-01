@@ -1,0 +1,35 @@
+set defsearch=google
+set suggestengines=google
+
+" Completion priority in :[tab]open: bookmarks, suggestions, awesome bar.
+set complete=lbS
+
+" Max number of listing items.
+set maxitems=5
+
+" Don't focus new opened tabs automatically.
+set activate=
+
+set hintmatching=contains
+
+set newtab=all
+
+" Don't focus any "input" element automatically.
+set focuscontent
+
+set gui=nonavigation
+
+" Always display tab bar.
+set! browser.tabs.autoHide=false
+
+" Open tab in background.
+set! browser.tabs.loadDivertedInBackground=true
+
+" Number of URL completions.
+set! browser.urlbar.maxRichResults=20
+
+" Number of popups.
+set! dom.popup_maximum=100
+
+" Minimize tab size.
+style -name iconize-tab chrome://* .tabbrowser-tab:not([pinned]) { min-width: 28px !important; max-width: 28px !important; } .tabbrowser-tab:not([pinned]) .tab-label { display: none !important; } .tab-close-button { display: none; }
