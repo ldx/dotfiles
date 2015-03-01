@@ -9,6 +9,7 @@
         - curl
         - gawk
         - git
+        - python-dev
         - python-pip
         - screen
         - sysstat
