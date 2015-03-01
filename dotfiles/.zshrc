@@ -248,9 +248,6 @@ zstyle ':completion:*:killall:*' command 'ps -u $USER -o cmd'
 set -o vi  # First, set vi line editing mode.
 
 # Set up emacs-style key bindings too.
-bindkey '^[OA'   history-beginning-search-backward  # Up
-bindkey '^[OB'   history-beginning-search-forward  # Down
-bindkey '^[^I'   reverse-menu-complete  # ESC TAB
 bindkey ' '      magic-space
 bindkey '^A'     beginning-of-line
 bindkey '^E'     end-of-line
@@ -261,11 +258,7 @@ bindkey '^U'     kill-whole-line
 bindkey '^W'     vi-backward-kill-word
 bindkey '^f'     vi-forward-word
 bindkey '^b'     vi-backward-word
-bindkey '^/'     undo
 bindkey '^x'     kill-word
-bindkey '^[[^@'  beginning-of-line
-bindkey '^[[e'   end-of-line
-# vi style incremental search
 bindkey '^R'     history-incremental-search-backward
 bindkey '^S'     history-incremental-search-forward
 bindkey '^P'     history-beginning-search-backward
@@ -283,8 +276,8 @@ my-forward-word() {
     done
 }
 
-zle -N my-forward-word
-bindkey '^f' my-forward-word
+#zle -N my-forward-word
+#bindkey '^f' my-forward-word
 
 my-backward-word() {
     if [[ "${BUFFER[CURSOR]}" =~ "${SEPCHARS}" ]]; then
@@ -296,8 +289,8 @@ my-backward-word() {
     done
 }
 
-zle -N my-backward-word
-bindkey '^b' my-backward-word
+#zle -N my-backward-word
+#bindkey '^b' my-backward-word
 
 my-backward-kill-word() {
     if [[ "${LBUFFER[CURSOR]}" =~ "${SEPCHARS}" ]]; then
@@ -309,8 +302,8 @@ my-backward-kill-word() {
     done
 }
 
-zle -N my-backward-kill-word
-bindkey '^W' my-backward-kill-word
+#zle -N my-backward-kill-word
+#bindkey '^W' my-backward-kill-word
 
 history-fuzzy-search() {
     emulate -L zsh
