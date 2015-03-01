@@ -244,6 +244,10 @@ zstyle ':completion:*:killall:*' command 'ps -u $USER -o cmd'
 ##########################
 # K E Y  B I N D I N G S #
 ##########################
+
+set -o vi  # First, set vi line editing mode.
+
+# Set up emacs-style key bindings too.
 bindkey '^[OA'   history-beginning-search-backward  # Up
 bindkey '^[OB'   history-beginning-search-forward  # Down
 bindkey '^[^I'   reverse-menu-complete  # ESC TAB
