@@ -9,6 +9,9 @@
     - name: create base directory
       file: path={{ homedir }} state=directory mode=0755
 
+    - name: create .tmp directory
+      file: path={{ homedir }}/.tmp state=directory mode=0755
+
     - name: check files/directories in dotfiles/
       local_action: shell find dotfiles -maxdepth 1|grep -v '^dotfiles$'
       register: dotfiles
