@@ -94,3 +94,6 @@
 [submodule ".vim/bundle/vim-ansible-yaml"]
 	path = dotfiles/.vim/bundle/vim-ansible-yaml
 	url = https://github.com/chase/vim-ansible-yaml.git
+[submodule "dotfiles/.vim/bundle/vim-gutentags"]
+	path = dotfiles/.vim/bundle/vim-gutentags
+	url = git@github.com:ludovicchabant/vim-gutentags.git
