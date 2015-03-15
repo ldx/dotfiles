@@ -1,0 +1,45 @@
+#
+# .gitignore
+#
+
+*.o
+*.o.*
+*.a
+*.s
+*.ko
+*.so.dbg
+*.mod.c
+*.i
+*.lst
+*.symtypes
+*.order
+*.elf
+*.bin
+*.gz
+*.lzma
+*.patch
+*.gcno
+
+# stgit generated dirs
+patches-*
+
+# quilt's files
+patches
+series
+
+# cscope files
+cscope.*
+ncscope.*
+!cscope.vim
+
+# gnu global files
+GPATH
+GRTAGS
+GSYMS
+GTAGS
+
+tags
+
+*.orig
+*~
+\#*#
