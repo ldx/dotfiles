@@ -39,6 +39,8 @@ GSYMS
 GTAGS
 
 tags
+tags.lock
+tags.temp
 
 *.orig
 *~
