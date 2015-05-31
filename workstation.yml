@@ -6,3 +6,32 @@
     - name: change shell to zsh
       command: /usr/bin/chsh -s /bin/zsh {{ ansible_env.SUDO_USER }}
 
+    - name: remounting existing filesystems with noatime
+      mount: src={{item.device}}
+             name={{item.mount}}
+             fstype={{item.fstype}}
+             opts={{item.options}},noatime
+             state=present
+      with_items: ansible_mounts
+      when: item.mount in ['/', '/boot'] and 'noatime' not in item.options
+
+    - name: run fstrim daily
+      cron: name="run fstrim daily"
+            special_time=daily
+            job="fstrim /"
+
+    - name: set swappiness
+      sysctl: name=vm.swappiness
+              value=1
+              state=present
+              sysctl_file=/etc/sysctl.conf
+
+    - name: add kernel parameters to grub
+      lineinfile: dest=/etc/default/grub
+                  regexp="^GRUB_CMDLINE_LINUX="
+                  line="GRUB_CMDLINE_LINUX=\"cgroup_enable=memory swapaccount=1 elevator=noop\""
+      register: grub_cmdline
+
+    - name: run update-grub if /etc/default/grub has changed
+      command: update-grub
+      when: grub_cmdline | changed
