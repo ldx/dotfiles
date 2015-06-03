@@ -72,7 +72,7 @@ type "$FIREFOX" > /dev/null 2>&1 && while :; do
     if [ -n "$(pidof $FIREFOX)" ]; then
         break
     fi
-    (sleep 10 && $FIREFOX) &
+    (sleep 10 && LANG=C LC_ALL=C $FIREFOX) &
     break
 done
 
