@@ -36,13 +36,13 @@ setup() {
   SOURCE_MUTED="${NRM}${GRN}$SOURCE_MUTED${NRM}"
   CURVOL=$(pacmd list-sinks|grep -A 15 '* index'| awk '/volume: 0:/{ print $3 }'|sed 's/%//')
 
-  if [ "$CURVOL" -ge 0 -o "$CURVOL" -lt 0 2>/dev/null ]; then
+  if [ "$CURVOL" != "" -a "$CURVOL" -ge 0 -o "$CURVOL" -lt 0 2>/dev/null ]; then
     return 0
   else
     # the git snapshot at the time of writing this script changes the
     # expected output of this cmd
     CURVOL=$(pacmd list-sinks|grep -A 15 '* index'| awk '/volume: front/{ print $5 }' | sed 's/%//g')
-    if [ "$CURVOL" -ge 0 -o "$CURVOL" -lt 0 2>/dev/null ]; then
+    if [ "$CURVOL" != "" -a "$CURVOL" -ge 0 -o "$CURVOL" -lt 0 2>/dev/null ]; then
       return 0
     else
       echo -e " ${BLD}${RED}Cannot find current volume. CURVOL = ${CURVOL}${NRM}"
@@ -55,16 +55,20 @@ case "$1" in
   U|u|[U,u]p)
     # raise volume by 5%
     setup
-    [[ "$CURVOL" -ge 100 ]] && exit 0 ||
+    [[ "$CURVOL" -ge 100 ]] && exit 0 || {
+      pactl set-sink-volume "$SINK" +5%
       pactl set-sink-volume "$SINK" -- +5%
-      PULSE_LATENCY_MSEC=30 padsp play $HOME/.local/share/sound/Volume.wav > /dev/null 2>&1
+    }
+    PULSE_LATENCY_MSEC=30 padsp play $HOME/.local/share/sound/Volume.wav > /dev/null 2>&1
     ;;
   D|d|[D,d]own|[D,d]o)
     # lowers volume by 5%
     setup
-    [[ "$CURVOL" -le 0 ]] && exit 0 ||
+    [[ "$CURVOL" -le 0 ]] && exit 0 || {
+      pactl set-sink-volume "$SINK" -5%
       pactl set-sink-volume "$SINK" -- -5%
-      PULSE_LATENCY_MSEC=30 padsp play $HOME/.local/share/sound/Volume.wav > /dev/null 2>&1
+    }
+    PULSE_LATENCY_MSEC=30 padsp play $HOME/.local/share/sound/Volume.wav > /dev/null 2>&1
     ;;
   M|m|[M,m]u|[M,m]ute)
     # mutes the volume entirely
@@ -81,16 +85,20 @@ case "$1" in
     setup
     NEWVOL="${2%%%}"
     [[ "$NEWVOL" -ge 100 ]] && exit 0 ||
-      [[ "$NEWVOL" -le 0 ]] && exit 0 ||
+      [[ "$NEWVOL" -le 0 ]] && exit 0 || {
+      pactl set-sink-volume "$SINK" $NEWVOL%
       pactl set-sink-volume "$SINK" -- $NEWVOL%
+    }
     ;;
   atmost)
     setup
     NEWVOL="${2%%%}"
     [[ "$CURVOL" -le "$NEWVOL" ]] && exit 0 ||
       [[ "$NEWVOL" -ge 100 ]] && exit 0 ||
-      [[ "$NEWVOL" -le 0 ]] && exit 0 ||
+      [[ "$NEWVOL" -le 0 ]] && exit 0 || {
+      pactl set-sink-volume "$SINK" $NEWVOL%
       pactl set-sink-volume "$SINK" -- $NEWVOL%
+    }
     ;;
   *)
     setup
