@@ -1,0 +1,60 @@
+Config {
+        -- appearance
+          font = "-*-Fixed-Bold-R-Normal-*-14-*-*-*-*-*-*-*"
+        , bgColor = "black"
+        , fgColor = "grey"
+        , position = TopW R 100
+
+        -- general behavior
+        , lowerOnStart =     False   -- send to bottom of window stack on start
+        , hideOnStart =      False   -- start with window unmapped (hidden)
+        , allDesktops =      True    -- show on all desktops
+        , overrideRedirect = True    -- set the Override Redirect flag (Xlib)
+        , pickBroadest =     False   -- choose widest display (multi-monitor)
+        , persistent =       True    -- enable/disable hiding (True = disabled)
+
+        -- plugins
+        --   Numbers can be automatically colored according to their value.
+        --   xmobar decides color based on a three-tier/two-cutoff system,
+        --   controlled by command options:
+        --     --Low sets the low cutoff
+        --     --High sets the high cutoff
+        --
+        --     --low sets the color below --Low cutoff
+        --     --normal sets the color between --Low and --High cutoffs
+        --     --High sets the color above --High cutoff
+        --
+        --   The --template option controls how the plugin is displayed. Text
+        --   color can be set by enclosing in <fc></fc> tags. For more details
+        --   see http://projects.haskell.org/xmobar/#system-monitor-plugins.
+        , commands = [
+              Run Weather "LHBP" [ "--template", "<fc=#4682B4><tempC></fc>°C . <fc=#4682B4><rh></fc>% . <fc=#4682B4><pressure></fc>hPa" ] 36000
+              , Run Battery [ "--template" , "Batt: <acstatus>"
+                            , "--Low"      , "10"        -- units: %
+                            , "--High"     , "80"        -- units: %
+                            , "--low"      , "darkred"
+                            , "--normal"   , "darkorange"
+                            , "--high"     , "darkgreen"
+                            , "--" -- battery specific options
+                                   -- discharging status
+                                   , "-o"	, "<left>% (<timeleft>)"
+                                   -- AC "on" status
+                                   , "-O"	, "<fc=#dAA520>Charging</fc>"
+                                   -- charged status
+                                   , "-i"	, "<fc=#006000>Charged</fc>"
+                             ] 600
+                    , Run Cpu [
+                            "-L", "0", "-H", "50", "--normal", "green", "--high", "red" ] 10
+                    , Run Memory [
+                            "-L", "0", "-H", "50", "--normal", "green", "--high", "red", "-t", "Mem: <usedratio>%" ] 50
+                    , Run Swap [
+                            "-L", "0", "-H", "30", "--normal", "green", "--high", "red" ] 50
+                    , Run Date "%b %_d %a %H:%M" "date" 600
+                    , Run StdinReader
+                    ]
+
+        -- layout
+        , sepChar = "%"
+        , alignSep = "}{"
+        , template = "%StdinReader% }{ %battery% | %cpu% | %memory% | %swap% | %LHBP% || <fc=#ee9a00>%date%</fc>"
+}
