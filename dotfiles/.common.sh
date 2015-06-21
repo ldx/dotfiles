@@ -127,6 +127,12 @@ done
 # added by travis gem
 [ -f ~/.travis/travis.sh ] && source ~/.travis/travis.sh
 
+if [ -d "$LOCAL_PREFIX/share/completions" ]; then
+    for f in $LOCAL_PREFIX/share/completions/*; do
+        source $f
+    done
+fi
+
 # Aliases.
 case `uname -s` in
 [Ll][Ii][Nn][Uu][Xx])
