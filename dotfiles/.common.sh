@@ -34,8 +34,7 @@ case `uname -s` in
 esac
 
 if [ "$TERM" = "xterm" ]; then
-    TERM=xterm-color
-    export TERM
+    export TERM=xterm-color
 fi
 
 export WORKON_HOME=~/.virtualenvs
