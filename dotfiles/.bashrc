@@ -40,11 +40,11 @@ declare -f __git_ps1 > /dev/null && {
     GIT_PS1_SHOWDIRTYSTATE="yes"
     GIT_PS1_SHOWUPSTREAM="auto"
     GIT_PS1_DESCRIBE_STYLE="branch"
-    PROMPT_COMMAND='__git_ps1 "${debian_chroot:+($debian_chroot)}\u@\h:\w" "\\\$ " "[%s]"'
+    PROMPT_COMMAND='__git_ps1 "${debian_chroot:+($debian_chroot)}\u@\h:\w${VIRTUAL_ENV:+($(basename $VIRTUAL_ENV))}" "\\\$ " "[%s]"'
 }
 
 if [ -z "$PROMPT_COMMAND" ]; then
-    PS1='${debian_chroot:+($debian_chroot)}\u@\h:\w\$ '
+    PS1='${debian_chroot:+($debian_chroot)}\u@\h:\w${VIRTUAL_ENV:+($(basename $VIRTUAL_ENV))}\$ '
 fi
 
 # Add an "alert" alias for long running commands.  Use like so:
