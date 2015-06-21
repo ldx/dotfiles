@@ -38,10 +38,6 @@ zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}'
 # Better completion for killall
 zstyle ':completion:*:killall:*' command 'ps -u $USER -o cmd'
 
-# What zsh considers a word
-#autoload select-word-style
-#select-word-style normal
-
 ##########################
 # K E Y  B I N D I N G S #
 ##########################
@@ -65,46 +61,6 @@ bindkey '^S'     history-incremental-search-forward
 bindkey '^P'     history-beginning-search-backward
 bindkey '^N'     history-beginning-search-forward
 
-SEPCHARS='[/:@"'"'"'=| ]'
-
-my-forward-word() {
-    if [[ "${BUFFER[CURSOR + 1]}" =~ "${SEPCHARS}" ]]; then
-        (( CURSOR += 1 ))
-        return
-    fi
-    while [[ CURSOR -lt "${#BUFFER}" && ! "${BUFFER[CURSOR + 1]}" =~ "${SEPCHARS}" ]]; do
-        (( CURSOR += 1 ))
-    done
-}
-
-#zle -N my-forward-word
-#bindkey '^f' my-forward-word
-
-my-backward-word() {
-    if [[ "${BUFFER[CURSOR]}" =~ "${SEPCHARS}" ]]; then
-        (( CURSOR -= 1 ))
-        return
-    fi
-    while [[ CURSOR -gt 0 && ! "${BUFFER[CURSOR]}" =~ "${SEPCHARS}" ]]; do
-        (( CURSOR -= 1 ))
-    done
-}
-
-#zle -N my-backward-word
-#bindkey '^b' my-backward-word
-
-my-backward-kill-word() {
-    if [[ "${LBUFFER[CURSOR]}" =~ "${SEPCHARS}" ]]; then
-        LBUFFER="${LBUFFER[1, CURSOR - 1]}"
-        return
-    fi
-    while [[ CURSOR -gt 0 && ! "${LBUFFER[CURSOR]}" =~ "${SEPCHARS}" ]]; do
-            LBUFFER="${LBUFFER[1, CURSOR - 1]}"
-    done
-}
-
-#zle -N my-backward-kill-word
-#bindkey '^W' my-backward-kill-word
 
 history-fuzzy-search() {
     emulate -L zsh
@@ -180,47 +136,6 @@ history-fuzzy-search() {
 zle -N history-fuzzy-search
 bindkey '^y' history-fuzzy-search
 
-###########
-# T M U X #
-###########
-send_command_to_tmux() {
-    cmd="$1"
-    tmux_session="$(tmux list-panes -F '#{session_name}')"
-    tmux list-windows -t $tmux_session|cut -d: -f1|xargs -I{} tmux send-keys -t $tmux_session:{} $cmd Enter
-}
-
-###########
-# M I S C #
-###########
-
-dexify() {
-    for f in $*; do
-        tmpdir="`mktemp -d`"
-        tmpfile="${tmpdir}/classes.dex"
-        dx --dex --output=${tmpfile} ${f}
-        aapt add ${f} ${tmpfile}
-        rm -f ${tmpfile}
-        rmdir ${tmpdir}
-    done
-}
-
-scanify() {
-    fuzz_value="50%"
-    convert ${1} -fuzz ${3-50%} -trim +repage -modulate 130,130,130 ${2:-$(echo ${1}|awk -F . 'sub(FS $NF,x)')_scan.jpg}
-}
-
-update_dotfiles() {
-    type "curl" > /dev/null 2>&1 && while :; do
-        curl -k -L https://gist.github.com/ldx/5466020/raw/|sh
-        return 0
-    done
-    type "wget" > /dev/null 2>&1 && while :; do
-        wget -O - https://gist.github.com/ldx/5466020/raw/|sh
-        return 0
-    done
-    return 1
-}
-
 ###############
 # P R O M P T #
 ###############
@@ -242,12 +157,4 @@ vcs_info_wrapper() {
     fi
 }
 
-lsb_release_codename() {
-    hash lsb_release 2>/dev/null && lsb_release -c|awk '{print $2}'
-}
-
 PROMPT='[%B%n%b@%B%m%b]%18<..<%~%<<$(vcs_info_wrapper)%# '
-
-#autoload -U promptinit
-#promptinit
-#prompt adam2 magenta cyan cyan
