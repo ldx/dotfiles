@@ -12,8 +12,8 @@ set editing-mode vi
 "\C-f": forward-char
 "\C-s": forward-search-history
 "\C-k": kill-line
-"\C-n": next-history
-"\C-p": previous-history
+"\C-n": history-search-forward
+"\C-p": history-search-backward
 "\C-v": quoted-insert
 "\C-w": shell-backward-kill-word
 "\C-u": unix-line-discard
