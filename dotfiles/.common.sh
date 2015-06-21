@@ -149,8 +149,14 @@ alias la='ls -al'
 alias l='ls -l'
 alias screen='TERM=screen screen'
 alias scpresume="rsync --partial --progress --rsh=ssh"
-alias grep='grep --color'
 alias killall='nocorrect killall'
+alias grep='grep --color=auto'
+alias fgrep='fgrep --color=auto'
+alias egrep='egrep --color=auto'
+
+if [ -x /usr/bin/dircolors ]; then
+    test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
+fi
 
 # Functions.
 alias calc="noglob _calc" calcfx="noglob _calcfx"
