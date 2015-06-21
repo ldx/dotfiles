@@ -3,19 +3,17 @@ set completion-ignore-case On
 set editing-mode vi
 
 "\C-g": abort
-"\C-B": backward-char
+"\C-b": backward-char
 "\C-h": backward-delete-char
 "\C-a": beginning-of-line
 "\C-l": clear-screen
 "\C-i": complete
 "\C-e": end-of-line
-"\C-F": forward-char
+"\C-f": forward-char
 "\C-s": forward-search-history
 "\C-k": kill-line
 "\C-n": next-history
 "\C-p": previous-history
 "\C-v": quoted-insert
 "\C-w": shell-backward-kill-word
-"\C-b": shell-backward-word
-"\C-f": shell-forward-word
 "\C-u": unix-line-discard
