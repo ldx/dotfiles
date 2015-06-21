@@ -29,13 +29,13 @@ autoload -U compinit
 autoload -Uz vcs_info
 compinit
 
-# Tab completion from both ends
+# Tab completion from both ends.
 setopt completeinword
 
-# Tab completion should be case-insensitive
+# Tab completion should be case-insensitive.
 zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}'
 
-# Better completion for killall
+# Better completion for killall.
 zstyle ':completion:*:killall:*' command 'ps -u $USER -o cmd'
 
 ##########################
