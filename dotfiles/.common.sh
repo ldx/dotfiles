@@ -31,10 +31,6 @@ case `uname -s` in
         export MallocBadFreeAbort=1
         alias sed="sed -E"
         ;;
-    [Ll][Ii][Nn][Uu][Xx])
-        alias open=xdg-open
-        alias sed="sed -r"
-        ;;
 esac
 
 if [ "$TERM" = "xterm" ]; then
