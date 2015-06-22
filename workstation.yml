@@ -3,8 +3,8 @@
   sudo: yes
 
   tasks:
-    - name: change shell to zsh
-      command: /usr/bin/chsh -s /bin/zsh {{ ansible_env.SUDO_USER }}
+    - name: change shell to bash
+      command: /usr/bin/chsh -s /bin/bash {{ ansible_env.SUDO_USER }}
 
     - name: remounting existing filesystems with noatime
       mount: src={{item.device}}
