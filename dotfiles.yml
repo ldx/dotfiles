@@ -1,4 +1,9 @@
 ---
+#
+# Usage example:
+#
+#     ansible-playbook -u <remote user> -i <remote hostname>, dotfiles.yml
+#
 - hosts: all
   sudo: no
 
