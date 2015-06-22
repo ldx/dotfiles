@@ -149,7 +149,6 @@ alias la='ls -al'
 alias l='ls -l'
 alias screen='TERM=screen screen'
 alias scpresume="rsync --partial --progress --rsh=ssh"
-alias killall='nocorrect killall'
 alias grep='grep --color=auto'
 alias fgrep='fgrep --color=auto'
 alias egrep='egrep --color=auto'
