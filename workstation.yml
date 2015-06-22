@@ -35,3 +35,10 @@
     - name: run update-grub if /etc/default/grub has changed
       command: update-grub
       when: grub_cmdline | changed
+
+    - name: make backlight sysfs file writable
+      copy: dest=/etc/udev/rules.d/97-intel_backlight.rules
+            mode=0644
+            owner=root
+            group=root
+            content='KERNEL=="intel_backlight", SUBSYSTEM=="backlight", RUN+="/bin/chmod 0666 /sys/class/backlight/%k/brightness"'
