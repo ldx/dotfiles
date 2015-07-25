@@ -158,7 +158,7 @@ if [ -x /usr/bin/dircolors ]; then
 fi
 
 # Functions.
-alias calc="noglob _calc" calcfx="noglob _calcfx"
+alias calc="_calc" calcfx="_calcfx"
 
 function _calc()
 {
