@@ -39,7 +39,8 @@ type "xscreensaver" > /dev/null 2>&1 && while :; do
 done
 
 type "gnome-keyring-daemon" > /dev/null 2>&1 && while :; do
-    eval "$(gnome-keyring-daemon -r)"
+    killall -9 gnome-keyring-daemon
+    eval "$(gnome-keyring-daemon)"
     export GNOME_KEYRING_CONTROL
     export SSH_AUTH_SOCK
     export GPG_AGENT_INFO
