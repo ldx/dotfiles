@@ -177,6 +177,10 @@ function avg() {
     awk '{sum+=$1} END {printf "%.2f\n", sum/NR}'
 }
 
+function add() {
+    awk '{sum+=$1} END {printf "%d\n", sum}'
+}
+
 function median() {
     gawk \
         'function median(c, v,  d) {
