@@ -25,6 +25,8 @@ export LDFLAGS=-L$LOCAL_PREFIX/lib
 export GPU_MAX_ALLOC_PERCENT=100
 export GPU_USE_SYNC_OBJECTS=1
 
+export QUILT_PATCHES=debian/patches
+
 case `uname -s` in
     [Dd][Aa][Rr][Ww][Ii][Nn])
         export JAVA_HOME=/System/Library/Frameworks/JavaVM.framework/Home
