@@ -95,6 +95,7 @@ unshift_path "$GOPATH"
 unshift_path "$BUNDLE_PATH"
 unshift_path "$GOROOT"
 unshift_path "$HOME/Projects/rumprun/rumprun"
+unshift_path "$HOME/.cabal"
 if which ruby > /dev/null && which gem >/dev/null; then
     unshift_path "$(ruby -rubygems -e 'puts Gem.user_dir')"
 fi
