@@ -2,7 +2,7 @@
 #
 # Usage example:
 #
-#     ansible-playbook -u <remote user> -i <remote hostname>, dotfiles.yml
+#     ansible-playbook -c -i localhost, dotfiles.yml
 #
 - hosts: all
   sudo: no
