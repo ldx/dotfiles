@@ -81,7 +81,7 @@ XFLUX=$HOME/.local/bin/xflux
 type $XFLUX > /dev/null 2>&1 && while :; do
     pid="$(pidof xflux)"
     if [ -n "$pid" ]; then
-        kill $pid
+        kill -9 $pid
     fi
     geo=$(curl 'http://www.ipinfodb.com/my_ip_location.php')
     lat=$(echo "$geo"|tr '\r' '\n'|grep Latitude|sed -r 's/.*\W(-?\W[0-9]+\.[0-9]+)\W.*/\1/')
