@@ -90,10 +90,10 @@ type $XFLUX > /dev/null 2>&1 && while :; do
     echo $lat >> /tmp/geo.txt
     echo $lon >> /tmp/geo.txt
     if [ -z "$lat" ]; then
-        lat="47.4925"
+        lat="37.7833"
     fi
     if [ -z "$lon" ]; then
-        lon="19.0514"
+        lon="-122.4167"
     fi
     $XFLUX -l $lat -g $lon
     break
