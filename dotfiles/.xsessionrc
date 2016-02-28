@@ -77,6 +77,25 @@ type "$FIREFOX" > /dev/null 2>&1 && while :; do
     break
 done
 
+CONNECTED_DISPLAYS=$(xrandr|grep '\bconnected\b'|awk '{print $1}'|grep -v '\beDP1\b')
+DISCONNECTED_DISPLAYS=$(xrandr|grep '\bdisconnected\b'|awk '{print $1}'|grep -v '\beDP1\b')
+N_DISPLAYS=$(echo $CONNECTED_DISPLAYS|wc -w)
+
+if [ $N_DISPLAYS -gt 0 ]; then
+    XRANDR="xrandr --output eDP1 --off"
+    for d in $CONNECTED_DISPLAYS; do
+        XRANDR="$XRANDR --output $d --auto"
+    done
+    for d in $DISCONNECTED_DISPLAYS; do
+        XRANDR="$XRANDR --output $d --off"
+    done
+else
+    XRANDR="xrandr --output eDP1 --auto"
+fi
+
+echo "adjusting display settings: running \"$XRANDR\""
+$XRANDR
+
 XFLUX=$HOME/.local/bin/xflux
 type $XFLUX > /dev/null 2>&1 && while :; do
     pid="$(pidof xflux)"
@@ -111,22 +130,3 @@ done
 #         break
 #     done
 # done
-
-CONNECTED_DISPLAYS=$(xrandr|grep '\bconnected\b'|awk '{print $1}'|grep -v '\beDP1\b')
-DISCONNECTED_DISPLAYS=$(xrandr|grep '\bdisconnected\b'|awk '{print $1}'|grep -v '\beDP1\b')
-N_DISPLAYS=$(echo $CONNECTED_DISPLAYS|wc -w)
-
-if [ $N_DISPLAYS -gt 0 ]; then
-    XRANDR="xrandr --output eDP1 --off"
-    for d in $CONNECTED_DISPLAYS; do
-        XRANDR="$XRANDR --output $d --auto"
-    done
-    for d in $DISCONNECTED_DISPLAYS; do
-        XRANDR="$XRANDR --output $d --off"
-    done
-else
-    XRANDR="xrandr --output eDP1 --auto"
-fi
-
-echo "adjusting display settings: running \"$XRANDR\""
-$XRANDR
