@@ -59,7 +59,3 @@ if ! shopt -oq posix; then
 	. /etc/bash_completion
     fi
 fi
-
-if [ -f ~/.sensible.bash/bash-sensible/sensible.bash ]; then
-    . ~/.sensible.bash/bash-sensible/sensible.bash
-fi
