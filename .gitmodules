@@ -103,6 +103,3 @@
 [submodule "dotfiles/.vim/bundle/rust.vim"]
 	path = dotfiles/.vim/bundle/rust.vim
 	url = https://github.com/rust-lang/rust.vim.git
-[submodule "dotfiles/.sensible.bash/bash-sensible"]
-	path = dotfiles/.sensible.bash/bash-sensible
-	url = https://github.com/mrzool/bash-sensible.git
