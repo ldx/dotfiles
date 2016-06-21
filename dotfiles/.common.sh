@@ -121,6 +121,9 @@ export PERL5LIB=$_PERLLIBS
 # ulimit -c unlimited
 ulimit -c 0
 
+# Try to bump max number of open fds.
+ulimit -n 9999
+
 # Check for files with local environment settings.
 for f in .setenv setenv setenv.sh; do
     if [ -f "$HOME/$f" ]; then
