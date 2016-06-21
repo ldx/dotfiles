@@ -233,6 +233,11 @@ augroup md
   autocmd FileType mkd setlocal nocursorline
 augroup END
 
+" go
+augroup go
+  autocmd FileType go setlocal tw=0
+augroup END
+
 " puppet
 augroup puppet
   autocmd FileType puppet setlocal equalprg=puppet-tidy
