@@ -60,7 +60,11 @@ type "dropbox" > /dev/null 2>&1 && (dropbox stop; dropbox start &)
 
 type "nm-applet" > /dev/null 2>&1 && nm-applet &
 
-type "devmon" > /dev/null 2>&1 && devmon &
+type "devmon" > /dev/null 2>&1 && while :; do
+    killall devmon > /dev/null 2>&1
+    devmon &
+    break
+done
 
 type "parcellite" > /dev/null 2>&1 && while :; do
     parcellite > /dev/null 2>&1 &
