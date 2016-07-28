@@ -83,24 +83,26 @@ type "$FIREFOX" > /dev/null 2>&1 && while :; do
     break
 done
 
-CONNECTED_DISPLAYS=$(xrandr|grep '\bconnected\b'|awk '{print $1}'|grep -v '\beDP1\b')
-DISCONNECTED_DISPLAYS=$(xrandr|grep '\bdisconnected\b'|awk '{print $1}'|grep -v '\beDP1\b')
+CONNECTED_DISPLAYS=$(xrandr|grep '\bconnected\b'|awk '{print $1}'|grep -v '\beDP\b')
+DISCONNECTED_DISPLAYS=$(xrandr|grep '\bdisconnected\b'|awk '{print $1}'|grep -v '\beDP\b')
+INTERNAL_DISPLAY=$(xrandr|grep '\beDP\b'|awk '{print $1}')
 N_DISPLAYS=$(echo $CONNECTED_DISPLAYS|wc -w)
 
 if [ $N_DISPLAYS -gt 0 ]; then
-    XRANDR="xrandr --output eDP1 --off"
+    echo "Disabling internal display $INTERNAL_DISPLAY"
+    xrandr --output $INTERNAL_DISPLAY --off
     for d in $CONNECTED_DISPLAYS; do
-        XRANDR="$XRANDR --output $d --auto"
+        echo "Enabling display $d"
+        xrandr --output $d --auto
     done
     for d in $DISCONNECTED_DISPLAYS; do
-        XRANDR="$XRANDR --output $d --off"
+        echo "Disabling display $d"
+        xrandr --output $d --off
     done
 else
-    XRANDR="xrandr --output eDP1 --auto"
+    echo "Enabling internal display $INTERNAL_DISPLAY"
+    xrandr --output $INTERNAL_DISPLAY --auto
 fi
-
-echo "adjusting display settings: running \"$XRANDR\""
-$XRANDR
 
 XFLUX=$HOME/.local/bin/xflux
 type $XFLUX > /dev/null 2>&1 && while :; do
@@ -123,16 +125,3 @@ type $XFLUX > /dev/null 2>&1 && while :; do
     $XFLUX -l $lat -g $lon
     break
 done
-
-# N_SCREENS=$(xrandr|grep '\<connected\>'|wc -l)
-# for screen in $(seq 1 $N_SCREENS); do
-#     type "conky" > /dev/null 2>&1 && type "dzen2" > /dev/null 2>&1 && while :; do
-#         export FG='white'
-#         export BG='#002b36'
-#         export FONT='-*-terminus-medium-r-*-*-14-*-*-*-*-*-*-*'
-#         export LC_ALL=hu_HU.UTF-8
-#         (sleep 5 && conky -c $HOME/.conkyrc | dzen2 -e - -x '500' -ta r -fg $FG \
-#             -bg $BG -fn $FONT -xs $screen) &
-#         break
-#     done
-# done
