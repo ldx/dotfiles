@@ -1,36 +1,42 @@
 ---
-- name: set YCM parameters
-  set_fact: ycm_params=--clang-completer
-  when: ycm_with_clang is defined
+- hosts: all
 
-- name: check last modification date of C++ source files
-  shell: find {{ homedir }}/.vim/bundle/YouCompleteMe -name "*.[ch]*" -type f -exec stat -c '%Y' {} \;|sort -n|uniq|tail -1
-  register: ycm_last_modification_time
+  vars:
+    homedir: "{{ ansible_env.HOME }}"
 
-- name: set default YCM build time fact
-  set_fact:
-    ycm_build_time: 0
+  tasks:
+    - name: set YCM parameters
+      set_fact: ycm_params=--clang-completer
+      when: ycm_with_clang is defined
 
-- name: check YCM library
-  shell: stat -c '%Y' {{ homedir }}/.vim/bundle/YouCompleteMe/third_party/ycmd/ycm_core.so
-  register: ycm_build_time_check
-  ignore_errors: yes
+    - name: check last modification date of C++ source files
+      shell: find {{ homedir }}/.vim/bundle/YouCompleteMe -name "*.[ch]*" -type f -exec stat -c '%Y' {} \;|sort -n|uniq|tail -1
+      register: ycm_last_modification_time
 
-- name: update YCM build time fact
-  set_fact:
-    ycm_build_time: "{{ ycm_build_time_check.stdout }}"
-  when: ycm_build_time_check is defined
+    - name: set default YCM build time fact
+      set_fact:
+        ycm_build_time: 0
 
-- name: show timestamp check results
-  debug: var={{ item }}
-  with_items:
-    - ycm_build_time
-    - ycm_last_modification_time.stdout
+    - name: check YCM library
+      shell: stat -c '%Y' {{ homedir }}/.vim/bundle/YouCompleteMe/third_party/ycmd/ycm_core.so
+      register: ycm_build_time_check
+      ignore_errors: yes
 
-- name: finish YCM installation
-  shell: ./install.sh {{ ycm_params | default('') }}
-  args:
-    chdir: "{{ homedir }}/.vim/bundle/YouCompleteMe"
-  environment:
-    PATH: "/usr/local/bin:{{ ansible_env.PATH }}"
-  when: ycm_build_time | int < ycm_last_modification_time.stdout | int
+    - name: update YCM build time fact
+      set_fact:
+        ycm_build_time: "{{ ycm_build_time_check.stdout }}"
+      when: ycm_build_time_check is defined
+
+    - name: show timestamp check results
+      debug: var={{ item }}
+      with_items:
+        - ycm_build_time
+        - ycm_last_modification_time.stdout
+
+    - name: finish YCM installation
+      shell: ./install.sh {{ ycm_params | default('') }}
+      args:
+        chdir: "{{ homedir }}/.vim/bundle/YouCompleteMe"
+      environment:
+        PATH: "/usr/local/bin:{{ ansible_env.PATH }}"
+      when: ycm_build_time | int < ycm_last_modification_time.stdout | int

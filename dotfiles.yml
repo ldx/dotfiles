@@ -50,6 +50,3 @@
       shell: tic {{ item }}
       with_fileglob:
         - "{{ homedir }}/.terminfo/*.terminfo"
-
-    - include: ycm.yml
-      when: no_ycm is not defined
