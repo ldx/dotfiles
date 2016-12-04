@@ -187,6 +187,7 @@
         - scrot
         - sed
         - socat
+        - sox
         - speedometer
         - sqlite3
         - sshfs
