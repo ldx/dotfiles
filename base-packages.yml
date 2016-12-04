@@ -7,12 +7,18 @@
         repo: "{{ item }}"
         state: present
       with_items:
+        - deb http://httpredir.debian.org/debian/ {{ ansible_lsb.codename }} main contrib non-free
         - deb [arch=i386,amd64] http://linux.dropbox.com/debian sid main
         - deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main
         - deb http://dl.google.com/linux/musicmanager/deb/ stable main
         - deb http://dl.google.com/linux/talkplugin/deb/ stable main
+      when: ansible_os_family == 'Debian'
     - name: install packages on Debian/Ubuntu
-      apt: name={{ item }} state=present
+      apt:
+        name: "{{ item }}"
+        state: present
+        force: yes
+        update_cache: yes
       with_items:
         - acpi
         - acpica-tools
@@ -54,11 +60,8 @@
         - evince
         - exuberant-ctags
         - fakeroot
-        - ffmpeg
         - file
         - firmware-iwlwifi
-        - firmware-linux-free
-        - flashplugin-nonfree
         - flex
         - fontconfig
         - fontconfig-config
@@ -67,7 +70,6 @@
         - fonts-dejavu
         - fonts-dejavu-core
         - fonts-dejavu-extra
-        - fonts-droid-fallback
         - fonts-freefont-ttf
         - fonts-inconsolata
         - fonts-lato
@@ -75,16 +77,13 @@
         - fonts-linuxlibertine
         - fonts-lmodern
         - fonts-lyx
-        - fonts-noto-mono
         - fonts-opensymbol
         - fonts-sil-gentium
         - fonts-sil-gentium-basic
         - fonts-texgyre
         - fonts-vlgothic
-        - fonts-wine
         - ftp
         - fuse
-        - fuse2fs
         - g++
         - gawk
         - gawk
@@ -132,11 +131,9 @@
         - man-db
         - manpages
         - manpages-dev
-        - manpages-posix
-        - manpages-posix-dev
         - mawk
         - mcelog
-        - mplayer
+        - mplayer2
         - netcat6
         - netcat-openbsd
         - netcat-traditional
@@ -209,17 +206,11 @@
         - tzdata
         - ubuntu-archive-keyring
         - ubuntu-dev-tools
-        - unrar
         - unzip
         - util-linux
         - vagrant
         - valgrind
-        - vim
-        - vim
-        - virtualbox
-        - virtualbox-dkms
-        - virtualbox-guest-additions-iso
-        - virtualbox-qt
+        - vim-nox
         - virtualenv
         - vlc
         - vpnc-scripts
