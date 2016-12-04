@@ -27,7 +27,7 @@
                    archive=yes
                    delete=yes
                    rsync_opts=--filter='P *.so'
-      with_items: dotfiles.stdout.split('\n')
+      with_items: "{{ dotfiles.stdout.split('\n') }}"
 
     - name: create .local directory
       file: path={{ homedir }}/.local state=directory mode=0755
