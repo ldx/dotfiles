@@ -81,10 +81,10 @@
 	url = https://github.com/jnwhiteh/vim-golang
 [submodule ".vim/bundle/YouCompleteMe"]
 	path = dotfiles/.vim/bundle/YouCompleteMe
-	url = git@github.com:Valloric/YouCompleteMe.git
+	url = https://github.com/Valloric/YouCompleteMe.git
 [submodule ".vim/bundle/vim-gocode"]
 	path = dotfiles/.vim/bundle/vim-gocode
-	url = git@github.com:Blackrush/vim-gocode.git
+	url = https://github.com/Blackrush/vim-gocode.git
 [submodule ".vim/bundle/powerline"]
 	path = dotfiles/.vim/bundle/powerline
 	url = https://github.com/Lokaltog/powerline.git
@@ -96,7 +96,7 @@
 	url = https://github.com/chase/vim-ansible-yaml.git
 [submodule "dotfiles/.vim/bundle/vim-gutentags"]
 	path = dotfiles/.vim/bundle/vim-gutentags
-	url = git@github.com:ludovicchabant/vim-gutentags.git
+	url = https://github.com/ludovicchabant/vim-gutentags.git
 [submodule "dotfiles/.vim/bundle/rust.vim"]
 	path = dotfiles/.vim/bundle/rust.vim
 	url = https://github.com/rust-lang/rust.vim.git
