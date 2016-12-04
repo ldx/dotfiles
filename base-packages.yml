@@ -21,6 +21,7 @@
         update_cache: yes
       with_items:
         - acpi
+        - acpi-support
         - acpica-tools
         - acpitool
         - autoconf
@@ -96,7 +97,6 @@
         - ghc-doc
         - ghostscript
         - gimp
-        - git
         - git
         - git-man
         - git-svn
