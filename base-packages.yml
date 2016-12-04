@@ -216,6 +216,7 @@
         - valgrind
         - vim-nox
         - virtualenv
+        - virtualenvwrapper
         - vlc
         - vpnc-scripts
         - wget
