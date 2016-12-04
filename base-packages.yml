@@ -12,6 +12,7 @@
         - deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main
         - deb http://dl.google.com/linux/musicmanager/deb/ stable main
         - deb http://dl.google.com/linux/talkplugin/deb/ stable main
+        - deb http://mozilla.debian.net/ {{ ansible_lsb.codename }}-backports firefox-release
       when: ansible_os_family == 'Debian'
     - name: install packages on Debian/Ubuntu
       apt:
@@ -62,6 +63,7 @@
         - exuberant-ctags
         - fakeroot
         - file
+        - firefox
         - firmware-iwlwifi
         - flashplugin-nonfree
         - flex
@@ -157,6 +159,7 @@
         - patchutils
         - pavucontrol
         - pkg-config
+        - pkg-mozilla-archive-keyring
         - pm-utils
         - pulseaudio
         - pulseaudio-module-bluetooth
