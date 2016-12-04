@@ -3,6 +3,17 @@
   sudo: yes
 
   tasks:
+    - name: update /etc/locale.gen
+      lineinfile:
+        dest: /etc/locale.gen
+        line: "{{ item }}"
+      with_items:
+        - en_US.UTF-8 UTF-8
+        - hu_HU.UTF-8 UTF-8
+
+    - name: generate locals
+      command: locale-gen
+
     - name: change shell to bash
       command: /usr/bin/chsh -s /bin/bash {{ ansible_env.SUDO_USER }}
 
