@@ -29,7 +29,6 @@
         - autocutsel
         - automake
         - autotools-dev
-        - avahi-daemon
         - bash-completion
         - bc
         - bison
