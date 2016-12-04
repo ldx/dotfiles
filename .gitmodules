@@ -97,9 +97,6 @@
 [submodule "dotfiles/.vim/bundle/vim-gutentags"]
 	path = dotfiles/.vim/bundle/vim-gutentags
 	url = git@github.com:ludovicchabant/vim-gutentags.git
-[submodule "dotfiles/.vim/bundle/Vim-Jinja2-Syntax"]
-	path = dotfiles/.vim/bundle/Vim-Jinja2-Syntax
-	url = git@github.com:Glench/Vim-Jinja2-Syntax.git
 [submodule "dotfiles/.vim/bundle/rust.vim"]
 	path = dotfiles/.vim/bundle/rust.vim
 	url = https://github.com/rust-lang/rust.vim.git
