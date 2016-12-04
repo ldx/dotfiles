@@ -22,8 +22,8 @@
         update_cache: yes
       with_items:
         - acpi
-        - acpi-support
         - acpica-tools
+        - acpi-support
         - acpitool
         - autoconf
         - autocutsel
