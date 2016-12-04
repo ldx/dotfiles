@@ -23,8 +23,8 @@
              fstype={{item.fstype}}
              opts={{item.options}},noatime
              state=present
-      with_items: ansible_mounts
-      when: item.mount in ['/', '/boot'] and 'noatime' not in item.options
+      when: "{{ item.mount in ['/', '/boot'] and 'noatime' not in item.options }}"
+      with_items: "{{ ansible_mounts }}"
 
     - name: run fstrim daily
       cron: name="run fstrim daily"
