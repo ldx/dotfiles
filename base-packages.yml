@@ -229,16 +229,3 @@
         - zip
         - zsh
       when: ansible_os_family == 'Debian'
-
-- hosts: all
-  sudo: no
-  tasks:
-    - name: install packages on Mac OS X
-      homebrew: name={{ item }} state=present
-      with_items:
-        - cmake
-        - gawk
-        - git
-        - python
-      ignore_errors: yes
-      when: ansible_os_family == 'Darwin'
