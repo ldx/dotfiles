@@ -39,6 +39,7 @@
         - acpica-tools
         - acpi-support
         - acpitool
+        - silversearcher-ag
         - autoconf
         - autocutsel
         - automake
