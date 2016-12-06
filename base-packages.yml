@@ -102,6 +102,7 @@
         - git-man
         - git-svn
         - g++-multilib
+        - gnome-keyring
         - gnupg
         - golang
         - golang-doc
