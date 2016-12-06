@@ -2,6 +2,15 @@
 - hosts: all
   sudo: yes
   tasks:
+    - name: install apt-transport-https
+      apt:
+        name: apt-transport-https
+        state: present
+        force: yes
+        update_cache: yes
+    - name: add skype repo key
+      apt_key:
+        url: https://repo.skype.com/data/SKYPE-GPG-KEY
     - name: add apt repos
       apt_repository:
         repo: "{{ item }}"
@@ -13,6 +22,11 @@
         - deb http://dl.google.com/linux/musicmanager/deb/ stable main
         - deb http://dl.google.com/linux/talkplugin/deb/ stable main
         - deb http://mozilla.debian.net/ {{ ansible_lsb.codename }}-backports firefox-release
+        - deb [arch=amd64] https://repo.skype.com/deb stable main
+      when: ansible_os_family == 'Debian'
+    - name: install skype
+      apt:
+        name: skypeforlinux
       when: ansible_os_family == 'Debian'
     - name: install packages on Debian/Ubuntu
       apt:
