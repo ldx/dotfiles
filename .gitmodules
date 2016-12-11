@@ -100,3 +100,6 @@
 [submodule "dotfiles/.vim/bundle/rust.vim"]
 	path = dotfiles/.vim/bundle/rust.vim
 	url = https://github.com/rust-lang/rust.vim.git
+[submodule "dotfiles/.vim/bundle/vim-cool"]
+	path = dotfiles/.vim/bundle/vim-cool
+	url = https://github.com/romainl/vim-cool.git
