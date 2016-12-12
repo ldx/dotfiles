@@ -230,7 +230,7 @@
         - util-linux
         - vagrant
         - valgrind
-        - vim-nox
+        - vim-gtk
         - virtualenv
         - virtualenvwrapper
         - vlc
