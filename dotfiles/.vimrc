@@ -231,6 +231,7 @@ augroup END
 augroup md
   autocmd FileType mkd setlocal tw=0
   autocmd FileType mkd setlocal nocursorline
+  autocmd FileType mkd normal zR
 augroup END
 
 " go
