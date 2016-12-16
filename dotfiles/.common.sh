@@ -231,3 +231,7 @@ function join() {
     shift
     echo "$*"
 }
+
+if [ -f $HOME/*.retry ]; then
+    mv $HOME/*.retry /tmp/
+fi
