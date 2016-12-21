@@ -105,11 +105,12 @@ done
 FIREFOX="firefox"
 type "$FIREFOX" > /dev/null 2>&1 || FIREFOX="iceweasel"
 type "$FIREFOX" > /dev/null 2>&1 && {
-    if [ -n "$(pidof $FIREFOX)" ]; then
-        break
+    ffpid="$(pidof $FIREFOX)"
+    echo "$FIREFOX running as pid $ffpid"
+    if [ -z "$ffpid" ]; then
+        echo "Starting $FIREFOX"
+        (sleep 10 && LANG=C LC_ALL=C $FIREFOX) &
     fi
-    (sleep 10 && LANG=C LC_ALL=C $FIREFOX) &
-    break
 }
 
 XFLUX=$HOME/.local/bin/xflux
