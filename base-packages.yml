@@ -238,6 +238,7 @@
         - wget
         - wireshark
         - xclip
+        - xdg-utils
         - xmobar
         - xmonad
         - xorg
