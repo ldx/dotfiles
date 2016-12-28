@@ -8,9 +8,12 @@
         state: present
         force: yes
         update_cache: yes
-    - name: add skype repo key
+    - name: add repo keys
       apt_key:
-        url: https://repo.skype.com/data/SKYPE-GPG-KEY
+        url: "{{ item }}"
+      with_items:
+        - https://repo.skype.com/data/SKYPE-GPG-KEY
+        - https://www.virtualbox.org/download/oracle_vbox_2016.asc
     - name: add apt repos
       apt_repository:
         repo: "{{ item }}"
@@ -22,6 +25,7 @@
         - deb http://dl.google.com/linux/musicmanager/deb/ stable main
         - deb http://dl.google.com/linux/talkplugin/deb/ stable main
         - deb http://mozilla.debian.net/ {{ ansible_lsb.codename }}-backports firefox-release
+        - deb http://download.virtualbox.org/virtualbox/debian {{ ansible_lsb.codename }} contrib non-free
         - deb [arch=amd64] https://repo.skype.com/deb stable main
       when: ansible_os_family == 'Debian'
     - name: install skype
@@ -231,6 +235,7 @@
         - vagrant
         - valgrind
         - vim-gtk
+        - virtualbox-5.1
         - virtualenv
         - virtualenvwrapper
         - vlc
