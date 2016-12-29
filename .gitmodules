@@ -103,3 +103,6 @@
 [submodule "dotfiles/.vim/bundle/vim-cool"]
 	path = dotfiles/.vim/bundle/vim-cool
 	url = https://github.com/romainl/vim-cool.git
+[submodule "dotfiles/.vim/bundle/YCM-Generator"]
+	path = dotfiles/.vim/bundle/YCM-Generator
+	url = https://github.com/rdnetto/YCM-Generator.git
