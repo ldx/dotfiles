@@ -232,6 +232,4 @@ function join() {
     echo "$*"
 }
 
-if [ -f $HOME/*.retry ]; then
-    mv $HOME/*.retry /tmp/
-fi
+ls $HOME/*.retry > /dev/null 2>&1 && mv $HOME/*.retry /tmp/
