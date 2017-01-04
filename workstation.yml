@@ -11,6 +11,15 @@
         - en_US.UTF-8 UTF-8
         - hu_HU.UTF-8 UTF-8
 
+    - name: update /etc/ssh/ssh_config
+      lineinfile:
+        dest: /etc/ssh/ssh_config
+        regexp: '^\s+SendEnv (.*)$'
+        line: '#   SendEnv \1'
+        backrefs: yes
+      tags:
+        - sshconfig
+
     - name: generate locals
       command: locale-gen
 
