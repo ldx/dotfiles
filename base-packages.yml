@@ -163,6 +163,7 @@
         - nfs-common
         - nfs-kernel-server
         - nmap
+        - ntp
         - openssh-client
         - openssh-server
         - openssh-sftp-server
