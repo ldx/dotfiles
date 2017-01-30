@@ -113,7 +113,7 @@ type "$FIREFOX" > /dev/null 2>&1 && {
     ffpid="$(pidof $FIREFOX)"
     if [ -z "$ffpid" ]; then
         echo "Starting $FIREFOX"
-        (sleep 10 && LANG=C LC_ALL=C $FIREFOX) &
+        (sleep 3 && LANG=C LC_ALL=C $FIREFOX > /dev/null 2>&1) &
     else
         echo "$FIREFOX running as pid $ffpid"
     fi
