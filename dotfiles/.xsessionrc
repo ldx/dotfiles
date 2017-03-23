@@ -96,11 +96,16 @@ type "dropbox" > /dev/null 2>&1 && (dropbox stop; dropbox start &)
 
 type "nm-applet" > /dev/null 2>&1 && nm-applet &
 
-type "devmon" > /dev/null 2>&1 && while :; do
-    killall devmon > /dev/null 2>&1
-    devmon &
-    break
-done
+type "devmon" > /dev/null 2>&1 && {
+    dmpid="$(ps h -C devmon -o pid)"
+    if [ -z "$dmpid" ]; then
+        echo "Starting devmon"
+        devmon &
+    else
+        echo -n "devmon running as pid(s): "
+        echo $dmpid
+    fi
+}
 
 type "parcellite" > /dev/null 2>&1 && while :; do
     parcellite > /dev/null 2>&1 &
