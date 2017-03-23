@@ -62,3 +62,15 @@
             owner=root
             group=root
             content='KERNEL=="intel_backlight", SUBSYSTEM=="backlight", RUN+="/bin/chmod 0666 /sys/class/backlight/%k/brightness"'
+
+    - name: look up timedatectl
+      set_fact:
+        timedatectl_path: "{{ lookup('pipe', 'which timedatectl') }}"
+
+    - name: allow passwordless sudoing for certain commands
+      lineinfile:
+        dest: /etc/sudoers.d/local-passwordless-commands
+        line: "{{ ansible_env.SUDO_USER }} ALL=NOPASSWD: {{ timedatectl_path }}"
+        state: present
+        create: yes
+        validate: 'visudo -cf %s'
