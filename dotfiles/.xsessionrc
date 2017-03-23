@@ -119,6 +119,13 @@ type "$FIREFOX" > /dev/null 2>&1 && {
     fi
 }
 
+type tzupdate && (
+    TZ=$(tzupdate -p|awk '{print $4}'|sed 's/\.$//')
+    if [ $? = 0 ]; then
+        sudo timedatectl set-timezone $tz
+    fi
+) &
+
 XFLUX=$HOME/.local/bin/xflux
 type $XFLUX > /dev/null 2>&1 && while :; do
     pid="$(pidof xflux)"
