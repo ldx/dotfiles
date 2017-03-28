@@ -20,6 +20,14 @@
       tags:
         - sshconfig
 
+    - name: enable ForwardAgent in /etc/ssh/ssh_config
+      lineinfile:
+        dest: /etc/ssh/ssh_config
+        regexp: '^\s*#?\s*ForwardAgent\s'
+        line: 'ForwardAgent yes'
+      tags:
+        - sshconfig
+
     - name: generate locals
       command: locale-gen
 
