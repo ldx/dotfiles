@@ -11,7 +11,7 @@
         - en_US.UTF-8 UTF-8
         - hu_HU.UTF-8 UTF-8
 
-    - name: update /etc/ssh/ssh_config
+    - name: disable SendEnv in /etc/ssh/ssh_config
       lineinfile:
         dest: /etc/ssh/ssh_config
         regexp: '^\s+SendEnv (.*)$'
