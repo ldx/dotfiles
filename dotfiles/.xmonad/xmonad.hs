@@ -11,6 +11,7 @@ myManageHook = composeAll
     , className =? "Gimp" --> doShift "6"
     , className =? "Google-chrome" --> doShift "7"
     , className =? "Firefox" --> doShift "8"
+    , className =? "Firefox-esr" --> doShift "8"
     , className =? "trayer" --> doShift "9"
     , className =? "Skype" --> doShift "9"
     ]
