@@ -112,17 +112,19 @@ type "parcellite" > /dev/null 2>&1 && while :; do
     break
 done
 
-FIREFOX="firefox"
-type "$FIREFOX" > /dev/null 2>&1 || FIREFOX="iceweasel"
-type "$FIREFOX" > /dev/null 2>&1 && {
-    ffpid="$(pidof $FIREFOX)"
-    if [ -z "$ffpid" ]; then
-        echo "Starting $FIREFOX"
-        (sleep 3 && LANG=C LC_ALL=C $FIREFOX > /dev/null 2>&1) &
-    else
-        echo "$FIREFOX running as pid $ffpid"
-    fi
-}
+FIREFOX_CANDIDATES="firefox-esr firefox iceweasel"
+for ff in $FIREFOX_CANDIDATES; do
+    type "$ff" > /dev/null 2>&1 && {
+        ffpid="$(pidof $ff)"
+        if [ -z "$ffpid" ]; then
+            echo "Starting $ff"
+            (sleep 3 && LANG=C LC_ALL=C $ff > /dev/null 2>&1) &
+        else
+            echo "$ff running as pid $ffpid"
+        fi
+        break
+    }
+done
 
 type tzupdate && (
     TZ=$(tzupdate -p|awk '{print $4}'|sed 's/\.$//')
