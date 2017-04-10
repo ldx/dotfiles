@@ -129,7 +129,7 @@ done
 type tzupdate && (
     TZ=$(tzupdate -p|awk '{print $4}'|sed 's/\.$//')
     if [ $? = 0 ]; then
-        sudo timedatectl set-timezone $tz
+        sudo timedatectl set-timezone $TZ
     fi
 ) &
 
