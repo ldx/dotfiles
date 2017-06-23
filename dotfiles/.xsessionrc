@@ -96,6 +96,8 @@ type "dropbox" > /dev/null 2>&1 && (dropbox stop; dropbox start &)
 
 type "nm-applet" > /dev/null 2>&1 && nm-applet &
 
+type "pasystray" > /dev/null 2>&1 && pidof pasystray || pasystray &
+
 type "devmon" > /dev/null 2>&1 && {
     dmpid="$(ps h -C devmon -o pid)"
     if [ -z "$dmpid" ]; then
