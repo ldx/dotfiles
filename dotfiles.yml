@@ -50,3 +50,8 @@
       shell: tic {{ item }}
       with_fileglob:
         - "{{ homedir }}/.terminfo/*.terminfo"
+
+    - name: install vundle
+      git:
+        repo: https://github.com/VundleVim/Vundle.vim
+        dest: "{{ homedir }}/.vim/bundle/Vundle.vim"
