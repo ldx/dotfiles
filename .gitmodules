@@ -73,9 +73,6 @@
 [submodule ".vim/bundle/vimerl"]
 	path = dotfiles/.vim/bundle/vimerl
 	url = https://github.com/jimenezrick/vimerl.git
-[submodule ".vim/bundle/SWTC"]
-	path = dotfiles/.vim/bundle/SWTC
-	url = https://github.com/shinokada/SWTC.vim.git
 [submodule ".vim/bundle/vim-golang"]
 	path = dotfiles/.vim/bundle/vim-golang
 	url = https://github.com/jnwhiteh/vim-golang
