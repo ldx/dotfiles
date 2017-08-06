@@ -2,10 +2,57 @@
 " .vimrc
 "
 
-runtime bundle/vim-pathogen/autoload/pathogen.vim
-call pathogen#infect()
-
 set nocompatible		" vim defaults
+filetype off
+
+"
+" *-*-*-*-*-*-*-*-*-* P L U G I N S *-*-*-*-*-*-*-*-*-*
+"
+
+" set the runtime path to include Vundle and initialize
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+" alternatively, pass a path where Vundle should install plugins
+"call vundle#begin('~/some/path/here')
+
+" let Vundle manage Vundle, required
+Plugin 'VundleVim/Vundle.vim'
+
+Plugin 'vim-scripts/gnupg.vim'
+Plugin 'kien/rainbow_parentheses.vim'
+Plugin 'scrooloose/syntastic'
+Plugin 'vim-scripts/taglist.vim'
+Plugin 'altercation/vim-colors-solarized'
+Plugin 'tpope/vim-fugitive'
+Plugin 'ldx/vim-indentfinder'
+Plugin 'ldx/vim-springforest'
+Plugin 'plasticboy/vim-markdown'
+Plugin 'klen/python-mode'
+Plugin 'vim-scripts/cscope.vim'
+Plugin 'davidhalter/jedi-vim'
+Plugin 'tpope/vim-git'
+Plugin 'airblade/vim-gitgutter'
+Plugin 'mhinz/vim-startify'
+Plugin 'scrooloose/nerdtree'
+Plugin 'godlygeek/tabular'
+Plugin 'jimenezrick/vimerl'
+Plugin 'jnwhiteh/vim-golang'
+Plugin 'Valloric/YouCompleteMe'
+Plugin 'Blackrush/vim-gocode'
+Plugin 'Lokaltog/powerline'
+Plugin 'chase/vim-ansible-yaml'
+Plugin 'ludovicchabant/vim-gutentags'
+Plugin 'rust-lang/rust.vim'
+Plugin 'rdnetto/YCM-Generator'
+
+" All of your Plugins must be added before the following line
+call vundle#end()            " required
+filetype plugin indent on    " required
+
+"
+" *-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+"
+
 set encoding=utf-8
 set ttyfast
 
