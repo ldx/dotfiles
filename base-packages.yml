@@ -65,6 +65,7 @@
         - cmake
         - cpp
         - cpufrequtils
+        - cscope
         - cups
         - curl
         - curl
