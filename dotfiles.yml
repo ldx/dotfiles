@@ -26,7 +26,7 @@
                    dest={{ homedir }}/
                    archive=yes
                    delete=yes
-                   rsync_opts=--filter='P *.so'
+                   #rsync_opts=--filter='P *.so'
       with_items: "{{ dotfiles.stdout.split('\n') }}"
 
     - name: create .local directory
