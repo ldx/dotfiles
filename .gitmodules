@@ -1,6 +1,3 @@
 [submodule "dotfiles/.tmux/plugins/tmux-yank"]
 	path = dotfiles/.tmux/plugins/tmux-yank
 	url = https://github.com/tmux-plugins/tmux-yank
-[submodule "dotfiles/.vim/bundle/Vundle.vim"]
-	path = dotfiles/.vim/bundle/Vundle.vim
-	url = https://github.com/VundleVim/Vundle.vim.git
