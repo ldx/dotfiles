@@ -8,6 +8,10 @@
         state: present
         force: yes
         update_cache: yes
+    - name: add dropbox repo key
+      apt_key:
+        keyserver: pgp.mit.edu
+        id: 1C61A2656FB57B7E4DE0F4C1FC918B335044912E
     - name: add repo keys
       apt_key:
         url: "{{ item }}"
