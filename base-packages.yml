@@ -28,7 +28,6 @@
         - deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main
         - deb http://dl.google.com/linux/musicmanager/deb/ stable main
         - deb http://dl.google.com/linux/talkplugin/deb/ stable main
-        - deb http://mozilla.debian.net/ {{ ansible_lsb.codename }}-backports firefox-release
         - deb http://download.virtualbox.org/virtualbox/debian {{ ansible_lsb.codename }} contrib non-free
         - deb [arch=amd64] https://repo.skype.com/deb stable main
       when: ansible_os_family == 'Debian'
@@ -86,7 +85,6 @@
         - exuberant-ctags
         - fakeroot
         - file
-        - firefox
         - firmware-iwlwifi
         - flashplugin-nonfree
         - flex
