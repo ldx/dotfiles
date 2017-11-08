@@ -223,19 +223,6 @@ au FileType gitcommit set tw=72
 " ctags
 set tags=./tags;/
 
-" disable certain plugins if python versions is old
-let pyversion = 0
-:py << EOF
-import sys
-import vim
-vim.command("let pyversion = %d" % (sys.hexversion))
-EOF
-
-if pyversion < 0x02050000
-  let g:pymode = 0
-  let g:jedi#auto_initialization = 0
-endif
-
 " powerline
 set rtp+=~/.vim/bundle/powerline/powerline/bindings/vim
 
