@@ -86,7 +86,6 @@
         - fakeroot
         - file
         - firmware-iwlwifi
-        - flashplugin-nonfree
         - flex
         - fontconfig
         - fontconfig-config
@@ -159,9 +158,8 @@
         - mawk
         - mcelog
         - mplayer2
-        - netcat6
+        - netcat
         - netcat-openbsd
-        - netcat-traditional
         - network-manager
         - nfs-common
         - nfs-kernel-server
@@ -202,7 +200,6 @@
         - rdesktop
         - redis-server
         - redis-tools
-        - remmina
         - rfkill
         - rsync
         - sbuild
