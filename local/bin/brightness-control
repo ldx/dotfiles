@@ -1,35 +1,36 @@
 #!/bin/sh
 
-BRDIR="/sys/class/backlight/$(ls -1 /sys/class/backlight/|head -n 1)"
-MAXBR="$(cat $BRDIR/max_brightness)"
-CURBR_FILE="$BRDIR/brightness"
-CURBR="$(cat $CURBR_FILE)"
-STEP=$((MAXBR/20))
+CURBR="$(xrandr --current --verbose|grep 'Brightness:'|head -1|awk '{print $2}')"
+STEP="0.05"
+MAXBR="1.0"
+MINBR="0"
+echo "current brightness" $CURBR
 
 case "$1" in
     U|u|[U,u]p)
         # increase brightness by 5%
-        _brightness=$((CURBR+STEP))
-        if [ $_brightness -gt $MAXBR ]; then
-            _brightness=$MAXBR
+        _brightness=$(echo $CURBR+$STEP|bc)
+        echo "desired new brightness" $_brightness
+        _res=$(echo "$_brightness <= $MAXBR"|bc)
+        if [ "$_res" -eq 1 ]; then
+            echo "new brightness" $_brightness
+            xrandr --output eDP-1 --brightness $_brightness
         fi
-        echo $_brightness > $CURBR_FILE
         ;;
     D|d|[D,d]own|[D,d]o)
         # increase brightness by 5%
-        _brightness=$((CURBR-STEP))
-        if [ $_brightness -lt 0 ]; then
-            _brightness=0
+        _brightness=$(echo $CURBR-$STEP|bc)
+        echo "desired new brightness" $_brightness
+        _res=$(echo "$_brightness >= $MINBR"|bc)
+        if [ "$_res" -eq 1 ]; then
+            echo "new brightness" $_brightness
+            xrandr --output eDP-1 --brightness $_brightness
         fi
-        echo $_brightness > $CURBR_FILE
         ;;
     *)
         echo "Usage: $0 [up|down]"
         exit 1
         ;;
 esac
-
-_percent=$((CURBR*100/MAXBR))
-echo $_percent
 
 exit 0
