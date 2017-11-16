@@ -200,6 +200,7 @@
         - rdesktop
         - redis-server
         - redis-tools
+        - redshift
         - rfkill
         - rsync
         - sbuild
