@@ -80,6 +80,7 @@
         - dput
         - dropbox
         - ebtables
+        - ed
         - encfs
         - evince
         - exuberant-ctags
