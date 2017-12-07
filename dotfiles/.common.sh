@@ -53,6 +53,9 @@ elif [ -e /etc/bash_completion.d/virtualenvwrapper ]; then
 fi
 
 export GOPATH=$HOME/Projects/go
+if [ -d $HOME/.local/go ]; then
+    export GOROOT=$HOME/.local/go
+fi
 
 export GEM_HOME=$HOME/.gem
 export BUNDLE_PATH=$GEM_HOME
