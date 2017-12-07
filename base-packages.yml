@@ -212,6 +212,7 @@
         - scrot
         - sed
         - socat
+        - software-properties-common
         - sox
         - speedometer
         - sqlite3
