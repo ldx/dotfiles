@@ -1,4 +1,5 @@
 set completion-ignore-case On
+set bind-tty-special-chars Off
 
 set editing-mode vi
 
