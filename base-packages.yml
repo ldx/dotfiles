@@ -76,6 +76,7 @@
         - debootstrap
         - desktop-base
         - devscripts
+        - direnv
         - dnsmasq
         - dput
         - dropbox
