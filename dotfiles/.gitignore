@@ -5,7 +5,6 @@
 *.o
 *.o.*
 *.a
-*.s
 *.ko
 *.so.dbg
 *.mod.c
@@ -45,3 +44,7 @@ tags.temp
 *.orig
 *~
 \#*#
+
+.terraform/
+
+.envrc
