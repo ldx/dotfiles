@@ -250,8 +250,8 @@
       when: ansible_os_family == 'Debian'
     - name: download vagrant deb
       get_url:
-        url: https://releases.hashicorp.com/vagrant/1.9.1/vagrant_1.9.1_x86_64.deb
-        dest: /var/cache/apt/archives/vagrant_1.9.1_x86_64.deb
-    - name: Install a .deb package from the internet.
+        url: https://releases.hashicorp.com/vagrant/2.2.5/vagrant_2.2.5_x86_64.deb
+        dest: /var/cache/apt/archives/vagrant_2.2.5_x86_64.deb
+    - name: install vagrant deb
       apt:
-        deb: /var/cache/apt/archives/vagrant_1.9.1_x86_64.deb
+        deb: /var/cache/apt/archives/vagrant_2.2.5_x86_64.deb
