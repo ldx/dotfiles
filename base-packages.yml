@@ -16,7 +16,6 @@
       apt_key:
         url: "{{ item }}"
       with_items:
-        - https://repo.skype.com/data/SKYPE-GPG-KEY
         - https://www.virtualbox.org/download/oracle_vbox_2016.asc
     - name: add apt repos
       apt_repository:
@@ -26,14 +25,7 @@
         - deb http://httpredir.debian.org/debian/ {{ ansible_lsb.codename }} main contrib non-free
         - deb [arch=i386,amd64] http://linux.dropbox.com/debian sid main
         - deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main
-        - deb http://dl.google.com/linux/musicmanager/deb/ stable main
-        - deb http://dl.google.com/linux/talkplugin/deb/ stable main
         - deb http://download.virtualbox.org/virtualbox/debian {{ ansible_lsb.codename }} contrib non-free
-        - deb [arch=amd64] https://repo.skype.com/deb stable main
-      when: ansible_os_family == 'Debian'
-    - name: install skype
-      apt:
-        name: skypeforlinux
       when: ansible_os_family == 'Debian'
     - name: install packages on Debian/Ubuntu
       apt:
