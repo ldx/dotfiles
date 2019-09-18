@@ -71,7 +71,6 @@
         - cscope
         - cups
         - curl
-        - curl
         - daemontools
         - debootstrap
         - desktop-base
@@ -160,6 +159,7 @@
         - mawk
         - mcelog
         - mplayer2
+        - ncurses-term
         - netcat
         - netcat-openbsd
         - network-manager
