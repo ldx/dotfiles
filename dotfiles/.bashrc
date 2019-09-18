@@ -59,3 +59,10 @@ if ! shopt -oq posix; then
 	. /etc/bash_completion
     fi
 fi
+
+type aws_completer > /dev/null 2>&1 && complete -C aws_completer aws
+
+# added by travis gem
+[ -f /home/vilmos/.travis/travis.sh ] && source /home/vilmos/.travis/travis.sh
+
+eval "$(direnv hook bash)"
