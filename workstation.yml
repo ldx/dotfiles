@@ -2,6 +2,9 @@
 - hosts: all
   sudo: yes
 
+  vars:
+    homedir: "/home/{{ ansible_env.SUDO_USER }}"
+
   tasks:
     - name: update /etc/locale.gen
       lineinfile:
@@ -89,3 +92,23 @@
         state: present
         create: yes
         validate: 'visudo -cf %s'
+
+    - name: check if vimrc exists
+      stat:
+        path: "{{ homedir }}/.vimrc"
+      register: vimrc
+
+    - name: generate vimrc via vim-bootstrap
+      uri:
+        url: https://vim-bootstrap.com/generate.vim
+        dest: "{{ homedir }}/.vimrc"
+        method: POST
+        body_format: form-urlencoded
+        body:
+        - [ editor, vim ]
+        - [ langs, c ]
+        - [ langs, erlang ]
+        - [ langs, go ]
+        - [ langs, haskell ]
+        - [ langs, python ]
+      when: not vimrc.stat.exists
