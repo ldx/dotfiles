@@ -116,7 +116,6 @@
         - git-man
         - git-svn
         - g++-multilib
-        - gnome-keyring
         - gnupg
         - golang
         - golang-doc
@@ -209,6 +208,7 @@
         - sox
         - speedometer
         - sqlite3
+        - ssh-askpass
         - sshfs
         - sshpass
         - ssl-cert
