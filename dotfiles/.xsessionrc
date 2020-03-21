@@ -14,7 +14,7 @@ fi
 
 xset b off
 
-type "synclient" > /dev/null 2>&1 && while :; do
+if type "synclient" > /dev/null 2>&1; then
     synclient TapButton1=1
     synclient TapButton2=3
     synclient TapButton3=2
@@ -22,8 +22,7 @@ type "synclient" > /dev/null 2>&1 && while :; do
     synclient LockedDrags=1
     synclient LockedDragTimeout=500
     synclient PalmDetect=1
-    break
-done
+fi
 
 if [ -f "$HOME/.Xdefaults" ]; then
     xrdb $HOME/.Xdefaults
@@ -63,35 +62,31 @@ for p in $(pidof gnome-screensaver conky trayer skype nm-applet chrome \
     kill $p
 done
 
-type "xscreensaver" > /dev/null 2>&1 && while :; do
+if type "xscreensaver" > /dev/null 2>&1; then
     xscreensaver-command -exit
     xscreensaver -no-splash &
-    break
-done
+fi
 
-type "ssh-agent" > /dev/null 2>&1 && while :; do
+type "xss-lock" > /dev/null 2>&1 && xss-lock -- xscreensaver-command -lock &
+
+if type "ssh-agent" > /dev/null 2>&1; then
     echo -n "Checking if ssh-agent is running..."
     if [ -z "$SSH_AUTH_SOCK" ]; then
         echo "no, starting it"
         eval "$(ssh-agent)"
-        type "ssh-askpass" > /dev/null 2>&1 && while :; do
+        if type "ssh-askpass" > /dev/null 2>&1; then
             export SSH_ASKPASS=ssh-askpass
             ssh-add < /dev/null
-            break
-        done
+        fi
     else
         echo "yes"
     fi
-    break
-done
+fi
 
 type "trayer" > /dev/null 2>&1 && trayer --widthtype request --align right \
     --height 32 --transparent true --alpha 0 --tint 0x0B0B0B &
 
-type "skype" > /dev/null 2>&1 && while :; do
-    (sleep 3 && PULSE_LATENCY_MSEC=30 skype &)
-    break
-done
+type "skype" > /dev/null 2>&1 && (sleep 3 && PULSE_LATENCY_MSEC=30 skype &)
 
 type "dropbox" > /dev/null 2>&1 && (dropbox stop; dropbox start &)
 
@@ -110,10 +105,7 @@ type "devmon" > /dev/null 2>&1 && {
     fi
 }
 
-type "parcellite" > /dev/null 2>&1 && while :; do
-    parcellite > /dev/null 2>&1 &
-    break
-done
+type "parcellite" > /dev/null 2>&1 && parcellite &
 
 FIREFOX_CANDIDATES="firefox-esr firefox iceweasel"
 for ff in $FIREFOX_CANDIDATES; do
@@ -138,7 +130,7 @@ type tzupdate && (
 
 # XXX: Use redshift for now
 #XFLUX=$HOME/.local/bin/xflux
-#type $XFLUX > /dev/null 2>&1 && while :; do
+#if type $XFLUX > /dev/null 2>&1; then
 #    pid="$(pidof xflux)"
 #    if [ -n "$pid" ]; then
 #        kill -9 $pid
@@ -156,5 +148,4 @@ type tzupdate && (
 #        lon="-122.4167"
 #    fi
 #    $XFLUX -l $lat -g $lon
-#    break
-#done
+#fi
