@@ -154,6 +154,7 @@
         - netcat
         - netcat-openbsd
         - network-manager
+        - network-manager-gnome
         - nfs-common
         - nfs-kernel-server
         - nmap
@@ -243,6 +244,7 @@
         - xmobar
         - xmonad
         - xorg
+        - xss-lock
         - xterm
         - xtightvncviewer
         - zip
