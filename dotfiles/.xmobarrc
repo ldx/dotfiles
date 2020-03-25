@@ -28,8 +28,8 @@ Config {
         --   color can be set by enclosing in <fc></fc> tags. For more details
         --   see http://projects.haskell.org/xmobar/#system-monitor-plugins.
         , commands = [
-              Run Weather "LHBP" [
-                "--template", "<fc=#4682B4><tempC></fc>°C . <fc=#4682B4><rh></fc>% . <fc=#4682B4><pressure></fc>hPa" ] 36000
+              Run Weather "KSFO" [
+                "--template", "<fc=#4682B4><tempF></fc>°F . <fc=#4682B4><rh></fc>%" ] 36000
               , Run Battery [
                 "--template" , "Batt: <acstatus>"
                 , "--Low"      , "10"        -- units: %
@@ -49,9 +49,7 @@ Config {
                 "-L", "0", "-H", "50", "--normal", "green", "--high", "red" ] 10
               , Run Memory [
                 "-L", "0", "-H", "50", "--normal", "green", "--high", "red", "-t", "Mem: <usedratio>%" ] 50
-              , Run Swap [
-                "-L", "0", "-H", "10", "--normal", "green", "--high", "red" ] 50
-              , Run DynNetwork [
+              , Run Network "wlp4s0" [
                 "-t", "<dev>: <fc=#4682B4><rx></fc>kB . <fc=#4682B4><tx></fc>kB" ] 10
               , Run Date "%b %_d %a %H:%M" "date" 600
               , Run StdinReader
@@ -60,5 +58,5 @@ Config {
         -- layout
         , sepChar = "%"
         , alignSep = "}{"
-        , template = "%StdinReader% }{ %battery% || %cpu% | %memory% | %swap% || %dynnetwork% || %LHBP% || <fc=#ee9a00>%date%</fc>"
+        , template = "%StdinReader% }{ %battery% || %cpu% | %memory% || %wlp4s0% || %KSFO% || <fc=#ee9a00>%date%</fc>"
 }
