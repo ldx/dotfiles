@@ -29,7 +29,7 @@ Config {
         --   see http://projects.haskell.org/xmobar/#system-monitor-plugins.
         , commands = [
               Run Weather "KSFO" [
-                "--template", "<fc=#4682B4><tempF></fc>°F . <fc=#4682B4><rh></fc>%" ] 36000
+                "--template", "<fc=#4682B4><tempF></fc>°F <fc=#4682B4><rh></fc>%" ] 36000
               , Run Battery [
                 "--template" , "Batt: <acstatus>"
                 , "--Low"      , "10"        -- units: %
@@ -50,7 +50,7 @@ Config {
               , Run Memory [
                 "-L", "0", "-H", "50", "--normal", "green", "--high", "red", "-t", "Mem: <usedratio>%" ] 50
               , Run Network "wlp4s0" [
-                "-t", "<dev>: <fc=#4682B4><rx></fc>kB . <fc=#4682B4><tx></fc>kB" ] 10
+                "-t", "<dev>: <fc=#4682B4><rx></fc>kB <fc=#4682B4><tx></fc>kB" ] 10
               , Run Date "%b %_d %a %H:%M" "date" 600
               , Run StdinReader
               ]

@@ -16,5 +16,6 @@ set editing-mode vi
 "\C-n": history-search-forward
 "\C-p": history-search-backward
 "\C-v": quoted-insert
-"\C-w": shell-backward-kill-word
+"\C-w": unix-filename-rubout
+#backward-kill-word
 "\C-u": unix-line-discard
