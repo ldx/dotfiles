@@ -1295,7 +1295,7 @@ xkb_symbols "pc+hu+inet(evdev)" {
     key <SPCE> {         [           space ] };
     key <FK01> {
         type= "CTRL+ALT",
-        symbols[Group1]= [              F1,              F1,              F1,              F1, XF86Switch_VT_1 ]
+        symbols[Group1]= [              F1,              XF86Switch_VT_1, F1,              F1, XF86Switch_VT_1 ]
     };
     key <FK02> {
         type= "CTRL+ALT",
