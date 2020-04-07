@@ -38,7 +38,6 @@
         - acpica-tools
         - acpi-support
         - acpitool
-        - silversearcher-ag
         - autoconf
         - autocutsel
         - automake
@@ -60,9 +59,9 @@
         - cmake
         - cpp
         - cpufrequtils
-        - cscope
         - cups
         - curl
+        - cscope
         - daemontools
         - debootstrap
         - desktop-base
@@ -90,7 +89,7 @@
         - fonts-freefont-ttf
         - fonts-inconsolata
         - fonts-lato
-        - fonts-liberation
+        - fonts-liberation2
         - fonts-linuxlibertine
         - fonts-lmodern
         - fonts-lyx
@@ -128,7 +127,6 @@
         - imagemagick
         - info
         - iotop
-        - iproute
         - iproute2
         - ipset
         - iptables
@@ -148,15 +146,12 @@
         - manpages
         - manpages-dev
         - mawk
-        - mcelog
-        - mplayer2
+        - mplayer
         - ncurses-term
         - netcat
         - netcat-openbsd
         - network-manager
         - network-manager-gnome
-        - nfs-common
-        - nfs-kernel-server
         - nmap
         - ntp
         - openssh-client
@@ -192,9 +187,8 @@
         - qemu-system-x86
         - qemu-utils
         - rdesktop
-        - redis-server
-        - redis-tools
         - redshift
+        - silversearcher-ag
         - rfkill
         - rsync
         - sbuild
@@ -224,7 +218,6 @@
         - tree
         - ttf-bitstream-vera
         - ttf-dejavu
-        - ttf-liberation
         - tzdata
         - ubuntu-archive-keyring
         - ubuntu-dev-tools
@@ -232,7 +225,7 @@
         - util-linux
         - valgrind
         - vim-gtk
-        - virtualbox-5.1
+        - virtualbox-6.1
         - virtualenv
         - virtualenvwrapper
         - vlc
@@ -244,6 +237,7 @@
         - xmobar
         - xmonad
         - xorg
+        - xserver-xorg-input-synaptics
         - xss-lock
         - xterm
         - xtightvncviewer
