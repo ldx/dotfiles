@@ -1,6 +1,6 @@
 ---
 - hosts: all
-  sudo: yes
+  become: yes
 
   vars:
     homedir: "/home/{{ ansible_env.SUDO_USER }}"
@@ -65,7 +65,7 @@
 
     - name: run update-grub if /etc/default/grub has changed
       command: update-grub
-      when: grub_cmdline | changed
+      when: grub_cmdline.changed
 
     - name: make backlight sysfs file writable
       copy: dest=/etc/udev/rules.d/97-intel_backlight.rules

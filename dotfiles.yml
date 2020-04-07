@@ -5,7 +5,7 @@
 #     ansible-playbook -c local -i localhost, dotfiles.yml
 #
 - hosts: all
-  sudo: no
+  become: no
 
   vars:
     homedir: "{{ ansible_env.HOME }}"
