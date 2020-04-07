@@ -149,3 +149,5 @@ type tzupdate && (
 #    fi
 #    $XFLUX -l $lat -g $lon
 #fi
+
+exec xmonad
