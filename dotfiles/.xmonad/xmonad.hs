@@ -21,6 +21,7 @@ main = do
     xmonad $ defaultConfig
         { manageHook = manageDocks  <+> myManageHook <+> manageHook defaultConfig
         , layoutHook = avoidStruts  $  layoutHook defaultConfig
+        , handleEventHook = handleEventHook defaultConfig <+> docksEventHook
         , logHook = dynamicLogWithPP xmobarPP
                         { ppOutput = hPutStrLn xmproc
                         , ppTitle = xmobarColor "green" "" . shorten 50
