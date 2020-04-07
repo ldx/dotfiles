@@ -123,6 +123,7 @@ popd; dpkg -i /tmp/debs/*; rm -rf /tmp/debs
 # Other tools.
 curl -L https://storage.googleapis.com/kubernetes-release/release/`curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt`/bin/linux/amd64/kubectl > /usr/local/bin/kubectl \
     && chmod +x /usr/local/bin/kubectl
+kubectl completion bash > /etc/bash_completion.d/kubectl
 
 curl -L https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64 > /usr/local/bin/minikube \
     && chmod +x /usr/local/bin/minikube
