@@ -5,7 +5,6 @@ if [ -z "$TMUX" -a "$parent" != "sshd" -a "$parent" != "su" ]; then
 fi
 
 # Environment variables.
-export PAGER="less -r"
 export LESSCHARSET=utf-8
 
 export CVS_RSH=ssh
@@ -100,9 +99,6 @@ unshift_path "$GOROOT"
 unshift_path "$HOME/Projects/rumprun/rumprun"
 unshift_path "$HOME/.cabal"
 unshift_path "$HOME/.local/depot_tools"
-if which ruby > /dev/null && which gem >/dev/null; then
-    unshift_path "$(ruby -rubygems -e 'puts Gem.user_dir')"
-fi
 
 unset _PERLLIBS
 if [ -d "$LOCAL_PREFIX/lib/perf" ]; then
