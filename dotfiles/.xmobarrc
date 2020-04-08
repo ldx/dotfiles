@@ -1,8 +1,8 @@
 Config {
         -- appearance
-          font = "-*-Fixed-Bold-R-Normal-*-14-*-*-*-*-*-*-*"
+          font = "xft:SFNS Display:size=12"
         , bgColor = "black"
-        , fgColor = "grey"
+        , fgColor = "white"
         , position = TopW R 100
 
         -- general behavior
@@ -49,7 +49,7 @@ Config {
                 "-L", "0", "-H", "50", "--normal", "green", "--high", "red" ] 10
               , Run Memory [
                 "-L", "0", "-H", "50", "--normal", "green", "--high", "red", "-t", "Mem: <usedratio>%" ] 50
-              , Run Network "wlp4s0" [
+              , Run Network "wlp0s20f3" [
                 "-t", "<dev>: <fc=#4682B4><rx></fc>kB <fc=#4682B4><tx></fc>kB" ] 10
               , Run Date "%b %_d %a %H:%M" "date" 600
               , Run StdinReader
@@ -58,5 +58,5 @@ Config {
         -- layout
         , sepChar = "%"
         , alignSep = "}{"
-        , template = "%StdinReader% }{ %battery% || %cpu% | %memory% || %wlp4s0% || %KSFO% || <fc=#ee9a00>%date%</fc>"
+        , template = "%StdinReader% }{ %battery% || %cpu% | %memory% || %wlp0s20f3% || %KSFO% || <fc=#ee9a00>%date%</fc>"
 }
