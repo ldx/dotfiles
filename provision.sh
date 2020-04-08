@@ -34,38 +34,217 @@ echo "deb [arch=i386,amd64] http://linux.dropbox.com/debian $codename main" > /e
 echo "deb http://httpredir.debian.org/debian/ $codename main contrib non-free" > /etc/apt/sources.list.d/nonfree.list
 
 apt-get update
-apt-get install python-dev python-pip ansible rsync acpi acpica-tools \
-    acpi-support acpitool autoconf autocutsel automake autotools-dev \
-    bash-completion bc bison blueman bluetooth bluez bridge-utils \
-    build-essential busybox bzip2 ca-certificates clang clusterssh cmake \
-    cpp cpufrequtils cups curl cscope daemontools debootstrap desktop-base \
-    devscripts direnv dnsmasq dput dropbox ebtables ed encfs evince \
-    exuberant-ctags fakeroot file firmware-iwlwifi flex fontconfig \
-    fontconfig-config fonts-crosextra-caladea fonts-crosextra-carlito \
-    fonts-dejavu fonts-dejavu-core fonts-dejavu-extra fonts-freefont-ttf \
-    fonts-inconsolata fonts-lato fonts-liberation2 fonts-linuxlibertine \
-    fonts-lmodern fonts-lyx fonts-opensymbol fonts-sil-gentium \
-    fonts-sil-gentium-basic fonts-texgyre fonts-vlgothic ftp fuse g++ gawk \
-    gcc gccgo gcc-multilib gdb ghc ghc-doc ghostscript gimp git git-man \
-    git-svn g++-multilib gnupg golang golang-doc grep groff-base gthumb \
-    gzip htop iftop imagemagick info iotop iproute2 ipset iptables \
-    iptables-dev iw jq laptop-detect less libreoffice lightdm lshw lsof m4 \
-    make makedev man-db manpages manpages-dev mawk mplayer ncurses-term \
-    netcat netcat-openbsd network-manager network-manager-gnome nmap ntp \
-    openssh-client openssh-server openssh-sftp-server openssl openvpn \
-    p7zip-full pandoc parcellite parted passwd pasystray patch patchutils \
-    pavucontrol pkg-config pkg-mozilla-archive-keyring pm-utils pulseaudio \
-    pulseaudio-module-bluetooth pulseaudio-utils puppet-lint pwgen python \
-    python-all python-all-dev python-dev python-dev python-pip qemu-kvm \
-    qemu-system-common qemu-system-x86 qemu-utils rdesktop redshift \
-    silversearcher-ag rfkill rsync sbuild schroot schroot-common screen \
-    scrot sed socat software-properties-common sox speedometer sqlite3 \
-    ssh-askpass sshfs sshpass ssl-cert strace sudo sysstat tar tcpdump tmux \
-    traceroute trayer tree ttf-bitstream-vera ttf-dejavu tzdata \
-    ubuntu-archive-keyring ubuntu-dev-tools unzip util-linux valgrind \
-    vim-gtk virtualbox-6.1 virtualenv virtualenvwrapper vlc vpnc-scripts \
-    wget wireshark xclip xdg-utils xmobar xmonad xorg \
-    xserver-xorg-input-synaptics xss-lock xterm xtightvncviewer zip 
+apt-get install \
+    acpi \
+    acpica-tools \
+    acpi-support \
+    acpitool \
+    ansible \
+    autoconf \
+    autocutsel \
+    automake \
+    autotools-dev \
+    bash-completion \
+    bc \
+    bison \
+    blueman \
+    bluetooth \
+    bluez \
+    bridge-utils \
+    build-essential \
+    busybox \
+    bzip2 \
+    ca-certificates \
+    clang \
+    clusterssh \
+    cmake \
+    cpp \
+    cpufrequtils \
+    cups \
+    curl \
+    cscope \
+    daemontools \
+    debootstrap \
+    desktop-base \
+    devscripts \
+    direnv \
+    dnsmasq \
+    dput \
+    dropbox \
+    ebtables \
+    ed \
+    encfs \
+    evince \
+    exuberant-ctags \
+    fakeroot \
+    file \
+    firmware-iwlwifi \
+    flex \
+    fontconfig \
+    fontconfig-config \
+    fonts-crosextra-caladea \
+    fonts-crosextra-carlito \
+    fonts-dejavu \
+    fonts-dejavu-core \
+    fonts-dejavu-extra \
+    fonts-freefont-ttf \
+    fonts-inconsolata \
+    fonts-lato \
+    fonts-liberation2 \
+    fonts-linuxlibertine \
+    fonts-lmodern \
+    fonts-lyx \
+    fonts-opensymbol \
+    fonts-sil-gentium \
+    fonts-sil-gentium-basic \
+    fonts-texgyre \
+    fonts-vlgothic \
+    ftp \
+    fuse \
+    g++ \
+    gawk \
+    gcc \
+    gccgo \
+    gcc-multilib \
+    gdb \
+    ghc \
+    ghc-doc \
+    ghostscript \
+    gimp \
+    git \
+    git-man \
+    git-svn \
+    g++-multilib \
+    gnupg \
+    gocryptfs \
+    golang \
+    golang-doc \
+    grep \
+    groff-base \
+    gthumb \
+    gzip \
+    htop \
+    hxtools \
+    iftop \
+    imagemagick \
+    info \
+    iotop \
+    iproute2 \
+    ipset \
+    iptables \
+    iptables-dev \
+    iw \
+    jq \
+    laptop-detect \
+    less \
+    libpam-mount \
+    libreoffice \
+    libssl-dev \
+    lightdm \
+    lshw \
+    lsof \
+    m4 \
+    make \
+    makedev \
+    man-db \
+    manpages \
+    manpages-dev \
+    mawk \
+    mplayer \
+    ncurses-term \
+    netcat \
+    netcat-openbsd \
+    network-manager \
+    network-manager-gnome \
+    nmap \
+    ntp \
+    openssh-client \
+    openssh-server \
+    openssh-sftp-server \
+    openssl \
+    openvpn \
+    p7zip-full \
+    pandoc \
+    parcellite \
+    parted \
+    passwd \
+    pasystray \
+    patch \
+    patchutils \
+    pavucontrol \
+    pkg-config \
+    pkg-mozilla-archive-keyring \
+    pm-utils \
+    pulseaudio \
+    pulseaudio-module-bluetooth \
+    pulseaudio-utils \
+    puppet-lint \
+    pwgen \
+    python \
+    python-all \
+    python-all-dev \
+    python-dev \
+    python-pip \
+    qemu-kvm \
+    qemu-system-common \
+    qemu-system-x86 \
+    qemu-utils \
+    rdesktop \
+    redshift \
+    rfkill \
+    rsync \
+    sbuild \
+    schroot \
+    schroot-common \
+    screen \
+    scrot \
+    sed \
+    silversearcher-ag \
+    socat \
+    software-properties-common \
+    sox \
+    speedometer \
+    sqlite3 \
+    ssh-askpass \
+    sshfs \
+    sshpass \
+    ssl-cert \
+    strace \
+    sudo \
+    sysstat \
+    tar \
+    tcpdump \
+    tmux \
+    traceroute \
+    trayer \
+    tree \
+    ttf-bitstream-vera \
+    ttf-dejavu \
+    tzdata \
+    ubuntu-archive-keyring \
+    ubuntu-dev-tools \
+    unzip \
+    util-linux \
+    valgrind \
+    vim-gtk \
+    virtualbox-6.1 \
+    virtualenv \
+    virtualenvwrapper \
+    vlc \
+    vpnc-scripts \
+    wget \
+    wireshark \
+    xattr \
+    xclip \
+    xdg-utils \
+    xmobar \
+    xmonad \
+    xorg \
+    xserver-xorg-input-synaptics \
+    xss-lock \
+    xterm \
+    xtightvncviewer \
+    zip
 
 umask 0022
 
