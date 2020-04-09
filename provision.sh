@@ -20,6 +20,8 @@ fi
 homedir="/home/$provisioning_user"
 curdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
+mkdir -p /usr/local
+
 # Required packages.
 apt-get update
 apt-get install apt-transport-https gpg
@@ -117,8 +119,6 @@ apt-get install \
     g++-multilib \
     gnupg \
     gocryptfs \
-    golang \
-    golang-doc \
     grep \
     groff-base \
     gthumb \
@@ -284,12 +284,15 @@ chown -R $provisioning_user: $homedir/.terminfo
 
 # Install latest Firefox.
 apt-get remove firefox-esr || true
-curl -L "https://download.mozilla.org/?product=firefox-latest&os=linux64&lang=en-US" > FirefoxSetup.tar.bz2
-tar xvf FirefoxSetup.tar.bz2
-rm -rf /opt/firefox
-mv firefox /opt/
-ln -snf /opt/firefox/firefox /usr/local/bin/firefox
-rm FirefoxSetup.tar.bz2
+rm -rf /usr/local/firefox
+curl -L "https://download.mozilla.org/?product=firefox-latest&os=linux64&lang=en-US" | \
+    tar -xjf - -C /usr/local/
+ln -snf /usr/local/firefox/firefox /usr/local/bin/firefox
+
+# Go 1.13.
+rm -rf /usr/local/go
+curl -L https://dl.google.com/go/go1.13.10.linux-amd64.tar.gz | \
+    tar -xzf - -C /usr/local/
 
 # Install deb packages.
 deb_urls="https://downloads.slack-edge.com/linux_releases/slack-desktop-4.4.0-amd64.deb https://releases.hashicorp.com/vagrant/2.2.7/vagrant_2.2.7_x86_64.deb"
