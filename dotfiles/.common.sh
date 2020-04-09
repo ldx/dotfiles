@@ -51,13 +51,10 @@ elif [ -e /etc/bash_completion.d/virtualenvwrapper ]; then
     source /etc/bash_completion.d/virtualenvwrapper
 fi
 
-export GOPATH=$HOME/Projects/go
-if [ -d $HOME/.local/go ]; then
-    export GOROOT=$HOME/.local/go
-fi
-
 export GEM_HOME=$HOME/.gem
 export BUNDLE_PATH=$GEM_HOME
+
+export GOPATH=$HOME/Projects/go
 
 # prepend_colon(val, var)
 prepend_colon() {
@@ -88,6 +85,7 @@ export MANPATH=""
 unshift_path ""
 unshift_path "/usr"
 unshift_path "/usr/local"
+unshift_path "/usr/local/go"
 unshift_path "/usr/X11"
 unshift_path "/opt"
 unshift_path "/opt/local"
@@ -95,10 +93,13 @@ unshift_path "$HOME"
 unshift_path "$LOCAL_PREFIX"
 unshift_path "$GOPATH"
 unshift_path "$BUNDLE_PATH"
-unshift_path "$GOROOT"
 unshift_path "$HOME/Projects/rumprun/rumprun"
 unshift_path "$HOME/.cabal"
 unshift_path "$HOME/.local/depot_tools"
+if [ -d $HOME/.local/go ]; then
+    export GOROOT=$HOME/.local/go
+    unshift_path "$GOROOT"
+fi
 
 unset _PERLLIBS
 if [ -d "$LOCAL_PREFIX/lib/perf" ]; then
