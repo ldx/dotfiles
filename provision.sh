@@ -137,6 +137,7 @@ apt-get install \
     jq \
     laptop-detect \
     less \
+    libnotify-bin \
     libpam-mount \
     libreoffice \
     libssl-dev \
@@ -157,6 +158,7 @@ apt-get install \
     network-manager \
     network-manager-gnome \
     nmap \
+    notification-daemon \
     ntp \
     openssh-client \
     openssh-server \
