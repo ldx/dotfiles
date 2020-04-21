@@ -71,6 +71,7 @@ apt-get install \
     devscripts \
     direnv \
     dnsmasq \
+    dnsutils \
     dput \
     dropbox \
     ebtables \
@@ -153,6 +154,7 @@ apt-get install \
     mawk \
     mplayer \
     ncurses-term \
+    net-tools \
     netcat \
     netcat-openbsd \
     network-manager \
