@@ -317,4 +317,6 @@ curl -L https://storage.googleapis.com/minikube/releases/latest/minikube-linux-a
 curl -L https://releases.hashicorp.com/terraform/0.12.24/terraform_0.12.24_linux_amd64.zip > tf.zip \
     && unzip -o tf.zip -d /usr/local/bin/
 
+curl -L https://github.com/ldx/closest-airport/releases/download/v1.0.0/closest-airport.tar.gz | tar xzf - -C /usr/local/bin
+
 pip install awscli
