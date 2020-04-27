@@ -121,33 +121,5 @@ for ff in $FIREFOX_CANDIDATES; do
     }
 done
 
-type tzupdate && (
-    TZ=$(tzupdate -p|awk '{print $4}'|sed 's/\.$//')
-    if [ $? = 0 ]; then
-        sudo timedatectl set-timezone $TZ
-    fi
-) &
-
-# XXX: Use redshift for now
-#XFLUX=$HOME/.local/bin/xflux
-#if type $XFLUX > /dev/null 2>&1; then
-#    pid="$(pidof xflux)"
-#    if [ -n "$pid" ]; then
-#        kill -9 $pid
-#    fi
-#    geo=$(curl 'http://www.ipinfodb.com/my_ip_location.php')
-#    lat=$(echo "$geo"|tr '\r' '\n'|grep Latitude|sed -r 's/.*\W(-?\W[0-9]+\.[0-9]+)\W.*/\1/')
-#    lon=$(echo "$geo"|tr '\r' '\n'|grep Longitude|sed -r 's/.*\W(-?\W[0-9]+\.[0-9]+)\W.*/\1/')
-#    echo $geo >> /tmp/geo.txt
-#    echo $lat >> /tmp/geo.txt
-#    echo $lon >> /tmp/geo.txt
-#    if [ -z "$lat" ]; then
-#        lat="37.7833"
-#    fi
-#    if [ -z "$lon" ]; then
-#        lon="-122.4167"
-#    fi
-#    $XFLUX -l $lat -g $lon
-#fi
 
 exec xmonad
