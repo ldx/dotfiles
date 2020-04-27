@@ -67,7 +67,7 @@ if type "xscreensaver" > /dev/null 2>&1; then
     xscreensaver -no-splash &
 fi
 
-type "xss-lock" > /dev/null 2>&1 && xss-lock -- xscreensaver-command -lock &
+type "light-locker" > /dev/null 2>&1 && light-locker &
 
 if type "ssh-agent" > /dev/null 2>&1; then
     echo -n "Checking if ssh-agent is running..."
