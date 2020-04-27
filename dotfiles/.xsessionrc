@@ -121,5 +121,8 @@ for ff in $FIREFOX_CANDIDATES; do
     }
 done
 
+weather_station=KSFO
+type "closest-airport" > /dev/null 2>&1 && type jq && weather_station=$(closest-airport | jq -r '.ClosestAirport.ident')
+sed -i "s/Run Weather \".*\"/Run Weather \"$weather_station\"/" $HOME/.xmobarrc
 
 exec xmonad
