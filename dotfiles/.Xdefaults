@@ -114,6 +114,8 @@ Xft.hintstyle: hintslight
 *xterm*foreground: white
 *xterm*locale: true
 
+*xterm*visualBell: True
+
 XTerm*VT100.translations: #override \
   Shift <Key>Up: scroll-back(1) \n\
   Shift <Key>Down: scroll-forw(1) \n\
