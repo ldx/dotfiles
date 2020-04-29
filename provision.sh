@@ -227,6 +227,7 @@ apt-get install \
     tzdata \
     ubuntu-archive-keyring \
     ubuntu-dev-tools \
+    uidmap \
     unzip \
     util-linux \
     valgrind \
