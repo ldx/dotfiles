@@ -107,6 +107,14 @@ type "devmon" > /dev/null 2>&1 && {
 
 type "parcellite" > /dev/null 2>&1 && parcellite &
 
+if [ -x "/usr/lib/notification-daemon/notification-daemon" ]; then
+    pid=$(pidof /usr/lib/notification-daemon/notification-daemon)
+    if [ -n "$pid" ]; then
+        kill $pid
+    fi
+     /usr/lib/notification-daemon/notification-daemon &
+fi
+
 FIREFOX_CANDIDATES="firefox-esr firefox iceweasel"
 for ff in $FIREFOX_CANDIDATES; do
     type "$ff" > /dev/null 2>&1 && {
