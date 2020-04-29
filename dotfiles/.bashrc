@@ -16,8 +16,8 @@ shopt -s histappend
 # Don't put duplicate lines or lines starting with space in the history.
 HISTCONTROL=ignoreboth
 
-HISTSIZE=
-HISTFILESIZE=
+HISTSIZE=9999
+HISTFILESIZE=9999999
 
 # Check window size after each command and, if necessary, update the values of
 # LINES and COLUMNS.
