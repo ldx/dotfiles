@@ -66,9 +66,10 @@ adjust_volume() {
 }
 
 normalize_outputs() {
-  # Set all outputs to 30%, so the main sink volume is the main control.
+  # Normalize all outputs.
   which pa_volume 2>&1 > /dev/null || return
-  pa_volume | sed -r 's/^client:\s+(.*[^ ])\s+[0-9]+%$/\1/' | xargs -n1 -I{} pa_volume "{}" 30
+  get_curvol $sink
+  pa_volume | sed -r 's/^client:\s+(.*[^ ])\s+[0-9]+%$/\1/' | xargs -n1 -I{} pa_volume "{}" $CURVOL
 }
 
 case "$1" in
