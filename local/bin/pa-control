@@ -65,9 +65,16 @@ adjust_volume() {
   pactl set-sink-volume "$sink" -- "$change"
 }
 
+normalize_outputs() {
+  # Set all outputs to 30%, so the main sink volume is the main control.
+  which pa_volume 2>&1 > /dev/null || return
+  pa_volume | sed -r 's/^client:\s+(.*[^ ])\s+[0-9]+%$/\1/' | xargs -n1 -I{} pa_volume "{}" 30
+}
+
 case "$1" in
   U|u|[U,u]p)
     # raise volume by 5%
+    normalize_outputs
     for sink in $SINKS; do
       adjust_volume $sink "+5%"
     done
@@ -75,6 +82,7 @@ case "$1" in
     ;;
   D|d|[D,d]own|[D,d]o)
     # lowers volume by 5%
+    normalize_outputs
     for sink in $SINKS; do
       adjust_volume $sink "-5%"
     done
@@ -82,6 +90,7 @@ case "$1" in
     ;;
   M|m|[M,m]u|[M,m]ute)
     # mutes the volume entirely
+    normalize_outputs
     for sink in $SINKS; do
       pactl set-sink-mute "$sink" toggle
     done
