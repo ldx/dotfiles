@@ -27,7 +27,7 @@ apt-get update
 apt-get install apt-transport-https gpg
 
 apt-key adv --keyserver pool.sks-keyservers.net \
-    --recv-keys 78BD65473CB3BD13 1C61A2656FB57B7E4DE0F4C1FC918B335044912E
+    --recv-keys 78BD65473CB3BD13 1C61A2656FB57B7E4DE0F4C1FC918B335044912E A2F683C52980AECF
 
 rm -rf /etc/apt/sources.list.d/*
 echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" > /etc/apt/sources.list.d/google-chrome.list
