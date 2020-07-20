@@ -212,6 +212,7 @@ apt-get install \
     ssh-askpass \
     sshfs \
     sshpass \
+    sshuttle \
     ssl-cert \
     strace \
     sudo \
