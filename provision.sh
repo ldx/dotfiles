@@ -143,6 +143,7 @@ apt-get install \
     libreoffice \
     libssl-dev \
     lightdm \
+    light-locker \
     lshw \
     lsof \
     m4 \
