@@ -65,6 +65,9 @@ type aws_completer > /dev/null 2>&1 && complete -C aws_completer aws
 # added by travis gem
 [ -f /home/vilmos/.travis/travis.sh ] && source /home/vilmos/.travis/travis.sh
 
+which _awsp > /dev/null 2>&1 && alias awsp="source _awsp"
+[ -f $HOME/.awsp ] && export AWS_PROFILE=$(cat $HOME/.awsp)
+
 alias k="kubectl"
 alias ke="kubectl exec -ti"
 alias ks="kubectl -n kube-system"
