@@ -142,4 +142,8 @@ function alias_completion {
     source "$tmp_file" && rm -f "$tmp_file"
 }; alias_completion
 
+for kc in $HOME/.kube/configs/*; do
+    export KUBECONFIG=$KUBECONFIG:$kc
+done
+
 eval "$(direnv hook bash)"
