@@ -45,6 +45,7 @@ apt-get install \
     autoconf \
     autocutsel \
     automake \
+    autossh \
     autotools-dev \
     bash-completion \
     bc \
