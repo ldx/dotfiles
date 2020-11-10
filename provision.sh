@@ -23,8 +23,8 @@ curdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 mkdir -p /usr/local
 
 # Required packages.
-apt-get update
-apt-get install apt-transport-https gpg
+apt-get update -y
+apt-get install -y apt-transport-https gpg
 
 apt-key adv --keyserver pool.sks-keyservers.net \
     --recv-keys 78BD65473CB3BD13 1C61A2656FB57B7E4DE0F4C1FC918B335044912E A2F683C52980AECF
@@ -35,8 +35,8 @@ echo "deb http://download.virtualbox.org/virtualbox/debian $codename contrib non
 echo "deb [arch=i386,amd64] http://linux.dropbox.com/debian $codename main" > /etc/apt/sources.list.d/dropbox.list
 echo "deb http://httpredir.debian.org/debian/ $codename main contrib non-free" > /etc/apt/sources.list.d/nonfree.list
 
-apt-get update
-apt-get install \
+apt-get update -y
+apt-get install -y \
     acpi \
     acpica-tools \
     acpi-support \
@@ -291,7 +291,7 @@ done
 chown -R $provisioning_user: $homedir/.terminfo
 
 # Install latest Firefox.
-apt-get remove firefox-esr || true
+apt-get remove -y firefox-esr || true
 rm -rf /usr/local/firefox
 curl -L "https://download.mozilla.org/?product=firefox-latest&os=linux64&lang=en-US" | \
     tar -xjf - -C /usr/local/
