@@ -121,6 +121,7 @@ apt-get install -y \
     g++-multilib \
     gnupg \
     gocryptfs \
+    google-chrome-stable \
     grep \
     groff-base \
     gthumb \
