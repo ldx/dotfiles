@@ -205,6 +205,7 @@ apt-get install -y \
     screen \
     scrot \
     sed \
+    shellcheck \
     silversearcher-ag \
     socat \
     software-properties-common \
