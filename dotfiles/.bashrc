@@ -72,6 +72,9 @@ alias k="kubectl"
 alias ke="kubectl exec -ti"
 alias ks="kubectl -n kube-system"
 alias kse="kubectl -n kube-system exec -ti"
+alias kk="kubectl -n kip"
+alias kke="kubectl -n kip exec -ti"
+alias kc="http_proxy=localhost:8888 kubectl"
 
 # Automatically add completion for all aliases to commands having completion functions
 function alias_completion {
