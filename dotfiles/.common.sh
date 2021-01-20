@@ -55,6 +55,7 @@ export GEM_HOME=$HOME/.gem
 export BUNDLE_PATH=$GEM_HOME
 
 export GOPATH=$HOME/Projects/go
+export GOFLAGS="-mod=readonly"
 
 # prepend_colon(val, var)
 prepend_colon() {
