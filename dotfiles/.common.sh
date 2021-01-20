@@ -1,6 +1,6 @@
 # Start tmux automatically.
 parent="$(ps -o comm= $PPID)"
-if [ -z "$TMUX" -a "$parent" != "sshd" -a "$parent" != "su" ]; then
+if [ -z "$TMUX" -a "$parent" != "sshd" -a "$parent" != "su" -a "$SSH_CONNECTION" = "" ]; then
     which tmux > /dev/null 2>&1 && exec tmux -2
 fi
 
