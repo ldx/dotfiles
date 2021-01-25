@@ -71,7 +71,6 @@ apt-get install -y \
     desktop-base \
     devscripts \
     direnv \
-    dnsmasq \
     dnsutils \
     dput \
     dropbox \
@@ -141,6 +140,7 @@ apt-get install -y \
     laptop-detect \
     less \
     libnotify-bin \
+    libnss-resolve \
     libpam-mount \
     libreoffice \
     libssl-dev \
