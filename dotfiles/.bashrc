@@ -47,6 +47,14 @@ if [ -z "$PROMPT_COMMAND" ]; then
     PS1='${debian_chroot:+($debian_chroot)}\u@\h:\w${VIRTUAL_ENV:+($(basename $VIRTUAL_ENV))}\$ '
 fi
 
+powerline_root=$(pip show powerline-status | grep '^Location:' | awk '{print $2}')
+if [ -d "$powerline_root" ]; then
+    powerline-daemon -q
+    POWERLINE_BASH_CONTINUATION=1
+    POWERLINE_BASH_SELECT=1
+    . $powerline_root/powerline/bindings/bash/powerline.sh
+fi
+
 # Add an "alert" alias for long running commands.  Use like so:
 #   sleep 10; alert
 alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'
