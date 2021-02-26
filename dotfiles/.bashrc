@@ -65,6 +65,8 @@ if ! shopt -oq posix; then
 	. /usr/share/bash-completion/bash_completion
     elif [ -f /etc/bash_completion ]; then
 	. /etc/bash_completion
+    elif [ -f /usr/local/etc/profile.d/bash_completion.sh ]; then
+	. /usr/local/etc/profile.d/bash_completion.sh
     fi
 fi
 
