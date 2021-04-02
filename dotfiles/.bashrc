@@ -30,24 +30,10 @@ shopt -s checkwinsize
 # Make less more friendly for non-text input files, see lesspipe(1).
 [ -x /usr/bin/lesspipe ] && eval "$(SHELL=/bin/sh lesspipe)"
 
-# Set variable identifying the chroot you work in (used in the prompt below).
-if [ -z "${debian_chroot:-}" ] && [ -r /etc/debian_chroot ]; then
-    debian_chroot=$(cat /etc/debian_chroot)
+powerline_root=$(pip3 show powerline-status | grep '^Location:' | awk '{print $2}')
+if [[ -z "$powerline_root" ]]; then
+    powerline_root=$(pip show powerline-status | grep '^Location:' | awk '{print $2}')
 fi
-
-unset PROMPT_COMMAND
-declare -f __git_ps1 > /dev/null && {
-    GIT_PS1_SHOWDIRTYSTATE="yes"
-    GIT_PS1_SHOWUPSTREAM="auto"
-    GIT_PS1_DESCRIBE_STYLE="branch"
-    PROMPT_COMMAND='__git_ps1 "${debian_chroot:+($debian_chroot)}\u@\h:\w${VIRTUAL_ENV:+($(basename $VIRTUAL_ENV))}" "\\\$ " "[%s]"'
-}
-
-if [ -z "$PROMPT_COMMAND" ]; then
-    PS1='${debian_chroot:+($debian_chroot)}\u@\h:\w${VIRTUAL_ENV:+($(basename $VIRTUAL_ENV))}\$ '
-fi
-
-powerline_root=$(pip show powerline-status | grep '^Location:' | awk '{print $2}')
 if [ -d "$powerline_root" ]; then
     powerline-daemon -q
     POWERLINE_BASH_CONTINUATION=1
