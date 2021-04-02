@@ -188,6 +188,8 @@ apt-get install -y \
     puppet-lint \
     pwgen \
     python \
+    python3 \
+    python3-pip \
     python-all \
     python-all-dev \
     python-dev \
@@ -327,3 +329,11 @@ curl -L https://github.com/ldx/closest-airport/releases/download/v1.0.0/closest-
 
 pip install awscli
 pip install powerline-status powerline_gitstatus
+
+# Install NeoVim.
+mkdir -p $homedir/.local/bin
+curl -L https://github.com/neovim/neovim/releases/latest/download/nvim.appimage > $homedir/.local/bin/nvim
+chmod u+x $homedir/.local/bin/nvim
+ln -s $homedir/.local/bin/nvim $homedir/.local/bin/vim
+python3 -m pip install --user --upgrade pynvim
+python -m pip install --user --upgrade pynvim
