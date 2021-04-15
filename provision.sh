@@ -31,8 +31,6 @@ apt-key adv --keyserver pool.sks-keyservers.net \
 
 rm -rf /etc/apt/sources.list.d/*
 echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" > /etc/apt/sources.list.d/google-chrome.list
-echo "deb http://download.virtualbox.org/virtualbox/debian $codename contrib non-free" > /etc/apt/sources.list.d/virtualbox.list
-echo "deb [arch=i386,amd64] http://linux.dropbox.com/debian $codename main" > /etc/apt/sources.list.d/dropbox.list
 echo "deb http://httpredir.debian.org/debian/ $codename main contrib non-free" > /etc/apt/sources.list.d/nonfree.list
 
 apt-get update -y
@@ -63,9 +61,9 @@ apt-get install -y \
     cmake \
     cpp \
     cpufrequtils \
+    cscope \
     cups \
     curl \
-    cscope \
     daemontools \
     debootstrap \
     desktop-base \
@@ -73,7 +71,6 @@ apt-get install -y \
     direnv \
     dnsutils \
     dput \
-    dropbox \
     ebtables \
     ed \
     encfs \
@@ -87,6 +84,7 @@ apt-get install -y \
     fontconfig-config \
     fonts-crosextra-caladea \
     fonts-crosextra-carlito \
+    fonts-dejavu \
     fonts-dejavu \
     fonts-dejavu-core \
     fonts-dejavu-extra \
@@ -134,7 +132,6 @@ apt-get install -y \
     iproute2 \
     ipset \
     iptables \
-    iptables-dev \
     iw \
     jq \
     laptop-detect \
@@ -142,6 +139,7 @@ apt-get install -y \
     libnotify-bin \
     libnss-resolve \
     libpam-mount \
+    libpango1.0-0 \
     libreoffice \
     libssl-dev \
     lightdm \
@@ -157,9 +155,9 @@ apt-get install -y \
     mawk \
     mplayer \
     ncurses-term \
-    net-tools \
     netcat \
     netcat-openbsd \
+    net-tools \
     network-manager \
     network-manager-gnome \
     nmap \
@@ -180,20 +178,17 @@ apt-get install -y \
     patchutils \
     pavucontrol \
     pkg-config \
-    pkg-mozilla-archive-keyring \
     pm-utils \
     pulseaudio \
     pulseaudio-module-bluetooth \
     pulseaudio-utils \
     puppet-lint \
     pwgen \
-    python \
     python3 \
+    python3-all \
+    python3-all-dev \
+    python3-dev \
     python3-pip \
-    python-all \
-    python-all-dev \
-    python-dev \
-    python-pip \
     qemu-kvm \
     qemu-system-common \
     qemu-system-x86 \
@@ -216,7 +211,6 @@ apt-get install -y \
     speedometer \
     sqlite3 \
     ssh-askpass \
-    sshfs \
     sshpass \
     sshuttle \
     ssl-cert \
@@ -230,16 +224,13 @@ apt-get install -y \
     trayer \
     tree \
     ttf-bitstream-vera \
-    ttf-dejavu \
     tzdata \
-    ubuntu-archive-keyring \
     ubuntu-dev-tools \
     uidmap \
     unzip \
     util-linux \
     valgrind \
     vim-gtk \
-    virtualbox-6.1 \
     virtualenv \
     virtualenvwrapper \
     vlc \
@@ -307,12 +298,12 @@ curl -L https://dl.google.com/go/go1.13.10.linux-amd64.tar.gz | \
     tar -xzf - -C /usr/local/
 
 # Install deb packages.
-deb_urls="https://downloads.slack-edge.com/linux_releases/slack-desktop-4.4.0-amd64.deb https://releases.hashicorp.com/vagrant/2.2.7/vagrant_2.2.7_x86_64.deb"
+deb_urls="https://downloads.slack-edge.com/linux_releases/slack-desktop-4.14.0-amd64.deb https://releases.hashicorp.com/vagrant/2.2.7/vagrant_2.2.7_x86_64.deb https://www.dropbox.com/download?dl=packages/ubuntu/dropbox_2020.03.04_amd64.deb"
 rm -rf /tmp/debs; mkdir -p /tmp/debs; pushd /tmp/debs
 for deb in $deb_urls; do
     curl -LO $deb
 done
-popd; dpkg -i /tmp/debs/*; rm -rf /tmp/debs
+popd; dpkg -i /tmp/debs/* || true; apt-get install -f -y; rm -rf /tmp/debs
 
 # Other tools.
 curl -L https://storage.googleapis.com/kubernetes-release/release/`curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt`/bin/linux/amd64/kubectl > /usr/local/bin/kubectl \
@@ -334,6 +325,5 @@ pip install powerline-status powerline_gitstatus
 mkdir -p $homedir/.local/bin
 curl -L https://github.com/neovim/neovim/releases/latest/download/nvim.appimage > $homedir/.local/bin/nvim
 chmod u+x $homedir/.local/bin/nvim
-ln -s $homedir/.local/bin/nvim $homedir/.local/bin/vim
+ln -snf $homedir/.local/bin/nvim $homedir/.local/bin/vim
 python3 -m pip install --user --upgrade pynvim
-python -m pip install --user --upgrade pynvim
