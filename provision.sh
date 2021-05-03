@@ -205,6 +205,7 @@ apt-get install -y \
     sed \
     shellcheck \
     silversearcher-ag \
+    snapd \
     socat \
     software-properties-common \
     sox \
