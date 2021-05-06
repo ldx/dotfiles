@@ -96,7 +96,7 @@ Xft.hintstyle: hintslight
 *xterm*scrollBar: false
 *xterm*scrollstyle: rxvt
 *xterm*faceName: Liberation Mono for Powerline
-*xterm*faceSize: 18
+*xterm*faceSize: 15
 *xterm*cursorColor: white
 *xterm*utf8: 2
 *xterm*termName: xterm-256color
