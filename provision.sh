@@ -69,6 +69,7 @@ apt-get install -y \
     desktop-base \
     devscripts \
     direnv \
+    docker.io \
     dnsutils \
     dput \
     ebtables \
