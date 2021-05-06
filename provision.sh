@@ -180,6 +180,7 @@ apt-get install -y \
     pavucontrol \
     pkg-config \
     pm-utils \
+    postgresql-client \
     pulseaudio \
     pulseaudio-module-bluetooth \
     pulseaudio-utils \
