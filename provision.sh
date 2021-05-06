@@ -325,8 +325,5 @@ pip install awscli
 pip install powerline-status powerline_gitstatus
 
 # Install NeoVim.
-mkdir -p $homedir/.local/bin
-curl -L https://github.com/neovim/neovim/releases/latest/download/nvim.appimage > $homedir/.local/bin/nvim
-chmod u+x $homedir/.local/bin/nvim
-ln -snf $homedir/.local/bin/nvim $homedir/.local/bin/vim
-python3 -m pip install --user --upgrade pynvim
+snap install nvim
+pip install pynvim
