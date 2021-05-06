@@ -327,3 +327,10 @@ pip install powerline-status powerline_gitstatus
 # Install NeoVim.
 snap install nvim
 pip install pynvim
+
+# Install tfenv.
+mkdir -p "$homedir/.local/bin"
+git clone https://github.com/tfutils/tfenv.git "$homedir/.tfenv"
+chown -R "$provisioning_user:" "$homedir/.tfenv"
+ln -s "$homedir/.tfenv/bin/*" "$homedir/.local/bin"
+chown -R "$provisioning_user:" "$homedir/.local/bin"
