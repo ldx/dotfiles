@@ -88,8 +88,6 @@ type "trayer" > /dev/null 2>&1 && trayer --widthtype request --align right \
 
 type "skype" > /dev/null 2>&1 && (sleep 3 && PULSE_LATENCY_MSEC=30 skype &)
 
-type "dropbox" > /dev/null 2>&1 && (dropbox stop; dropbox start &)
-
 type "nm-applet" > /dev/null 2>&1 && nm-applet &
 
 type "pasystray" > /dev/null 2>&1 && pidof pasystray || pasystray &
@@ -107,6 +105,10 @@ type "devmon" > /dev/null 2>&1 && {
 
 type "parcellite" > /dev/null 2>&1 && parcellite &
 
+type "google-chrome" > /dev/null 2>&1 && google-chrome &
+
+type "slack" > /dev/null 2>&1 && slack &
+
 if [ -x "/usr/lib/notification-daemon/notification-daemon" ]; then
     pid=$(pidof /usr/lib/notification-daemon/notification-daemon)
     if [ -n "$pid" ]; then
@@ -114,20 +116,6 @@ if [ -x "/usr/lib/notification-daemon/notification-daemon" ]; then
     fi
      /usr/lib/notification-daemon/notification-daemon &
 fi
-
-FIREFOX_CANDIDATES="firefox-esr firefox iceweasel"
-for ff in $FIREFOX_CANDIDATES; do
-    type "$ff" > /dev/null 2>&1 && {
-        ffpid="$(pidof $ff)"
-        if [ -z "$ffpid" ]; then
-            echo "Starting $ff"
-            (sleep 3 && LANG=C LC_ALL=C $ff > /dev/null 2>&1) &
-        else
-            echo "$ff running as pid $ffpid"
-        fi
-        break
-    }
-done
 
 weather_station=KSFO
 type "closest-airport" > /dev/null 2>&1 && type jq && weather_station=$(closest-airport | jq -r '.ClosestAirport.ident')
