@@ -22,6 +22,8 @@ if type "synclient" > /dev/null 2>&1; then
     synclient LockedDrags=1
     synclient LockedDragTimeout=500
     synclient PalmDetect=1
+    synclient HorizHysteresis=25
+    synclient VertHysteresis=25
 fi
 
 if [ -f "$HOME/.Xdefaults" ]; then
