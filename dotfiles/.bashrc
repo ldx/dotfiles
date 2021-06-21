@@ -61,6 +61,10 @@ type aws_completer > /dev/null 2>&1 && complete -C aws_completer aws
 # added by travis gem
 [ -f /home/vilmos/.travis/travis.sh ] && source /home/vilmos/.travis/travis.sh
 
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
 which _awsp > /dev/null 2>&1 && alias awsp="source _awsp"
 [ -f $HOME/.awsp ] && export AWS_PROFILE=$(cat $HOME/.awsp)
 
@@ -146,7 +150,3 @@ for kc in $HOME/.kube/configs/*; do
 done
 
 eval "$(direnv hook bash)"
-
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
