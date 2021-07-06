@@ -119,6 +119,21 @@ if [ -x "/usr/lib/notification-daemon/notification-daemon" ]; then
      /usr/lib/notification-daemon/notification-daemon &
 fi
 
+type "v4l2-ctl" > /dev/null 2>&1 && {
+    v4l2-ctl \
+    --set-ctrl=brightness=180 \
+    --set-ctrl=contrast=50 \
+    --set-ctrl=saturation=40 \
+    --set-ctrl=hue=0 \
+    --set-ctrl=white_balance_temperature_auto=1 \
+    --set-ctrl=gamma=120 \
+    --set-ctrl=power_line_frequency=1 \
+    --set-ctrl=sharpness=1 \
+    --set-ctrl=backlight_compensation=1 \
+    --set-ctrl=exposure_auto=3 \
+    --set-ctrl=exposure_auto_priority=1
+}
+
 weather_station=KSFO
 #type "closest-airport" > /dev/null 2>&1 && type jq && weather_station=$(closest-airport | jq -r '.ClosestAirport.ident')
 sed -i "s/Run Weather \".*\"/Run Weather \"$weather_station\"/" $HOME/.xmobarrc
