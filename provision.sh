@@ -325,8 +325,12 @@ pip install powerline-status powerline_gitstatus
 snap install nvim
 pip install pynvim
 
-# Install tfenv.
+# Install Slack.
+snap install slack
+
 mkdir -p "$homedir/.local/bin"
+
+# Install tfenv.
 git clone https://github.com/tfutils/tfenv.git "$homedir/.tfenv"
 chown -R "$provisioning_user:" "$homedir/.tfenv"
 ln -s "$homedir/.tfenv/bin/*" "$homedir/.local/bin"
