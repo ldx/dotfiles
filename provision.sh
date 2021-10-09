@@ -334,7 +334,11 @@ mkdir -p "$homedir/.local/bin"
 git clone https://github.com/tfutils/tfenv.git "$homedir/.tfenv"
 chown -R "$provisioning_user:" "$homedir/.tfenv"
 ln -s "$homedir/.tfenv/bin/*" "$homedir/.local/bin"
-chown -R "$provisioning_user:" "$homedir/.local/bin"
 
-# Install Slack.
-snap install slack
+# Install bazelisk.
+homedir=$HOME
+provisioning_user=vilmos
+curl -L https://github.com/bazelbuild/bazelisk/releases/download/v1.10.1/bazelisk-linux-amd64 > $homedir/.local/bin/bazel
+ln -snf "$homedir/.local/bin/bazelisk" "$homedir/.local/bin/bazel"
+chmod 0755 "$homedir/.local/bin/"*
+chown -R "$provisioning_user:" "$homedir/.local/bin"
