@@ -297,7 +297,7 @@ ln -snf /usr/local/firefox/firefox /usr/local/bin/firefox
 
 # Go 1.13.
 rm -rf /usr/local/go
-curl -L https://dl.google.com/go/go1.13.10.linux-amd64.tar.gz | \
+curl -L https://dl.google.com/go/go1.17.1.linux-amd64.tar.gz | \
     tar -xzf - -C /usr/local/
 
 # Install deb packages.
