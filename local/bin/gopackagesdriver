@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+echo "${@}" >> /tmp/gopkgsdriver.log
+exec bazel run -- @io_bazel_rules_go//go/tools/gopackagesdriver "${@}"
