@@ -24,16 +24,6 @@ mkdir -p /usr/local
 
 # Required packages.
 apt-get update -y
-apt-get install -y apt-transport-https gpg
-
-apt-key adv --keyserver pool.sks-keyservers.net \
-    --recv-keys 78BD65473CB3BD13 1C61A2656FB57B7E4DE0F4C1FC918B335044912E A2F683C52980AECF
-
-rm -rf /etc/apt/sources.list.d/*
-echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" > /etc/apt/sources.list.d/google-chrome.list
-echo "deb http://httpredir.debian.org/debian/ $codename main contrib non-free" > /etc/apt/sources.list.d/nonfree.list
-
-apt-get update -y
 apt-get install -y \
     acpi \
     acpica-tools \
@@ -80,6 +70,7 @@ apt-get install -y \
     fakeroot \
     file \
     firmware-iwlwifi \
+    flatpak \
     flex \
     fontconfig \
     fontconfig-config \
@@ -268,14 +259,13 @@ sed -r -i 's/^GRUB_CMDLINE_LINUX=.*$/GRUB_CMDLINE_LINUX="cgroup_enable=memory sw
 update-grub
 
 echo 'KERNEL=="intel_backlight", SUBSYSTEM=="backlight", RUN+="/bin/chmod 0666 /sys/class/backlight/%k/brightness"' > /etc/udev/rules.d/97-intel_backlight.rules
-echo 'Acquire::AllowInsecureRepositories "yes";' > /etc/apt/apt.conf.d/30allowinsecurerepos
-
-rsync -av $curdir/dotfiles/ $homedir/
-chown -R $provisioning_user: $homedir
 
 rm -rf $homedir/.vim
+rm -rf $homedir/.config/nvim; mkdir -p $homedir/.config/nvim
 curl 'https://vim-bootstrap.com/generate.vim' --data 'editor=vim&langs=c&langs=erlang&langs=html&langs=go&langs=haskell&langs=html&langs=javascript&langs=python&langs=ruby&langs=rust' > $homedir/.vimrc
-chown $provisioning_user: $homedir/.vimrc
+curl 'https://vim-bootstrap.com/generate.vim' --data 'editor=vim&langs=c&langs=erlang&langs=html&langs=go&langs=haskell&langs=html&langs=javascript&langs=python&langs=ruby&langs=rust' > $homedir/.config/nvim/init.vim
+chown -R $provisioning_user: $homedir/.vimrc
+chown -R $provisioning_user: $homedir/.config
 
 mkdir -p $homedir/.local
 rsync -av $curdir/local/ $homedir/
@@ -288,57 +278,62 @@ for ti in $homedir/.terminfo/*.terminfo; do
 done
 chown -R $provisioning_user: $homedir/.terminfo
 
-# Install latest Firefox.
-apt-get remove -y firefox-esr || true
-rm -rf /usr/local/firefox
-curl -L "https://download.mozilla.org/?product=firefox-latest&os=linux64&lang=en-US" | \
-    tar -xjf - -C /usr/local/
-ln -snf /usr/local/firefox/firefox /usr/local/bin/firefox
+rsync -av $curdir/dotfiles/ $homedir/
+chown -R $provisioning_user: $homedir
 
-# Go 1.13.
+# Remove Firefox ESR.
+apt-get remove -y firefox-esr || true
+
+# Go.
 rm -rf /usr/local/go
-curl -L https://dl.google.com/go/go1.17.1.linux-amd64.tar.gz | \
+curl -L https://dl.google.com/go/go1.17.2.linux-amd64.tar.gz | \
     tar -xzf - -C /usr/local/
 
-# Install deb packages.
-deb_urls="https://downloads.slack-edge.com/linux_releases/slack-desktop-4.14.0-amd64.deb https://releases.hashicorp.com/vagrant/2.2.7/vagrant_2.2.7_x86_64.deb https://www.dropbox.com/download?dl=packages/ubuntu/dropbox_2020.03.04_amd64.deb"
-rm -rf /tmp/debs; mkdir -p /tmp/debs; pushd /tmp/debs
-for deb in $deb_urls; do
-    curl -LO $deb
-done
-popd; dpkg -i /tmp/debs/* || true; apt-get install -f -y; rm -rf /tmp/debs
-
-# Other tools.
+# Kubectl.
 curl -L https://storage.googleapis.com/kubernetes-release/release/`curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt`/bin/linux/amd64/kubectl > /usr/local/bin/kubectl \
     && chmod +x /usr/local/bin/kubectl
 kubectl completion bash > /etc/bash_completion.d/kubectl
 
+# Minikube.
 curl -L https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64 > /usr/local/bin/minikube \
     && chmod +x /usr/local/bin/minikube
 
+# Closest-airport.
 curl -L https://github.com/ldx/closest-airport/releases/download/v1.0.0/closest-airport.tar.gz | tar xzf - -C /usr/local/bin
 
-pip install awscli
-pip install powerline-status powerline_gitstatus
+# Awscli.
+pip3 install awscli
 
-# Install NeoVim.
-snap install nvim
-pip install pynvim
+# Powerline.
+pip3 install powerline-status powerline_gitstatus
 
-# Install Slack.
-snap install slack
+# NeoVim.
+snap install --classic nvim
+pip3 install pynvim
 
+# Directory for user-installed binaries.
+rm -rf "$homedir/.local/bin"
 mkdir -p "$homedir/.local/bin"
 
-# Install tfenv.
+# TFenv.
+rm -rf "$homedir/.tfenv"
 git clone https://github.com/tfutils/tfenv.git "$homedir/.tfenv"
 chown -R "$provisioning_user:" "$homedir/.tfenv"
-ln -s "$homedir/.tfenv/bin/*" "$homedir/.local/bin"
+for x in "$homedir/.tfenv/bin/"*; do
+   ln -s "$x" "$homedir/.local/bin/"
+done
 
-# Install bazelisk.
-homedir=$HOME
-provisioning_user=vilmos
-curl -L https://github.com/bazelbuild/bazelisk/releases/download/v1.10.1/bazelisk-linux-amd64 > $homedir/.local/bin/bazel
-ln -snf "$homedir/.local/bin/bazelisk" "$homedir/.local/bin/bazel"
+# Bazelisk.
+curl -L "https://github.com/bazelbuild/bazelisk/releases/download/v1.10.1/bazelisk-linux-amd64" > "$homedir/.local/bin/bazel"
+
+# Dropbox.
+flatpak install -y com.dropbox.Client/x86_64/stable
+
+# Slack.
+flatpak install -y com.slack.Slack/x86_64/stable
+
+# Firefox.
+flatpak install -y app/org.mozilla.firefox/x86_64/stable
+
 chmod 0755 "$homedir/.local/bin/"*
 chown -R "$provisioning_user:" "$homedir/.local/bin"
