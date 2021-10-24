@@ -289,6 +289,9 @@ rm -rf /usr/local/go
 curl -L https://dl.google.com/go/go1.17.2.linux-amd64.tar.gz | \
     tar -xzf - -C /usr/local/
 
+# Node & nvm.
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.0/install.sh | sudo -u "$provisioning_user" bash
+
 # Kubectl.
 curl -L https://storage.googleapis.com/kubernetes-release/release/`curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt`/bin/linux/amd64/kubectl > /usr/local/bin/kubectl \
     && chmod +x /usr/local/bin/kubectl
