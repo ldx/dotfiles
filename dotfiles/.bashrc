@@ -149,4 +149,6 @@ for kc in $HOME/.kube/configs/*; do
     export KUBECONFIG=$KUBECONFIG:$kc
 done
 
+which nvim > /dev/null 2>&1 && alias vim=nvim
+
 eval "$(direnv hook bash)"
