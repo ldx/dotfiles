@@ -338,5 +338,12 @@ flatpak install -y com.slack.Slack/x86_64/stable
 # Firefox.
 flatpak install -y app/org.mozilla.firefox/x86_64/stable
 
+# Gopackagesdriver.
+cat > "$homedir/.local/bin/gopkgdriver" <<EOF
+#!/usr/bin/env bash
+echo "\${@}" >> /tmp/gopkgsdriver.log
+exec bazel run -- @io_bazel_rules_go//go/tools/gopackagesdriver "\${@}"
+EOF
+
 chmod 0755 "$homedir/.local/bin/"*
 chown -R "$provisioning_user:" "$homedir/.local/bin"

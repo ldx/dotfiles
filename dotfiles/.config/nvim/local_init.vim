@@ -11,14 +11,21 @@ autocmd FileType javascript setlocal shiftwidth=2 softtabstop=2 expandtab
 python3 << EOF
 import vim
 import json
+import subprocess
+
+gopackagesdriver = ""
+
+bazel_info = subprocess.run(["bazel", "info"])
+if bazel_info.returncode == 0:
+    gopackagesdriver = "gopkgdriver"
 
 gopls_cfg = json.loads("""{
 	"build.env": {
-        "GOPACKAGESDRIVER": "gopackagesdriver",
+        "GOPACKAGESDRIVER": "%s",
         "GOPACKAGESDRIVER_BAZEL_QUERY": "kind(go_binary, //...)",
         "GOPACKAGESDRIVER_BAZEL_TARGETS": "//..."
     }
-}""")
+}""" % gopackagesdriver)
 EOF
 
 let g:go_gopls_settings = py3eval("gopls_cfg")
