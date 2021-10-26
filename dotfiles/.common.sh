@@ -100,6 +100,7 @@ unshift_path "$BUNDLE_PATH"
 unshift_path "$HOME/Projects/rumprun/rumprun"
 unshift_path "$HOME/.cabal"
 unshift_path "$HOME/.local/depot_tools"
+unshift_path "$HOME/.krew"
 if [ -d $HOME/.local/go ]; then
     export GOROOT=$HOME/.local/go
     unshift_path "$GOROOT"
