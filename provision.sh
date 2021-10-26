@@ -243,6 +243,8 @@ apt-get install -y \
     xtightvncviewer \
     zip
 
+flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
+
 umask 0022
 
 # TODO: noatime in fstab
@@ -330,13 +332,16 @@ done
 curl -L "https://github.com/bazelbuild/bazelisk/releases/download/v1.10.1/bazelisk-linux-amd64" > "$homedir/.local/bin/bazel"
 
 # Dropbox.
-flatpak install -y com.dropbox.Client/x86_64/stable
+flatpak install -y com.dropbox.Client
 
 # Slack.
-flatpak install -y com.slack.Slack/x86_64/stable
+flatpak install -y com.slack.Slack
 
 # Firefox.
-flatpak install -y app/org.mozilla.firefox/x86_64/stable
+flatpak install -y org.mozilla.firefox
+
+# Zoom.
+flatpak install -y us.zoom.Zoom
 
 # Gopackagesdriver.
 cat > "$homedir/.local/bin/gopkgdriver" <<EOF
