@@ -49,6 +49,8 @@ elif [ -e $LOCAL_PREFIX/bin/virtualenvwrapper.sh ]; then
     source $LOCAL_PREFIX/bin/virtualenvwrapper.sh
 elif [ -e /etc/bash_completion.d/virtualenvwrapper ]; then
     source /etc/bash_completion.d/virtualenvwrapper
+elif [ -e /usr/share/bash-completion/completions/virtualenvwrapper ]; then
+    source /usr/share/bash-completion/completions/virtualenvwrapper
 fi
 
 export GEM_HOME=$HOME/.gem
