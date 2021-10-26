@@ -68,23 +68,21 @@ export NVM_DIR="$HOME/.nvm"
 which _awsp > /dev/null 2>&1 && alias awsp="source _awsp"
 [ -f $HOME/.awsp ] && export AWS_PROFILE=$(cat $HOME/.awsp)
 
-command -v kubecolor >/dev/null 2>&1 && alias kubectl="kubecolor"
-
 alias k="kubectl"
-alias ke="kubectl exec -ti"
-alias ks="kubectl -n kube-system"
-alias kse="kubectl -n kube-system exec -ti"
-alias kk="kubectl -n kip"
-alias kke="kubectl -n kip exec -ti"
-alias kc="http_proxy=localhost:8888 kubectl"
+alias ke="k exec -ti"
+alias ks="k -n kube-system"
+alias kse="k -n kube-system exec -ti"
+alias kc="http_proxy=localhost:8888 k"
 
-complete -o default -F __start_kubectl k
-complete -o default -F __start_kubectl ke
-complete -o default -F __start_kubectl ks
-complete -o default -F __start_kubectl kse
-complete -o default -F __start_kubectl kk
-complete -o default -F __start_kubectl kke
-complete -o default -F __start_kubectl kc
+source .complete_alias
+
+complete -F _complete_alias k
+complete -F _complete_alias ke
+complete -F _complete_alias ks
+complete -F _complete_alias kse
+complete -F _complete_alias kc
+
+command -v kubecolor >/dev/null 2>&1 && complete -F __start_kubectl kubecolor
 
 for kc in $HOME/.kube/configs/*; do
     export KUBECONFIG=$KUBECONFIG:$kc
