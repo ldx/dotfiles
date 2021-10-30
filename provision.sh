@@ -6,19 +6,12 @@ if [[ $EUID -ne 0 ]]; then
     echo "This script must be run as root" 
     exit 1
 fi
-codename="$(lsb_release -c | awk '{print $2}')"
-if [[ -z "$codename" ]]; then
-    echo "Failed to detect distro codename"
-    exit 1
-fi
+
 provisioning_user="$SUDO_USER"
 if [[ -z "$provisioning_user" ]]; then
     echo "Failed to detect user"
     exit 1
 fi
-
-homedir="/home/$provisioning_user"
-curdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 mkdir -p /usr/local
 
@@ -243,7 +236,24 @@ apt-get install -y \
     xtightvncviewer \
     zip
 
+# Remove Firefox ESR.
+apt-get remove -y firefox-esr || true
+
+# Flatpak hub.
 flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
+
+# Snap packages.
+for p in firefox zoom-client; do
+    snap install $p
+done
+for p in nvim go aws-cli kubectl slack; do
+    snap install --classic $p
+done
+pip3 install pynvim
+kubectl completion bash > /etc/bash_completion.d/kubectl
+
+# Dropbox.
+flatpak install -y com.dropbox.Client
 
 umask 0022
 
@@ -251,8 +261,6 @@ umask 0022
 
 locale-gen en_US.UTF-8
 locale-gen hu_HU.UTF-8
-
-chsh -s /bin/bash $provisioning_user
 
 sed -r -i 's/\s?#?(\s*)SendEnv (.*)$/#   SendEnv \2/g' /etc/ssh/ssh_config
 sed -r -i 's/\s?#?(\s*)ForwardAgent\s+.*$/    ForwardAgent yes/g' /etc/ssh/ssh_config
@@ -262,93 +270,4 @@ update-grub
 
 echo 'KERNEL=="intel_backlight", SUBSYSTEM=="backlight", RUN+="/bin/chmod 0666 /sys/class/backlight/%k/brightness"' > /etc/udev/rules.d/97-intel_backlight.rules
 
-rm -rf $homedir/.vim
-rm -rf $homedir/.config/nvim; mkdir -p $homedir/.config/nvim
-curl 'https://vim-bootstrap.com/generate.vim' --data 'editor=vim&langs=c&langs=erlang&langs=html&langs=go&langs=haskell&langs=html&langs=javascript&langs=python&langs=ruby&langs=rust' > $homedir/.vimrc
-curl 'https://vim-bootstrap.com/generate.vim' --data 'editor=vim&langs=c&langs=erlang&langs=html&langs=go&langs=haskell&langs=html&langs=javascript&langs=python&langs=ruby&langs=rust' > $homedir/.config/nvim/init.vim
-chown -R $provisioning_user: $homedir/.vimrc
-chown -R $provisioning_user: $homedir/.config
-
-mkdir -p $homedir/.local
-rsync -av $curdir/local/ $homedir/
-chown -R $provisioning_user: $homedir/.local
-
-mkdir -p $homedir/.terminfo
-cp $curdir/terminfo/*.terminfo $homedir/.terminfo/
-for ti in $homedir/.terminfo/*.terminfo; do
-    tic $ti
-done
-chown -R $provisioning_user: $homedir/.terminfo
-
-rsync -av $curdir/dotfiles/ $homedir/
-chown -R $provisioning_user: $homedir
-
-# Remove Firefox ESR.
-apt-get remove -y firefox-esr || true
-
-# Go.
-rm -rf /usr/local/go
-curl -L https://dl.google.com/go/go1.17.2.linux-amd64.tar.gz | \
-    tar -xzf - -C /usr/local/
-
-# Node & nvm.
-curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.0/install.sh | sudo -u "$provisioning_user" bash
-
-# Kubectl.
-curl -L https://storage.googleapis.com/kubernetes-release/release/`curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt`/bin/linux/amd64/kubectl > /usr/local/bin/kubectl \
-    && chmod +x /usr/local/bin/kubectl
-kubectl completion bash > /etc/bash_completion.d/kubectl
-
-# Minikube.
-curl -L https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64 > /usr/local/bin/minikube \
-    && chmod +x /usr/local/bin/minikube
-
-# Closest-airport.
-curl -L https://github.com/ldx/closest-airport/releases/download/v1.0.0/closest-airport.tar.gz | tar xzf - -C /usr/local/bin
-
-# Awscli.
-pip3 install awscli
-
-# Powerline.
-pip3 install powerline-status powerline_gitstatus
-
-# NeoVim.
-snap install --classic nvim
-pip3 install pynvim
-
-# Directory for user-installed binaries.
-rm -rf "$homedir/.local/bin"
-mkdir -p "$homedir/.local/bin"
-
-# TFenv.
-rm -rf "$homedir/.tfenv"
-git clone https://github.com/tfutils/tfenv.git "$homedir/.tfenv"
-chown -R "$provisioning_user:" "$homedir/.tfenv"
-for x in "$homedir/.tfenv/bin/"*; do
-   ln -s "$x" "$homedir/.local/bin/"
-done
-
-# Bazelisk.
-curl -L "https://github.com/bazelbuild/bazelisk/releases/download/v1.10.1/bazelisk-linux-amd64" > "$homedir/.local/bin/bazel"
-
-# Dropbox.
-flatpak install -y com.dropbox.Client
-
-# Slack.
-flatpak install -y com.slack.Slack
-
-# Firefox.
-flatpak install -y org.mozilla.firefox
-
-# Zoom.
-flatpak install -y us.zoom.Zoom
-
-# Gopackagesdriver.
-cat > "$homedir/.local/bin/gopkgdriver" <<EOF
-#!/usr/bin/env bash
-echo "\${@}" >> /tmp/gopkgsdriver.log
-exec bazel run -- @io_bazel_rules_go//go/tools/gopackagesdriver "\${@}"
-EOF
-
-chmod 0755 "$homedir/.local/bin/"*
-chown -R "$provisioning_user:" "$homedir/.local/bin"
+chsh -s /bin/bash $provisioning_user
