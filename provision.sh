@@ -63,6 +63,7 @@ apt-get install -y \
     fakeroot \
     file \
     firmware-iwlwifi \
+    firmware-sof-signed \
     flatpak \
     flex \
     fontconfig \
