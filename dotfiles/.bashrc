@@ -57,6 +57,8 @@ if ! shopt -oq posix; then
 fi
 
 type aws_completer > /dev/null 2>&1 && complete -C aws_completer aws
+type /snap/aws-cli/current/usr/bin/python3 > /dev/null 2>&1 && complete -C \
+    'SNAP=/snap/aws-cli/current /snap/aws-cli/current/usr/bin/python3 /snap/aws-cli/current/bin/aws_completer' aws
 
 # added by travis gem
 [ -f /home/vilmos/.travis/travis.sh ] && source /home/vilmos/.travis/travis.sh
