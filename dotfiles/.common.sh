@@ -26,6 +26,9 @@ export GPU_USE_SYNC_OBJECTS=1
 
 export QUILT_PATCHES=debian/patches
 
+# Workaround for https://wiki.archlinux.org/title/Java#Gray_window,_applications_not_resizing_with_WM,_menus_immediately_closing.
+export _JAVA_AWT_WM_NONREPARENTING=1
+
 case `uname -s` in
     [Dd][Aa][Rr][Ww][Ii][Nn])
         export JAVA_HOME=/System/Library/Frameworks/JavaVM.framework/Home
