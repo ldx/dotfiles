@@ -1,0 +1,38 @@
+#!/usr/bin/env bash
+
+#echo "ENV: $(env)" >> /tmp/gopkgsdriver.log
+
+if [[ "$BUILD_WORKSPACE_DIRECTORY" != "" ]]; then cd $BUILD_WORKSPACE_DIRECTORY; fi
+
+echo "CWD: $(pwd)" >> /tmp/gopkgsdriver.log
+echo "${@}" >> /tmp/gopkgsdriver.log
+
+exec bazel run -- @io_bazel_rules_go//go/tools/gopackagesdriver "${@}"
+
+#ts=$(date +%s)
+#
+#(
+#rm -f /tmp/in-$ts.fifo; mkfifo /tmp/in-$ts.fifo
+#exec 3>/tmp/in-$ts.fifo   # open fifo for writing
+#trap "exit" 1 2 3 15
+#exec cat - | tee /tmp/gopackagesdriver-in-$ts.log > /tmp/in-$ts.fifo
+#) &
+#inpid=$!
+#
+#(
+#rm -f /tmp/out-$ts.fifo; mkfifo /tmp/out-$ts.fifo
+#exec 4</tmp/out-$ts.fifo   # open fifo for reading
+#trap "exit" 1 2 3 15
+#exec cat /tmp/out-$ts.fifo | tee /tmp/gopackagesdriver-out-$ts.log
+#) &
+#outpid=$!
+#
+#sleep 1
+#
+#(
+#exec 3</tmp/in-$ts.fifo  # open fifo for reading
+#exec 4>/tmp/out-$ts.fifo  # open fifo for writing
+#trap "exit" 1 2 3 15
+#exec bazel run -- @io_bazel_rules_go//go/tools/gopackagesdriver "${@}" > /tmp/out-$ts.fifo 2>/dev/null < /tmp/in-$ts.fifo
+#)
+##kill -TERM $bpid
