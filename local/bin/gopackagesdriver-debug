@@ -1,5 +1,9 @@
 #!/usr/bin/env bash
 
+if [[ "$GOPACKAGESDRIVER_BAZEL_BUILD_FLAGS" = "" ]]; then
+    export GOPACKAGESDRIVER_BAZEL_BUILD_FLAGS=--strategy=GoStdlibList=local
+fi
+
 #echo "ENV: $(env)" >> /tmp/gopkgsdriver.log
 
 if [[ "$BUILD_WORKSPACE_DIRECTORY" != "" ]]; then cd $BUILD_WORKSPACE_DIRECTORY; fi
