@@ -49,10 +49,4 @@ for x in "$HOME/.tfenv/bin/"*; do
    ln -snf "$x" "$BINDIR/"
 done
 
-# Gopackagesdriver.
-cat > "$BINDIR/gopkgdriver" <<EOF
-#!/usr/bin/env bash
-exec bazel run -- @io_bazel_rules_go//go/tools/gopackagesdriver "\${@}"
-EOF
-
 chmod 0755 "$BINDIR/"*
