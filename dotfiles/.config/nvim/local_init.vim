@@ -4,15 +4,17 @@ autocmd FileType javascript setlocal shiftwidth=2 softtabstop=2 expandtab
 python3 << EOF
 import os
 import shutil
-import subprocess
 
 CMD = "gopackagesdriver-bazel"
 
-if 'GOPACKAGESDRIVER' not in os.environ:
-    bazel_info = subprocess.run(["bazel", "info"], capture_output=False)
-    gopkgdrv_path = shutil.which(CMD)
-    if bazel_info.returncode == 0 and gopkgdrv_path:
-        os.environ['GOPACKAGESDRIVER'] = gopkgdrv_path
+gopkgdrv_path = shutil.which(CMD)
+if 'GOPACKAGESDRIVER' not in os.environ and gopkgdrv_path:
+    while os.getcwd() != '/':
+        if os.path.exists('WORKSPACE'):
+            print('Setting GOPACKAGESDRIVER to', gopkgdrv_path)
+            os.environ['GOPACKAGESDRIVER'] = gopkgdrv_path
+            break
+        os.chdir('..')
 EOF
 
 lua << EOF
