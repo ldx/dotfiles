@@ -1,22 +1,6 @@
 autocmd FileType python setlocal shiftwidth=4 softtabstop=4 expandtab
 autocmd FileType javascript setlocal shiftwidth=2 softtabstop=2 expandtab
 
-python3 << EOF
-import os
-import shutil
-
-CMD = "gopackagesdriver-bazel"
-
-gopkgdrv_path = shutil.which(CMD)
-if 'GOPACKAGESDRIVER' not in os.environ and gopkgdrv_path:
-    while os.getcwd() != '/':
-        if os.path.exists('WORKSPACE'):
-            print('Setting GOPACKAGESDRIVER to', gopkgdrv_path)
-            os.environ['GOPACKAGESDRIVER'] = gopkgdrv_path
-            break
-        os.chdir('..')
-EOF
-
 lua << EOF
 -- Mappings.
 -- See `:help vim.diagnostic.*` for documentation on any of the below functions

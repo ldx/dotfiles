@@ -1,0 +1,18 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+vim="vim"
+which nvim > /dev/null 2>&1 && vim="nvim" || tru
+
+gopkgdrv="gopackagesdriver-bazel-debug"
+gopkgdrv_path=$(which "$gopkgdrv")
+
+if [[ "${GOPACKAGESDRIVER-x_unset}" = "x_unset" ]] && [[ -n "${gopkgdrv_path}" ]]; then
+    echo "Using GOPACKAGESDRIVER from \"$gopkgdrv_path\""
+    export GOPACKAGESDRIVER="$gopkgdrv_path"
+else
+    echo "Using GOPACKAGESDRIVER from \"$GOPACKAGESDRIVER\""
+fi
+
+"$vim" "$@"
