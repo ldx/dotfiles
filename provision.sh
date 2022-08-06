@@ -26,6 +26,7 @@ apt-get install -y \
     autoconf \
     autocutsel \
     automake \
+    autorandr \
     autossh \
     autotools-dev \
     bash-completion \
