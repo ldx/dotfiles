@@ -73,7 +73,7 @@ type "devmon" > /dev/null 2>&1 && {
 
 type "parcellite" > /dev/null 2>&1 && parcellite &
 
-type "google-chrome" > /dev/null 2>&1 && google-chrome &
+type "firefox" > /dev/null 2>&1 && firefox &
 
 type "slack" > /dev/null 2>&1 && slack &
 
