@@ -30,35 +30,6 @@ if [ -f "$HOME/.Xdefaults" ]; then
     xrdb $HOME/.Xdefaults
 fi
 
-CONNECTED_DISPLAYS=$(xrandr|grep '\bconnected\b'|awk '{print $1}'|grep -v -E '\beDP[0-9]*\b')
-DISCONNECTED_DISPLAYS=$(xrandr|grep '\bdisconnected\b'|awk '{print $1}'|grep -v -E '\beDP[0-9]*\b')
-INTERNAL_DISPLAY=$(xrandr|grep -E '\beDP[0-9]*\b'|awk '{print $1}')
-N_DISPLAYS=$(echo $CONNECTED_DISPLAYS|wc -w)
-echo "CONNECTED_DISPLAYS $CONNECTED_DISPLAYS"
-echo "DISCONNECTED_DISPLAYS $DISCONNECTED_DISPLAYS"
-echo "INTERNAL_DISPLAY $INTERNAL_DISPLAY"
-echo "N_DISPLAYS $N_DISPLAYS"
-
-if [ $N_DISPLAYS -gt 0 ]; then
-    echo "Disabling internal display $INTERNAL_DISPLAY"
-    xrandr --output $INTERNAL_DISPLAY --off
-    for d in $CONNECTED_DISPLAYS; do
-        echo "Enabling display $d xrandr --output $d --auto"
-        xrandr --output $d --auto
-    done
-    for d in $DISCONNECTED_DISPLAYS; do
-        echo "Disabling display $d xrandr --output $d --off"
-        xrandr --output $d --off
-    done
-else
-    echo "Enabling internal display $INTERNAL_DISPLAY"
-    xrandr --output $INTERNAL_DISPLAY --auto
-    for d in $DISCONNECTED_DISPLAYS; do
-        echo "Disabling display $d xrandr --output $d --off"
-        xrandr --output $d --off
-    done
-fi
-
 for p in $(pidof gnome-screensaver conky trayer skype nm-applet chrome \
            autocutsel parcellite); do
     kill $p
@@ -138,6 +109,12 @@ weather_station=KSFO
 #type "closest-airport" > /dev/null 2>&1 && type jq && weather_station=$(closest-airport | jq -r '.ClosestAirport.ident')
 sed -i "s/Run Weather \".*\"/Run Weather \"$weather_station\"/" $HOME/.xmobarrc
 
-type "autorandr" > /dev/null 2>&1 && autorandr
+gdbus monitor --system --dest org.freedesktop.login1 | grep org.freedesktop.login1.Session.Unlock |
+    while read -r line; do
+        echo "Session unlocked"
+        autorandr --change
+    done &
+
+type "autorandr" >/dev/null 2>&1 && autorandr --change
 
 exec xmonad
