@@ -87,12 +87,12 @@ fi
 
 type "v4l2-ctl" > /dev/null 2>&1 && {
     v4l2-ctl \
-    --set-ctrl=brightness=180 \
-    --set-ctrl=contrast=50 \
-    --set-ctrl=saturation=40 \
-    --set-ctrl=hue=0 \
+    --set-ctrl=brightness=160 \
+    --set-ctrl=contrast=45 \
+    --set-ctrl=saturation=45 \
+    --set-ctrl=hue=7 \
     --set-ctrl=white_balance_temperature_auto=1 \
-    --set-ctrl=gamma=120 \
+    --set-ctrl=gamma=110 \
     --set-ctrl=power_line_frequency=1 \
     --set-ctrl=sharpness=1 \
     --set-ctrl=backlight_compensation=1 \
