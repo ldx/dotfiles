@@ -12,8 +12,8 @@ mkdir -p "$BINDIR"
 # Vim/NeoVim.
 rm -rf "$HOME/.vim"
 rm -rf "$HOME/.config/nvim"; mkdir -p "$HOME/.config/nvim"
-curl 'https://vim-bootstrap.com/generate.vim' --data 'editor=vim&langs=c&langs=erlang&langs=html&langs=go&langs=haskell&langs=html&langs=javascript&langs=python&langs=ruby&langs=rust' > "$HOME/.vimrc"
-curl 'https://vim-bootstrap.com/generate.vim' --data 'editor=vim&langs=c&langs=erlang&langs=html&langs=go&langs=haskell&langs=html&langs=javascript&langs=python&langs=ruby&langs=rust' > "$HOME/.config/nvim/init.vim"
+curl 'https://vim-bootstrap.com/generate.vim' --data 'editor=vim&langs=c&langs=erlang&langs=html&langs=go&langs=haskell&langs=html&langs=javascript&langs=python&langs=ruby&langs=rust&langs=typescript' > "$HOME/.vimrc"
+curl 'https://vim-bootstrap.com/generate.vim' --data 'editor=neovim&langs=c&langs=erlang&langs=html&langs=go&langs=haskell&langs=html&langs=javascript&langs=python&langs=ruby&langs=rust&langs=typescript' > "$HOME/.config/nvim/init.vim"
 
 mkdir -p "$HOME/.local"
 rsync -av "$CURDIR/local/" "$HOME/"
