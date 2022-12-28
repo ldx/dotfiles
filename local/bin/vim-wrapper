@@ -3,7 +3,9 @@
 set -euo pipefail
 
 vim="vim"
-which nvim > /dev/null 2>&1 && vim="nvim" || tru
+which nvim.appimage > /dev/null 2>&1 && vim="nvim.appimage" || true
+which nvim > /dev/null 2>&1 && vim="nvim" || true
+which /var/lib/flatpak/exports/bin/io.neovim.nvim > /dev/null 2>&1 && vim="/var/lib/flatpak/exports/bin/io.neovim.nvim" || true
 
 gopkgdrv="gopackagesdriver-bazel-debug"
 gopkgdrv_path=$(which "$gopkgdrv")

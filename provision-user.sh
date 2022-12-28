@@ -39,6 +39,10 @@ curl -L https://github.com/ldx/closest-airport/releases/download/v1.0.0/closest-
 # Bazelisk.
 curl -L "https://github.com/bazelbuild/bazelisk/releases/download/v1.10.1/bazelisk-linux-amd64" > "$BINDIR/bazel"
 
+# Neovim.
+curl -L https://github.com/neovim/neovim/releases/latest/download/nvim.appimage > "$BINDIR/nvim.appimage"
+chmod u+x "$BINDIR/nvim.appimage"
+
 # Powerline.
 pip3 install --user powerline-status powerline_gitstatus
 

@@ -248,7 +248,7 @@ flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flat
 for p in firefox zoom-client; do
     snap install $p
 done
-for p in nvim go aws-cli kubectl slack; do
+for p in aws-cli go kubectl slack; do
     snap install --classic $p
 done
 pip3 install pynvim
