@@ -177,10 +177,6 @@ apt-get install -y \
     python3-all-dev \
     python3-dev \
     python3-pip \
-    qemu-kvm \
-    qemu-system-common \
-    qemu-system-x86 \
-    qemu-utils \
     rdesktop \
     redshift \
     rfkill \
