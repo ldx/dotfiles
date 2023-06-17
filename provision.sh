@@ -164,6 +164,7 @@ apt-get install -y \
     pkg-config \
     pm-utils \
     postgresql-client \
+    psmisc \
     pulseaudio \
     pulseaudio-module-bluetooth \
     pulseaudio-utils \
