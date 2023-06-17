@@ -204,6 +204,7 @@ apt-get install -y \
     sysstat \
     tar \
     tcpdump \
+    tlp \
     tmux \
     traceroute \
     trayer \
