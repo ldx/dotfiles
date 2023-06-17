@@ -263,4 +263,7 @@ update-grub
 
 echo 'KERNEL=="intel_backlight", SUBSYSTEM=="backlight", RUN+="/bin/chmod 0666 /sys/class/backlight/%k/brightness"' > /etc/udev/rules.d/97-intel_backlight.rules
 
-chsh -s /bin/bash $provisioning_user
+usermod -a -G docker "$provisioning_user"
+usermod -a -G sudo "$provisioning_user"
+
+chsh -s /bin/bash "$provisioning_user"
