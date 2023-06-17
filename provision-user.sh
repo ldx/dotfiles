@@ -26,6 +26,9 @@ done
 
 rsync -av "$CURDIR/dotfiles/" "$HOME/"
 
+# Dropbox.
+curl -L "https://www.dropbox.com/download?plat=lnx.x86_64" | tar -C "$HOME" -xzf -
+
 # Node & nvm.
 curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.0/install.sh | bash
 
@@ -42,9 +45,10 @@ curl -L "https://github.com/bazelbuild/bazelisk/releases/download/v1.10.1/bazeli
 # Neovim.
 curl -L https://github.com/neovim/neovim/releases/latest/download/nvim.appimage > "$BINDIR/nvim.appimage"
 chmod u+x "$BINDIR/nvim.appimage"
+pip3 install --break-system-packages --user pynvim
 
 # Powerline.
-pip3 install --user powerline-status powerline_gitstatus
+pip3 install --break-system-packages --user powerline-status powerline_gitstatus
 
 # TFenv.
 rm -rf "$HOME/.tfenv"
@@ -52,5 +56,8 @@ git clone https://github.com/tfutils/tfenv.git "$HOME/.tfenv"
 for x in "$HOME/.tfenv/bin/"*; do
    ln -snf "$x" "$BINDIR/"
 done
+
+# Default browser.
+xdg-settings set default-web-browser firefox_firefox.desktop
 
 chmod 0755 "$BINDIR/"*

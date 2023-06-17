@@ -88,7 +88,6 @@ apt-get install -y \
     fonts-texgyre \
     fonts-vlgothic \
     ftp \
-    fuse \
     g++ \
     gawk \
     gcc \
@@ -105,7 +104,6 @@ apt-get install -y \
     g++-multilib \
     gnupg \
     gocryptfs \
-    google-chrome-stable \
     grep \
     groff-base \
     gthumb \
@@ -142,7 +140,6 @@ apt-get install -y \
     mawk \
     mplayer \
     ncurses-term \
-    netcat \
     netcat-openbsd \
     net-tools \
     network-manager \
@@ -216,7 +213,6 @@ apt-get install -y \
     unzip \
     util-linux \
     valgrind \
-    vim-gtk \
     virtualenv \
     virtualenvwrapper \
     vlc \
@@ -248,18 +244,15 @@ done
 for p in aws-cli go kubectl slack; do
     snap install --classic $p
 done
-pip3 install pynvim
+export PATH=$PATH:/snap/bin
 kubectl completion bash > /etc/bash_completion.d/kubectl
-
-# Dropbox.
-flatpak install -y com.dropbox.Client
 
 umask 0022
 
 # TODO: noatime in fstab
 
-locale-gen en_US.UTF-8
-locale-gen hu_HU.UTF-8
+grep '^hu_HU.UTF-8 UTF-8' /etc/locale.gen || echo 'hu_HU.UTF-8 UTF-8' >> /etc/locale.gen
+locale-gen
 
 sed -r -i 's/\s?#?(\s*)SendEnv (.*)$/#   SendEnv \2/g' /etc/ssh/ssh_config
 sed -r -i 's/\s?#?(\s*)ForwardAgent\s+.*$/    ForwardAgent yes/g' /etc/ssh/ssh_config
