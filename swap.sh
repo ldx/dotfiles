@@ -3,7 +3,7 @@
 set -euxo pipefail
 
 if [[ ! -f /swapfile ]]; then
-    fallocate -l 8G /swapfile
+    fallocate -l 16G /swapfile
     chmod 600 /swapfile
     mkswap /swapfile
     swapon /swapfile
