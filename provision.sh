@@ -239,10 +239,7 @@ apt-get remove -y firefox-esr || true
 flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
 
 # Snap packages.
-for p in firefox zoom-client; do
-    snap install $p
-done
-for p in amz-aws-cli go kubectl slack; do
+for p in amz-aws-cli go kubectl; do
     snap install --classic $p
 done
 snap alias amz-aws-cli aws
