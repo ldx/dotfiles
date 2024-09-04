@@ -4,7 +4,7 @@ set -euo pipefail
 
 CURDIR=$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)
 
-BINDIR="$HOME/.local/bin"
+BINDIR="$HOME/bin"
 
 # Directory for user-installed binaries.
 mkdir -p "$BINDIR"
@@ -15,7 +15,7 @@ rm -rf "$HOME/.config/nvim"; mkdir -p "$HOME/.config/nvim"
 curl 'https://vim-bootstrap.com/generate.vim' --data 'editor=vim&langs=c&langs=erlang&langs=html&langs=go&langs=haskell&langs=html&langs=javascript&langs=python&langs=ruby&langs=rust&langs=typescript' > "$HOME/.vimrc"
 curl 'https://vim-bootstrap.com/generate.vim' --data 'editor=neovim&langs=c&langs=erlang&langs=html&langs=go&langs=haskell&langs=html&langs=javascript&langs=python&langs=ruby&langs=rust&langs=typescript' > "$HOME/.config/nvim/init.vim"
 
-mkdir -p "$HOME/.local"
+mkdir -p "$HOME"
 rsync -av "$CURDIR/local/" "$HOME/"
 
 mkdir -p "$HOME/.terminfo"
