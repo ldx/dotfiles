@@ -58,7 +58,6 @@ apt-get install -y \
     dput \
     ebtables \
     ed \
-    encfs \
     evince \
     exuberant-ctags \
     fakeroot \
@@ -213,6 +212,7 @@ apt-get install -y \
     uidmap \
     unzip \
     util-linux \
+    v4l-utils \
     valgrind \
     virtualenv \
     virtualenvwrapper \
