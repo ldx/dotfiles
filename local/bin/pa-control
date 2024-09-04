@@ -1,12 +1,10 @@
-#!/bin/bash
+#!/usr/bin/env bash
 #
-# pulseaudio-ctl
+# pa-control - simple control of pulseaudio vol+/vol-/mute from the shell.
 #
-# simple control of pulseaudio vol+/vol-/mute from the shell
-# or more practically, from DE shortcut keys
+# Based on pulseaudio-ctl by graysky:
+#   https://github.com/graysky2/pulseaudio-ctl
 #
-# by graysky
-# https://github.com/graysky2/pulseaudio-ctl
 
 export BLD="\e[01m" BLU="\e[01;34m" RED="\e[01;31m" NRM="\e[00m" GRN="\e[01;32m"
 command -v sed >/dev/null 2>&1 || {
@@ -21,29 +19,28 @@ command -v pactl >/dev/null 2>&1 || {
 echo "I require pactl but it's not installed. Aborting." >&2
 exit 1; }
 
-command -v pacmd >/dev/null 2>&1 || {
-echo "I require pacmd but it's not installed. Aborting." >&2
-exit 1; }
+play() {
+  command -v pw-play >/dev/null 2>&1 && pw-play "$1" || PULSE_LATENCY_MSEC=30 padsp play "$1"
+}
 
-SINKS=$(pacmd list-sinks|grep 'index:'|awk '{print $NF}')
+SINKS=$(pactl list short sinks | grep -v "Monitor" | awk '{print $1}')
+[[ -z "$SINKS" ]] && echo -e " ${BLD}${RED}Cannot find any sinks. Exiting.${NRM}" && exit 1
 
 get_curvol() {
   local sink=$1
 
-  CURVOL=$(pacmd list-sinks|grep -A 15 "index: $sink"| awk '/volume: 0:/{ print $3 }'|sed 's/%//')
+  CURVOL=$(pactl list sinks | grep -A 15 "index: $sink" | awk '/volume: front/{ print $5 }' | sed 's/%//g')
+  if [[ -n "$CURVOL" ]] && [[ "$CURVOL" -ge 0 ]] && [[ "$CURVOL" -le 100 ]]; then
+    return
+  fi
 
-  if [ "$CURVOL" != "" -a "$CURVOL" -ge 0 -o "$CURVOL" -lt 0 2>/dev/null ]; then
-    return 0
+  # Different pactl version and expected output.
+  CURVOL=$(pactl list sinks | grep -A 15 "Sink #$sink" | awk '/Volume: front/{ print $5 }' | sed 's/%//g')
+  if [[ -n "$CURVOL" ]] && [[ "$CURVOL" -ge 0 ]] && [[ "$CURVOL" -le 100 ]]; then
+    return
   else
-    # the git snapshot at the time of writing this script changes the
-    # expected output of this cmd
-    CURVOL=$(pacmd list-sinks|grep -A 15 "index: $sink"| awk '/volume: front/{ print $5 }' | sed 's/%//g')
-    if [ "$CURVOL" != "" -a "$CURVOL" -ge 0 -o "$CURVOL" -lt 0 2>/dev/null ]; then
-      return 0
-    else
-      echo -e " ${BLD}${RED}Cannot find current volume. CURVOL = ${CURVOL}${NRM}"
-      exit 1
-    fi
+    echo -e " ${BLD}${RED}Cannot find current volume. CURVOL = ${CURVOL}${NRM}"
+    exit 1
   fi
 }
 
@@ -57,45 +54,35 @@ adjust_volume() {
   fi
 
   get_curvol $sink
+  echo $CURVOL
 
   [[ "$up" = true ]] && [[ "$CURVOL" -ge 100 ]] && return
   [[ "$up" = false ]] && [[ "$CURVOL" -le 0 ]] && return
 
   pactl set-sink-volume "$sink" "$change"
-  pactl set-sink-volume "$sink" -- "$change"
-}
-
-normalize_outputs() {
-  # Normalize all outputs.
-  which pa_volume 2>&1 > /dev/null || return
-  get_curvol $sink
-  pa_volume | sed -r 's/^client:\s+(.*[^ ])\s+[0-9]+%$/\1/' | xargs -n1 -I{} pa_volume "{}" $CURVOL
 }
 
 case "$1" in
   U|u|[U,u]p)
     # raise volume by 5%
-    normalize_outputs
     for sink in $SINKS; do
-      adjust_volume $sink "+5%"
+      adjust_volume "$sink" "+5%"
     done
-    PULSE_LATENCY_MSEC=30 padsp play $HOME/.local/share/sound/Volume.wav > /dev/null 2>&1
+    play "$HOME/share/sound/Volume.wav" > /dev/null 2>&1
     ;;
   D|d|[D,d]own|[D,d]o)
     # lowers volume by 5%
-    normalize_outputs
     for sink in $SINKS; do
-      adjust_volume $sink "-5%"
+      adjust_volume "$sink" "-5%"
     done
-    PULSE_LATENCY_MSEC=30 padsp play $HOME/.local/share/sound/Volume.wav > /dev/null 2>&1
+    play "$HOME/share/sound/Volume.wav" > /dev/null 2>&1
     ;;
   M|m|[M,m]u|[M,m]ute)
     # mutes the volume entirely
-    normalize_outputs
     for sink in $SINKS; do
       pactl set-sink-mute "$sink" toggle
     done
-    PULSE_LATENCY_MSEC=30 padsp play $HOME/.local/share/sound/Volume.wav > /dev/null 2>&1
+    play "$HOME/share/sound/Volume.wav" > /dev/null 2>&1
     ;;
 esac
 
