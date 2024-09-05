@@ -41,7 +41,7 @@ main = do
                         }
         , terminal           = "xterm"
         } `additionalKeys`
-        [ ((mod1Mask .|. shiftMask, xK_o), spawn "xscreensaver-command -lock")
+        [ ((mod1Mask .|. shiftMask, xK_o), spawn "light-locker-command -l")
         , ((mod1Mask .|. shiftMask, xK_s), spawn "sudo pm-suspend")
         , ((controlMask, xK_Print), spawn "sleep 0.2; scrot -s")
         , ((0, xK_Print), spawn "scrot")
