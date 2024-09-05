@@ -26,6 +26,10 @@ if type "synclient" > /dev/null 2>&1; then
     synclient VertHysteresis=25
 fi
 
+if type "syndaemon" > /dev/null 2>&1; then
+    syndaemon -i 1 -d -K
+fi
+
 if [ -f "$HOME/.Xdefaults" ]; then
     xrdb $HOME/.Xdefaults
 fi
