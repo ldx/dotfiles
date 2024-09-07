@@ -14,6 +14,7 @@ if [[ -z "$provisioning_user" ]]; then
 fi
 
 mkdir -p /usr/local
+chown "$provisioning_user" /usr/local
 
 # Required packages.
 apt-get update -y
