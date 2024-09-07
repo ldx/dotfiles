@@ -50,10 +50,15 @@ pip3 install --break-system-packages --user pynvim
 # Powerline.
 pip3 install --break-system-packages --user powerline-status powerline_gitstatus
 
-# TFenv.
+# TFenv and Tofuenv
 rm -rf "$HOME/.tfenv"
 git clone https://github.com/tfutils/tfenv.git "$HOME/.tfenv"
 for x in "$HOME/.tfenv/bin/"*; do
+   ln -snf "$x" "$BINDIR/"
+done
+rm -rf "$HOME/.tofuenv"
+git clone https://github.com/tofuutils/tofuenv.git "$HOME/.tofuenv"
+for x in "$HOME/.tofuenv/bin/"*; do
    ln -snf "$x" "$BINDIR/"
 done
 
