@@ -43,7 +43,7 @@ main = do
         , terminal           = "xterm"
         } `additionalKeys`
         [ ((mod1Mask .|. shiftMask, xK_o), spawn "light-locker-command -l")
-        , ((mod1Mask .|. shiftMask, xK_s), spawn "sudo pm-suspend")
+        , ((mod1Mask .|. shiftMask, xK_s), spawn "systemctl suspend")
         , ((controlMask, xK_Print), spawn "sleep 0.2; scrot -s")
         , ((0, xK_Print), spawn "scrot")
         , ((0, xF86XK_AudioMute), spawn "$HOME/bin/pa-control mute")
