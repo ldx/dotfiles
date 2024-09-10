@@ -13,6 +13,8 @@ if [[ -z "$provisioning_user" ]]; then
     exit 1
 fi
 
+cur_dir=$(dirname "$(readlink -f "$0")")
+
 mkdir -p /usr/local
 chown "$provisioning_user" /usr/local
 
@@ -235,6 +237,8 @@ apt-get install -y \
 
 # Remove Firefox ESR.
 apt-get remove -y firefox-esr || true
+
+bash "$cur_dir"/InstallAzureCLIDeb
 
 # Flatpak hub.
 flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
