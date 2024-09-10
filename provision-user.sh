@@ -31,6 +31,10 @@ done
 
 rsync -av "$CURDIR/dotfiles/" "$HOME/"
 
+# Firefox.
+curl -L "https://download.mozilla.org/?product=firefox-latest-ssl&os=linux64&lang=en-US" | tar -C "$HOME/share" -xjf -
+ln -s "$HOME/share/firefox/firefox" "$BINDIR/firefox"
+
 # Dropbox.
 curl -L "https://www.dropbox.com/download?plat=lnx.x86_64" | tar -C "$HOME" -xzf -
 
