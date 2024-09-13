@@ -247,6 +247,7 @@ flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flat
 for p in amz-aws-cli go kubectl; do
     snap install --classic $p
 done
+snap install kubelogin
 snap alias amz-aws-cli aws
 export PATH=$PATH:/snap/bin
 kubectl completion bash > /etc/bash_completion.d/kubectl
