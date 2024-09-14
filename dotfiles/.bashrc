@@ -86,8 +86,15 @@ complete -F _complete_alias kc
 
 command -v kubecolor >/dev/null 2>&1 && complete -F __start_kubectl kubecolor
 
-for kc in $HOME/.kube/configs/*; do
-    export KUBECONFIG=$KUBECONFIG:$kc
+for kc in "$HOME"/.kube/configs/*; do
+    if [[ ! -f $kc ]]; then
+        continue
+    fi
+    if [[ -z ${KUBECONFIG:-} ]]; then
+        export KUBECONFIG=$kc
+    else
+        export KUBECONFIG=$KUBECONFIG:$kc
+    fi
 done
 
 which vim-wrapper > /dev/null 2>&1 && alias vim=vim-wrapper
