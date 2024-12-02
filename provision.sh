@@ -240,6 +240,12 @@ apt-get remove -y firefox-esr || true
 
 bash "$cur_dir"/InstallAzureCLIDeb
 
+# Install from GitHub.
+curl -L https://github.com/BurntSushi/ripgrep/releases/download/14.1.1/ripgrep_14.1.1-1_amd64.deb -o /tmp/ripgrep.deb
+curl -L https://github.com/sharkdp/fd/releases/download/v10.2.0/fd_10.2.0_amd64.deb -o /tmp/fd.deb
+dpkg -i /tmp/ripgrep.deb /tmp/fd.deb
+rm /tmp/ripgrep.deb /tmp/fd.deb
+
 # Flatpak hub.
 flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
 
