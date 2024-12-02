@@ -74,7 +74,7 @@ alias k="kubectl"
 alias ke="k exec -ti"
 alias ks="k -n kube-system"
 alias kse="k -n kube-system exec -ti"
-alias kc="http_proxy=localhost:8888 k"
+alias kk="k kustomize"
 
 source .complete_alias
 
