@@ -1,7 +1,76 @@
-autocmd FileType python setlocal shiftwidth=4 softtabstop=4 expandtab
-autocmd FileType javascript setlocal shiftwidth=2 softtabstop=2 expandtab
+augroup vimrc-javascript
+  autocmd!
+  autocmd FileType javascript setl tabstop=2|setl shiftwidth=2|setl expandtab softtabstop=2
+  autocmd FileType typescript setl tabstop=2|setl shiftwidth=2|setl expandtab softtabstop=2
+augroup END
 
 lua << EOF
+-- Configure tabs according to filetype.
+local generalSettingsGroup = vim.api.nvim_create_augroup('General settings', { clear = true })
+
+--vim.api.nvim_create_autocmd('FileType', {
+--    pattern = { '*.js', '*.ts', '*.jsx', '*.tsx' },
+--    callback = function()
+--        vim.opt.shiftwidth = 2
+--        vim.opt.softtabstop = 2
+--        vim.opt.expandtab = true
+--    end,
+--    group = generalSettingsGroup,
+--})
+
+local null_ls = require("null-ls")
+
+local group = vim.api.nvim_create_augroup("lsp_format_on_save", { clear = false })
+local event = "BufWritePre" -- or "BufWritePost"
+local async = event == "BufWritePost"
+
+null_ls.setup({
+  on_attach = function(client, bufnr)
+    if client.supports_method("textDocument/formatting") then
+      vim.keymap.set("n", "<Leader>f", function()
+        vim.lsp.buf.format({ bufnr = vim.api.nvim_get_current_buf() })
+      end, { buffer = bufnr, desc = "[lsp] format" })
+
+      -- format on save
+      vim.api.nvim_clear_autocmds({ buffer = bufnr, group = group })
+      vim.api.nvim_create_autocmd(event, {
+        buffer = bufnr,
+        group = group,
+        callback = function()
+          vim.lsp.buf.format({ bufnr = bufnr, async = async })
+        end,
+        desc = "[lsp] format on save",
+      })
+    end
+
+    if client.supports_method("textDocument/rangeFormatting") then
+      vim.keymap.set("x", "<Leader>f", function()
+        vim.lsp.buf.format({ bufnr = vim.api.nvim_get_current_buf() })
+      end, { buffer = bufnr, desc = "[lsp] format" })
+    end
+  end,
+})
+
+local prettier = require("prettier")
+
+prettier.setup({
+  bin = 'prettierd',
+  filetypes = {
+    "css",
+    "graphql",
+    "html",
+    "javascript",
+    "javascriptreact",
+    "json",
+    "less",
+    "markdown",
+    "scss",
+    "typescript",
+    "typescriptreact",
+    "yaml",
+  },
+})
+
 -- Mappings.
 -- See `:help vim.diagnostic.*` for documentation on any of the below functions
 local opts = { noremap=true, silent=true }
@@ -35,7 +104,7 @@ end
 
 -- Use a loop to conveniently call 'setup' on multiple servers and
 -- map buffer local keybindings when the language server attaches
-local servers = { 'gopls', 'tsserver' }
+local servers = { 'gopls', 'ts_ls' }
 for _, lsp in pairs(servers) do
   require('lspconfig')[lsp].setup {
     on_attach = on_attach,
