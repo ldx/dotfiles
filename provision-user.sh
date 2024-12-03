@@ -41,6 +41,12 @@ curl -L https://sh.rustup.rs >/tmp/rustup.sh
 chmod +x /tmp/rustup.sh
 /tmp/rustup.sh -y
 
+# Fonts
+curl -L https://github.com/ryanoasis/nerd-fonts/releases/download/v3.3.0/LiberationMono.zip >/tmp/LiberationMono.zip
+mkdir -p ~/.local/share/fonts
+unzip -d ~/.local/share/fonts /tmp/LiberationMono.zip
+fc-cache -f -v
+
 # Minikube.
 curl -L https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64 >"$BINDIR/minikube" &&
   chmod +x "$BINDIR/minikube"
