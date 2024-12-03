@@ -39,10 +39,10 @@ URxvt*scrollBar: false
 URxvt*scrollBar_right: true
 URxvt*scrollstyle: rxvt
 
-URxvt*font: xft:Liberation Mono for Powerline:pixelsize=15:antialias=true:hinting=true
-URxvt*boldFont: xft:Liberation Mono for Powerline:pixelsize=15:antialias=true:bold:hinting=true
-URxvt*italicFont: xft:Liberation Mono for Powerline:pixelsize=15:antialias=true:italic:autohint=true:hinting=true
-URxvt*bolditalicFont: xft:Liberation Mono for Powerline:pixelsize=15:antialias=true:bold:italic:autohint=true:hinting=true
+URxvt*font: xft:Liberation Mono for Powerline:pixelsize=12:antialias=true:hinting=true
+URxvt*boldFont: xft:Liberation Mono for Powerline:pixelsize=12:antialias=true:bold:hinting=true
+URxvt*italicFont: xft:Liberation Mono for Powerline:pixelsize=12:antialias=true:italic:autohint=true:hinting=true
+URxvt*bolditalicFont: xft:Liberation Mono for Powerline:pixelsize=12:antialias=true:bold:italic:autohint=true:hinting=true
 !URxvt*font: xft:Bitstream Vera Sans Mono for Powerline:pixelsize=12:antialias=true:hinting=true
 !URxvt*boldFont: xft:Bitstream Vera Sans Mono for Powerline:bold:pixelsize=12:antialias=true:hinting=true
 !URxvt*font: xft:Inconsolata:pixelsize=20:antialias=true:hinting=true
@@ -65,7 +65,7 @@ URxvt*bolditalicFont: xft:Liberation Mono for Powerline:pixelsize=15:antialias=t
 !URxvt*matcher.button: 1
 !URxvt*urlLauncher: google-chrome
 
-Xft.dpi: 96
+Xft.dpi: 120
 Xft.antialias: true
 Xft.rgba: rgb
 Xft.hinting: true
@@ -95,8 +95,9 @@ Xft.hintstyle: hintslight
 ! white
 *xterm*scrollBar: false
 *xterm*scrollstyle: rxvt
-*xterm*faceName: Liberation Mono for Powerline
-*xterm*faceSize: 15
+!*xterm*faceName: Liberation Mono for Powerline
+*xterm*faceName: LiterationMonoNerdFontMono
+*xterm*faceSize: 13
 *xterm*cursorColor: white
 *xterm*utf8: 2
 *xterm*termName: xterm-256color
