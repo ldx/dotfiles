@@ -14,12 +14,6 @@ BINDIR="$HOME/bin"
 # Directory for user-installed binaries.
 mkdir -p "$BINDIR"
 
-# Vim/NeoVim.
-rm -rf "$HOME/.vim"
-rm -rf "$HOME/.config/nvim"; mkdir -p "$HOME/.config/nvim"
-curl 'https://vim-bootstrap.com/generate.vim' --data 'editor=vim&langs=c&langs=erlang&langs=html&langs=go&langs=haskell&langs=html&langs=javascript&langs=python&langs=ruby&langs=rust&langs=typescript' > "$HOME/.vimrc"
-curl 'https://vim-bootstrap.com/generate.vim' --data 'editor=neovim&langs=c&langs=erlang&langs=html&langs=go&langs=haskell&langs=html&langs=javascript&langs=python&langs=ruby&langs=rust&langs=typescript' > "$HOME/.config/nvim/init.vim"
-
 mkdir -p "$HOME"
 rsync -av "$CURDIR/local/" "$HOME/"
 
@@ -55,6 +49,14 @@ curl -L "https://github.com/bazelbuild/bazelisk/releases/download/v1.10.1/bazeli
 curl -L https://github.com/neovim/neovim/releases/latest/download/nvim.appimage > "$BINDIR/nvim.appimage"
 chmod u+x "$BINDIR/nvim.appimage"
 pip3 install --break-system-packages --user pynvim
+
+# LazyVim.
+[[ -d ~/.config/nvim ]] && mv ~/.config/nvim{,.bak} || true
+[[ -d ~/.local/share/nvim ]] && mv ~/.local/share/nvim{,.bak} || true
+[[ -d ~/.local/state/nvim ]] && mv ~/.local/state/nvim{,.bak} || true
+[[ -d ~/.cache/nvim ]] && mv ~/.cache/nvim{,.bak} || true
+git clone https://github.com/LazyVim/starter ~/.config/nvim
+rm -rf ~/.config/nvim/.git
 
 # Powerline.
 pip3 install --break-system-packages --user powerline-status powerline_gitstatus
