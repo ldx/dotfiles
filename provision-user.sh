@@ -69,6 +69,7 @@ pip3 install --break-system-packages --user pynvim
 [[ -d ~/.cache/nvim ]] && mv ~/.cache/nvim{,.bak} || true
 git clone https://github.com/LazyVim/starter ~/.config/nvim
 rm -rf ~/.config/nvim/.git
+cp -rf "$CURDIR/dotfiles/.config/nvim" ~/.config/nvim
 
 # Powerline.
 pip3 install --break-system-packages --user powerline-status powerline_gitstatus
