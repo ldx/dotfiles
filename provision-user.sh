@@ -43,8 +43,8 @@ chmod +x /tmp/rustup.sh
 
 # Fonts
 curl -L https://github.com/ryanoasis/nerd-fonts/releases/download/v3.3.0/LiberationMono.zip >/tmp/LiberationMono.zip
-mkdir -p ~/.local/share/fonts
-unzip -o -d ~/.local/share/fonts /tmp/LiberationMono.zip
+mkdir -p "$HOME/.local/share/fonts"
+unzip -o -d "$HOME/.local/share/fonts" /tmp/LiberationMono.zip
 fc-cache -f -v
 
 # Minikube.
@@ -63,13 +63,13 @@ chmod u+x "$BINDIR/vim"
 #pip3 install --break-system-packages --user pynvim
 
 # LazyVim.
-[[ -d ~/.config/nvim ]] && rm -rf ~/.config/nvim
-[[ -d ~/.local/share/nvim ]] && rm -rf ~/.local/share/nvim
-[[ -d ~/.local/state/nvim ]] && rm -rf ~/.local/state/nvim
-[[ -d ~/.cache/nvim ]] && rm -rf ~/.cache/nvim
-git clone https://github.com/LazyVim/starter ~/.config/nvim
-rm -rf ~/.config/nvim/.git
-cp -rf "$CURDIR/dotfiles/.config/nvim" ~/.config/nvim
+rm -rf "$HOME/.config/nvim"
+rm -rf "$HOME/.local/share/nvim"
+rm -rf "$HOME/.local/state/nvim"
+rm -rf "$HOME/.cache/nvim"
+git clone https://github.com/LazyVim/starter "$HOME/.config/nvim"
+rm -rf "$HOME/.config/nvim/.git"
+cp -rf "$CURDIR/dotfiles/.config/nvim"/* "$HOME/.config/nvim/"
 
 # Powerline.
 pip3 install --break-system-packages --user powerline-status powerline_gitstatus
