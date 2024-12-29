@@ -9,14 +9,14 @@ fi
 
 CURDIR=$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)
 
-BINDIR="$HOME/bin"
+BINDIR="$HOME/.local/bin"
 
 # Directory for user-installed binaries.
 mkdir -p "$BINDIR"
 
 # Copy local files.
-mkdir -p "$HOME"
-rsync -av "$CURDIR/local/" "$HOME/"
+mkdir -p "$HOME/.local"
+rsync -av "$CURDIR/local/" "$HOME/.local/"
 
 mkdir -p "$HOME/.terminfo"
 cp "$CURDIR/terminfo/"*.terminfo "$HOME/.terminfo/"
@@ -28,7 +28,7 @@ rsync -av "$CURDIR/dotfiles/" "$HOME/"
 
 # Firefox.
 curl -L "https://download.mozilla.org/?product=firefox-latest-ssl&os=linux64&lang=en-US" | tar -C "$HOME/share" -xjf -
-ln -s "$HOME/share/firefox/firefox" "$BINDIR/firefox"
+ln -snf "$HOME/share/firefox/firefox" "$BINDIR/firefox"
 
 # Dropbox.
 curl -L "https://www.dropbox.com/download?plat=lnx.x86_64" | tar -C "$HOME" -xzf -
@@ -44,7 +44,7 @@ chmod +x /tmp/rustup.sh
 # Fonts
 curl -L https://github.com/ryanoasis/nerd-fonts/releases/download/v3.3.0/LiberationMono.zip >/tmp/LiberationMono.zip
 mkdir -p ~/.local/share/fonts
-unzip -d ~/.local/share/fonts /tmp/LiberationMono.zip
+unzip -o -d ~/.local/share/fonts /tmp/LiberationMono.zip
 fc-cache -f -v
 
 # Minikube.
@@ -58,15 +58,15 @@ curl -L https://github.com/ldx/closest-airport/releases/download/v1.0.0/closest-
 curl -L "https://github.com/bazelbuild/bazelisk/releases/download/v1.10.1/bazelisk-linux-amd64" >"$BINDIR/bazel"
 
 # Neovim.
-curl -L https://github.com/neovim/neovim/releases/latest/download/nvim.appimage >"$BINDIR/nvim.appimage"
-chmod u+x "$BINDIR/nvim.appimage"
-pip3 install --break-system-packages --user pynvim
+curl -L https://github.com/neovim/neovim/releases/latest/download/nvim.appimage >"$BINDIR/vim"
+chmod u+x "$BINDIR/vim"
+#pip3 install --break-system-packages --user pynvim
 
 # LazyVim.
-[[ -d ~/.config/nvim ]] && mv ~/.config/nvim{,.bak} || true
-[[ -d ~/.local/share/nvim ]] && mv ~/.local/share/nvim{,.bak} || true
-[[ -d ~/.local/state/nvim ]] && mv ~/.local/state/nvim{,.bak} || true
-[[ -d ~/.cache/nvim ]] && mv ~/.cache/nvim{,.bak} || true
+[[ -d ~/.config/nvim ]] && rm -rf ~/.config/nvim
+[[ -d ~/.local/share/nvim ]] && rm -rf ~/.local/share/nvim
+[[ -d ~/.local/state/nvim ]] && rm -rf ~/.local/state/nvim
+[[ -d ~/.cache/nvim ]] && rm -rf ~/.cache/nvim
 git clone https://github.com/LazyVim/starter ~/.config/nvim
 rm -rf ~/.config/nvim/.git
 cp -rf "$CURDIR/dotfiles/.config/nvim" ~/.config/nvim
