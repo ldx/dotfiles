@@ -4,8 +4,8 @@
 
 # If not running interactively, don't do anything.
 case $- in
-    *i*) ;;
-      *) return;;
+*i*) ;;
+*) return ;;
 esac
 
 source $HOME/.common.sh
@@ -32,13 +32,13 @@ shopt -s checkwinsize
 
 powerline_root=$(pip3 show powerline-status | grep '^Location:' | awk '{print $2}')
 if [[ -z "$powerline_root" ]]; then
-    powerline_root=$(pip show powerline-status | grep '^Location:' | awk '{print $2}')
+  powerline_root=$(pip show powerline-status | grep '^Location:' | awk '{print $2}')
 fi
 if [ -d "$powerline_root" ]; then
-    powerline-daemon -q
-    POWERLINE_BASH_CONTINUATION=1
-    POWERLINE_BASH_SELECT=1
-    . $powerline_root/powerline/bindings/bash/powerline.sh
+  powerline-daemon -q
+  POWERLINE_BASH_CONTINUATION=1
+  POWERLINE_BASH_SELECT=1
+  . $powerline_root/powerline/bindings/bash/powerline.sh
 fi
 
 # Add an "alert" alias for long running commands.  Use like so:
@@ -47,27 +47,27 @@ alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo
 
 # Enable programmable completion features.
 if ! shopt -oq posix; then
-    if [ -f /usr/share/bash-completion/bash_completion ]; then
-	. /usr/share/bash-completion/bash_completion
-    elif [ -f /etc/bash_completion ]; then
-	. /etc/bash_completion
-    elif [ -f /usr/local/etc/profile.d/bash_completion.sh ]; then
-	. /usr/local/etc/profile.d/bash_completion.sh
-    fi
+  if [ -f /usr/share/bash-completion/bash_completion ]; then
+    . /usr/share/bash-completion/bash_completion
+  elif [ -f /etc/bash_completion ]; then
+    . /etc/bash_completion
+  elif [ -f /usr/local/etc/profile.d/bash_completion.sh ]; then
+    . /usr/local/etc/profile.d/bash_completion.sh
+  fi
 fi
 
-type aws_completer > /dev/null 2>&1 && complete -C aws_completer aws
-type /snap/aws-cli/current/usr/bin/python3 > /dev/null 2>&1 && complete -C \
-    'SNAP=/snap/aws-cli/current /snap/aws-cli/current/usr/bin/python3 /snap/aws-cli/current/bin/aws_completer' aws
+type aws_completer >/dev/null 2>&1 && complete -C aws_completer aws
+type /snap/aws-cli/current/usr/bin/python3 >/dev/null 2>&1 && complete -C \
+  'SNAP=/snap/aws-cli/current /snap/aws-cli/current/usr/bin/python3 /snap/aws-cli/current/bin/aws_completer' aws
 
 # added by travis gem
 [ -f /home/vilmos/.travis/travis.sh ] && source /home/vilmos/.travis/travis.sh
 
 export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"                   # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion" # This loads nvm bash_completion
 
-which _awsp > /dev/null 2>&1 && alias awsp="source _awsp"
+which _awsp >/dev/null 2>&1 && alias awsp="source _awsp"
 [ -f $HOME/.awsp ] && export AWS_PROFILE=$(cat $HOME/.awsp)
 
 alias k="kubectl"
@@ -87,16 +87,16 @@ complete -F _complete_alias kc
 command -v kubecolor >/dev/null 2>&1 && complete -F __start_kubectl kubecolor
 
 for kc in "$HOME"/.kube/configs/*; do
-    if [[ ! -f $kc ]]; then
-        continue
-    fi
-    if [[ -z ${KUBECONFIG:-} ]]; then
-        export KUBECONFIG=$kc
-    else
-        export KUBECONFIG=$KUBECONFIG:$kc
-    fi
+  if [[ ! -f $kc ]]; then
+    continue
+  fi
+  if [[ -z ${KUBECONFIG:-} ]]; then
+    export KUBECONFIG=$kc
+  else
+    export KUBECONFIG=$KUBECONFIG:$kc
+  fi
 done
 
-which vim-wrapper > /dev/null 2>&1 && alias vim=vim-wrapper
+[[ -f "$HOME/.cargo/env" ]] && . "$HOME/.cargo/env"
 
 eval "$(direnv hook bash)"
