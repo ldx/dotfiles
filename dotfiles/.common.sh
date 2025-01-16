@@ -16,6 +16,8 @@ export LC_ALL=hu_HU.UTF-8
 export EDITOR=vim
 export VISUAL=vim
 
+export PAGER="less -X"
+
 export LOCAL_PREFIX=$HOME/.local
 export CPPFLAGS=-I$LOCAL_PREFIX/include
 export LDFLAGS=-L$LOCAL_PREFIX/lib
