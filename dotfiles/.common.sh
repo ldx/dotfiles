@@ -1,7 +1,7 @@
 # Start tmux automatically.
 parent="$(ps -o comm= $PPID)"
 if [ -z "$TMUX" -a "$parent" != "sshd" -a "$parent" != "su" -a "$SSH_CONNECTION" = "" ]; then
-    which tmux > /dev/null 2>&1 && exec tmux -2
+  which tmux >/dev/null 2>&1 && exec tmux -2
 fi
 
 # Environment variables.
@@ -31,31 +31,31 @@ export QUILT_PATCHES=debian/patches
 # Workaround for https://wiki.archlinux.org/title/Java#Gray_window,_applications_not_resizing_with_WM,_menus_immediately_closing.
 export _JAVA_AWT_WM_NONREPARENTING=1
 
-case `uname -s` in
-    [Dd][Aa][Rr][Ww][Ii][Nn])
-        export JAVA_HOME=/System/Library/Frameworks/JavaVM.framework/Home
-        export MallocBadFreeAbort=1
-        alias sed="sed -E"
-        ;;
+case $(uname -s) in
+[Dd][Aa][Rr][Ww][Ii][Nn])
+  export JAVA_HOME=/System/Library/Frameworks/JavaVM.framework/Home
+  export MallocBadFreeAbort=1
+  alias sed="sed -E"
+  ;;
 esac
 
 if [ "$TERM" = "xterm" ]; then
-    export TERM=xterm-color
+  export TERM=xterm-color
 fi
 
 export WORKON_HOME=~/.virtualenvs
 if [ ! -d $WORKON_HOME ]; then
-    mkdir $WORKON_HOME
+  mkdir $WORKON_HOME
 fi
 
 if [ -e /usr/local/bin/virtualenvwrapper.sh ]; then
-    source /usr/local/bin/virtualenvwrapper.sh
+  source /usr/local/bin/virtualenvwrapper.sh
 elif [ -e $LOCAL_PREFIX/bin/virtualenvwrapper.sh ]; then
-    source $LOCAL_PREFIX/bin/virtualenvwrapper.sh
+  source $LOCAL_PREFIX/bin/virtualenvwrapper.sh
 elif [ -e /etc/bash_completion.d/virtualenvwrapper ]; then
-    source /etc/bash_completion.d/virtualenvwrapper
+  source /etc/bash_completion.d/virtualenvwrapper
 elif [ -e /usr/share/bash-completion/completions/virtualenvwrapper ]; then
-    source /usr/share/bash-completion/completions/virtualenvwrapper
+  source /usr/share/bash-completion/completions/virtualenvwrapper
 fi
 
 export GEM_HOME=$HOME/.gem
@@ -66,25 +66,25 @@ export GOFLAGS="-mod=readonly"
 
 # prepend_colon(val, var)
 prepend_colon() {
-    if [ -z "$2" ]; then
-        echo $1
-    else
-        echo $1:$2
-    fi
+  if [ -z "$2" ]; then
+    echo $1
+  else
+    echo $1:$2
+  fi
 }
 
 # unshift_path(path)
 unshift_path() {
-    if [ -d $1/sbin ]; then
-        export PATH=$(prepend_colon "$1/sbin" $PATH)
-    fi
-    if [ -d $1/bin ]; then
-        export PATH=$(prepend_colon "$1/bin" $PATH)
-    fi
+  if [ -d $1/sbin ]; then
+    export PATH=$(prepend_colon "$1/sbin" $PATH)
+  fi
+  if [ -d $1/bin ]; then
+    export PATH=$(prepend_colon "$1/bin" $PATH)
+  fi
 
-    if [ -d $1/share/man ]; then
-        export MANPATH=$(prepend_colon "$1/share/man" $MANPATH)
-    fi
+  if [ -d $1/share/man ]; then
+    export MANPATH=$(prepend_colon "$1/share/man" $MANPATH)
+  fi
 }
 
 export PATH=""
@@ -107,24 +107,24 @@ unshift_path "$HOME/.cabal"
 unshift_path "$HOME/.local/depot_tools"
 unshift_path "$HOME/.krew"
 if [ -d $HOME/.local/go ]; then
-    export GOROOT=$HOME/.local/go
-    unshift_path "$GOROOT"
+  export GOROOT=$HOME/.local/go
+  unshift_path "$GOROOT"
 fi
 
 unset _PERLLIBS
 if [ -d "$LOCAL_PREFIX/lib/perf" ]; then
-    for x in $LOCAL_PREFIX/lib/perl/*; do
-        if [ -d "$x" ]; then
-            _PERLLIBS=$(prepend_colon "$x" $_PERLLIBS)
-        fi
-    done
+  for x in $LOCAL_PREFIX/lib/perl/*; do
+    if [ -d "$x" ]; then
+      _PERLLIBS=$(prepend_colon "$x" $_PERLLIBS)
+    fi
+  done
 fi
 if [ -d "$LOCAL_PREFIX/share/perf" ]; then
-    for x in $LOCAL_PREFIX/share/perl/*; do
-        if [ -d "$x" ]; then
-            _PERLLIBS=$(prepend_colon "$x" $_PERLLIBS)
-        fi
-    done
+  for x in $LOCAL_PREFIX/share/perl/*; do
+    if [ -d "$x" ]; then
+      _PERLLIBS=$(prepend_colon "$x" $_PERLLIBS)
+    fi
+  done
 fi
 export PERL5LIB=$_PERLLIBS
 
@@ -137,31 +137,31 @@ ulimit -n 9999
 
 # Check for files with local environment settings.
 for f in .setenv setenv setenv.sh; do
-    if [ -f "$HOME/$f" ]; then
-        . "$HOME/$f"
-    fi
+  if [ -f "$HOME/$f" ]; then
+    . "$HOME/$f"
+  fi
 done
 
 # added by travis gem
 [ -f ~/.travis/travis.sh ] && source ~/.travis/travis.sh
 
 if [ -d "$LOCAL_PREFIX/share/completions" ]; then
-    for f in $LOCAL_PREFIX/share/completions/*; do
-        source $f
-    done
+  for f in $LOCAL_PREFIX/share/completions/*; do
+    source $f
+  done
 fi
 
 # Aliases.
-case `uname -s` in
+case $(uname -s) in
 [Ll][Ii][Nn][Uu][Xx])
-    alias ls='ls --color -F'
-    ;;
+  alias ls='ls --color -F'
+  ;;
 [Ff][Rr][Ee][Ee][Bb][Ss][Dd])
-    alias ls='ls -G -F'
-    ;;
+  alias ls='ls -G -F'
+  ;;
 [Dd][Aa][Rr][Ww][Ii][Nn])
-    alias ls='ls -G -F'
-    ;;
+  alias ls='ls -G -F'
+  ;;
 esac
 alias la='ls -al'
 alias l='ls -l'
@@ -172,36 +172,35 @@ alias fgrep='fgrep --color=auto'
 alias egrep='egrep --color=auto'
 
 if [ -x /usr/bin/dircolors ]; then
-    test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
+  test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
 fi
 
 # Functions.
 alias calc="_calc" calcfx="_calcfx"
 
-function _calc()
-{
-    gawk "BEGIN { print $* ; }"
+function _calc() {
+  gawk "BEGIN { print $* ; }"
 }
 
-function _calcfx () {
-    gawk -v CONVFMT="%12.2f" -v OFMT="%.9g"  "BEGIN { print $* ; }"
+function _calcfx() {
+  gawk -v CONVFMT="%12.2f" -v OFMT="%.9g" "BEGIN { print $* ; }"
 }
 
 function stdev() {
-    awk '{delta = $1 - avg; avg += delta / NR; mean2 += delta * ($1 - avg); } END { printf "%.2f\n", sqrt(mean2/NR); }'
+  awk '{delta = $1 - avg; avg += delta / NR; mean2 += delta * ($1 - avg); } END { printf "%.2f\n", sqrt(mean2/NR); }'
 }
 
 function avg() {
-    awk '{sum+=$1} END {printf "%.2f\n", sum/NR}'
+  awk '{sum+=$1} END {printf "%.2f\n", sum/NR}'
 }
 
 function add() {
-    awk '{sum+=$1} END {printf "%d\n", sum}'
+  awk '{sum+=$1} END {printf "%d\n", sum}'
 }
 
 function median() {
-    gawk \
-        'function median(c, v,  d) {
+  gawk \
+    'function median(c, v,  d) {
             asort(v, d);
             if (c % 2) {
                 return d[(c+1)/2];
@@ -219,8 +218,8 @@ function median() {
 }
 
 function percentile() {
-    gawk \
-        "function percentile(c, v, p,  d) {
+  gawk \
+    "function percentile(c, v, p,  d) {
             asort(v, d);
             n=int(c * p - 0.5);
             return d[n];
@@ -238,9 +237,9 @@ function percentile() {
 }
 
 function join() {
-    IFS=$1
-    shift
-    echo "$*"
+  IFS=$1
+  shift
+  echo "$*"
 }
 
-ls $HOME/*.retry > /dev/null 2>&1 && mv $HOME/*.retry /tmp/
+ls $HOME/*.retry >/dev/null 2>&1 && mv $HOME/*.retry /tmp/
