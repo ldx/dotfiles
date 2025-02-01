@@ -238,6 +238,19 @@ apt-get install -y \
 # Remove Firefox ESR.
 apt-get remove -y firefox-esr || true
 
+cat <<EOF >/usr/share/applications/firefox.desktop
+[Desktop Entry]
+Name=Firefox
+Comment=Web Browser
+Exec=firefox %U
+Icon=firefox
+Terminal=false
+Type=Application
+Categories=Network;WebBrowser;
+MimeType=text/html;text/xml;application/xhtml+xml;application/xml;application/vnd.mozilla.xul+xml;application/rss+xml;application/rdf+xml;image/webp;x-scheme-handler/http;x-scheme-handler/https;
+StartupNotify=true
+EOF
+
 bash "$cur_dir"/InstallAzureCLIDeb
 
 # Install from GitHub.

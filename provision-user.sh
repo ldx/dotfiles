@@ -87,7 +87,7 @@ for x in "$HOME/.tofuenv/bin/"*; do
 done
 
 # Default browser.
-xdg-settings set default-web-browser firefox_firefox.desktop
+xdg-settings set default-web-browser firefox.desktop
 
 # Docker plugins.
 curl -L https://github.com/docker/buildx/releases/download/v0.11.0/buildx-v0.11.0.linux-amd64 >"$HOME"/.docker/cli-plugins/docker-buildx
