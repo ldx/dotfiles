@@ -43,8 +43,10 @@ chmod +x /tmp/rustup.sh
 
 # Fonts
 curl -L https://github.com/ryanoasis/nerd-fonts/releases/download/v3.3.0/LiberationMono.zip >/tmp/LiberationMono.zip
+curl -L https://github.com/ryanoasis/nerd-fonts/releases/download/v3.3.0/CommitMono.zip >/tmp/CommitMono.zip
 mkdir -p "$HOME/.local/share/fonts"
 unzip -o -d "$HOME/.local/share/fonts" /tmp/LiberationMono.zip
+unzip -o -d "$HOME/.local/share/fonts" /tmp/CommitMono.zip
 fc-cache -f -v
 
 # Minikube.
