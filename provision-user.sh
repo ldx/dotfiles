@@ -92,6 +92,7 @@ done
 xdg-settings set default-web-browser firefox.desktop
 
 # Docker plugins.
+mkdir -p "$HOME"/.docker/cli-plugins/
 curl -L https://github.com/docker/buildx/releases/download/v0.11.0/buildx-v0.11.0.linux-amd64 >"$HOME"/.docker/cli-plugins/docker-buildx
 chmod +x "$HOME"/.docker/cli-plugins/docker-buildx
 
