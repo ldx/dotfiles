@@ -18,6 +18,15 @@ cur_dir=$(dirname "$(readlink -f "$0")")
 mkdir -p /usr/local
 chown "$provisioning_user" /usr/local
 
+# Docker Engine apt sources.
+install -m 0755 -d /etc/apt/keyrings
+curl -fsSL https://download.docker.com/linux/debian/gpg -o /etc/apt/keyrings/docker.asc
+chmod a+r /etc/apt/keyrings/docker.asc
+echo \
+  "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/debian \
+  $(. /etc/os-release && echo "$VERSION_CODENAME") stable" |
+  tee /etc/apt/sources.list.d/docker.list >/dev/null
+
 # Required packages.
 apt-get update -y
 apt-get install -y \
@@ -56,7 +65,11 @@ apt-get install -y \
   desktop-base \
   devscripts \
   direnv \
-  docker.io \
+  docker-ce \
+  docker-ce-cli \
+  containerd.io \
+  docker-buildx-plugin \
+  docker-compose-plugin \
   dnsutils \
   dput \
   ebtables \
