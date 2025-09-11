@@ -33,15 +33,7 @@ ln -snf "$HOME/share/firefox/firefox" "$BINDIR/firefox"
 # Dropbox.
 curl -L "https://www.dropbox.com/download?plat=lnx.x86_64" | tar -C "$HOME" -xzf -
 
-# Node & nvm.
-curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.0/install.sh | bash
-
-# Rust.
-curl -L https://sh.rustup.rs >/tmp/rustup.sh
-chmod +x /tmp/rustup.sh
-/tmp/rustup.sh -y
-
-# Fonts
+# Fonts.
 curl -L https://github.com/ryanoasis/nerd-fonts/releases/download/v3.3.0/LiberationMono.zip >/tmp/LiberationMono.zip
 curl -L https://github.com/ryanoasis/nerd-fonts/releases/download/v3.3.0/CommitMono.zip >/tmp/CommitMono.zip
 mkdir -p "$HOME/.local/share/fonts"
@@ -76,18 +68,6 @@ cp -rf "$CURDIR/dotfiles/.config/nvim"/* "$HOME/.config/nvim/"
 # Powerline.
 pip3 install --break-system-packages --user powerline-status powerline_gitstatus
 
-# TFenv and Tofuenv
-rm -rf "$HOME/.tfenv"
-git clone https://github.com/tfutils/tfenv.git "$HOME/.tfenv"
-for x in "$HOME/.tfenv/bin/"*; do
-  ln -snf "$x" "$BINDIR/"
-done
-rm -rf "$HOME/.tofuenv"
-git clone https://github.com/tofuutils/tofuenv.git "$HOME/.tofuenv"
-for x in "$HOME/.tofuenv/bin/"*; do
-  ln -snf "$x" "$BINDIR/"
-done
-
 # Default browser.
 xdg-settings set default-web-browser firefox.desktop
 
@@ -95,5 +75,9 @@ xdg-settings set default-web-browser firefox.desktop
 mkdir -p "$HOME"/.docker/cli-plugins/
 curl -L https://github.com/docker/buildx/releases/download/v0.11.0/buildx-v0.11.0.linux-amd64 >"$HOME"/.docker/cli-plugins/docker-buildx
 chmod +x "$HOME"/.docker/cli-plugins/docker-buildx
+
+# Mise.
+curl -L "https://github.com/jdx/mise/releases/download/v2025.9.9/mise-v2025.9.9-linux-x64" >"$BINDIR/mise" && chmod +x "$BINDIR/mise"
+"$BINDIR/mise" install
 
 chmod 0755 "$BINDIR/"*
