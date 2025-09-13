@@ -27,8 +27,8 @@ done
 rsync -av "$CURDIR/dotfiles/" "$HOME/"
 
 # Firefox.
-curl -L "https://download.mozilla.org/?product=firefox-latest-ssl&os=linux64&lang=en-US" | tar -C "$HOME/share" -xJf -
-ln -snf "$HOME/share/firefox/firefox" "$BINDIR/firefox"
+curl -L "https://download.mozilla.org/?product=firefox-latest-ssl&os=linux64&lang=en-US" | tar -C "$HOME/.local/share" -xJf -
+ln -snf "$HOME/.local/share/firefox/firefox" "$BINDIR/firefox"
 
 # Dropbox.
 curl -L "https://www.dropbox.com/download?plat=lnx.x86_64" | tar -C "$HOME" -xzf -
@@ -39,11 +39,8 @@ curl -L https://github.com/ryanoasis/nerd-fonts/releases/download/v3.3.0/CommitM
 mkdir -p "$HOME/.local/share/fonts"
 unzip -o -d "$HOME/.local/share/fonts" /tmp/LiberationMono.zip
 unzip -o -d "$HOME/.local/share/fonts" /tmp/CommitMono.zip
-fc-cache -f -v
-
-# Minikube.
-curl -L https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64 >"$BINDIR/minikube" &&
-  chmod +x "$BINDIR/minikube"
+sleep 3
+fc-cache -f -v || fc-cache -f -v
 
 # Closest-airport.
 curl -L https://github.com/ldx/closest-airport/releases/download/v1.0.0/closest-airport.tar.gz | tar xzf - -C "$BINDIR"
@@ -52,7 +49,7 @@ curl -L https://github.com/ldx/closest-airport/releases/download/v1.0.0/closest-
 curl -L "https://github.com/bazelbuild/bazelisk/releases/download/v1.10.1/bazelisk-linux-amd64" >"$BINDIR/bazel"
 
 # Neovim.
-curl -L https://github.com/neovim/neovim/releases/latest/download/nvim.appimage >"$BINDIR/vim"
+curl -L "https://github.com/neovim/neovim/releases/download/stable/nvim-linux-x86_64.appimage" >"$BINDIR/vim"
 chmod u+x "$BINDIR/vim"
 #pip3 install --break-system-packages --user pynvim
 
@@ -69,7 +66,7 @@ cp -rf "$CURDIR/dotfiles/.config/nvim"/* "$HOME/.config/nvim/"
 pip3 install --break-system-packages --user powerline-status powerline_gitstatus
 
 # Default browser.
-xdg-settings set default-web-browser firefox.desktop
+xdg-settings set default-web-browser firefox.desktop || true
 
 # Docker plugins.
 mkdir -p "$HOME"/.docker/cli-plugins/
@@ -78,6 +75,6 @@ chmod +x "$HOME"/.docker/cli-plugins/docker-buildx
 
 # Mise.
 curl -L "https://github.com/jdx/mise/releases/download/v2025.9.9/mise-v2025.9.9-linux-x64" >"$BINDIR/mise" && chmod +x "$BINDIR/mise"
-"$BINDIR/mise" install
+PATH=$PATH:$BINDIR "$BINDIR/mise" install
 
 chmod 0755 "$BINDIR/"*

@@ -55,7 +55,6 @@ apt-get install -y \
   clusterssh \
   cmake \
   cpp \
-  cpufrequtils \
   cscope \
   cups \
   curl \
@@ -126,10 +125,11 @@ apt-get install -y \
   iw \
   laptop-detect \
   less \
+  libicu-dev \
   libnotify-bin \
   libnss-resolve \
   libpam-mount \
-  libpango1.0-0 \
+  libreadline-dev \
   libreoffice \
   libssl-dev \
   lightdm \
@@ -138,7 +138,6 @@ apt-get install -y \
   lsof \
   m4 \
   make \
-  makedev \
   man-db \
   manpages \
   manpages-dev \
@@ -151,7 +150,6 @@ apt-get install -y \
   network-manager-gnome \
   nmap \
   notification-daemon \
-  ntp \
   openssh-client \
   openssh-server \
   openssh-sftp-server \
@@ -159,7 +157,6 @@ apt-get install -y \
   openvpn \
   p7zip-full \
   pandoc \
-  parcellite \
   parted \
   passwd \
   pasystray \
@@ -179,6 +176,7 @@ apt-get install -y \
   python3-all-dev \
   python3-dev \
   python3-pip \
+  python3-venv \
   rdesktop \
   redshift \
   rfkill \
@@ -190,7 +188,6 @@ apt-get install -y \
   sed \
   shellcheck \
   socat \
-  software-properties-common \
   sox \
   speedometer \
   ssh-askpass \
@@ -269,7 +266,6 @@ update-grub
 
 echo 'KERNEL=="intel_backlight", SUBSYSTEM=="backlight", RUN+="/bin/chmod 0666 /sys/class/backlight/%k/brightness"' >/etc/udev/rules.d/97-intel_backlight.rules
 
-usermod -a -G docker "$provisioning_user"
 usermod -a -G sudo "$provisioning_user"
 
 chsh -s /bin/bash "$provisioning_user"
