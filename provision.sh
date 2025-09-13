@@ -54,6 +54,7 @@ apt-get install -y \
   clang \
   clusterssh \
   cmake \
+  copyq \
   cpp \
   cscope \
   cups \
