@@ -1,96 +1,96 @@
 #!/bin/bash
 
 setxkbmap \
-    -rules evdev \
-    -model pc105 \
-    -layout hu \
-    -option
+  -rules evdev \
+  -model pc105 \
+  -layout hu \
+  -option
 #    -option lv3:alt_switch -option terminate:ctrl_alt_bksp \
 #    -option altwin:swap_lalt_lwin -option altwin:alt_super_win
 
 if [ -f "$HOME/.layout.xkb" ]; then
-    xkbcomp $HOME/.layout.xkb $DISPLAY
+  xkbcomp $HOME/.layout.xkb $DISPLAY
 fi
 
 xset b off
 
-if type "synclient" > /dev/null 2>&1; then
-    synclient TapButton1=1
-    synclient TapButton2=3
-    synclient TapButton3=2
-    synclient VertTwoFingerScroll=1
-    synclient LockedDrags=1
-    synclient LockedDragTimeout=500
-    synclient PalmDetect=1
-    synclient HorizHysteresis=25
-    synclient VertHysteresis=25
+if type "synclient" >/dev/null 2>&1; then
+  synclient TapButton1=1
+  synclient TapButton2=3
+  synclient TapButton3=2
+  synclient VertTwoFingerScroll=1
+  synclient LockedDrags=1
+  synclient LockedDragTimeout=500
+  synclient PalmDetect=1
+  synclient HorizHysteresis=25
+  synclient VertHysteresis=25
 fi
 
-if type "syndaemon" > /dev/null 2>&1; then
-    syndaemon -i 1 -d
+if type "syndaemon" >/dev/null 2>&1; then
+  syndaemon -i 1 -d
 fi
 
 if [ -f "$HOME/.Xdefaults" ]; then
-    xrdb $HOME/.Xdefaults
+  xrdb $HOME/.Xdefaults
 fi
 
 for p in $(pidof gnome-screensaver conky trayer skype nm-applet chrome \
-           autocutsel parcellite); do
-    kill $p
+  autocutsel copyq); do
+  kill $p
 done
 
-type "light-locker" > /dev/null 2>&1 && light-locker &
+type "light-locker" >/dev/null 2>&1 && light-locker &
 
-if type "ssh-agent" > /dev/null 2>&1; then
-    echo -n "Checking if ssh-agent is running..."
-    if [ -z "$SSH_AUTH_SOCK" ]; then
-        echo "no, starting it"
-        eval "$(ssh-agent)"
-        if type "ssh-askpass" > /dev/null 2>&1; then
-            export SSH_ASKPASS=ssh-askpass
-            ssh-add < /dev/null
-        fi
-    else
-        echo "yes"
+if type "ssh-agent" >/dev/null 2>&1; then
+  echo -n "Checking if ssh-agent is running..."
+  if [ -z "$SSH_AUTH_SOCK" ]; then
+    echo "no, starting it"
+    eval "$(ssh-agent)"
+    if type "ssh-askpass" >/dev/null 2>&1; then
+      export SSH_ASKPASS=ssh-askpass
+      ssh-add </dev/null
     fi
+  else
+    echo "yes"
+  fi
 fi
 
-type "trayer" > /dev/null 2>&1 && trayer --widthtype request --align right \
-    --height 32 --transparent true --alpha 0 --tint 0x0B0B0B &
+type "trayer" >/dev/null 2>&1 && trayer --widthtype request --align right \
+  --height 32 --transparent true --alpha 0 --tint 0x0B0B0B &
 
-type "skype" > /dev/null 2>&1 && (sleep 3 && PULSE_LATENCY_MSEC=30 skype &)
+type "skype" >/dev/null 2>&1 && (sleep 3 && PULSE_LATENCY_MSEC=30 skype &)
 
-type "nm-applet" > /dev/null 2>&1 && nm-applet &
+type "nm-applet" >/dev/null 2>&1 && nm-applet &
 
-type "pasystray" > /dev/null 2>&1 && pidof pasystray || pasystray &
+type "pasystray" >/dev/null 2>&1 && pidof pasystray || pasystray &
 
-type "devmon" > /dev/null 2>&1 && {
-    dmpid="$(ps h -C devmon -o pid)"
-    if [ -z "$dmpid" ]; then
-        echo "Starting devmon"
-        devmon &
-    else
-        echo -n "devmon running as pid(s): "
-        echo $dmpid
-    fi
+type "devmon" >/dev/null 2>&1 && {
+  dmpid="$(ps h -C devmon -o pid)"
+  if [ -z "$dmpid" ]; then
+    echo "Starting devmon"
+    devmon &
+  else
+    echo -n "devmon running as pid(s): "
+    echo $dmpid
+  fi
 }
 
-type "parcellite" > /dev/null 2>&1 && parcellite &
+type "copyq" >/dev/null 2>&1 && copyq &
 
-type "firefox" > /dev/null 2>&1 && firefox &
+type "firefox" >/dev/null 2>&1 && firefox &
 
-type "slack" > /dev/null 2>&1 && slack &
+type "slack" >/dev/null 2>&1 && slack &
 
 if [ -x "/usr/lib/notification-daemon/notification-daemon" ]; then
-    pid=$(pidof /usr/lib/notification-daemon/notification-daemon)
-    if [ -n "$pid" ]; then
-        kill $pid
-    fi
-     /usr/lib/notification-daemon/notification-daemon &
+  pid=$(pidof /usr/lib/notification-daemon/notification-daemon)
+  if [ -n "$pid" ]; then
+    kill $pid
+  fi
+  /usr/lib/notification-daemon/notification-daemon &
 fi
 
-type "v4l2-ctl" > /dev/null 2>&1 && {
-    v4l2-ctl \
+type "v4l2-ctl" >/dev/null 2>&1 && {
+  v4l2-ctl \
     --set-ctrl=brightness=160 \
     --set-ctrl=contrast=45 \
     --set-ctrl=saturation=45 \
@@ -109,10 +109,10 @@ weather_station=KSFO
 sed -i "s/Run Weather \".*\"/Run Weather \"$weather_station\"/" $HOME/.xmobarrc
 
 gdbus monitor --system --dest org.freedesktop.login1 | grep org.freedesktop.login1.Session.Unlock |
-    while read -r line; do
-        echo "Session unlocked"
-        autorandr --change
-    done &
+  while read -r line; do
+    echo "Session unlocked"
+    autorandr --change
+  done &
 
 type "autorandr" >/dev/null 2>&1 && autorandr --change
 
