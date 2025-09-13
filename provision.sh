@@ -125,6 +125,7 @@ apt-get install -y \
   iw \
   laptop-detect \
   less \
+  libfuse-dev \
   libicu-dev \
   libnotify-bin \
   libnss-resolve \
