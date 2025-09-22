@@ -124,6 +124,7 @@ apt-get install -y \
   ipset \
   iptables \
   iw \
+  keyd \
   laptop-detect \
   less \
   libfuse-dev \
@@ -231,6 +232,18 @@ apt-get install -y \
   xterm \
   xtightvncviewer \
   zip
+
+cat <<EOF >/etc/keyd/default.conf
+[ids]
+#04d8:eed3:ab0dc860
+*
+
+[main]
+capslock = escape
+leftalt  = rightalt
+# dual-role example: tap=esc, hold=ctrl
+#capslock = overload(control, esc)
+EOF
 
 # Remove Firefox ESR.
 apt-get remove -y firefox-esr || true

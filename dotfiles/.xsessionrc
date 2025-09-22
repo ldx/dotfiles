@@ -8,10 +8,6 @@ setxkbmap \
 #    -option lv3:alt_switch -option terminate:ctrl_alt_bksp \
 #    -option altwin:swap_lalt_lwin -option altwin:alt_super_win
 
-if [ -f "$HOME/.layout.xkb" ]; then
-  xkbcomp $HOME/.layout.xkb $DISPLAY
-fi
-
 xset b off
 
 if type "synclient" >/dev/null 2>&1; then
