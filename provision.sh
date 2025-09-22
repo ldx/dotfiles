@@ -124,7 +124,6 @@ apt-get install -y \
   ipset \
   iptables \
   iw \
-  keyd \
   laptop-detect \
   less \
   libfuse-dev \
@@ -233,6 +232,8 @@ apt-get install -y \
   xtightvncviewer \
   zip
 
+# Keyd is not in Debian 13.
+mkdir -p /etc/keyd
 cat <<EOF >/etc/keyd/default.conf
 [ids]
 #04d8:eed3:ab0dc860
@@ -244,6 +245,12 @@ leftalt  = rightalt
 # dual-role example: tap=esc, hold=ctrl
 #capslock = overload(control, esc)
 EOF
+
+keyd_tmpdir=$(mktemp -d /tmp/keyd-XXXXXX)
+git clone https://github.com/rvaiya/keyd.git "$keyd_tmpdir"
+pushd "$keyd_tmpdir"
+make && make install
+popd
 
 # Remove Firefox ESR.
 apt-get remove -y firefox-esr || true
