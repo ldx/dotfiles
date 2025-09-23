@@ -242,7 +242,9 @@ cat <<EOF >/etc/keyd/default.conf
 [main]
 capslock = escape
 leftalt  = rightalt
-# dual-role example: tap=esc, hold=ctrl
+leftcontrol+leftmeta = leftalt
+
+# Dual-role example: tap=esc, hold=ctrl
 #capslock = overload(control, esc)
 EOF
 
