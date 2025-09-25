@@ -34,6 +34,7 @@ main = do
     xmproc <- spawnPipe "/usr/bin/xmobar $HOME/.xmobarrc"
     xmonad $ defaultConfig
         { manageHook = manageDocks  <+> myManageHook <+> manageHook defaultConfig
+        , modMask = mod4Mask
         , layoutHook = avoidStruts  $  myLayouts
         , handleEventHook = handleEventHook defaultConfig <+> docksEventHook
         , logHook = dynamicLogWithPP xmobarPP
@@ -42,8 +43,8 @@ main = do
                         }
         , terminal           = "xterm"
         } `additionalKeys`
-        [ ((mod1Mask .|. shiftMask, xK_o), spawn "light-locker-command -l")
-        , ((mod1Mask .|. shiftMask, xK_s), spawn "systemctl suspend")
+        [ ((mod4Mask .|. shiftMask, xK_o), spawn "light-locker-command -l")
+        , ((mod4Mask .|. shiftMask, xK_s), spawn "systemctl suspend")
         , ((controlMask, xK_Print), spawn "sleep 0.2; scrot -s")
         , ((0, xK_Print), spawn "scrot")
         , ((0, xF86XK_AudioMute), spawn "$HOME/.local/bin/pa-control mute")
