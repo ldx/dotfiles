@@ -287,6 +287,13 @@ sed -r -i 's/\s?#?(\s*)ForwardAgent\s+.*$/    ForwardAgent yes/g' /etc/ssh/ssh_c
 
 echo 'KERNEL=="intel_backlight", SUBSYSTEM=="backlight", RUN+="/bin/chmod 0666 /sys/class/backlight/%k/brightness"' >/etc/udev/rules.d/97-intel_backlight.rules
 
+cat <<EOF >/etc/sudoers.d/50-utils
+%sudo  ALL=(ALL) NOPASSWD: /sbin/resolvconf
+%sudo  ALL=(ALL) NOPASSWD: /usr/bin/resolvectl
+%sudo  ALL=(ALL) NOPASSWD: /usr/sbin/openconnect
+%sudo  ALL=(ALL) NOPASSWD: /usr/sbin/openvpn
+EOF
+
 usermod -a -G sudo "$provisioning_user"
 
 chsh -s /bin/bash "$provisioning_user"
