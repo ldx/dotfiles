@@ -52,14 +52,14 @@ Config {
                 "-L", "0", "-H", "50", "--normal", "green", "--high", "red" ] 10
               , Run Memory [
                 "-L", "0", "-H", "50", "--normal", "green", "--high", "red", "-t", "Mem: <usedratio>%" ] 50
-              , Run Network "wlp0s20f3" [
+              , Run Network "wlp1s0" [
                 "-t", "<dev>: <fc=#4682B4><rx></fc>kB <fc=#4682B4><tx></fc>kB" ] 10
-              , Run Date "%b %_d %a %H:%M" "date" 600
+              , Run Date "%b %_d %a %Y %H:%M" "date" 600
               , Run StdinReader
               ]
 
         -- layout
         , sepChar = "%"
         , alignSep = "}{"
-        , template = "%StdinReader% }{ %battery% || %cpu% | %memory% || %wlp0s20f3% || %KSFO% || <fc=#ee9a00>%date%</fc>"
+        , template = "%StdinReader% }{ %battery% || %cpu% | %memory% || %wlp1s0% || %KSFO% || <fc=#ee9a00>%date%</fc>"
 }
