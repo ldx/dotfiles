@@ -8,19 +8,19 @@ set -e
 
 # Environment to K8s context mapping (add exceptions here)
 declare -A K8S_CONTEXT_MAP=(
-    # ["dev"]="custom-dev-context"
-    # ["staging-usw2"]="staging-west-k8s"
-    # Add your custom mappings here
+  # ["dev"]="custom-dev-context"
+  # ["staging-usw2"]="staging-west-k8s"
+  # Add your custom mappings here
 )
 
 BACKOFF_DELAY=3
 
 # Check if environment argument is provided
 if [ -z "$1" ]; then
-    echo "Usage: vpn <environment>"
-    echo "Available environments:"
-    ls /home/vilmos/Documents/openvpn-vilmos-*.ovpn 2>/dev/null | sed 's/.*openvpn-vilmos-\(.*\)\.ovpn/  - \1/' | grep -v '.old'
-    exit 1
+  echo "Usage: vpn <environment>"
+  echo "Available environments:"
+  ls /home/vilmos/Documents/openvpn-vilmos-*.ovpn 2>/dev/null | sed 's/.*openvpn-vilmos-\(.*\)\.ovpn/  - \1/' | grep -v '.old'
+  exit 1
 fi
 
 ENV="$1"
@@ -28,17 +28,17 @@ VPN_CONFIG="/home/vilmos/Documents/openvpn-vilmos-${ENV}.ovpn"
 
 # Determine K8s context: check lookup table first, then use convention
 if [ -n "${K8S_CONTEXT_MAP[$ENV]}" ]; then
-    K8S_CONTEXT="${K8S_CONTEXT_MAP[$ENV]}"
+  K8S_CONTEXT="${K8S_CONTEXT_MAP[$ENV]}"
 else
-    K8S_CONTEXT="${ENV}-k8s"
+  K8S_CONTEXT="${ENV}-k8s"
 fi
 
 # Check if VPN config exists
 if [ ! -f "$VPN_CONFIG" ]; then
-    echo "Error: VPN config not found: $VPN_CONFIG"
-    echo "Available configs:"
-    ls /home/vilmos/Documents/openvpn-vilmos-*.ovpn 2>/dev/null | sed 's/.*openvpn-vilmos-\(.*\)\.ovpn/  - \1/' | grep -v '.old'
-    exit 1
+  echo "Error: VPN config not found: $VPN_CONFIG"
+  echo "Available configs:"
+  ls /home/vilmos/Documents/openvpn-vilmos-*.ovpn 2>/dev/null | sed 's/.*openvpn-vilmos-\(.*\)\.ovpn/  - \1/' | grep -v '.old'
+  exit 1
 fi
 
 # Global variables for PIDs
@@ -48,23 +48,23 @@ SHOULD_EXIT=false
 
 # Cleanup function
 cleanup() {
-    echo ""
-    echo "Cleaning up..."
-    SHOULD_EXIT=true
+  echo ""
+  echo "Cleaning up..."
+  SHOULD_EXIT=true
 
-    # Kill port-forward if running
-    if [ ! -z "$PORT_FORWARD_PID" ] && kill -0 $PORT_FORWARD_PID 2>/dev/null; then
-        echo "Stopping port forwarding..."
-        kill $PORT_FORWARD_PID 2>/dev/null || true
-    fi
+  # Kill port-forward if running
+  if [ ! -z "$PORT_FORWARD_PID" ] && kill -0 $PORT_FORWARD_PID 2>/dev/null; then
+    echo "Stopping port forwarding..."
+    kill $PORT_FORWARD_PID 2>/dev/null || true
+  fi
 
-    # Stop OpenVPN
-    if [ ! -z "$OPENVPN_PID" ] && kill -0 $OPENVPN_PID 2>/dev/null; then
-        echo "Stopping OpenVPN..."
-        sudo kill $OPENVPN_PID 2>/dev/null || true
-    fi
+  # Stop OpenVPN
+  if [ ! -z "$OPENVPN_PID" ] && kill -0 $OPENVPN_PID 2>/dev/null; then
+    echo "Stopping OpenVPN..."
+    kill $OPENVPN_PID 2>/dev/null || true
+  fi
 
-    exit 0
+  exit 0
 }
 
 # Set up trap for cleanup on Ctrl+C
@@ -72,41 +72,41 @@ trap cleanup SIGINT SIGTERM
 
 # Function to kill existing OpenVPN instances for this config
 kill_existing_openvpn() {
-    local existing_pids=$(pgrep -f "openvpn.*$VPN_CONFIG" || true)
-    if [ ! -z "$existing_pids" ]; then
-        echo "Killing existing OpenVPN instances: $existing_pids"
-        sudo kill $existing_pids 2>/dev/null || true
-        sleep 1
-    fi
+  local existing_pids=$(pgrep -f "openvpn.*$VPN_CONFIG" || true)
+  if [ ! -z "$existing_pids" ]; then
+    echo "Killing existing OpenVPN instances: $existing_pids"
+    kill $existing_pids 2>/dev/null || true
+    sleep 1
+  fi
 }
 
 # Function to start OpenVPN
 start_openvpn() {
-    # Kill any existing instances first
-    kill_existing_openvpn
+  # Kill any existing instances first
+  kill_existing_openvpn
 
-    echo "Starting OpenVPN (requires sudo)..."
-    # Run in background without daemon mode so we can track the PID
-    sudo openvpn --config "$VPN_CONFIG" > /dev/null 2>&1 &
-    OPENVPN_PID=$!
+  echo "Starting OpenVPN (requires sudo)..."
+  # Run in background without daemon mode so we can track the PID
+  sudo openvpn --config "$VPN_CONFIG" >/dev/null 2>&1 &
+  OPENVPN_PID=$!
 
-    # Wait a moment and check if it's still running
-    sleep 2
-    if ! kill -0 $OPENVPN_PID 2>/dev/null; then
-        echo "Warning: OpenVPN failed to start"
-        return 1
-    else
-        echo "OpenVPN started with PID: $OPENVPN_PID"
-        return 0
-    fi
+  # Wait a moment and check if it's still running
+  sleep 2
+  if ! kill -0 $OPENVPN_PID 2>/dev/null; then
+    echo "Warning: OpenVPN failed to start"
+    return 1
+  else
+    echo "OpenVPN started with PID: $OPENVPN_PID"
+    return 0
+  fi
 }
 
 # Function to start port forwarding
 start_port_forward() {
-    echo "Starting port forwarding: localhost:8888 -> svc/argocd-server:80"
-    kubectl -n argocd port-forward svc/argocd-server 8888:80 &
-    PORT_FORWARD_PID=$!
-    echo "Port forwarding started with PID: $PORT_FORWARD_PID"
+  echo "Starting port forwarding: localhost:8888 -> svc/argocd-server:80"
+  kubectl -n argocd port-forward svc/argocd-server 8888:80 &
+  PORT_FORWARD_PID=$!
+  echo "Port forwarding started with PID: $PORT_FORWARD_PID"
 }
 
 echo "Starting VPN for environment: $ENV"
@@ -123,11 +123,11 @@ sleep 5
 # Switch k8s context
 echo "Switching k8s context to: $K8S_CONTEXT"
 if kubectl config use-context "$K8S_CONTEXT" 2>/dev/null; then
-    echo "Successfully switched to context: $K8S_CONTEXT"
+  echo "Successfully switched to context: $K8S_CONTEXT"
 else
-    echo "Warning: Could not switch to context $K8S_CONTEXT"
-    echo "Available contexts:"
-    kubectl config get-contexts -o name
+  echo "Warning: Could not switch to context $K8S_CONTEXT"
+  echo "Available contexts:"
+  kubectl config get-contexts -o name
 fi
 
 echo ""
@@ -147,23 +147,23 @@ echo ""
 
 # Monitor loop
 while [ "$SHOULD_EXIT" = false ]; do
-    # Check OpenVPN
-    if [ ! -z "$OPENVPN_PID" ] && ! kill -0 $OPENVPN_PID 2>/dev/null; then
-        echo "[$(date +'%H:%M:%S')] OpenVPN process died, restarting in ${BACKOFF_DELAY}s..."
-        sleep $BACKOFF_DELAY
-        if start_openvpn; then
-            echo "Waiting for VPN to stabilize..."
-            sleep 5
-        fi
+  # Check OpenVPN
+  if [ ! -z "$OPENVPN_PID" ] && ! kill -0 $OPENVPN_PID 2>/dev/null; then
+    echo "[$(date +'%H:%M:%S')] OpenVPN process died, restarting in ${BACKOFF_DELAY}s..."
+    sleep $BACKOFF_DELAY
+    if start_openvpn; then
+      echo "Waiting for VPN to stabilize..."
+      sleep 5
     fi
+  fi
 
-    # Check port-forward
-    if [ ! -z "$PORT_FORWARD_PID" ] && ! kill -0 $PORT_FORWARD_PID 2>/dev/null; then
-        echo "[$(date +'%H:%M:%S')] Port-forward process died, restarting in ${BACKOFF_DELAY}s..."
-        sleep $BACKOFF_DELAY
-        start_port_forward
-    fi
+  # Check port-forward
+  if [ ! -z "$PORT_FORWARD_PID" ] && ! kill -0 $PORT_FORWARD_PID 2>/dev/null; then
+    echo "[$(date +'%H:%M:%S')] Port-forward process died, restarting in ${BACKOFF_DELAY}s..."
+    sleep $BACKOFF_DELAY
+    start_port_forward
+  fi
 
-    # Sleep before next check
-    sleep 2
+  # Sleep before next check
+  sleep 2
 done
