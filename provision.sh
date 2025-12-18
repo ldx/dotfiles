@@ -294,6 +294,9 @@ cat <<EOF >/etc/sudoers.d/50-utils
 %sudo  ALL=(ALL) NOPASSWD: /usr/sbin/openvpn
 EOF
 
+mkdir -p /etc/openvpn
+cp "$cur_dir"/update-resolv-conf /etc/openvpn/update-resolv-conf
+
 usermod -a -G sudo "$provisioning_user"
 
 chsh -s /bin/bash "$provisioning_user"
