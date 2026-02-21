@@ -3,10 +3,14 @@
 setxkbmap \
   -rules evdev \
   -model pc105 \
-  -layout hu \
-  -option
-#    -option lv3:alt_switch -option terminate:ctrl_alt_bksp \
-#    -option altwin:swap_lalt_lwin -option altwin:alt_super_win
+  -layout hu
+
+# -option altwin:swap_lalt_lwin -option altwin:alt_super_win
+# -option lv3:alt_switch -option terminate:ctrl_alt_bksp
+
+#if [ -f "$HOME/.layout.xkb" ]; then
+#    xkbcomp $HOME/.layout.xkb $DISPLAY
+#fi
 
 xset b off
 
@@ -31,7 +35,7 @@ if [ -f "$HOME/.Xdefaults" ]; then
 fi
 
 for p in $(pidof gnome-screensaver conky trayer skype nm-applet chrome \
-  autocutsel copyq); do
+  autocutsel parcellite); do
   kill $p
 done
 
@@ -71,7 +75,7 @@ type "devmon" >/dev/null 2>&1 && {
   fi
 }
 
-type "copyq" >/dev/null 2>&1 && copyq &
+type "parcellite" >/dev/null 2>&1 && parcellite &
 
 type "firefox" >/dev/null 2>&1 && firefox &
 

@@ -1,9 +1,3 @@
-# Start tmux automatically.
-parent="$(ps -o comm= $PPID)"
-if [ -z "$TMUX" -a "$parent" != "sshd" -a "$parent" != "su" -a "$SSH_CONNECTION" = "" ]; then
-  which tmux >/dev/null 2>&1 && exec tmux -2
-fi
-
 # Environment variables.
 export LESSCHARSET=utf-8
 
@@ -129,7 +123,6 @@ fi
 export PERL5LIB=$_PERLLIBS
 
 # Create core files.
-# ulimit -c unlimited
 ulimit -c 0
 
 # Try to bump max number of open fds.

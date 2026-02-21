@@ -96,7 +96,7 @@ Xft.hintstyle: hintslight
 *xterm*scrollBar: false
 *xterm*scrollstyle: rxvt
 !*xterm*faceName: Liberation Mono for Powerline
-*xterm*faceName: LiterationMonoNerdFontMono
+*xterm*faceName: CommitMonoNerdFontMono
 *xterm*faceSize: 13
 *xterm*cursorColor: white
 *xterm*utf8: 2
@@ -117,12 +117,9 @@ Xft.hintstyle: hintslight
 
 *xterm*visualBell: True
 
-XTerm*selectToClipboard: true
-
 XTerm*VT100.translations: #override \
   Shift <Key>Up: scroll-back(1) \n\
   Shift <Key>Down: scroll-forw(1) \n\
-  Shift Ctrl <Key>C: copy-selection(CLIPBOARD) \n\
   Shift Ctrl <Key>V: insert-selection(CLIPBOARD) \n
 !  ~Meta Shift Ctrl <Key>V: insert-selection(CLIPBOARD) \n\
 !   Meta Shift Ctrl <Key>V: insert-selection(PRIMARY) \n\
