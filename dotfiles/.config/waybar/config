@@ -2,7 +2,11 @@
     "layer": "top",
     "position": "top",
     "modules-left": ["sway/workspaces", "sway/mode", "sway/window"],
-    "modules-right": ["battery", "cpu", "memory", "network", "clock"],
+    "modules-right": ["tray", "battery", "cpu", "memory", "network", "clock"],
+
+    "tray": {
+        "spacing": 8
+    },
 
     "sway/workspaces": {
         "disable-scroll": true,
