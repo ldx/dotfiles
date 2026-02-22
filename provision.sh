@@ -283,3 +283,24 @@ cp "$cur_dir"/update-resolv-conf /etc/openvpn/update-resolv-conf
 usermod -a -G sudo "$provisioning_user"
 
 chsh -s /bin/bash "$provisioning_user"
+
+# greetd + tuigreet display manager.
+apt-get install -y greetd tuigreet
+
+# greeter user needs a home dir for --remember state and input group for keyboard.
+mkdir -p /home/greeter
+chown greeter:greeter /home/greeter
+usermod -aG input greeter
+
+cat <<EOF >/etc/greetd/config.toml
+[terminal]
+vt = 1
+
+[default_session]
+command = "tuigreet --time --remember --remember-session --sessions /usr/share/wayland-sessions:/usr/local/share/wayland-sessions"
+user = "greeter"
+EOF
+
+# Prevent getty@tty1 from fighting greetd on VT1.
+systemctl mask getty@tty1
+systemctl enable greetd
