@@ -59,33 +59,45 @@ bindsym $mod+q reload
 # Exit sway (Mod+Shift+q matches XMonad quit)
 bindsym $mod+Shift+q exec swaynag -t warning -m 'Exit sway?' -B 'Yes, exit' 'swaymsg exit'
 
-# Focus next/prev in stack (Mod+j/k matches XMonad)
+# Focus (vim-style + arrows)
+bindsym $mod+h focus left
 bindsym $mod+j focus down
 bindsym $mod+k focus up
+bindsym $mod+l focus right
+bindsym $mod+Left  focus left
 bindsym $mod+Down  focus down
 bindsym $mod+Up    focus up
-bindsym $mod+Left  focus left
 bindsym $mod+Right focus right
 
-# Resize width (Mod+h/l matches XMonad master shrink/expand)
-bindsym $mod+h resize shrink width 10px
-bindsym $mod+l resize grow   width 10px
-
-# Move windows (Mod+Shift+j/k matches XMonad swap down/up)
+# Move windows
+bindsym $mod+Shift+h     move left
 bindsym $mod+Shift+j     move down
 bindsym $mod+Shift+k     move up
-bindsym $mod+Shift+h     move left
 bindsym $mod+Shift+l     move right
+bindsym $mod+Shift+Left  move left
 bindsym $mod+Shift+Down  move down
 bindsym $mod+Shift+Up    move up
-bindsym $mod+Shift+Left  move left
 bindsym $mod+Shift+Right move right
 
-# Toggle bar visibility (Mod+b matches XMonad)
-bindsym $mod+b bar mode toggle
-
-# Split vertical (Mod+v, new — no XMonad equivalent)
+# Splits
+bindsym $mod+b splith
 bindsym $mod+v splitv
+
+# Resize mode
+mode "resize" {
+    bindsym h resize shrink width  5 ppt
+    bindsym j resize grow   height 5 ppt
+    bindsym k resize shrink height 5 ppt
+    bindsym l resize grow   width  5 ppt
+    bindsym Left  resize shrink width  5 ppt
+    bindsym Down  resize grow   height 5 ppt
+    bindsym Up    resize shrink height 5 ppt
+    bindsym Right resize grow   width  5 ppt
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+    bindsym $mod+r mode "default"
+}
+bindsym $mod+r mode "resize"
 
 # Cycle layouts (Mod+Space matches XMonad)
 bindsym $mod+space layout toggle split tabbed
