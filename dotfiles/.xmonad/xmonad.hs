@@ -32,16 +32,16 @@ myManageHook = composeAll
 
 main = do
     xmproc <- spawnPipe "/usr/bin/xmobar $HOME/.xmobarrc"
-    xmonad $ defaultConfig
-        { manageHook = manageDocks  <+> myManageHook <+> manageHook defaultConfig
+    xmonad $ docks $ def
+        { manageHook = myManageHook <+> manageHook def
         , modMask = mod4Mask
         , layoutHook = avoidStruts  $  myLayouts
-        , handleEventHook = handleEventHook defaultConfig <+> docksEventHook
+        , handleEventHook = handleEventHook def
         , logHook = dynamicLogWithPP xmobarPP
                         { ppOutput = hPutStrLn xmproc
                         , ppTitle = xmobarColor "green" "" . shorten 50
                         }
-        , terminal           = "xterm"
+        , terminal           = "alacritty"
         } `additionalKeys`
         [ ((mod4Mask .|. shiftMask, xK_o), spawn "light-locker-command -l")
         , ((mod4Mask .|. shiftMask, xK_s), spawn "systemctl suspend")

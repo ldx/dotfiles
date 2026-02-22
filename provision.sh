@@ -222,6 +222,7 @@ apt-get install -y \
   xmonad \
   xorg \
   xss-lock \
+  alacritty \
   xterm \
   xtightvncviewer \
   zip \
