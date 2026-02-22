@@ -34,13 +34,13 @@ ln -snf "$HOME/.local/share/firefox/firefox" "$BINDIR/firefox"
 curl -L "https://www.dropbox.com/download?plat=lnx.x86_64" | tar -C "$HOME" -xzf -
 
 # Fonts.
-curl -L https://github.com/ryanoasis/nerd-fonts/releases/download/v3.3.0/LiberationMono.zip >/tmp/LiberationMono.zip
-curl -L https://github.com/ryanoasis/nerd-fonts/releases/download/v3.3.0/CommitMono.zip >/tmp/CommitMono.zip
+NERD_FONTS_VERSION=$(curl -fsSL https://api.github.com/repos/ryanoasis/nerd-fonts/releases/latest | grep '"tag_name"' | cut -d'"' -f4)
+curl -L "https://github.com/ryanoasis/nerd-fonts/releases/download/${NERD_FONTS_VERSION}/LiberationMono.zip" >/tmp/LiberationMono.zip
+curl -L "https://github.com/ryanoasis/nerd-fonts/releases/download/${NERD_FONTS_VERSION}/CommitMono.zip" >/tmp/CommitMono.zip
 mkdir -p "$HOME/.local/share/fonts"
 unzip -o -d "$HOME/.local/share/fonts" /tmp/LiberationMono.zip
 unzip -o -d "$HOME/.local/share/fonts" /tmp/CommitMono.zip
-sleep 3
-fc-cache -f -v || fc-cache -f -v
+fc-cache -f -v
 
 # LazyVim.
 rm -rf "$HOME/.config/nvim"
@@ -57,9 +57,9 @@ xdg-settings set default-web-browser firefox.desktop || true
 
 # Mise.
 curl https://mise.run | sh
-PATH=$PATH:$BINDIR mise install
+PATH="$PATH:$BINDIR" mise install
 
 # Symlink vim to neovim installed by mise.
-ln -snf "$(PATH=$PATH:$BINDIR "$BINDIR/mise" which nvim)" "$BINDIR/vim"
+ln -snf "$(PATH="$PATH:$BINDIR" "$BINDIR/mise" which nvim)" "$BINDIR/vim"
 
 chmod 0755 "$BINDIR/"*

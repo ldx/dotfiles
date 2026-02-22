@@ -11,7 +11,6 @@ export PAGER="less -X"
 export LOCAL_PREFIX=$HOME/.local
 export CPPFLAGS=-I$LOCAL_PREFIX/include
 export LDFLAGS=-L$LOCAL_PREFIX/lib
-# export LD_LIBRARY_PATH=$LOCAL_PREFIX/lib:$LD_LIBRARY_PATH
 
 export GPU_MAX_ALLOC_PERCENT=100
 export GPU_USE_SYNC_OBJECTS=1
@@ -65,7 +64,6 @@ unshift_path() {
 export PATH=""
 export MANPATH=""
 
-unshift_path ""
 unshift_path "/usr"
 unshift_path "/usr/local"
 unshift_path "/usr/local/go"
@@ -85,23 +83,6 @@ if [ -d $HOME/.local/go ]; then
   export GOROOT=$HOME/.local/go
   unshift_path "$GOROOT"
 fi
-
-unset _PERLLIBS
-if [ -d "$LOCAL_PREFIX/lib/perf" ]; then
-  for x in $LOCAL_PREFIX/lib/perl/*; do
-    if [ -d "$x" ]; then
-      _PERLLIBS=$(prepend_colon "$x" $_PERLLIBS)
-    fi
-  done
-fi
-if [ -d "$LOCAL_PREFIX/share/perf" ]; then
-  for x in $LOCAL_PREFIX/share/perl/*; do
-    if [ -d "$x" ]; then
-      _PERLLIBS=$(prepend_colon "$x" $_PERLLIBS)
-    fi
-  done
-fi
-export PERL5LIB=$_PERLLIBS
 
 # Create core files.
 ulimit -c 0
@@ -212,5 +193,3 @@ function join() {
   shift
   echo "$*"
 }
-
-ls $HOME/*.retry >/dev/null 2>&1 && mv $HOME/*.retry /tmp/

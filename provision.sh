@@ -153,7 +153,6 @@ apt-get install -y \
   notification-daemon \
   openssh-client \
   openssh-server \
-  openssh-sftp-server \
   openssl \
   openvpn \
   p7zip-full \
@@ -170,7 +169,6 @@ apt-get install -y \
   pulseaudio \
   pulseaudio-module-bluetooth \
   pulseaudio-utils \
-  puppet-lint \
   pwgen \
   python3 \
   python3-all \

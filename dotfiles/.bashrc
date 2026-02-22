@@ -56,7 +56,7 @@ alias ks="k -n kube-system"
 alias kse="k -n kube-system exec -ti"
 alias kk="k kustomize"
 
-source .complete_alias
+source "$HOME/.complete_alias"
 
 complete -F _complete_alias k
 complete -F _complete_alias ke

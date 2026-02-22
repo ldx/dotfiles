@@ -19,7 +19,7 @@ BACKOFF_DELAY=3
 if [ -z "$1" ]; then
   echo "Usage: vpn <environment>"
   echo "Available environments:"
-  ls $HOME/Documents/openvpn-$USER-*.ovpn 2>/dev/null | sed 's/.*openvpn-vilmos-\(.*\)\.ovpn/  - \1/' | grep -v '.old'
+  ls $HOME/Documents/openvpn-$USER-*.ovpn 2>/dev/null | sed "s/.*openvpn-$USER-\(.*\)\.ovpn/  - \1/" | grep -v '.old'
   exit 1
 fi
 
@@ -37,7 +37,7 @@ fi
 if [ ! -f "$VPN_CONFIG" ]; then
   echo "Error: VPN config not found: $VPN_CONFIG"
   echo "Available configs:"
-  ls $HOME/Documents/openvpn-$USER-*.ovpn 2>/dev/null | sed 's/.*openvpn-vilmos-\(.*\)\.ovpn/  - \1/' | grep -v '.old'
+  ls $HOME/Documents/openvpn-$USER-*.ovpn 2>/dev/null | sed "s/.*openvpn-$USER-\(.*\)\.ovpn/  - \1/" | grep -v '.old'
   exit 1
 fi
 

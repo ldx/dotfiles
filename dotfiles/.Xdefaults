@@ -26,10 +26,10 @@ URxvt*scrollBar: false
 URxvt*scrollBar_right: true
 URxvt*scrollstyle: rxvt
 
-URxvt*font: xft:Liberation Mono for Powerline:pixelsize=12:antialias=true:hinting=true
-URxvt*boldFont: xft:Liberation Mono for Powerline:pixelsize=12:antialias=true:bold:hinting=true
-URxvt*italicFont: xft:Liberation Mono for Powerline:pixelsize=12:antialias=true:italic:autohint=true:hinting=true
-URxvt*bolditalicFont: xft:Liberation Mono for Powerline:pixelsize=12:antialias=true:bold:italic:autohint=true:hinting=true
+URxvt*font: xft:CommitMonoNerdFontMono:pixelsize=12:antialias=true:hinting=true
+URxvt*boldFont: xft:CommitMonoNerdFontMono:pixelsize=12:antialias=true:bold:hinting=true
+URxvt*italicFont: xft:CommitMonoNerdFontMono:pixelsize=12:antialias=true:italic:autohint=true:hinting=true
+URxvt*bolditalicFont: xft:CommitMonoNerdFontMono:pixelsize=12:antialias=true:bold:italic:autohint=true:hinting=true
 
 Xft.dpi: 120
 Xft.antialias: true

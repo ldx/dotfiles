@@ -38,7 +38,7 @@ case "$script_type" in
 	for optionvarname in ${foreign_options} ; do
 		option="${!optionvarname}"
 		echo "$option"
-		split_into_parts $option
+		split_into_parts "$option"
 		if [ "$part1" = "dhcp-option" ] ; then
 			if [ "$part2" = "DNS" ] ; then
 				NMSRVRS="${NMSRVRS:+$NMSRVRS }$part3"
