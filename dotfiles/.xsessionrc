@@ -1,21 +1,17 @@
 #!/bin/bash
 
-setxkbmap \
-  -rules evdev \
-  -model pc105 \
-  -layout hu
+# X11-only setup
+if [ -n "$DISPLAY" ]; then
+  setxkbmap \
+    -rules evdev \
+    -model pc105 \
+    -layout hu
 
-# -option altwin:swap_lalt_lwin -option altwin:alt_super_win
-# -option lv3:alt_switch -option terminate:ctrl_alt_bksp
+  xset b off
 
-#if [ -f "$HOME/.layout.xkb" ]; then
-#    xkbcomp $HOME/.layout.xkb $DISPLAY
-#fi
-
-xset b off
-
-if [ -f "$HOME/.Xdefaults" ]; then
-  xrdb $HOME/.Xdefaults
+  if [ -f "$HOME/.Xdefaults" ]; then
+    xrdb "$HOME/.Xdefaults"
+  fi
 fi
 
 for p in $(pidof gnome-screensaver conky trayer nm-applet chrome \
@@ -23,37 +19,32 @@ for p in $(pidof gnome-screensaver conky trayer nm-applet chrome \
   kill $p
 done
 
-type "light-locker" >/dev/null 2>&1 && light-locker &
+# X11-only autostart
+if [ -n "$DISPLAY" ]; then
+  type "light-locker" >/dev/null 2>&1 && light-locker &
+
+  type "trayer" >/dev/null 2>&1 && trayer --widthtype request --align right \
+    --height 32 --transparent true --alpha 0 --tint 0x0B0B0B &
+
+  type "nm-applet" >/dev/null 2>&1 && nm-applet &
+
+  type "pasystray" >/dev/null 2>&1 && pidof pasystray || pasystray &
+fi
 
 if type "ssh-agent" >/dev/null 2>&1; then
-  echo -n "Checking if ssh-agent is running..."
   if [ -z "$SSH_AUTH_SOCK" ]; then
-    echo "no, starting it"
     eval "$(ssh-agent)"
     if type "ssh-askpass" >/dev/null 2>&1; then
       export SSH_ASKPASS=ssh-askpass
       ssh-add </dev/null
     fi
-  else
-    echo "yes"
   fi
 fi
-
-type "trayer" >/dev/null 2>&1 && trayer --widthtype request --align right \
-  --height 32 --transparent true --alpha 0 --tint 0x0B0B0B &
-
-type "nm-applet" >/dev/null 2>&1 && nm-applet &
-
-type "pasystray" >/dev/null 2>&1 && pidof pasystray || pasystray &
 
 type "devmon" >/dev/null 2>&1 && {
   dmpid="$(ps h -C devmon -o pid)"
   if [ -z "$dmpid" ]; then
-    echo "Starting devmon"
     devmon &
-  else
-    echo -n "devmon running as pid(s): "
-    echo $dmpid
   fi
 }
 
@@ -86,12 +77,12 @@ type "v4l2-ctl" >/dev/null 2>&1 && {
     --set-ctrl=exposure_auto_priority=1
 }
 
-gdbus monitor --system --dest org.freedesktop.login1 | grep org.freedesktop.login1.Session.Unlock |
-  while read -r line; do
-    echo "Session unlocked"
-    autorandr --change
-  done &
+# X11-only: monitor for session unlock to re-apply display layout
+if [ -n "$DISPLAY" ]; then
+  gdbus monitor --system --dest org.freedesktop.login1 | grep org.freedesktop.login1.Session.Unlock |
+    while read -r line; do
+      autorandr --change
+    done &
 
-type "autorandr" >/dev/null 2>&1 && autorandr --change
-
-exec xmonad
+  type "autorandr" >/dev/null 2>&1 && autorandr --change
+fi
