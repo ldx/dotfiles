@@ -1,0 +1,5 @@
+[Desktop Entry]
+Name=XMonad
+Comment=Lightweight tiling window manager (X11)
+Exec=xmonad-x11
+Type=Application

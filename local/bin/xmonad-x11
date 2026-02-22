@@ -1,0 +1,3 @@
+#!/bin/bash
+# Launch XMonad (X11) from greetd — passes the VT number to startx
+exec startx /etc/X11/Xsession xmonad-session -- "vt${XDG_VTNR:-7}"
