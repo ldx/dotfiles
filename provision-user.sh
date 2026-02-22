@@ -31,7 +31,9 @@ curl -L "https://download.mozilla.org/?product=firefox-latest-ssl&os=linux64&lan
 ln -snf "$HOME/.local/share/firefox/firefox" "$BINDIR/firefox"
 
 # Dropbox.
-curl -L "https://www.dropbox.com/download?plat=lnx.x86_64" | tar -C "$HOME" -xzf -
+if [ ! -x "$HOME/.dropbox-dist/dropboxd" ]; then
+  curl -L "https://www.dropbox.com/download?plat=lnx.x86_64" | tar -C "$HOME" -xzf -
+fi
 
 # Fonts.
 NERD_FONTS_VERSION=$(curl -fsSL https://api.github.com/repos/ryanoasis/nerd-fonts/releases/latest | grep '"tag_name"' | cut -d'"' -f4)
