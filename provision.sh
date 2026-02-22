@@ -268,6 +268,11 @@ rm -rf "$keyd_tmpdir"
 # Remove Firefox ESR.
 apt-get remove -y firefox-esr || true
 
+# Slack.
+curl -L "https://slack.com/downloads/instructions/linux?ddl=1&build=deb" -o /tmp/slack.deb
+apt-get install -y /tmp/slack.deb
+rm -f /tmp/slack.deb
+
 bash "$cur_dir"/InstallAzureCLIDeb
 
 # Flatpak hub.
