@@ -3,8 +3,8 @@ export LESSCHARSET=utf-8
 
 export LANG=en_US.UTF-8
 
-export EDITOR=vim
-export VISUAL=vim
+export EDITOR=nvim
+export VISUAL=nvim
 
 export PAGER="less -X"
 
@@ -12,10 +12,7 @@ export LOCAL_PREFIX=$HOME/.local
 export CPPFLAGS=-I$LOCAL_PREFIX/include
 export LDFLAGS=-L$LOCAL_PREFIX/lib
 
-export GPU_MAX_ALLOC_PERCENT=100
-export GPU_USE_SYNC_OBJECTS=1
 
-export QUILT_PATCHES=debian/patches
 
 # Workaround for https://wiki.archlinux.org/title/Java#Gray_window,_applications_not_resizing_with_WM,_menus_immediately_closing.
 export _JAVA_AWT_WM_NONREPARENTING=1
@@ -27,13 +24,6 @@ case $(uname -s) in
   alias sed="sed -E"
   ;;
 esac
-
-if [ "$TERM" = "xterm" ]; then
-  export TERM=xterm-color
-fi
-
-export GEM_HOME=$HOME/.gem
-export BUNDLE_PATH=$GEM_HOME
 
 export GOPATH=$HOME/Projects/go
 export GOFLAGS="-mod=readonly"
@@ -70,14 +60,9 @@ unshift_path "/usr/local/go"
 unshift_path "/usr/X11"
 unshift_path "/opt"
 unshift_path "/opt/local"
-unshift_path "/snap"
 unshift_path "$HOME"
 unshift_path "$LOCAL_PREFIX"
 unshift_path "$GOPATH"
-unshift_path "$BUNDLE_PATH"
-unshift_path "$HOME/Projects/rumprun/rumprun"
-unshift_path "$HOME/.cabal"
-unshift_path "$HOME/.local/depot_tools"
 unshift_path "$HOME/.krew"
 if [ -d $HOME/.local/go ]; then
   export GOROOT=$HOME/.local/go
@@ -99,7 +84,7 @@ done
 
 if [ -d "$LOCAL_PREFIX/share/completions" ]; then
   for f in "$LOCAL_PREFIX/share/completions/"*; do
-    source $f
+    source "$f"
   done
 fi
 

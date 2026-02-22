@@ -8,7 +8,7 @@ case $- in
 *) return ;;
 esac
 
-source $HOME/.common.sh
+source "$HOME/.common.sh"
 
 # Append to the history file, don't overwrite it.
 shopt -s histappend
@@ -47,8 +47,8 @@ fi
 
 type aws_completer >/dev/null 2>&1 && complete -C aws_completer aws
 
-which _awsp >/dev/null 2>&1 && alias awsp="source _awsp"
-[ -f $HOME/.awsp ] && export AWS_PROFILE=$(cat $HOME/.awsp)
+type _awsp &>/dev/null && alias awsp="source _awsp"
+[ -f "$HOME/.awsp" ] && export AWS_PROFILE=$(cat "$HOME/.awsp")
 
 alias k="kubectl"
 alias ke="k exec -ti"
@@ -62,7 +62,6 @@ complete -F _complete_alias k
 complete -F _complete_alias ke
 complete -F _complete_alias ks
 complete -F _complete_alias kse
-complete -F _complete_alias kc
 
 command -v kubecolor >/dev/null 2>&1 && complete -F __start_kubectl kubecolor
 
