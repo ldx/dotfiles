@@ -1,21 +1,25 @@
 {
   "permissions": {
     "allow": [
-      "Bash(which brightnessctl 2>/dev/null; xrandr --current --verbose 2>/dev/null | grep -i 'edp\\\\|brightness' | head -5)",
-      "Bash(mise registry 2>/dev/null | grep -i \"neovim\\\\|docker-buildx\\\\|firefox\\\\|dropbox\" || mise ls-remote neovim 2>/dev/null | tail -3)",
-      "Bash(mise registry 2>/dev/null | grep -i \"docker-buildx\\\\|buildx\")",
-      "Bash(mise ls-remote docker-buildx 2>/dev/null | tail -3)",
-      "Bash(ls -la /home/vilmos/.local/bin/vim 2>/dev/null; which nvim 2>/dev/null; mise which nvim 2>/dev/null)",
-      "Bash(/usr/local/bin/nvim --version)",
-      "Bash(mise ls 2>/dev/null | grep -i \"neo\\\\|nvim\\\\|vim\"; ls -la /home/vilmos/.local/share/mise/installs/ 2>/dev/null | grep -i \"neo\\\\|nvim\")",
-      "Bash(/home/vilmos/.local/bin/mise install neovim 2>&1)",
-      "Bash(mise which nvim)",
-      "Bash(rm /home/vilmos/.local/bin/vim /home/vilmos/.local/bin/vim-0.11.6 2>/dev/null; ln -snf \"$HOME/.local/share/mise/shims/nvim\" \"$HOME/.local/bin/vim\")",
-      "Bash(vim --version 2>/dev/null | head -1)",
-      "Bash(ls -la /home/vilmos/.local/bin/vim && /home/vilmos/.local/bin/vim --version 2>&1 | head -1)",
-      "Bash(ln -snf \"$HOME/.local/share/mise/installs/neovim/0.11.6/nvim-linux-x86_64/bin/nvim\" \"$HOME/.local/bin/vim\" && /home/vilmos/.local/bin/vim --version | head -1)",
-      "Bash(ln -snf /home/vilmos/.local/share/mise/installs/neovim/0.11.6/nvim-linux-x86_64/bin/nvim /home/vilmos/.local/bin/vim && /home/vilmos/.local/bin/vim --version | head -1)",
-      "Bash(/home/vilmos/.local/bin/mise install starship 2>&1)"
+      "Bash(which *)",
+      "Bash(lspci *)",
+      "Bash(glxinfo *)",
+      "Bash(xrandr --current *)",
+      "Bash(dpkg -l *)",
+      "Bash(apt-cache *)",
+      "Bash(starship *)",
+      "Bash(alacritty *)",
+      "Bash(mise ls *)",
+      "Bash(mise ls-remote *)",
+      "Bash(mise registry *)",
+      "Bash(mise which *)",
+      "Bash(mise install *)",
+      "Bash(git log *)",
+      "Bash(git status *)",
+      "Bash(git diff *)",
+      "Bash(git show *)",
+      "Bash(git add *)",
+      "Bash(git commit *)"
     ]
   }
 }
