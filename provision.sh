@@ -100,6 +100,8 @@ apt-get install -y \
   gcc-multilib \
   gdb \
   ghostscript \
+  greetd \
+  tuigreet \
   gimp \
   git \
   git-man \
