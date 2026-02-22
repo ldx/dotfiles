@@ -285,13 +285,15 @@ usermod -a -G sudo "$provisioning_user"
 
 chsh -s /bin/bash "$provisioning_user"
 
-# greetd + tuigreet display manager.
-apt-get install -y greetd tuigreet
-
+# greetd + tuigreet display manager setup.
 # greeter user needs a home dir for --remember state and input group for keyboard.
 mkdir -p /home/greeter
 chown greeter:greeter /home/greeter
 usermod -aG input greeter
+
+# Deploy XMonad wayland session entry for tuigreet.
+mkdir -p /usr/local/share/wayland-sessions
+cp "$cur_dir/config/wayland-sessions/xmonad.desktop" /usr/local/share/wayland-sessions/
 
 cat <<EOF >/etc/greetd/config.toml
 [terminal]
