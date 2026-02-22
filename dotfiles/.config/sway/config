@@ -29,6 +29,12 @@ exec swayidle -w \
     before-sleep 'swaylock -f'
 
 # Input
+input type:keyboard {
+    xkb_rules evdev
+    xkb_model pc105
+    xkb_layout hu
+}
+
 input type:touchpad {
     tap enabled
     natural_scroll disabled
