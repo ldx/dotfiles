@@ -59,7 +59,6 @@ apt-get install -y \
   cscope \
   cups \
   curl \
-  daemontools \
   debootstrap \
   desktop-base \
   devscripts \
@@ -80,7 +79,6 @@ apt-get install -y \
   fonts-crosextra-caladea \
   fonts-crosextra-carlito \
   fonts-dejavu \
-  fonts-dejavu \
   fonts-dejavu-core \
   fonts-dejavu-extra \
   fonts-freefont-ttf \
@@ -99,14 +97,12 @@ apt-get install -y \
   g++ \
   gawk \
   gcc \
-  gccgo \
   gcc-multilib \
   gdb \
   ghostscript \
   gimp \
   git \
   git-man \
-  git-svn \
   g++-multilib \
   gnupg \
   grep \
@@ -164,7 +160,6 @@ apt-get install -y \
   patchutils \
   pavucontrol \
   pkg-config \
-  pm-utils \
   psmisc \
   pipewire \
   pipewire-audio \
@@ -177,12 +172,10 @@ apt-get install -y \
   python3-dev \
   python3-pip \
   python3-venv \
-  rdesktop \
+  freerdp2-x11 \
   redshift \
   rfkill \
   rsync \
-  schroot \
-  schroot-common \
   screen \
   scrot \
   sed \
@@ -205,7 +198,6 @@ apt-get install -y \
   trayer \
   tree \
   tzdata \
-  ubuntu-dev-tools \
   uidmap \
   unzip \
   util-linux \

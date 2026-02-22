@@ -27,7 +27,6 @@ esac
 
 export GOPATH=$HOME/Projects/go
 export GOFLAGS="-mod=readonly"
-
 # prepend_colon(val, var)
 prepend_colon() {
   if [ -z "$2" ]; then
@@ -57,14 +56,12 @@ export MANPATH=""
 unshift_path "/usr"
 unshift_path "/usr/local"
 unshift_path "/usr/local/go"
-unshift_path "/usr/X11"
 unshift_path "/opt"
-unshift_path "/opt/local"
 unshift_path "$HOME"
 unshift_path "$LOCAL_PREFIX"
 unshift_path "$GOPATH"
 unshift_path "$HOME/.krew"
-if [ -d $HOME/.local/go ]; then
+if [ -d "$HOME/.local/go" ]; then
   export GOROOT=$HOME/.local/go
   unshift_path "$GOROOT"
 fi
