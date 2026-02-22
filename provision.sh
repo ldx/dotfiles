@@ -18,6 +18,10 @@ cur_dir=$(dirname "$(readlink -f "$0")")
 mkdir -p /usr/local
 chown "$provisioning_user" /usr/local
 
+# Tailscale apt source.
+curl -fsSL https://pkgs.tailscale.com/stable/debian/bookworm.noarch.gpg | gpg --dearmor -o /usr/share/keyrings/tailscale-archive-keyring.gpg
+echo "deb [signed-by=/usr/share/keyrings/tailscale-archive-keyring.gpg] https://pkgs.tailscale.com/stable/debian bookworm main" > /etc/apt/sources.list.d/tailscale.list
+
 # Docker Engine apt sources.
 install -m 0755 -d /etc/apt/keyrings
 curl -fsSL https://download.docker.com/linux/debian/gpg -o /etc/apt/keyrings/docker.asc
@@ -233,7 +237,10 @@ apt-get install -y \
   xwayland \
   xtightvncviewer \
   zip \
-  docker-buildx-plugin
+  docker-buildx-plugin \
+  tailscale
+
+systemctl enable --now tailscaled
 
 # Keyd is not in Debian 13.
 mkdir -p /etc/keyd
