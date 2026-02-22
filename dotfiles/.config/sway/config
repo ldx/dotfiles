@@ -35,44 +35,57 @@ input type:touchpad {
     dwt enabled
 }
 
-# Terminal
+# Terminal (Mod+Shift+Return matches XMonad)
 bindsym $mod+Shift+Return exec $term
 
-# Kill focused window
-bindsym $mod+Shift+q kill
+# Kill focused window (Mod+Shift+c matches XMonad)
+bindsym $mod+Shift+c kill
 
-# App launcher
-bindsym $mod+d exec $menu
+# App launcher (Mod+p matches XMonad)
+bindsym $mod+p exec $menu
 
-# Focus (vim-style + arrows)
-bindsym $mod+h focus left
+# Reload sway config (Mod+q matches XMonad restart)
+bindsym $mod+q reload
+
+# Exit sway (Mod+Shift+q matches XMonad quit)
+bindsym $mod+Shift+q exec swaynag -t warning -m 'Exit sway?' -B 'Yes, exit' 'swaymsg exit'
+
+# Focus next/prev in stack (Mod+j/k matches XMonad)
 bindsym $mod+j focus down
 bindsym $mod+k focus up
-bindsym $mod+l focus right
-bindsym $mod+Left  focus left
 bindsym $mod+Down  focus down
 bindsym $mod+Up    focus up
+bindsym $mod+Left  focus left
 bindsym $mod+Right focus right
 
-# Move
-bindsym $mod+Shift+h move left
-bindsym $mod+Shift+j move down
-bindsym $mod+Shift+k move up
-bindsym $mod+Shift+l move right
-bindsym $mod+Shift+Left  move left
+# Resize width (Mod+h/l matches XMonad master shrink/expand)
+bindsym $mod+h resize shrink width 10px
+bindsym $mod+l resize grow   width 10px
+
+# Move windows (Mod+Shift+j/k matches XMonad swap down/up)
+bindsym $mod+Shift+j     move down
+bindsym $mod+Shift+k     move up
+bindsym $mod+Shift+h     move left
+bindsym $mod+Shift+l     move right
 bindsym $mod+Shift+Down  move down
 bindsym $mod+Shift+Up    move up
+bindsym $mod+Shift+Left  move left
 bindsym $mod+Shift+Right move right
 
-# Splits
-bindsym $mod+b splith
+# Toggle bar visibility (Mod+b matches XMonad)
+bindsym $mod+b bar mode toggle
+
+# Split vertical (Mod+v, new — no XMonad equivalent)
 bindsym $mod+v splitv
 
-# Layouts
-bindsym $mod+e layout toggle split
-bindsym $mod+f fullscreen toggle
+# Cycle layouts (Mod+Space matches XMonad)
+bindsym $mod+space layout toggle split tabbed
+
+# Toggle floating (Mod+Shift+Space matches XMonad reset layout spirit)
 bindsym $mod+Shift+space floating toggle
-bindsym $mod+space focus mode_toggle
+
+# Fullscreen (Mod+f — common addition)
+bindsym $mod+f fullscreen toggle
 
 # Workspaces
 bindsym $mod+1 workspace number 1
@@ -95,26 +108,6 @@ bindsym $mod+Shift+7 move container to workspace number 7
 bindsym $mod+Shift+8 move container to workspace number 8
 bindsym $mod+Shift+9 move container to workspace number 9
 
-# Resize mode
-mode "resize" {
-    bindsym h resize shrink width  10px
-    bindsym j resize grow   height 10px
-    bindsym k resize shrink height 10px
-    bindsym l resize grow   width  10px
-    bindsym Left  resize shrink width  10px
-    bindsym Down  resize grow   height 10px
-    bindsym Up    resize shrink height 10px
-    bindsym Right resize grow   width  10px
-    bindsym Return mode "default"
-    bindsym Escape mode "default"
-    bindsym $mod+r mode "default"
-}
-bindsym $mod+r mode "resize"
-
-# Reload / exit
-bindsym $mod+Shift+c reload
-bindsym $mod+Shift+e exec swaynag -t warning -m 'Exit sway?' -B 'Yes, exit' 'swaymsg exit'
-
 # Lock and suspend (matching XMonad)
 bindsym $mod+Shift+o exec swaylock
 bindsym $mod+Shift+s exec systemctl suspend
@@ -133,11 +126,11 @@ bindsym XF86MonBrightnessDown exec ~/.local/bin/brightness-control down
 bindsym XF86MonBrightnessUp   exec ~/.local/bin/brightness-control up
 
 # Window assignments (matching XMonad)
-assign [class="Vncviewer"]    workspace 5
-assign [class="Gimp"]         workspace 6
-assign [class="Slack"]        workspace 7
+assign [class="Vncviewer"]     workspace 5
+assign [class="Gimp"]          workspace 6
+assign [class="Slack"]         workspace 7
 assign [class="Google-chrome"] workspace 8
-assign [app_id="firefox"]     workspace 8
+assign [app_id="firefox"]      workspace 8
 
 # Status bar
 bar {
