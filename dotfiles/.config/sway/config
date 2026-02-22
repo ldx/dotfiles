@@ -79,9 +79,12 @@ bindsym $mod+Shift+Down  move down
 bindsym $mod+Shift+Up    move up
 bindsym $mod+Shift+Right move right
 
-# Splits
+# Splits (set direction for next window)
 bindsym $mod+b splith
 bindsym $mod+v splitv
+# Relayout existing container
+bindsym $mod+Shift+b exec swaymsg layout splith
+bindsym $mod+Shift+v exec swaymsg layout splitv
 
 # Resize mode
 mode "resize" {
