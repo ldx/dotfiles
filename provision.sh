@@ -230,7 +230,8 @@ apt-get install -y \
   xss-lock \
   xterm \
   xtightvncviewer \
-  zip
+  zip \
+  docker-buildx-plugin
 
 # Keyd is not in Debian 13.
 mkdir -p /etc/keyd

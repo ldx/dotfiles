@@ -1,11 +1,7 @@
 # Environment variables.
 export LESSCHARSET=utf-8
 
-export CVS_RSH=ssh
-
 export LANG=en_US.UTF-8
-export LANGUAGE=en_US.UTF-8
-export LC_ALL=hu_HU.UTF-8
 
 export EDITOR=vim
 export VISUAL=vim
@@ -134,9 +130,6 @@ for f in .setenv setenv setenv.sh; do
     . "$HOME/$f"
   fi
 done
-
-# added by travis gem
-[ -f ~/.travis/travis.sh ] && source ~/.travis/travis.sh
 
 if [ -d "$LOCAL_PREFIX/share/completions" ]; then
   for f in $LOCAL_PREFIX/share/completions/*; do

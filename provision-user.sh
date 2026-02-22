@@ -42,17 +42,6 @@ unzip -o -d "$HOME/.local/share/fonts" /tmp/CommitMono.zip
 sleep 3
 fc-cache -f -v || fc-cache -f -v
 
-# Closest-airport.
-curl -L https://github.com/ldx/closest-airport/releases/download/v1.0.0/closest-airport.tar.gz | tar xzf - -C "$BINDIR"
-
-# Bazelisk.
-curl -L "https://github.com/bazelbuild/bazelisk/releases/download/v1.10.1/bazelisk-linux-amd64" >"$BINDIR/bazel"
-
-# Neovim.
-curl -L "https://github.com/neovim/neovim/releases/download/stable/nvim-linux-x86_64.appimage" >"$BINDIR/vim"
-chmod u+x "$BINDIR/vim"
-#pip3 install --break-system-packages --user pynvim
-
 # LazyVim.
 rm -rf "$HOME/.config/nvim"
 rm -rf "$HOME/.local/share/nvim"
@@ -62,19 +51,15 @@ git clone https://github.com/LazyVim/starter "$HOME/.config/nvim"
 rm -rf "$HOME/.config/nvim/.git"
 cp -rf "$CURDIR/dotfiles/.config/nvim"/* "$HOME/.config/nvim/"
 
-# Powerline.
-pip3 install --break-system-packages --user powerline-status powerline_gitstatus
-
 # Default browser.
 xdg-settings set default-web-browser firefox.desktop || true
 
-# Docker plugins.
-mkdir -p "$HOME"/.docker/cli-plugins/
-curl -L https://github.com/docker/buildx/releases/download/v0.11.0/buildx-v0.11.0.linux-amd64 >"$HOME"/.docker/cli-plugins/docker-buildx
-chmod +x "$HOME"/.docker/cli-plugins/docker-buildx
 
 # Mise.
 curl -L "https://github.com/jdx/mise/releases/download/v2025.9.9/mise-v2025.9.9-linux-x64" >"$BINDIR/mise" && chmod +x "$BINDIR/mise"
 PATH=$PATH:$BINDIR "$BINDIR/mise" install
+
+# Symlink vim to neovim installed by mise.
+ln -snf "$(PATH=$PATH:$BINDIR "$BINDIR/mise" which nvim)" "$BINDIR/vim"
 
 chmod 0755 "$BINDIR/"*

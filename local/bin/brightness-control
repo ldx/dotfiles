@@ -1,40 +1,9 @@
 #!/usr/bin/env bash
 
-CURBR=$(xrandr --current --verbose|grep 'Brightness:'|head -1|awk '{print $2}')
-DEV=$(xrandr --current --verbose|grep 'eDP' | awk '{print $1}')
-STEP="0.05"
-MAXBR="1.0"
-MINBR="0"
-
-[[ -z "$CURBR" ]] && echo "Error: could not get current brightness" && exit 1
-
-echo "Current device: $DEV brightness: $CURBR"
+STEP=5
 
 case "$1" in
-    U|u|[U,u]p)
-        # increase brightness by 5%
-        _brightness=$(echo "$CURBR+$STEP" | bc)
-        echo "Desired new brightness: $_brightness"
-        _res=$(echo "$_brightness > $MAXBR" | bc)
-        if [[ "$_res" -eq 0 ]]; then
-            echo "New brightness: $_brightness"
-            xrandr --output "$DEV" --brightness $_brightness
-        fi
-        ;;
-    D|d|[D,d]own|[D,d]o)
-        # increase brightness by 5%
-        _brightness=$(echo "$CURBR-$STEP" | bc)
-        echo "Desired new brightness: $_brightness"
-        _res=$(echo "$_brightness < $MINBR" | bc)
-        if [[ "$_res" -eq 0 ]]; then
-            echo "New brightness: $_brightness"
-            xrandr --output "$DEV" --brightness $_brightness
-        fi
-        ;;
-    *)
-        echo "Usage: $0 [up|down]"
-        exit 1
-        ;;
+  U|u|up)   brightnessctl set "+${STEP}%" ;;
+  D|d|down) brightnessctl set "${STEP}%-" ;;
+  *)        echo "Usage: $0 [up|down]"; exit 1 ;;
 esac
-
-exit 0

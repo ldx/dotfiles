@@ -14,27 +14,11 @@ setxkbmap \
 
 xset b off
 
-if type "synclient" >/dev/null 2>&1; then
-  synclient TapButton1=1
-  synclient TapButton2=3
-  synclient TapButton3=2
-  synclient VertTwoFingerScroll=1
-  synclient LockedDrags=1
-  synclient LockedDragTimeout=500
-  synclient PalmDetect=1
-  synclient HorizHysteresis=25
-  synclient VertHysteresis=25
-fi
-
-if type "syndaemon" >/dev/null 2>&1; then
-  syndaemon -i 1 -d
-fi
-
 if [ -f "$HOME/.Xdefaults" ]; then
   xrdb $HOME/.Xdefaults
 fi
 
-for p in $(pidof gnome-screensaver conky trayer skype nm-applet chrome \
+for p in $(pidof gnome-screensaver conky trayer nm-applet chrome \
   autocutsel parcellite); do
   kill $p
 done
@@ -57,8 +41,6 @@ fi
 
 type "trayer" >/dev/null 2>&1 && trayer --widthtype request --align right \
   --height 32 --transparent true --alpha 0 --tint 0x0B0B0B &
-
-type "skype" >/dev/null 2>&1 && (sleep 3 && PULSE_LATENCY_MSEC=30 skype &)
 
 type "nm-applet" >/dev/null 2>&1 && nm-applet &
 
@@ -103,10 +85,6 @@ type "v4l2-ctl" >/dev/null 2>&1 && {
     --set-ctrl=exposure_auto=3 \
     --set-ctrl=exposure_auto_priority=1
 }
-
-weather_station=KSFO
-#type "closest-airport" > /dev/null 2>&1 && type jq && weather_station=$(closest-airport | jq -r '.ClosestAirport.ident')
-sed -i "s/Run Weather \".*\"/Run Weather \"$weather_station\"/" $HOME/.xmobarrc
 
 gdbus monitor --system --dest org.freedesktop.login1 | grep org.freedesktop.login1.Session.Unlock |
   while read -r line; do

@@ -30,17 +30,6 @@ shopt -s checkwinsize
 # Make less more friendly for non-text input files, see lesspipe(1).
 [ -x /usr/bin/lesspipe ] && eval "$(SHELL=/bin/sh lesspipe)"
 
-powerline_root=$(pip3 show powerline-status | grep '^Location:' | awk '{print $2}')
-if [[ -z "$powerline_root" ]]; then
-  powerline_root=$(pip show powerline-status | grep '^Location:' | awk '{print $2}')
-fi
-if [ -d "$powerline_root" ]; then
-  powerline-daemon -q
-  POWERLINE_BASH_CONTINUATION=1
-  POWERLINE_BASH_SELECT=1
-  . $powerline_root/powerline/bindings/bash/powerline.sh
-fi
-
 # Add an "alert" alias for long running commands.  Use like so:
 #   sleep 10; alert
 alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'
@@ -59,9 +48,6 @@ fi
 type aws_completer >/dev/null 2>&1 && complete -C aws_completer aws
 type /snap/aws-cli/current/usr/bin/python3 >/dev/null 2>&1 && complete -C \
   'SNAP=/snap/aws-cli/current /snap/aws-cli/current/usr/bin/python3 /snap/aws-cli/current/bin/aws_completer' aws
-
-# added by travis gem
-[ -f /home/vilmos/.travis/travis.sh ] && source /home/vilmos/.travis/travis.sh
 
 which _awsp >/dev/null 2>&1 && alias awsp="source _awsp"
 [ -f $HOME/.awsp ] && export AWS_PROFILE=$(cat $HOME/.awsp)
@@ -98,3 +84,4 @@ done
 eval "$(direnv hook bash)"
 
 eval "$(/home/vilmos/.local/bin/mise activate bash)"
+eval "$(starship init bash)"
