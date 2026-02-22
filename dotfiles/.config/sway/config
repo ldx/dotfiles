@@ -6,6 +6,9 @@ set $menu wofi --show drun
 
 font pango:CommitMonoNerdFontMono 11
 
+# HiDPI: scale 1.25 gives 1805x1203 logical resolution on 2256x1504 display
+output eDP-1 scale 1.25
+
 # Gaps (matching XMonad spacing 5)
 gaps inner 5
 default_border pixel 2
