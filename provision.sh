@@ -166,9 +166,10 @@ apt-get install -y \
   pkg-config \
   pm-utils \
   psmisc \
-  pulseaudio \
-  pulseaudio-module-bluetooth \
-  pulseaudio-utils \
+  pipewire \
+  pipewire-audio \
+  pipewire-pulse \
+  wireplumber \
   pwgen \
   python3 \
   python3-all \
