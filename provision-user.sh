@@ -56,8 +56,8 @@ xdg-settings set default-web-browser firefox.desktop || true
 
 
 # Mise.
-curl -L "https://github.com/jdx/mise/releases/download/v2025.9.9/mise-v2025.9.9-linux-x64" >"$BINDIR/mise" && chmod +x "$BINDIR/mise"
-PATH=$PATH:$BINDIR "$BINDIR/mise" install
+curl https://mise.run | sh
+PATH=$PATH:$BINDIR mise install
 
 # Symlink vim to neovim installed by mise.
 ln -snf "$(PATH=$PATH:$BINDIR "$BINDIR/mise" which nvim)" "$BINDIR/vim"

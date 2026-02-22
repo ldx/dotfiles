@@ -1,7 +1,0 @@
-#!/usr/bin/env bash
-
-if [[ "$GOPACKAGESDRIVER_BAZEL_BUILD_FLAGS" = "" ]]; then
-    export GOPACKAGESDRIVER_BAZEL_BUILD_FLAGS=--strategy=GoStdlibList=local
-fi
-
-exec bazel run -- @io_bazel_rules_go//go/tools/gopackagesdriver "${@}"

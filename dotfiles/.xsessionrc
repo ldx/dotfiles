@@ -19,7 +19,7 @@ if [ -f "$HOME/.Xdefaults" ]; then
 fi
 
 for p in $(pidof gnome-screensaver conky trayer nm-applet chrome \
-  autocutsel parcellite); do
+  autocutsel copyq); do
   kill $p
 done
 
@@ -57,7 +57,7 @@ type "devmon" >/dev/null 2>&1 && {
   fi
 }
 
-type "parcellite" >/dev/null 2>&1 && parcellite &
+type "copyq" >/dev/null 2>&1 && copyq &
 
 type "firefox" >/dev/null 2>&1 && firefox &
 

@@ -226,7 +226,6 @@ apt-get install -y \
   xmobar \
   xmonad \
   xorg \
-  xserver-xorg-input-synaptics \
   xss-lock \
   xterm \
   xtightvncviewer \
@@ -279,9 +278,6 @@ flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flat
 umask 0022
 
 # TODO: noatime in fstab
-
-grep '^hu_HU.UTF-8 UTF-8' /etc/locale.gen || echo 'hu_HU.UTF-8 UTF-8' >>/etc/locale.gen
-locale-gen
 
 sed -r -i 's/\s?#?(\s*)SendEnv (.*)$/#   SendEnv \2/g' /etc/ssh/ssh_config
 sed -r -i 's/\s?#?(\s*)ForwardAgent\s+.*$/    ForwardAgent yes/g' /etc/ssh/ssh_config
