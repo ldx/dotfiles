@@ -1,0 +1,42 @@
+[{
+    "layer": "top",
+    "position": "top",
+    "modules-left": ["sway/workspaces", "sway/mode", "sway/window"],
+    "modules-right": ["battery", "cpu", "memory", "network", "clock"],
+
+    "sway/workspaces": {
+        "disable-scroll": true,
+        "all-outputs": true
+    },
+
+    "sway/window": {
+        "max-length": 50
+    },
+
+    "battery": {
+        "format": "Batt: {capacity}%",
+        "format-charging": "Batt: {capacity}% ↑",
+        "format-full": "Batt: Full",
+        "states": { "warning": 30, "critical": 10 }
+    },
+
+    "cpu": {
+        "format": "CPU: {usage}%",
+        "interval": 1
+    },
+
+    "memory": {
+        "format": "Mem: {percentage}%"
+    },
+
+    "network": {
+        "format-wifi": "{ifname}: ↓{bandwidthDownBytes} ↑{bandwidthUpBytes}",
+        "format-ethernet": "{ifname}: ↓{bandwidthDownBytes} ↑{bandwidthUpBytes}",
+        "format-disconnected": "disconnected",
+        "interval": 2
+    },
+
+    "clock": {
+        "format": "{:%b %e %a %Y %H:%M}"
+    }
+}]

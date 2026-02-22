@@ -215,7 +215,18 @@ apt-get install -y \
   xorg \
   xss-lock \
   alacritty \
+  grim \
+  mako-notifier \
+  slurp \
+  sway \
+  swayidle \
+  swaylock \
+  waybar \
+  wl-clipboard \
+  wofi \
+  xdg-desktop-portal-wlr \
   xterm \
+  xwayland \
   xtightvncviewer \
   zip \
   docker-buildx-plugin

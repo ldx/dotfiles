@@ -1,0 +1,145 @@
+# Sway config — mirrors XMonad keybindings
+
+set $mod Mod4
+set $term alacritty
+set $menu wofi --show drun
+
+font pango:CommitMonoNerdFontMono 11
+
+# Gaps (matching XMonad spacing 5)
+gaps inner 5
+default_border pixel 2
+default_floating_border pixel 2
+
+# XWayland for X11 app compatibility
+xwayland enable
+
+# Wayland environment for portals and D-Bus
+exec --no-startup-id dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP=sway
+
+# Autostart
+exec copyq
+exec mako
+
+# Auto-lock after 5 min, screen off after 10 min
+exec swayidle -w \
+    timeout 300  'swaylock -f' \
+    timeout 600  'swaymsg "output * dpms off"' \
+    resume       'swaymsg "output * dpms on"' \
+    before-sleep 'swaylock -f'
+
+# Input
+input type:touchpad {
+    tap enabled
+    natural_scroll disabled
+    dwt enabled
+}
+
+# Terminal
+bindsym $mod+Shift+Return exec $term
+
+# Kill focused window
+bindsym $mod+Shift+q kill
+
+# App launcher
+bindsym $mod+d exec $menu
+
+# Focus (vim-style + arrows)
+bindsym $mod+h focus left
+bindsym $mod+j focus down
+bindsym $mod+k focus up
+bindsym $mod+l focus right
+bindsym $mod+Left  focus left
+bindsym $mod+Down  focus down
+bindsym $mod+Up    focus up
+bindsym $mod+Right focus right
+
+# Move
+bindsym $mod+Shift+h move left
+bindsym $mod+Shift+j move down
+bindsym $mod+Shift+k move up
+bindsym $mod+Shift+l move right
+bindsym $mod+Shift+Left  move left
+bindsym $mod+Shift+Down  move down
+bindsym $mod+Shift+Up    move up
+bindsym $mod+Shift+Right move right
+
+# Splits
+bindsym $mod+b splith
+bindsym $mod+v splitv
+
+# Layouts
+bindsym $mod+e layout toggle split
+bindsym $mod+f fullscreen toggle
+bindsym $mod+Shift+space floating toggle
+bindsym $mod+space focus mode_toggle
+
+# Workspaces
+bindsym $mod+1 workspace number 1
+bindsym $mod+2 workspace number 2
+bindsym $mod+3 workspace number 3
+bindsym $mod+4 workspace number 4
+bindsym $mod+5 workspace number 5
+bindsym $mod+6 workspace number 6
+bindsym $mod+7 workspace number 7
+bindsym $mod+8 workspace number 8
+bindsym $mod+9 workspace number 9
+
+bindsym $mod+Shift+1 move container to workspace number 1
+bindsym $mod+Shift+2 move container to workspace number 2
+bindsym $mod+Shift+3 move container to workspace number 3
+bindsym $mod+Shift+4 move container to workspace number 4
+bindsym $mod+Shift+5 move container to workspace number 5
+bindsym $mod+Shift+6 move container to workspace number 6
+bindsym $mod+Shift+7 move container to workspace number 7
+bindsym $mod+Shift+8 move container to workspace number 8
+bindsym $mod+Shift+9 move container to workspace number 9
+
+# Resize mode
+mode "resize" {
+    bindsym h resize shrink width  10px
+    bindsym j resize grow   height 10px
+    bindsym k resize shrink height 10px
+    bindsym l resize grow   width  10px
+    bindsym Left  resize shrink width  10px
+    bindsym Down  resize grow   height 10px
+    bindsym Up    resize shrink height 10px
+    bindsym Right resize grow   width  10px
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+    bindsym $mod+r mode "default"
+}
+bindsym $mod+r mode "resize"
+
+# Reload / exit
+bindsym $mod+Shift+c reload
+bindsym $mod+Shift+e exec swaynag -t warning -m 'Exit sway?' -B 'Yes, exit' 'swaymsg exit'
+
+# Lock and suspend (matching XMonad)
+bindsym $mod+Shift+o exec swaylock
+bindsym $mod+Shift+s exec systemctl suspend
+
+# Screenshots (grim replaces scrot)
+bindsym Print       exec mkdir -p "$HOME/Pictures" && grim "$HOME/Pictures/screenshot-$(date +%Y%m%d-%H%M%S).png"
+bindsym Ctrl+Print  exec mkdir -p "$HOME/Pictures" && grim -g "$(slurp)" "$HOME/Pictures/screenshot-$(date +%Y%m%d-%H%M%S).png"
+
+# Audio (same as XMonad)
+bindsym XF86AudioMute        exec wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle
+bindsym XF86AudioLowerVolume exec wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-
+bindsym XF86AudioRaiseVolume exec wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%+
+
+# Brightness (same as XMonad)
+bindsym XF86MonBrightnessDown exec ~/.local/bin/brightness-control down
+bindsym XF86MonBrightnessUp   exec ~/.local/bin/brightness-control up
+
+# Window assignments (matching XMonad)
+assign [class="Vncviewer"]    workspace 5
+assign [class="Gimp"]         workspace 6
+assign [class="Slack"]        workspace 7
+assign [class="Google-chrome"] workspace 8
+assign [app_id="firefox"]     workspace 8
+
+# Status bar
+bar {
+    swaybar_command waybar
+}
