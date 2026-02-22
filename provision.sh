@@ -131,7 +131,6 @@ apt-get install -y \
   libreadline-dev \
   libreoffice \
   libssl-dev \
-  lightdm \
   light-locker \
   lshw \
   lsof \
