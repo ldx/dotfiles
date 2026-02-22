@@ -1,0 +1,50 @@
+format = """
+$directory$git_branch$git_status$kubernetes$cmd_duration
+$status$character"""
+
+[directory]
+truncation_length = 4
+truncate_to_repo = false
+truncation_symbol = "…/"
+style = "bold blue"
+
+[git_branch]
+format = " [$symbol$branch]($style)"
+symbol = " "
+style = "bold purple"
+
+[git_status]
+format = '(\[[$all_status$ahead_behind]($style)\])'
+style = "bold red"
+conflicted = "="
+ahead = "⇡${count}"
+behind = "⇣${count}"
+diverged = "⇕⇡${ahead_count}⇣${behind_count}"
+untracked = "?"
+stashed = "\\$"
+modified = "!"
+staged = "+"
+renamed = "»"
+deleted = "✘"
+
+[kubernetes]
+disabled = false
+format = ' [$symbol$context( \($namespace\))]($style)'
+symbol = "⎈ "
+style = "bold cyan"
+
+[cmd_duration]
+min_time = 5_000
+format = " [$duration]($style)"
+style = "yellow"
+
+[status]
+disabled = false
+format = "[$symbol]($style)"
+symbol = "✗ "
+success_symbol = ""
+style = "bold red"
+
+[character]
+success_symbol = "[❯](bold green)"
+error_symbol = "[❯](bold red)"
