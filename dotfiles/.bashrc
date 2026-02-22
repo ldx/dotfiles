@@ -46,8 +46,6 @@ if ! shopt -oq posix; then
 fi
 
 type aws_completer >/dev/null 2>&1 && complete -C aws_completer aws
-type /snap/aws-cli/current/usr/bin/python3 >/dev/null 2>&1 && complete -C \
-  'SNAP=/snap/aws-cli/current /snap/aws-cli/current/usr/bin/python3 /snap/aws-cli/current/bin/aws_completer' aws
 
 which _awsp >/dev/null 2>&1 && alias awsp="source _awsp"
 [ -f $HOME/.awsp ] && export AWS_PROFILE=$(cat $HOME/.awsp)
@@ -83,5 +81,5 @@ done
 
 eval "$(direnv hook bash)"
 
-eval "$(/home/vilmos/.local/bin/mise activate bash)"
+eval "$($HOME/.local/bin/mise activate bash)"
 eval "$(starship init bash)"

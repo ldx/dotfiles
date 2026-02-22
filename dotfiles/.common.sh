@@ -33,21 +33,6 @@ if [ "$TERM" = "xterm" ]; then
   export TERM=xterm-color
 fi
 
-export WORKON_HOME=~/.virtualenvs
-if [ ! -d $WORKON_HOME ]; then
-  mkdir $WORKON_HOME
-fi
-
-if [ -e /usr/local/bin/virtualenvwrapper.sh ]; then
-  source /usr/local/bin/virtualenvwrapper.sh
-elif [ -e $LOCAL_PREFIX/bin/virtualenvwrapper.sh ]; then
-  source $LOCAL_PREFIX/bin/virtualenvwrapper.sh
-elif [ -e /etc/bash_completion.d/virtualenvwrapper ]; then
-  source /etc/bash_completion.d/virtualenvwrapper
-elif [ -e /usr/share/bash-completion/completions/virtualenvwrapper ]; then
-  source /usr/share/bash-completion/completions/virtualenvwrapper
-fi
-
 export GEM_HOME=$HOME/.gem
 export BUNDLE_PATH=$GEM_HOME
 

@@ -69,7 +69,6 @@ apt-get install -y \
   ebtables \
   ed \
   evince \
-  exuberant-ctags \
   fakeroot \
   file \
   firmware-iwlwifi \
@@ -206,7 +205,6 @@ apt-get install -y \
   traceroute \
   trayer \
   tree \
-  ttf-bitstream-vera \
   tzdata \
   ubuntu-dev-tools \
   uidmap \
@@ -214,8 +212,6 @@ apt-get install -y \
   util-linux \
   v4l-utils \
   valgrind \
-  virtualenv \
-  virtualenvwrapper \
   vlc \
   vpnc-scripts \
   wget \
@@ -253,22 +249,10 @@ git clone https://github.com/rvaiya/keyd.git "$keyd_tmpdir"
 pushd "$keyd_tmpdir"
 make && make install
 popd
+rm -rf "$keyd_tmpdir"
 
 # Remove Firefox ESR.
 apt-get remove -y firefox-esr || true
-
-cat <<EOF >/usr/share/applications/firefox.desktop
-[Desktop Entry]
-Name=Firefox
-Comment=Web Browser
-Exec=firefox %U
-Icon=firefox
-Terminal=false
-Type=Application
-Categories=Network;WebBrowser;
-MimeType=text/html;text/xml;application/xhtml+xml;application/xml;application/vnd.mozilla.xul+xml;application/rss+xml;application/rdf+xml;image/webp;x-scheme-handler/http;x-scheme-handler/https;
-StartupNotify=true
-EOF
 
 bash "$cur_dir"/InstallAzureCLIDeb
 
@@ -276,8 +260,6 @@ bash "$cur_dir"/InstallAzureCLIDeb
 flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
 
 umask 0022
-
-# TODO: noatime in fstab
 
 sed -r -i 's/\s?#?(\s*)SendEnv (.*)$/#   SendEnv \2/g' /etc/ssh/ssh_config
 sed -r -i 's/\s?#?(\s*)ForwardAgent\s+.*$/    ForwardAgent yes/g' /etc/ssh/ssh_config

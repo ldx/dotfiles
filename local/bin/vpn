@@ -19,12 +19,12 @@ BACKOFF_DELAY=3
 if [ -z "$1" ]; then
   echo "Usage: vpn <environment>"
   echo "Available environments:"
-  ls /home/vilmos/Documents/openvpn-vilmos-*.ovpn 2>/dev/null | sed 's/.*openvpn-vilmos-\(.*\)\.ovpn/  - \1/' | grep -v '.old'
+  ls $HOME/Documents/openvpn-$USER-*.ovpn 2>/dev/null | sed 's/.*openvpn-vilmos-\(.*\)\.ovpn/  - \1/' | grep -v '.old'
   exit 1
 fi
 
 ENV="$1"
-VPN_CONFIG="/home/vilmos/Documents/openvpn-vilmos-${ENV}.ovpn"
+VPN_CONFIG="$HOME/Documents/openvpn-$USER-${ENV}.ovpn"
 
 # Determine K8s context: check lookup table first, then use convention
 if [ -n "${K8S_CONTEXT_MAP[$ENV]}" ]; then
@@ -37,7 +37,7 @@ fi
 if [ ! -f "$VPN_CONFIG" ]; then
   echo "Error: VPN config not found: $VPN_CONFIG"
   echo "Available configs:"
-  ls /home/vilmos/Documents/openvpn-vilmos-*.ovpn 2>/dev/null | sed 's/.*openvpn-vilmos-\(.*\)\.ovpn/  - \1/' | grep -v '.old'
+  ls $HOME/Documents/openvpn-$USER-*.ovpn 2>/dev/null | sed 's/.*openvpn-vilmos-\(.*\)\.ovpn/  - \1/' | grep -v '.old'
   exit 1
 fi
 

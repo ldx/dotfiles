@@ -68,21 +68,21 @@ case "$1" in
     for sink in $SINKS; do
       adjust_volume "$sink" "+5%"
     done
-    play "$HOME/share/sound/Volume.wav" > /dev/null 2>&1
+    play "$HOME/.local/share/sound/Volume.wav" > /dev/null 2>&1
     ;;
   D|d|[D,d]own|[D,d]o)
     # lowers volume by 5%
     for sink in $SINKS; do
       adjust_volume "$sink" "-5%"
     done
-    play "$HOME/share/sound/Volume.wav" > /dev/null 2>&1
+    play "$HOME/.local/share/sound/Volume.wav" > /dev/null 2>&1
     ;;
   M|m|[M,m]u|[M,m]ute)
     # mutes the volume entirely
     for sink in $SINKS; do
       pactl set-sink-mute "$sink" toggle
     done
-    play "$HOME/share/sound/Volume.wav" > /dev/null 2>&1
+    play "$HOME/.local/share/sound/Volume.wav" > /dev/null 2>&1
     ;;
 esac
 

@@ -56,7 +56,7 @@ case "$script_type" in
 	done
 	echo -n "$R" | /sbin/resolvconf -a "${dev}.openvpn"
 
-	sudo /usr/bin/resolvectl domain tun0 ~windows.net ~azure.net ~azure.com ~trafficmanager.net ~azmk8s.io ~braincompany.net
+	/usr/bin/resolvectl domain "$dev" ~windows.net ~azure.net ~azure.com ~trafficmanager.net ~azmk8s.io ~braincompany.net
 	;;
   down)
 	/sbin/resolvconf -d "${dev}.openvpn"
