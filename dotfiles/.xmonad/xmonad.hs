@@ -47,9 +47,9 @@ main = do
         , ((mod4Mask .|. shiftMask, xK_s), spawn "systemctl suspend")
         , ((controlMask, xK_Print), spawn "sleep 0.2; scrot -s")
         , ((0, xK_Print), spawn "scrot")
-        , ((0, xF86XK_AudioMute), spawn "$HOME/.local/bin/pa-control mute")
-        , ((0, xF86XK_AudioLowerVolume), spawn "$HOME/.local/bin/pa-control down")
-        , ((0, xF86XK_AudioRaiseVolume), spawn "$HOME/.local/bin/pa-control up")
+        , ((0, xF86XK_AudioMute), spawn "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle")
+        , ((0, xF86XK_AudioLowerVolume), spawn "wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-")
+        , ((0, xF86XK_AudioRaiseVolume), spawn "wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%+")
         , ((0, xF86XK_MonBrightnessDown), spawn "$HOME/.local/bin/brightness-control down")
         , ((0, xF86XK_MonBrightnessUp), spawn "$HOME/.local/bin/brightness-control up")
         ]
