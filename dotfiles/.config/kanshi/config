@@ -1,0 +1,15 @@
+# kanshi output profiles — applied automatically on hotplug
+# Positions use logical pixels (after scaling)
+# eDP-1: 2256x1504 @ scale 1.25 = 1805x1203 logical
+# Dell U2720Q: 3840x2160 @ scale 2 = 1920x1080 logical
+
+profile laptop {
+    output eDP-1 enable scale 1.25
+}
+
+profile docked {
+    # Dell on left, laptop on right
+    # eDP-1 x offset = Dell native width (3840) / Dell scale (2) = 1920
+    output "Dell Inc. DELL U2720Q 2R3JV83" enable scale 2    position 0,0
+    output eDP-1                           enable scale 1.25 position 1920,0
+}

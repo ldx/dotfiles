@@ -218,6 +218,7 @@ apt-get install -y \
   xss-lock \
   alacritty \
   grim \
+  kanshi \
   mako-notifier \
   slurp \
   seatd \
