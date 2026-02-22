@@ -49,14 +49,14 @@ prepend_colon() {
 
 # unshift_path(path)
 unshift_path() {
-  if [ -d $1/sbin ]; then
+  if [ -d "$1/sbin" ]; then
     export PATH=$(prepend_colon "$1/sbin" $PATH)
   fi
-  if [ -d $1/bin ]; then
+  if [ -d "$1/bin" ]; then
     export PATH=$(prepend_colon "$1/bin" $PATH)
   fi
 
-  if [ -d $1/share/man ]; then
+  if [ -d "$1/share/man" ]; then
     export MANPATH=$(prepend_colon "$1/share/man" $MANPATH)
   fi
 }
@@ -98,7 +98,7 @@ for f in .setenv setenv setenv.sh; do
 done
 
 if [ -d "$LOCAL_PREFIX/share/completions" ]; then
-  for f in $LOCAL_PREFIX/share/completions/*; do
+  for f in "$LOCAL_PREFIX/share/completions/"*; do
     source $f
   done
 fi

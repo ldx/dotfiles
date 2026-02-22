@@ -19,7 +19,7 @@ BACKOFF_DELAY=3
 if [ -z "$1" ]; then
   echo "Usage: vpn <environment>"
   echo "Available environments:"
-  ls $HOME/Documents/openvpn-$USER-*.ovpn 2>/dev/null | sed "s/.*openvpn-$USER-\(.*\)\.ovpn/  - \1/" | grep -v '.old'
+  ls "$HOME/Documents/openvpn-$USER-"*.ovpn 2>/dev/null | sed "s/.*openvpn-$USER-\(.*\)\.ovpn/  - \1/" | grep -v '.old'
   exit 1
 fi
 
@@ -37,7 +37,7 @@ fi
 if [ ! -f "$VPN_CONFIG" ]; then
   echo "Error: VPN config not found: $VPN_CONFIG"
   echo "Available configs:"
-  ls $HOME/Documents/openvpn-$USER-*.ovpn 2>/dev/null | sed "s/.*openvpn-$USER-\(.*\)\.ovpn/  - \1/" | grep -v '.old'
+  ls "$HOME/Documents/openvpn-$USER-"*.ovpn 2>/dev/null | sed "s/.*openvpn-$USER-\(.*\)\.ovpn/  - \1/" | grep -v '.old'
   exit 1
 fi
 
@@ -53,9 +53,9 @@ cleanup() {
   SHOULD_EXIT=true
 
   # Kill port-forward if running
-  if [ ! -z "$PORT_FORWARD_PID" ] && kill -0 $PORT_FORWARD_PID 2>/dev/null; then
+  if [ ! -z "$PORT_FORWARD_PID" ] && kill -0 "$PORT_FORWARD_PID" 2>/dev/null; then
     echo "Stopping port forwarding..."
-    kill $PORT_FORWARD_PID 2>/dev/null || true
+    kill "$PORT_FORWARD_PID" 2>/dev/null || true
   fi
 
   # Stop OpenVPN
@@ -158,7 +158,7 @@ while [ "$SHOULD_EXIT" = false ]; do
   fi
 
   # Check port-forward
-  if [ ! -z "$PORT_FORWARD_PID" ] && ! kill -0 $PORT_FORWARD_PID 2>/dev/null; then
+  if [ ! -z "$PORT_FORWARD_PID" ] && ! kill -0 "$PORT_FORWARD_PID" 2>/dev/null; then
     echo "[$(date +'%H:%M:%S')] Port-forward process died, restarting in ${BACKOFF_DELAY}s..."
     sleep $BACKOFF_DELAY
     start_port_forward

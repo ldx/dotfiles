@@ -1,6 +1,6 @@
 Config {
         -- appearance
-          font = "xft:SFNS Display:size=12"
+          font = "xft:CommitMonoNerdFontMono:size=12"
         , bgColor = "black"
         , fgColor = "white"
         , position = TopW R 100

@@ -53,7 +53,7 @@ adjust_volume() {
     up=false
   fi
 
-  get_curvol $sink
+  get_curvol "$sink"
   echo $CURVOL
 
   [[ "$up" = true ]] && [[ "$CURVOL" -ge 100 ]] && return
