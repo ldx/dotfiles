@@ -1,0 +1,50 @@
+window:
+  padding:
+    x: 4
+    y: 4
+
+scrolling:
+  history: 512
+
+font:
+  normal:
+    family: "CommitMonoNerdFontMono"
+    style: Regular
+  bold:
+    family: "CommitMonoNerdFontMono"
+    style: Bold
+  italic:
+    family: "CommitMonoNerdFontMono"
+    style: Italic
+  size: 13.0
+
+colors:
+  draw_bold_text_with_bright_colors: true
+  primary:
+    background: '#222222'
+    foreground: '#ffffff'
+  cursor:
+    cursor: '#ffffff'
+    text:   '#222222'
+  normal:
+    black:   '#2e3436'
+    red:     '#cc0000'
+    green:   '#4e9a06'
+    yellow:  '#c4a000'
+    blue:    '#3465a4'
+    magenta: '#75507b'
+    cyan:    '#06989a'
+    white:   '#d3d7cf'
+  bright:
+    black:   '#555753'
+    red:     '#ef2929'
+    green:   '#8ae234'
+    yellow:  '#fce94f'
+    blue:    '#729fcf'
+    magenta: '#ad7fa8'
+    cyan:    '#34e2e2'
+    white:   '#eeeeec'
+
+key_bindings:
+  - { key: C, mods: Shift|Control, action: Copy }
+  - { key: V, mods: Shift|Control, action: Paste }
