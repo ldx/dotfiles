@@ -14,8 +14,7 @@ if [ -n "$DISPLAY" ]; then
   fi
 fi
 
-for p in $(pidof gnome-screensaver conky trayer nm-applet chrome \
-  autocutsel copyq); do
+for p in $(pidof trayer nm-applet copyq); do
   kill $p
 done
 
