@@ -218,6 +218,7 @@ apt-get install -y \
   grim \
   mako-notifier \
   slurp \
+  seatd \
   sway \
   swayidle \
   swaylock \
