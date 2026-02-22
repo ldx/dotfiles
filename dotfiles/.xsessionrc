@@ -41,18 +41,7 @@ if type "ssh-agent" >/dev/null 2>&1; then
   fi
 fi
 
-type "devmon" >/dev/null 2>&1 && {
-  dmpid="$(ps h -C devmon -o pid)"
-  if [ -z "$dmpid" ]; then
-    devmon &
-  fi
-}
-
 type "copyq" >/dev/null 2>&1 && copyq &
-
-type "firefox" >/dev/null 2>&1 && firefox &
-
-type "slack" >/dev/null 2>&1 && slack &
 
 if [ -x "/usr/lib/notification-daemon/notification-daemon" ]; then
   pid=$(pidof /usr/lib/notification-daemon/notification-daemon)

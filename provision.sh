@@ -42,6 +42,7 @@ apt-get install -y \
   autotools-dev \
   bash-completion \
   bc \
+  brightnessctl \
   bison \
   blueman \
   bluetooth \
