@@ -23,8 +23,8 @@ exec --no-startup-id dbus-update-activation-environment --systemd WAYLAND_DISPLA
 # Autostart
 exec_always sh -c 'pgrep -x copyq || copyq &'
 exec mako
-exec nm-applet --indicator
-exec pasystray
+exec_always sh -c 'pgrep -x nm-applet || nm-applet --indicator &'
+exec_always sh -c 'pgrep -x pasystray || pasystray &'
 
 # Auto-lock after 5 min, screen off after 10 min
 exec swayidle -w \
