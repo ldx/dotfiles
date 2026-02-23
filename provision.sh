@@ -231,7 +231,6 @@ apt-get install -y \
   alacritty \
   grim \
   kanshi \
-  mako-notifier \
   slurp \
   seatd \
   sway \
