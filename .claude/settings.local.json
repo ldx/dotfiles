@@ -30,7 +30,8 @@
       "Bash(ssh -p 2222 -o StrictHostKeyChecking=no vilmos@localhost *)",
       "Bash(rsync * vilmos@localhost:*)",
       "Bash(rsync * -e 'ssh -p 2222 -o StrictHostKeyChecking=no')",
-      "Bash(dpkg -l)"
+      "Bash(dpkg -l)",
+      "Bash(python3 -m json.tool)"
     ]
   }
 }

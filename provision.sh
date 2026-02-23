@@ -248,6 +248,9 @@ apt-get install -y \
   docker-buildx-plugin \
   tailscale
 
+# Allow swaylock to read /etc/shadow directly (needed for PAM auth without setuid).
+setcap cap_dac_read_search=+ep /usr/bin/swaylock
+
 systemctl enable --now tailscaled
 
 # Keyd is not in Debian 13.
