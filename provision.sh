@@ -18,9 +18,17 @@ cur_dir=$(dirname "$(readlink -f "$0")")
 mkdir -p /usr/local
 chown "$provisioning_user" /usr/local
 
+# gnupg is needed for apt key management below.
+# non-free-firmware is needed for hardware drivers (WiFi, audio).
+apt-get update -y
+apt-get install -y gnupg curl
+grep -q non-free-firmware /etc/apt/sources.list.d/debian.sources || \
+  sed -i 's/^Components: main$/Components: main non-free-firmware/' /etc/apt/sources.list.d/debian.sources
+
 # Tailscale apt source.
-curl -fsSL https://pkgs.tailscale.com/stable/debian/bookworm.noarch.gpg | gpg --dearmor -o /usr/share/keyrings/tailscale-archive-keyring.gpg
-echo "deb [signed-by=/usr/share/keyrings/tailscale-archive-keyring.gpg] https://pkgs.tailscale.com/stable/debian bookworm main" > /etc/apt/sources.list.d/tailscale.list
+codename=$(. /etc/os-release && echo "$VERSION_CODENAME")
+curl -fsSL "https://pkgs.tailscale.com/stable/debian/${codename}.noarmor.gpg" | tee /usr/share/keyrings/tailscale-archive-keyring.gpg >/dev/null
+curl -fsSL "https://pkgs.tailscale.com/stable/debian/${codename}.tailscale-keyring.list" | tee /etc/apt/sources.list.d/tailscale.list >/dev/null
 
 # Docker Engine apt sources.
 install -m 0755 -d /etc/apt/keyrings
@@ -178,7 +186,7 @@ apt-get install -y \
   python3-dev \
   python3-pip \
   python3-venv \
-  freerdp2-x11 \
+  freerdp3-x11 \
   redshift \
   rfkill \
   rsync \
@@ -264,14 +272,16 @@ pushd "$keyd_tmpdir"
 make && make install
 popd
 rm -rf "$keyd_tmpdir"
+systemctl enable --now keyd
 
 # Remove Firefox ESR.
 apt-get remove -y firefox-esr || true
 
-# Slack.
-curl -L "https://slack.com/downloads/instructions/linux?ddl=1&build=deb" -o /tmp/slack.deb
-apt-get install -y /tmp/slack.deb
-rm -f /tmp/slack.deb
+# Slack apt source.
+curl -fsSL https://packagecloud.io/slacktechnologies/slack/gpgkey | tee /usr/share/keyrings/slack-archive-keyring.gpg >/dev/null
+echo "deb [signed-by=/usr/share/keyrings/slack-archive-keyring.gpg] https://packagecloud.io/slacktechnologies/slack/debian/ jessie main" > /etc/apt/sources.list.d/slack.list
+apt-get update
+apt-get install -y slack-desktop
 
 bash "$cur_dir"/InstallAzureCLIDeb
 
@@ -300,10 +310,12 @@ usermod -a -G sudo "$provisioning_user"
 chsh -s /bin/bash "$provisioning_user"
 
 # greetd + tuigreet display manager setup.
-# greeter user needs a home dir for --remember state and input group for keyboard.
-mkdir -p /home/greeter
-chown greeter:greeter /home/greeter
-usermod -aG input greeter
+# _greetd user is created by the greetd package. Give it a home dir for
+# tuigreet --remember state and add to input group for keyboard access.
+greetd_user=$(getent passwd | awk -F: '/greetd/{print $1}' | head -1)
+mkdir -p "/home/${greetd_user}"
+chown "${greetd_user}:${greetd_user}" "/home/${greetd_user}"
+usermod -aG input "${greetd_user}"
 
 # Deploy XMonad wayland session entry for tuigreet.
 mkdir -p /usr/local/share/wayland-sessions
@@ -315,9 +327,11 @@ vt = 1
 
 [default_session]
 command = "tuigreet --time --remember --remember-session --sessions /usr/share/wayland-sessions:/usr/local/share/wayland-sessions"
-user = "greeter"
+user = "${greetd_user}"
 EOF
 
 # Prevent getty@tty1 from fighting greetd on VT1.
 systemctl mask getty@tty1
+# Disable any existing display manager before enabling greetd.
+systemctl disable lightdm gdm3 sddm 2>/dev/null || true
 systemctl enable greetd

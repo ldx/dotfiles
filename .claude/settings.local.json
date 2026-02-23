@@ -20,7 +20,16 @@
       "Bash(git show *)",
       "Bash(git add *)",
       "Bash(git commit *)",
-      "WebSearch"
+      "WebSearch",
+      "Bash(git push)",
+      "Bash(git -C /home/vilmos/src/dotfiles status)",
+      "WebFetch(domain:slack.com)",
+      "WebFetch(domain:cloud.debian.org)",
+      "WebFetch(domain:tailscale.com)",
+      "Bash(curl *)",
+      "Bash(ssh -p 2222 -o StrictHostKeyChecking=no vilmos@localhost *)",
+      "Bash(rsync * vilmos@localhost:*)",
+      "Bash(rsync * -e 'ssh -p 2222 -o StrictHostKeyChecking=no')"
     ]
   }
 }
