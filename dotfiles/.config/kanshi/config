@@ -2,14 +2,22 @@
 # Positions use logical pixels (after scaling)
 # eDP-1: 2256x1504 @ scale 1.25 = 1805x1203 logical
 # Dell U2720Q: 3840x2160 @ scale 2 = 1920x1080 logical
+# Apple Studio Display: 5120x2880 @ scale 1.5 = 3413x1920 logical
 
 profile laptop {
     output eDP-1 enable scale 1.25
 }
 
+profile apple_studio {
+    # Studio Display on left, laptop on right
+    # eDP-1 x offset = Studio Display logical width = 5120 / 1.5 = 3413
+    output "Apple Computer Inc StudioDisplay *"          enable mode 5120x2880@60Hz scale 1.5 position 0,0
+    output eDP-1                                         enable scale 1.25          position 3413,0
+}
+
 profile docked {
     # Dell on left, laptop on right
     # eDP-1 x offset = Dell native width (3840) / Dell scale (1.25) = 3072
-    output "Dell Inc. DELL U2720Q 2R3JV83" enable scale 1.25 position 0,0
+    output "Dell Inc. DELL U2720Q *"       enable scale 1.25 position 0,0
     output eDP-1                           enable scale 1.25 position 3072,0
 }
