@@ -21,7 +21,7 @@ xwayland enable
 exec --no-startup-id dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP=sway
 
 # Autostart
-exec copyq
+exec_always sh -c 'pgrep -x copyq || copyq &'
 exec mako
 exec nm-applet --indicator
 exec pasystray
@@ -60,6 +60,10 @@ bindsym $mod+q reload
 
 # Exit sway (Mod+Shift+q matches XMonad quit)
 bindsym $mod+Shift+q exec swaynag -t warning -m 'Exit sway?' -B 'Yes, exit' 'swaymsg exit'
+
+# Focus monitor (matching XMonad Mod+w/e)
+bindsym $mod+w focus output left
+bindsym $mod+e focus output right
 
 # Focus (vim-style + arrows)
 bindsym $mod+h focus left
