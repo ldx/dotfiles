@@ -18,7 +18,7 @@ default_floating_border pixel 2
 xwayland enable
 
 # Wayland environment for portals and D-Bus
-exec --no-startup-id dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP=sway
+exec dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP=sway
 
 # Autostart
 exec_always sh -c 'pgrep -x copyq || copyq &'
