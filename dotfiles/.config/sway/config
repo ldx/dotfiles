@@ -7,7 +7,7 @@ set $menu wofi --show drun
 font pango:CommitMonoNerdFontMono 11
 
 # Outputs managed by kanshi (handles hotplug and multi-monitor profiles)
-exec kanshi
+exec_always sh -c 'pkill -x kanshi; kanshi'
 
 # Gaps (matching XMonad spacing 5)
 gaps inner 5
@@ -23,6 +23,8 @@ exec --no-startup-id dbus-update-activation-environment --systemd WAYLAND_DISPLA
 # Autostart
 exec copyq
 exec mako
+exec nm-applet --indicator
+exec pasystray
 
 # Auto-lock after 5 min, screen off after 10 min
 exec swayidle -w \
