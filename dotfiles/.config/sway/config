@@ -7,6 +7,8 @@ set $menu wofi --show drun
 font pango:CommitMonoNerdFontMono 11
 
 # Outputs managed by kanshi (handles hotplug and multi-monitor profiles)
+# DP-6 is a phantom MST output from the Apple Studio Display — disable it globally.
+output DP-6 disable
 exec_always sh -c 'pkill -x kanshi; kanshi'
 
 # Gaps (matching XMonad spacing 5)
