@@ -305,7 +305,7 @@ EOF
 mkdir -p /etc/openvpn
 cp "$cur_dir"/update-resolv-conf /etc/openvpn/update-resolv-conf
 
-usermod -a -G sudo "$provisioning_user"
+usermod -a -G sudo,video "$provisioning_user"
 
 chsh -s /bin/bash "$provisioning_user"
 
@@ -318,8 +318,12 @@ chown "${greetd_user}:${greetd_user}" "/home/${greetd_user}"
 usermod -aG input "${greetd_user}"
 
 # Deploy XMonad wayland session entry for tuigreet.
+# Also install the xmonad-x11 wrapper system-wide so greetd can find it
+# without sourcing the user's PATH.
 mkdir -p /usr/local/share/wayland-sessions
 cp "$cur_dir/config/wayland-sessions/xmonad.desktop" /usr/local/share/wayland-sessions/
+cp "$cur_dir/local/bin/xmonad-x11" /usr/local/bin/xmonad-x11
+chmod 0755 /usr/local/bin/xmonad-x11
 
 cat <<EOF >/etc/greetd/config.toml
 [terminal]
