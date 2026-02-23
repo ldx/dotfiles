@@ -2,8 +2,7 @@
     "layer": "top",
     "position": "top",
     "modules-left": ["sway/workspaces", "sway/mode", "sway/window"],
-    "modules-center": ["tray"],
-    "modules-right": ["battery", "cpu", "memory", "network", "clock"],
+    "modules-right": ["battery", "cpu", "memory", "network", "tray", "clock"],
 
     "tray": {
         "spacing": 8
