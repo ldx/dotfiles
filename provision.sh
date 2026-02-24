@@ -225,7 +225,6 @@ apt-get install -y \
   xmobar \
   xmonad \
   xorg \
-  xss-lock \
   alacritty \
   grim \
   kanshi \
