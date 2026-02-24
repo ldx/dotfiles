@@ -116,6 +116,7 @@ apt-get install -y \
   tuigreet \
   gimp \
   git \
+  git-lfs \
   git-man \
   g++-multilib \
   gnupg \
