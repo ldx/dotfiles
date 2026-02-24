@@ -118,16 +118,16 @@ bindsym $mod+Shift+space floating toggle
 # Fullscreen (Mod+f — common addition)
 bindsym $mod+f fullscreen toggle
 
-# Workspaces
-bindsym $mod+1 workspace number 1
-bindsym $mod+2 workspace number 2
-bindsym $mod+3 workspace number 3
-bindsym $mod+4 workspace number 4
-bindsym $mod+5 workspace number 5
-bindsym $mod+6 workspace number 6
-bindsym $mod+7 workspace number 7
-bindsym $mod+8 workspace number 8
-bindsym $mod+9 workspace number 9
+# Workspaces — use sway-workspace to bring workspace to focused output (XMonad-style)
+bindsym $mod+1 exec ~/.local/bin/sway-workspace 1
+bindsym $mod+2 exec ~/.local/bin/sway-workspace 2
+bindsym $mod+3 exec ~/.local/bin/sway-workspace 3
+bindsym $mod+4 exec ~/.local/bin/sway-workspace 4
+bindsym $mod+5 exec ~/.local/bin/sway-workspace 5
+bindsym $mod+6 exec ~/.local/bin/sway-workspace 6
+bindsym $mod+7 exec ~/.local/bin/sway-workspace 7
+bindsym $mod+8 exec ~/.local/bin/sway-workspace 8
+bindsym $mod+9 exec ~/.local/bin/sway-workspace 9
 
 bindsym $mod+Shift+1 move container to workspace number 1
 bindsym $mod+Shift+2 move container to workspace number 2

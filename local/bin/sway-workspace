@@ -1,0 +1,4 @@
+#!/bin/bash
+# Switch to workspace N on the currently focused output (XMonad-style).
+output=$(swaymsg -t get_outputs | python3 -c "import sys,json; print(next(o['name'] for o in json.load(sys.stdin) if o['focused']))")
+swaymsg "workspace number $1; move workspace to output $output"
