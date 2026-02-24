@@ -332,7 +332,7 @@ cat <<EOF >/etc/greetd/config.toml
 vt = 1
 
 [default_session]
-command = "tuigreet --time --remember --remember-session --sessions /usr/share/wayland-sessions:/usr/local/share/wayland-sessions"
+command = "tuigreet --time --remember --remember-session --default-session sway --sessions /usr/share/wayland-sessions:/usr/local/share/wayland-sessions"
 user = "${greetd_user}"
 EOF
 
