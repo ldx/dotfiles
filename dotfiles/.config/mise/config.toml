@@ -5,7 +5,6 @@ idiomatic_version_file_enable_tools = []
 node = "lts"
 go = "1"
 fzf = "latest"
-#ag = "latest"
 amazon-ecr-credential-helper = "latest"
 argocd = "latest"
 aws-cli = "latest"
