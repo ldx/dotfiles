@@ -1,7 +1,7 @@
 # kanshi output profiles — applied automatically on hotplug
 # Positions use logical pixels (after scaling)
 # eDP-1: 2256x1504 @ scale 1.25 = 1805x1203 logical
-# Dell U2720Q: 3840x2160 @ scale 2 = 1920x1080 logical
+# Dell U2720Q: 3840x2160 @ scale 1.25 = 3072x1728 logical
 # Apple Studio Display: 5120x2880 @ scale 1.5 = 3413x1920 logical
 
 profile laptop {
