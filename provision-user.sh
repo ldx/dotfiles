@@ -37,10 +37,8 @@ fi
 
 # Fonts.
 NERD_FONTS_VERSION=$(curl -fsSL https://api.github.com/repos/ryanoasis/nerd-fonts/releases/latest | grep '"tag_name"' | cut -d'"' -f4)
-curl -L "https://github.com/ryanoasis/nerd-fonts/releases/download/${NERD_FONTS_VERSION}/LiberationMono.zip" >/tmp/LiberationMono.zip
 curl -L "https://github.com/ryanoasis/nerd-fonts/releases/download/${NERD_FONTS_VERSION}/CommitMono.zip" >/tmp/CommitMono.zip
 mkdir -p "$HOME/.local/share/fonts"
-unzip -o -d "$HOME/.local/share/fonts" /tmp/LiberationMono.zip
 unzip -o -d "$HOME/.local/share/fonts" /tmp/CommitMono.zip
 fc-cache -f -v
 
