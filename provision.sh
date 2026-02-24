@@ -47,7 +47,6 @@ apt-get install -y \
   acpi-support \
   acpitool \
   autoconf \
-  autocutsel \
   automake \
   autorandr \
   autossh \
@@ -187,7 +186,6 @@ apt-get install -y \
   python3-pip \
   python3-venv \
   freerdp3-x11 \
-  redshift \
   rfkill \
   rsync \
   screen \
