@@ -56,12 +56,13 @@ alias ks="k -n kube-system"
 alias kse="k -n kube-system exec -ti"
 alias kk="k kustomize"
 
-source "$HOME/.complete_alias"
-
-complete -F _complete_alias k
-complete -F _complete_alias ke
-complete -F _complete_alias ks
-complete -F _complete_alias kse
+if [[ -f "$HOME/.complete_alias" ]]; then
+  source "$HOME/.complete_alias"
+  complete -F _complete_alias k
+  complete -F _complete_alias ke
+  complete -F _complete_alias ks
+  complete -F _complete_alias kse
+fi
 
 command -v kubecolor >/dev/null 2>&1 && complete -F __start_kubectl kubecolor
 
@@ -78,7 +79,6 @@ done
 
 [[ -f "$HOME/.cargo/env" ]] && . "$HOME/.cargo/env"
 
-eval "$(direnv hook bash)"
-
-eval "$($HOME/.local/bin/mise activate bash)"
-eval "$(starship init bash)"
+command -v direnv >/dev/null 2>&1 && eval "$(direnv hook bash)"
+[[ -x "$HOME/.local/bin/mise" ]] && eval "$($HOME/.local/bin/mise activate bash)"
+command -v starship >/dev/null 2>&1 && eval "$(starship init bash)"
