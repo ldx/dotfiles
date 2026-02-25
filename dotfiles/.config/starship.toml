@@ -1,6 +1,11 @@
 format = """
-$directory$git_branch$git_status$kubernetes$cmd_duration
+$hostname$directory$git_branch$git_status$kubernetes$cmd_duration
 $status$character"""
+
+[hostname]
+format = "[$hostname]($style) "
+style = "bold green"
+trim_at = "."
 
 [directory]
 truncation_length = 4
