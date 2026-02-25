@@ -1,0 +1,62 @@
+[window]
+padding = { x = 4, y = 4 }
+decorations = "none"
+
+[scrolling]
+history = 999999
+
+[font]
+size = 13.0
+
+[font.normal]
+family = "CommitMonoNerdFontMono"
+style = "Regular"
+
+[font.bold]
+family = "CommitMonoNerdFontMono"
+style = "Bold"
+
+[font.italic]
+family = "CommitMonoNerdFontMono"
+style = "Italic"
+
+[colors]
+draw_bold_text_with_bright_colors = true
+
+[colors.primary]
+background = "#222222"
+foreground = "#ffffff"
+
+[colors.cursor]
+cursor = "#ffffff"
+text = "#222222"
+
+[colors.normal]
+black = "#2e3436"
+red = "#cc0000"
+green = "#4e9a06"
+yellow = "#c4a000"
+blue = "#3465a4"
+magenta = "#75507b"
+cyan = "#06989a"
+white = "#d3d7cf"
+
+[colors.bright]
+black = "#555753"
+red = "#ef2929"
+green = "#8ae234"
+yellow = "#fce94f"
+blue = "#729fcf"
+magenta = "#ad7fa8"
+cyan = "#34e2e2"
+white = "#eeeeec"
+
+[[keyboard.bindings]]
+key = "C"
+mods = "Shift|Control"
+action = "Copy"
+
+[[keyboard.bindings]]
+key = "V"
+mods = "Shift|Control"
+action = "Paste"
