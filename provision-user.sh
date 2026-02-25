@@ -54,7 +54,6 @@ cp -rf "$CURDIR/dotfiles/.config/nvim"/* "$HOME/.config/nvim/"
 # Default browser.
 xdg-settings set default-web-browser firefox.desktop || true
 
-
 # Mise.
 curl https://mise.run | sh
 PATH="$PATH:$BINDIR" mise install
