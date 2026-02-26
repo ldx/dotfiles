@@ -2,7 +2,7 @@
     "layer": "top",
     "position": "top",
     "modules-left": ["sway/workspaces", "sway/mode", "sway/window"],
-    "modules-right": ["battery", "cpu", "memory", "network", "tray", "clock"],
+    "modules-right": ["idle_inhibitor", "battery", "cpu", "temperature", "memory", "disk", "pulseaudio", "backlight", "network", "tray", "clock"],
 
     "tray": {
         "spacing": 8
@@ -17,6 +17,14 @@
         "max-length": 50
     },
 
+    "idle_inhibitor": {
+        "format": "{icon}",
+        "format-icons": {
+            "activated": "Inhibit: on",
+            "deactivated": "Inhibit: off"
+        }
+    },
+
     "battery": {
         "format": "Batt: {capacity}%",
         "format-charging": "Batt: {capacity}% ↑",
@@ -29,8 +37,29 @@
         "interval": 1
     },
 
+    "temperature": {
+        "format": "Temp: {temperatureC}°C",
+        "critical-threshold": 80,
+        "interval": 5
+    },
+
     "memory": {
         "format": "Mem: {percentage}%"
+    },
+
+    "disk": {
+        "format": "Disk: {percentage_used}%",
+        "path": "/"
+    },
+
+    "pulseaudio": {
+        "format": "Vol: {volume}%",
+        "format-muted": "Vol: muted",
+        "on-click": "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"
+    },
+
+    "backlight": {
+        "format": "Bright: {percent}%"
     },
 
     "network": {

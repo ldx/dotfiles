@@ -32,10 +32,19 @@ window#waybar {
 
 #battery,
 #cpu,
+#temperature,
 #memory,
+#disk,
+#pulseaudio,
+#backlight,
 #network,
+#idle_inhibitor,
 #clock {
     padding: 0 8px;
+}
+
+#temperature.critical {
+    color: darkred;
 }
 
 #battery.warning {
