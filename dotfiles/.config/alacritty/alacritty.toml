@@ -3,7 +3,7 @@ padding = { x = 4, y = 4 }
 decorations = "none"
 
 [scrolling]
-history = 999999
+history = 100000
 
 [font]
 size = 13.0

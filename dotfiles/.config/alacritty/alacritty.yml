@@ -5,7 +5,7 @@ window:
   decorations: none
 
 scrolling:
-  history: 999999
+  history: 100000
 
 font:
   normal:
