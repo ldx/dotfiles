@@ -32,7 +32,8 @@
       "Bash(rsync * -e 'ssh -p 2222 -o StrictHostKeyChecking=no')",
       "Bash(dpkg -l)",
       "Bash(python3 -m json.tool)",
-      "Bash(getcap /usr/bin/swaylock)"
+      "Bash(getcap /usr/bin/swaylock)",
+      "Bash(cd ~/src/dotfiles && ./sync-cli-dotfiles.sh ../braincompany/sandbox/dotfiles/vilmos)"
     ]
   }
 }
