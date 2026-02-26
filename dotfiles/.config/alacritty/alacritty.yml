@@ -2,9 +2,10 @@ window:
   padding:
     x: 4
     y: 4
+  decorations: none
 
 scrolling:
-  history: 512
+  history: 999999
 
 font:
   normal:
