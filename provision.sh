@@ -137,7 +137,6 @@ apt-get install -y \
   less \
   libfuse-dev \
   libicu-dev \
-  libnotify-bin \
   libnss-resolve \
   libpam-mount \
   libreadline-dev \
