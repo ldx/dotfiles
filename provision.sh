@@ -273,7 +273,7 @@ systemctl enable --now keyd
 # Remove Firefox ESR.
 apt-get remove -y firefox-esr || true
 
-# Slack apt source.
+# Slack apt source — 'jessie' is intentional, it's the only dist on packagecloud and works on any Debian.
 curl -fsSL https://packagecloud.io/slacktechnologies/slack/gpgkey | tee /usr/share/keyrings/slack-archive-keyring.gpg >/dev/null
 echo "deb [signed-by=/usr/share/keyrings/slack-archive-keyring.gpg] https://packagecloud.io/slacktechnologies/slack/debian/ jessie main" > /etc/apt/sources.list.d/slack.list
 apt-get update
@@ -309,7 +309,7 @@ chsh -s /bin/bash "$provisioning_user"
 greetd_user=$(getent passwd | awk -F: '/greetd/{print $1}' | head -1)
 mkdir -p "/home/${greetd_user}"
 chown "${greetd_user}:${greetd_user}" "/home/${greetd_user}"
-usermod -aG input "${greetd_user}"
+usermod -d "/home/${greetd_user}" -aG input "${greetd_user}"
 
 # Deploy XMonad wayland session entry for tuigreet.
 # Also install the xmonad-x11 wrapper system-wide so greetd can find it
@@ -324,7 +324,7 @@ cat <<EOF >/etc/greetd/config.toml
 vt = 1
 
 [default_session]
-command = "tuigreet --time --remember --remember-session --default-session sway --sessions /usr/share/wayland-sessions:/usr/local/share/wayland-sessions"
+command = "tuigreet --time --remember --remember-session --sessions /usr/share/wayland-sessions:/usr/local/share/wayland-sessions"
 user = "${greetd_user}"
 EOF
 
