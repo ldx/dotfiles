@@ -29,12 +29,15 @@ if [ ! -x "$HOME/.dropbox-dist/dropboxd" ]; then
   curl -L "https://www.dropbox.com/download?plat=lnx.x86_64" | tar -C "$HOME" -xzf -
 fi
 
-# Fonts.
-NERD_FONTS_VERSION=$(curl -fsSL https://api.github.com/repos/ryanoasis/nerd-fonts/releases/latest | grep '"tag_name"' | cut -d'"' -f4)
-curl -L "https://github.com/ryanoasis/nerd-fonts/releases/download/${NERD_FONTS_VERSION}/CommitMono.zip" >/tmp/CommitMono.zip
-mkdir -p "$HOME/.local/share/fonts"
-unzip -o -d "$HOME/.local/share/fonts" /tmp/CommitMono.zip
-fc-cache -f -v
+# Fonts and default browser (GUI only).
+if type fc-cache >/dev/null 2>&1; then
+  NERD_FONTS_VERSION=$(curl -fsSL https://api.github.com/repos/ryanoasis/nerd-fonts/releases/latest | grep '"tag_name"' | cut -d'"' -f4)
+  curl -L "https://github.com/ryanoasis/nerd-fonts/releases/download/${NERD_FONTS_VERSION}/CommitMono.zip" >/tmp/CommitMono.zip
+  mkdir -p "$HOME/.local/share/fonts"
+  unzip -o -d "$HOME/.local/share/fonts" /tmp/CommitMono.zip
+  fc-cache -f -v
+  type xdg-settings >/dev/null 2>&1 && xdg-settings set default-web-browser firefox.desktop || true
+fi
 
 # LazyVim.
 rm -rf "$HOME/.config/nvim"
@@ -44,9 +47,6 @@ rm -rf "$HOME/.cache/nvim"
 git clone https://github.com/LazyVim/starter "$HOME/.config/nvim"
 rm -rf "$HOME/.config/nvim/.git"
 cp -rf "$CURDIR/dotfiles/.config/nvim"/* "$HOME/.config/nvim/"
-
-# Default browser.
-xdg-settings set default-web-browser firefox.desktop || true
 
 # Mise.
 curl https://mise.run | sh
