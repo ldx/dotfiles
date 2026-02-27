@@ -18,12 +18,6 @@ mkdir -p "$BINDIR"
 mkdir -p "$HOME/.local"
 rsync -av "$CURDIR/local/" "$HOME/.local/"
 
-mkdir -p "$HOME/.terminfo"
-cp "$CURDIR/terminfo/"*.terminfo "$HOME/.terminfo/"
-for ti in "$HOME/.terminfo/"*.terminfo; do
-  tic "$ti"
-done
-
 rsync -av "$CURDIR/dotfiles/" "$HOME/"
 
 # Firefox.
