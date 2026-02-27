@@ -1,0 +1,11 @@
+[Unit]
+Description=Auto-switch microphone on headphone jack events
+After=pipewire.service wireplumber.service
+
+[Service]
+ExecStart=%h/.local/bin/headset-mic-monitor
+Restart=on-failure
+RestartSec=5
+
+[Install]
+WantedBy=default.target

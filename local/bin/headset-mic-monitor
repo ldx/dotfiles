@@ -1,0 +1,31 @@
+#!/usr/bin/env bash
+# Auto-switch microphone input when headphones are plugged/unplugged.
+#
+# The ALC295 codec has no jack detection on the mic input ports — both
+# analog-input-headset-mic and analog-input-internal-mic report
+# "availability unknown". WirePlumber therefore always picks the highest
+# priority port (internal mic) on every jack event.
+#
+# We work around this by watching for card change events from PipeWire.
+# Headphone insertion IS detectable because the speaker port reports
+# "not available" when headphones are connected.
+
+set -euo pipefail
+
+SOURCE="alsa_input.pci-0000_c1_00.6.analog-stereo"
+
+switch_mic() {
+  if pactl list cards | grep -q "analog-output-speaker.*not available"; then
+    pactl set-source-port "$SOURCE" analog-input-headset-mic 2>/dev/null || true
+  else
+    pactl set-source-port "$SOURCE" analog-input-internal-mic 2>/dev/null || true
+  fi
+}
+
+# Apply correct port on startup.
+switch_mic
+
+# Re-apply on every card change event (fired on jack insert/remove).
+pactl subscribe | grep --line-buffered "card" | while read -r _; do
+  switch_mic
+done
