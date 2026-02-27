@@ -50,6 +50,8 @@ type aws_completer >/dev/null 2>&1 && complete -C aws_completer aws
 type _awsp &>/dev/null && alias awsp="source _awsp"
 [ -f "$HOME/.awsp" ] && export AWS_PROFILE=$(cat "$HOME/.awsp")
 
+alias vim="nvim"
+
 alias k="kubectl"
 alias ke="k exec -ti"
 alias ks="k -n kube-system"
