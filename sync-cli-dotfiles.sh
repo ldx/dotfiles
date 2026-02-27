@@ -25,11 +25,7 @@ cp -v "$SRC/.config/mise/config.toml" "$DST/.config/mise/config.toml"
 cp -v "$SRC/.config/starship.toml" "$DST/.config/starship.toml"
 
 # Neovim config
-mkdir -p "$DST/.config/nvim/lua/config"
-mkdir -p "$DST/.config/nvim/lua/plugins"
-cp -v "$SRC/.config/nvim/init.lua"                "$DST/.config/nvim/init.lua"
-cp -v "$SRC/.config/nvim/lua/config/lazy.lua"     "$DST/.config/nvim/lua/config/lazy.lua"
-cp -v "$SRC/.config/nvim/lua/config/keymaps.lua"  "$DST/.config/nvim/lua/config/keymaps.lua"
-cp -v "$SRC/.config/nvim/lua/plugins/lint.lua"    "$DST/.config/nvim/lua/plugins/lint.lua"
+mkdir -p "$DST/.config/nvim"
+cp -rv "$SRC/.config/nvim/." "$DST/.config/nvim/"
 
 echo "Done. Review changes in $DST and commit."
