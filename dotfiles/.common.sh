@@ -79,12 +79,6 @@ for f in .setenv setenv setenv.sh; do
   fi
 done
 
-if [ -d "$LOCAL_PREFIX/share/completions" ]; then
-  for f in "$LOCAL_PREFIX/share/completions/"*; do
-    source "$f"
-  done
-fi
-
 # Aliases.
 case $(uname -s) in
 [Ll][Ii][Nn][Uu][Xx])
