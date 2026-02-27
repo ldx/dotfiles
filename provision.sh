@@ -73,7 +73,6 @@ apt-get install -y \
   curl \
   debootstrap \
   desktop-base \
-  devscripts \
   direnv \
   dnsutils \
   dput \
@@ -152,7 +151,6 @@ apt-get install -y \
   man-db \
   manpages \
   manpages-dev \
-  mawk \
   mplayer \
   ncurses-term \
   netcat-openbsd \
@@ -160,7 +158,6 @@ apt-get install -y \
   network-manager \
   network-manager-gnome \
   nmap \
-  notification-daemon \
   openssh-client \
   openssh-server \
   openssl \
