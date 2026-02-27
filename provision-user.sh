@@ -9,9 +9,8 @@ fi
 
 CURDIR=$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)
 
-BINDIR="$HOME/.local/bin"
-
 # Directory for user-installed binaries.
+BINDIR="$HOME/.local/bin"
 mkdir -p "$BINDIR"
 
 # Copy local files.
