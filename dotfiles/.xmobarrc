@@ -44,9 +44,7 @@ Config {
                         , "-O"	, "<fc=#dAA520>Charging</fc>"
                         -- charged status
                         , "-i"	, "<fc=#006000>Charged</fc>"
-                        -- notify low battery
-                        --, "--action-threshold"	, "5"
-                        --, "-action"	, "notify-send 'Battery Low' 'Battery is now at 5%.'"
+
                 ] 600
               , Run Cpu [
                 "-L", "0", "-H", "50", "--normal", "green", "--high", "red" ] 10
