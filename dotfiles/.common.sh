@@ -12,8 +12,6 @@ export LOCAL_PREFIX=$HOME/.local
 export CPPFLAGS=-I$LOCAL_PREFIX/include
 export LDFLAGS=-L$LOCAL_PREFIX/lib
 
-
-
 # Workaround for https://wiki.archlinux.org/title/Java#Gray_window,_applications_not_resizing_with_WM,_menus_immediately_closing.
 export _JAVA_AWT_WM_NONREPARENTING=1
 
@@ -25,8 +23,6 @@ case $(uname -s) in
   ;;
 esac
 
-export GOPATH=$HOME/Projects/go
-export GOFLAGS="-mod=readonly"
 # prepend_colon(val, var)
 prepend_colon() {
   if [ -z "$2" ]; then
@@ -59,12 +55,7 @@ unshift_path "/usr/local/go"
 unshift_path "/opt"
 unshift_path "$HOME"
 unshift_path "$LOCAL_PREFIX"
-unshift_path "$GOPATH"
 unshift_path "$HOME/.krew"
-if [ -d "$HOME/.local/go" ]; then
-  export GOROOT=$HOME/.local/go
-  unshift_path "$GOROOT"
-fi
 
 # Create core files.
 ulimit -c 0

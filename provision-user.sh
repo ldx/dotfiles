@@ -39,15 +39,6 @@ if type fc-cache >/dev/null 2>&1; then
   type xdg-settings >/dev/null 2>&1 && xdg-settings set default-web-browser firefox.desktop || true
 fi
 
-# LazyVim.
-rm -rf "$HOME/.config/nvim"
-rm -rf "$HOME/.local/share/nvim"
-rm -rf "$HOME/.local/state/nvim"
-rm -rf "$HOME/.cache/nvim"
-git clone https://github.com/LazyVim/starter "$HOME/.config/nvim"
-rm -rf "$HOME/.config/nvim/.git"
-cp -rf "$CURDIR/dotfiles/.config/nvim"/* "$HOME/.config/nvim/"
-
 # Mise.
 curl https://mise.run | sh
 PATH="$PATH:$BINDIR" mise install
