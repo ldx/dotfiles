@@ -143,7 +143,7 @@ bindsym $mod+Shift+9 move container to workspace number 9
 bindsym $mod+Shift+o exec swaylock
 bindsym $mod+Shift+s exec systemctl suspend
 
-# Screenshots (grim replaces scrot)
+# Screenshots
 bindsym Print       exec mkdir -p "$HOME/Pictures" && grim "$HOME/Pictures/screenshot-$(date +%Y%m%d-%H%M%S).png"
 bindsym Ctrl+Print  exec mkdir -p "$HOME/Pictures" && grim -g "$(slurp)" "$HOME/Pictures/screenshot-$(date +%Y%m%d-%H%M%S).png"
 
