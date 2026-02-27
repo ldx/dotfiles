@@ -33,7 +33,8 @@
       "Bash(dpkg -l)",
       "Bash(python3 -m json.tool)",
       "Bash(getcap /usr/bin/swaylock)",
-      "Bash(cd ~/src/dotfiles && ./sync-cli-dotfiles.sh ../braincompany/sandbox/dotfiles/vilmos)"
+      "Bash(cd ~/src/dotfiles && ./sync-cli-dotfiles.sh ../braincompany/sandbox/dotfiles/vilmos)",
+      "WebFetch(domain:raw.githubusercontent.com)"
     ]
   }
 }
