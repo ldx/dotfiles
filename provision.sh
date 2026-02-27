@@ -279,8 +279,6 @@ echo "deb [signed-by=/usr/share/keyrings/slack-archive-keyring.gpg] https://pack
 apt-get update
 apt-get install -y slack-desktop
 
-bash "$cur_dir"/InstallAzureCLIDeb
-
 # Flatpak hub.
 flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
 
@@ -299,7 +297,7 @@ cat <<EOF >/etc/sudoers.d/50-utils
 EOF
 
 mkdir -p /etc/openvpn
-cp "$cur_dir"/update-resolv-conf /etc/openvpn/update-resolv-conf
+cp "$cur_dir"/utils/update-resolv-conf /etc/openvpn/update-resolv-conf
 
 usermod -a -G sudo,video "$provisioning_user"
 

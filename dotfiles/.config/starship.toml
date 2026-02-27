@@ -3,6 +3,7 @@ $hostname$directory$git_branch$git_status$kubernetes$cmd_duration
 $status$character"""
 
 [hostname]
+ssh_only = true
 format = "[$hostname]($style) "
 style = "bold green"
 trim_at = "."
