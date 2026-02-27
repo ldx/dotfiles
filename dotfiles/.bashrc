@@ -81,6 +81,7 @@ done
 
 [[ -f "$HOME/.cargo/env" ]] && . "$HOME/.cargo/env"
 
-command -v direnv >/dev/null 2>&1 && eval "$(direnv hook bash)"
 [[ -x "$HOME/.local/bin/mise" ]] && eval "$($HOME/.local/bin/mise activate bash)"
+
+command -v direnv >/dev/null 2>&1 && eval "$(direnv hook bash)"
 command -v starship >/dev/null 2>&1 && eval "$(starship init bash)"
