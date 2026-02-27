@@ -51,7 +51,6 @@ export MANPATH=""
 
 unshift_path "/usr"
 unshift_path "/usr/local"
-unshift_path "/usr/local/go"
 unshift_path "/opt"
 unshift_path "$HOME"
 unshift_path "$LOCAL_PREFIX"

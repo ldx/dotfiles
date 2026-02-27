@@ -76,8 +76,6 @@ for kc in "$HOME"/.kube/configs/*; do
   fi
 done
 
-[[ -f "$HOME/.cargo/env" ]] && . "$HOME/.cargo/env"
-
 [[ -x "$HOME/.local/bin/mise" ]] && eval "$($HOME/.local/bin/mise activate bash)"
 
 command -v direnv >/dev/null 2>&1 && eval "$(direnv hook bash)"

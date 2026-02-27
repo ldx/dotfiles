@@ -161,6 +161,7 @@ apt-get install -y \
   openssh-server \
   openssl \
   openvpn \
+  resolvconf \
   p7zip-full \
   pandoc \
   parted \
@@ -238,6 +239,7 @@ apt-get install -y \
   xwayland \
   xtightvncviewer \
   zip \
+  docker-ce \
   docker-buildx-plugin \
   tailscale
 
