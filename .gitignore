@@ -42,5 +42,9 @@ GTAGS
 *~
 \#*#
 
+# XMonad build artifacts
+dotfiles/.xmonad/xmonad
+dotfiles/.xmonad/xmonad.hi
+
 # Claude Code local settings
 .claude/settings.local.json
