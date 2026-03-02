@@ -2,7 +2,7 @@
 # Positions use logical pixels (after scaling)
 # eDP-1: 2256x1504 @ scale 1.25 = 1805x1203 logical
 # Dell U2720Q: 3840x2160 @ scale 1.25 = 3072x1728 logical
-# Apple Studio Display: 5120x2880 @ scale 1.5 = 3413x1920 logical
+# Apple Studio Display: 5120x2880 @ scale 2.0 = 2560x1440 logical
 
 profile laptop {
     output eDP-1 enable scale 1.25
@@ -10,11 +10,11 @@ profile laptop {
 
 profile apple_studio {
     # Studio Display on left, laptop on right
-    # eDP-1 x offset = Studio Display logical width = 5120 / 1.5 = 3413
-    # DP-6 is a phantom MST tile from the Studio Display — disable it explicitly
-    output "Apple Computer Inc StudioDisplay 0x0000FF1A" enable scale 1.5 position 0,0
-    output DP-6                                          disable
-    output eDP-1                                         enable scale 1.25          position 3413,0
+    # eDP-1 x offset = Studio Display logical width = 5120 / 2.0 = 2560
+    # DP-8 is a phantom MST tile from the Studio Display — must be listed to match profile
+    output "Apple Computer Inc StudioDisplay 0x0000FA76" enable scale 2.0 position 0,0
+    output DP-8                                          disable
+    output eDP-1                                         enable scale 1.25 position 2560,0
 }
 
 profile docked {
