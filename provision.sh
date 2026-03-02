@@ -138,7 +138,6 @@ apt-get install -y \
   libfuse-dev \
   libicu-dev \
   libnss-resolve \
-  libpam-mount \
   libreadline-dev \
   libreoffice \
   libssl-dev \
@@ -245,6 +244,10 @@ apt-get install -y \
 
 # Allow swaylock to read /etc/shadow directly (needed for PAM auth without setuid).
 setcap cap_dac_read_search=+ep /usr/bin/swaylock
+
+# Fingerprint auth via fprintd. Remove libpam-mount (no volumes configured, breaks fingerprint sudo).
+apt-get purge -y --auto-remove libpam-mount libpam-mount-bin 2>/dev/null || true
+pam-auth-update --enable fprintd
 
 systemctl enable --now tailscaled
 
