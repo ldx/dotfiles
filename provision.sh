@@ -313,6 +313,10 @@ mkdir -p "/home/${greetd_user}"
 chown "${greetd_user}:${greetd_user}" "/home/${greetd_user}"
 usermod -d "/home/${greetd_user}" -aG input "${greetd_user}"
 
+# TLP power management config.
+mkdir -p /etc/tlp.d
+cp "$cur_dir/config/tlp.d/10-laptop.conf" /etc/tlp.d/
+
 # Deploy XMonad wayland session entry for tuigreet.
 # Also install the xmonad-x11 wrapper system-wide so greetd can find it
 # without sourcing the user's PATH.
