@@ -60,3 +60,8 @@ action = "Copy"
 key = "V"
 mods = "Shift|Control"
 action = "Paste"
+
+[[keyboard.bindings]]
+key = "Return"
+mods = "Shift"
+chars = "\u001B\r"

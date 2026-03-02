@@ -49,3 +49,4 @@ colors:
 key_bindings:
   - { key: C, mods: Shift|Control, action: Copy }
   - { key: V, mods: Shift|Control, action: Paste }
+  - { key: Return, mods: Shift, chars: "\x1b\r" }
