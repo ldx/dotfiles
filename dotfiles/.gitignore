@@ -48,3 +48,6 @@ tags.temp
 .terraform/
 
 .envrc
+
+# Claude Code local settings
+.claude/settings.local.json
