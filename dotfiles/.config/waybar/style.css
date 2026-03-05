@@ -43,6 +43,11 @@ window#waybar {
     padding: 0 8px;
 }
 
+#custom-notification {
+    padding: 0 8px 0 16px;
+    font-size: 18px;
+}
+
 #temperature.critical {
     color: darkred;
 }

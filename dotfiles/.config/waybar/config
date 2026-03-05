@@ -2,7 +2,23 @@
     "layer": "top",
     "position": "top",
     "modules-left": ["sway/workspaces", "sway/mode", "sway/window"],
-    "modules-right": ["idle_inhibitor", "battery", "cpu", "temperature", "memory", "disk", "pulseaudio", "backlight", "network", "tray", "clock"],
+    "modules-right": ["idle_inhibitor", "battery", "cpu", "temperature", "memory", "disk", "pulseaudio", "backlight", "network", "tray", "custom/notification", "clock"],
+
+    "custom/notification": {
+        "tooltip": false,
+        "format": "{icon}",
+        "format-icons": {
+            "notification": "\uf0f3",
+            "none": "\uf0a2",
+            "dnd-notification": "\uf186",
+            "dnd-none": "\uf186"
+        },
+        "return-type": "json",
+        "exec-if": "which swaync-client",
+        "exec": "swaync-client -swb",
+        "on-click": "swaync-client -t -sw",
+        "escape": true
+    },
 
     "tray": {
         "spacing": 8
