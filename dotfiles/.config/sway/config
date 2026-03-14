@@ -27,6 +27,7 @@ exec dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DE
 exec_always sh -c 'pgrep -x swaync || swaync &'
 exec_always sh -c 'pgrep -x copyq || copyq &'
 exec_always sh -c 'pgrep -x nm-applet || nm-applet --indicator &'
+exec_always sh -c 'pgrep -x blueman-applet || blueman-applet &'
 exec_always sh -c 'pgrep -x pasystray || pasystray &'
 
 # Auto-lock after 5 min, screen off after 10 min
