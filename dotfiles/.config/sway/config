@@ -29,6 +29,7 @@ exec_always sh -c 'pgrep -x copyq || copyq &'
 exec_always sh -c 'pgrep -x nm-applet || nm-applet --indicator &'
 exec_always sh -c 'pgrep -x blueman-applet || blueman-applet &'
 exec_always sh -c 'pgrep -x udiskie || udiskie --tray &'
+exec_always sh -c '[ -x "$HOME/.dropbox-dist/dropboxd" ] && (pgrep -x dropbox || "$HOME/.dropbox-dist/dropboxd" &)'
 exec_always sh -c 'pgrep -x pasystray || pasystray &'
 
 # Auto-lock after 5 min, screen off after 10 min
@@ -165,7 +166,7 @@ assign [class="Vncviewer"]     workspace 5
 assign [class="Gimp"]          workspace 6
 assign [class="Slack"]         workspace 7
 assign [class="Google-chrome"] workspace 8
-assign [app_id="firefox"]      workspace 8
+assign [app_id="firefox"]      workspace 3
 
 # Status bar
 bar {
