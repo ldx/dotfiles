@@ -19,12 +19,8 @@ mkdir -p /usr/local
 chown "$provisioning_user" /usr/local
 
 # gnupg is needed for apt key management below.
-# non-free-firmware is needed for hardware drivers (WiFi, audio).
 apt-get update -y
 apt-get install -y gnupg curl
-grep -q non-free-firmware /etc/apt/sources.list.d/debian.sources || \
-  sed -i 's/^Components: main$/Components: main non-free-firmware/' /etc/apt/sources.list.d/debian.sources
-
 # Tailscale apt source.
 codename=$(. /etc/os-release && echo "$VERSION_CODENAME")
 curl -fsSL "https://pkgs.tailscale.com/stable/debian/${codename}.noarmor.gpg" | tee /usr/share/keyrings/tailscale-archive-keyring.gpg >/dev/null
@@ -137,7 +133,6 @@ apt-get install -y \
   less \
   libfuse-dev \
   libicu-dev \
-  libnss-resolve \
   libreadline-dev \
   libreoffice \
   libssl-dev \
@@ -160,7 +155,6 @@ apt-get install -y \
   openssh-server \
   openssl \
   openvpn \
-  resolvconf \
   p7zip-full \
   pandoc \
   parted \
@@ -199,6 +193,7 @@ apt-get install -y \
   strace \
   sudo \
   sysstat \
+  systemd-resolved \
   tar \
   tcpdump \
   tlp \
@@ -295,14 +290,10 @@ sed -r -i 's/\s?#?(\s*)ForwardAgent\s+.*$/    ForwardAgent yes/g' /etc/ssh/ssh_c
 echo 'KERNEL=="intel_backlight", SUBSYSTEM=="backlight", RUN+="/bin/chmod 0666 /sys/class/backlight/%k/brightness"' >/etc/udev/rules.d/97-intel_backlight.rules
 
 cat <<EOF >/etc/sudoers.d/50-utils
-%sudo  ALL=(ALL) NOPASSWD: /sbin/resolvconf
 %sudo  ALL=(ALL) NOPASSWD: /usr/bin/resolvectl
 %sudo  ALL=(ALL) NOPASSWD: /usr/sbin/openconnect
 %sudo  ALL=(ALL) NOPASSWD: /usr/sbin/openvpn
 EOF
-
-mkdir -p /etc/openvpn
-cp "$cur_dir"/utils/update-resolv-conf /etc/openvpn/update-resolv-conf
 
 usermod -a -G sudo,video "$provisioning_user"
 
