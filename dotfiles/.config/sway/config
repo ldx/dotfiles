@@ -162,6 +162,8 @@ bindsym XF86AudioRaiseVolume exec wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%+
 bindsym XF86MonBrightnessDown exec ~/.local/bin/brightness-control down
 bindsym XF86MonBrightnessUp   exec ~/.local/bin/brightness-control up
 
+floating_modifier $mod normal
+
 # Window assignments (matching XMonad)
 assign [class="Vncviewer"]     workspace 5
 assign [class="Gimp"]          workspace 6
