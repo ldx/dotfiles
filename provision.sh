@@ -229,6 +229,7 @@ apt-get install -y \
   sway \
   swayidle \
   swaylock \
+  sway-notification-center \
   waybar \
   wl-clipboard \
   wofi \
