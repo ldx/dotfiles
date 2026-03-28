@@ -31,6 +31,7 @@ exec_always sh -c 'pgrep -x blueman-applet || blueman-applet &'
 exec_always sh -c 'pgrep -x udiskie || udiskie --tray &'
 exec_always sh -c '[ -x "$HOME/.dropbox-dist/dropboxd" ] && (pgrep -x dropbox || "$HOME/.dropbox-dist/dropboxd" &)'
 exec_always sh -c 'pgrep -x pasystray || pasystray &'
+exec_always sh -c 'pgrep -x lxpolkit || lxpolkit &'
 
 # Auto-lock after 5 min, screen off after 10 min
 exec swayidle -w \

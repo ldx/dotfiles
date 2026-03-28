@@ -81,6 +81,7 @@ apt-get install -y \
   firmware-sof-signed \
   flatpak \
   flex \
+  fprintd \
   fontconfig \
   fontconfig-config \
   fonts-crosextra-caladea \
@@ -131,6 +132,8 @@ apt-get install -y \
   iw \
   laptop-detect \
   less \
+  libpam-fprintd \
+  lxpolkit \
   libfuse-dev \
   libicu-dev \
   libreadline-dev \
