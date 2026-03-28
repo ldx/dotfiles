@@ -208,6 +208,7 @@ apt-get install -y \
   tzdata \
   uidmap \
   unzip \
+  udiskie \
   util-linux \
   v4l-utils \
   valgrind \
