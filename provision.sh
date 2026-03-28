@@ -102,6 +102,7 @@ apt-get install -y \
   fonts-texgyre \
   fonts-vlgothic \
   ftp \
+  fwupd \
   g++ \
   gawk \
   gcc \
