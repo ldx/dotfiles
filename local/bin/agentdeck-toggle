@@ -1,0 +1,17 @@
+#!/bin/bash
+# Toggle agent-deck window: focus if unfocused, close if focused, launch if absent.
+
+TITLE="agent-deck"
+BINARY="/home/vilmos/.local/bin/agent-deck"
+
+focused=$(swaymsg -t get_tree | /usr/bin/jq -r '.. | objects | select(.focused == true) | .name // empty' 2>/dev/null | head -1)
+
+if [ "$focused" = "$TITLE" ]; then
+    swaymsg "[title=\"$TITLE\"] kill"
+elif swaymsg "[title=\"$TITLE\"] focus" 2>/dev/null; then
+    :
+else
+    env -u AGENTDECK_INSTANCE_ID alacritty --title "$TITLE" -e "$BINARY" &
+fi
+
+pkill -RTMIN+8 waybar

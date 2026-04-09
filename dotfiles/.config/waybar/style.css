@@ -48,6 +48,20 @@ window#waybar {
     font-size: 18px;
 }
 
+#custom-agentdeck {
+    padding: 0 8px;
+    font-size: 18px;
+    color: #888888;
+}
+
+#custom-agentdeck.waiting {
+    color: #f9a825;
+}
+
+#custom-agentdeck.running {
+    color: #66bb6a;
+}
+
 #temperature.critical {
     color: darkred;
 }

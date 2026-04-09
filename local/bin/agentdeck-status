@@ -1,0 +1,25 @@
+#!/bin/bash
+# Waybar status script for agent-deck.
+# Outputs JSON: icon + CSS class based on running/waiting/idle state.
+
+ICON=$'\uf085'  # nf-fa-cogs (U+F085)
+
+status=$(/home/vilmos/.local/bin/agent-deck status 2>/dev/null | head -1) || true
+
+if [[ -z "$status" ]]; then
+    echo "{\"text\": \"$ICON\", \"class\": \"idle\", \"tooltip\": \"agent-deck unavailable\"}"
+    exit 0
+fi
+
+running=$(echo "$status" | grep -oP '\d+(?= running)' || echo 0)
+waiting=$(echo "$status" | grep -oP '\d+(?= waiting)' || echo 0)
+
+if [[ "$running" -gt 0 ]]; then
+    class="running"
+elif [[ "$waiting" -gt 0 ]]; then
+    class="waiting"
+else
+    class="idle"
+fi
+
+echo "{\"text\": \"$ICON\", \"class\": \"$class\", \"tooltip\": \"$status\"}"

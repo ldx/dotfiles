@@ -2,7 +2,16 @@
     "layer": "top",
     "position": "top",
     "modules-left": ["sway/workspaces", "sway/mode", "sway/window"],
-    "modules-right": ["idle_inhibitor", "battery", "cpu", "temperature", "memory", "disk", "pulseaudio", "backlight", "network", "tray", "custom/notification", "clock"],
+    "modules-right": ["idle_inhibitor", "battery", "cpu", "temperature", "memory", "disk", "pulseaudio", "backlight", "network", "tray", "custom/agentdeck", "custom/notification", "clock"],
+
+    "custom/agentdeck": {
+        "exec": "~/.local/bin/agentdeck-status",
+        "interval": 5,
+        "return-type": "json",
+        "on-click": "~/.local/bin/agentdeck-toggle",
+        "signal": 8,
+        "tooltip": true
+    },
 
     "custom/notification": {
         "tooltip": false,
