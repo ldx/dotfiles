@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 # Waybar status script for agent-deck.
 # Outputs JSON: icon + CSS class based on running/waiting/idle state.
 
