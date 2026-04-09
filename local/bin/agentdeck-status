@@ -4,10 +4,11 @@
 
 ICON=$'\uf085'  # nf-fa-cogs (U+F085)
 
-status=$("$HOME/.local/bin/agent-deck" status 2>/dev/null | head -1) || true
+status=$("$HOME/.local/bin/agent-deck" status 2>/dev/null | head -1)
 
 if [[ -z "$status" ]]; then
-    echo "{\"text\": \"$ICON\", \"class\": \"idle\", \"tooltip\": \"agent-deck unavailable\"}"
+    /usr/bin/jq -cn --arg text "$ICON" --arg class "idle" --arg tooltip "agent-deck unavailable" \
+        '{text: $text, class: $class, tooltip: $tooltip}'
     exit 0
 fi
 
@@ -22,4 +23,5 @@ else
     class="idle"
 fi
 
-echo "{\"text\": \"$ICON\", \"class\": \"$class\", \"tooltip\": \"$status\"}"
+/usr/bin/jq -cn --arg text "$ICON" --arg class "$class" --arg tooltip "$status" \
+    '{text: $text, class: $class, tooltip: $tooltip}'

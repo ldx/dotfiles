@@ -54,6 +54,10 @@ window#waybar {
     color: #888888;
 }
 
+#custom-agentdeck.idle {
+    color: #888888;
+}
+
 #custom-agentdeck.waiting {
     color: #f9a825;
 }

@@ -4,7 +4,11 @@
 TITLE="agent-deck"
 BINARY="$HOME/.local/bin/agent-deck"
 
-focused=$(swaymsg -t get_tree | /usr/bin/jq -r '.. | objects | select(.focused == true) | .name // empty' 2>/dev/null | head -1)
+focused=$(swaymsg -t get_tree | /usr/bin/jq -r '
+  .. | objects | select(
+    has("focused") and .focused == true and ((.nodes? // []) | length) == 0
+  ) | .name // empty
+' 2>/dev/null | head -1)
 
 if [ "$focused" = "$TITLE" ]; then
     swaymsg "[title=\"$TITLE\"] kill"
