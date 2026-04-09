@@ -2,7 +2,7 @@
 # Toggle agent-deck window: focus if unfocused, close if focused, launch if absent.
 
 TITLE="agent-deck"
-BINARY="/home/vilmos/.local/bin/agent-deck"
+BINARY="$HOME/.local/bin/agent-deck"
 
 focused=$(swaymsg -t get_tree | /usr/bin/jq -r '.. | objects | select(.focused == true) | .name // empty' 2>/dev/null | head -1)
 

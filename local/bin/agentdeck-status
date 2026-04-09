@@ -4,7 +4,7 @@
 
 ICON=$'\uf085'  # nf-fa-cogs (U+F085)
 
-status=$(/home/vilmos/.local/bin/agent-deck status 2>/dev/null | head -1) || true
+status=$("$HOME/.local/bin/agent-deck" status 2>/dev/null | head -1) || true
 
 if [[ -z "$status" ]]; then
     echo "{\"text\": \"$ICON\", \"class\": \"idle\", \"tooltip\": \"agent-deck unavailable\"}"
