@@ -15,7 +15,7 @@ if [ "$focused" = "$TITLE" ]; then
 elif swaymsg "[title=\"$TITLE\"] focus" 2>/dev/null; then
     :
 else
-    env -u AGENTDECK_INSTANCE_ID alacritty --title "$TITLE" -e "$BINARY" &
+    env -u AGENTDECK_INSTANCE_ID -u TMUX -u TMUX_PANE alacritty --title "$TITLE" -e "$BINARY" &
 fi
 
 pkill -RTMIN+8 waybar
