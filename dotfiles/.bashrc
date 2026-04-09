@@ -2,13 +2,15 @@
 # See /usr/share/doc/bash/examples/startup-files (in the package bash-doc) for
 # examples.
 
-# If not running interactively, don't do anything.
+# Environment setup — runs for all bash sessions (interactive and non-interactive).
+source "$HOME/.common.sh"
+[[ -x "$HOME/.local/bin/mise" ]] && eval "$($HOME/.local/bin/mise activate bash)"
+
+# If not running interactively, stop here.
 case $- in
 *i*) ;;
 *) return ;;
 esac
-
-source "$HOME/.common.sh"
 
 # Append to the history file, don't overwrite it.
 shopt -s histappend
@@ -75,8 +77,6 @@ for kc in "$HOME"/.kube/configs/*; do
     export KUBECONFIG=$KUBECONFIG:$kc
   fi
 done
-
-[[ -x "$HOME/.local/bin/mise" ]] && eval "$($HOME/.local/bin/mise activate bash)"
 
 command -v direnv >/dev/null 2>&1 && eval "$(direnv hook bash)"
 command -v starship >/dev/null 2>&1 && eval "$(starship init bash)"
