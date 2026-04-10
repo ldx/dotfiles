@@ -35,9 +35,17 @@ echo \
   $(. /etc/os-release && echo "$VERSION_CODENAME") stable" |
   tee /etc/apt/sources.list.d/docker.list >/dev/null
 
+# 1Password apt source.
+curl -sS https://downloads.1password.com/linux/keys/1password.asc | \
+  gpg --dearmor --output /usr/share/keyrings/1password-archive-keyring.gpg
+echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/1password-archive-keyring.gpg] https://downloads.1password.com/linux/debian/$(dpkg --print-architecture) stable main" | \
+  tee /etc/apt/sources.list.d/1password.list >/dev/null
+
 # Required packages.
 apt-get update -y
 apt-get install -y \
+  1password \
+  1password-cli \
   acpi \
   acpica-tools \
   acpi-support \
