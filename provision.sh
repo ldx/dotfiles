@@ -293,6 +293,12 @@ echo "deb [signed-by=/usr/share/keyrings/slack-archive-keyring.gpg] https://pack
 apt-get update
 apt-get install -y slack-desktop
 
+# Zoom deb package.
+zoom_tmpdir=$(mktemp -d /tmp/zoom-XXXXXX)
+curl -fsSL "https://zoom.us/client/latest/zoom_amd64.deb" -o "$zoom_tmpdir/zoom_amd64.deb"
+apt-get install -y "$zoom_tmpdir/zoom_amd64.deb"
+rm -rf "$zoom_tmpdir"
+
 # Flatpak hub.
 flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
 
