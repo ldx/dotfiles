@@ -11,8 +11,8 @@ focused=$(swaymsg -t get_tree | /usr/bin/jq -r '
 ' 2>/dev/null | head -1)
 
 if [ "$focused" = "$TITLE" ]; then
-    swaymsg "[title=\"$TITLE\"] kill"
-elif swaymsg "[title=\"$TITLE\"] focus" 2>/dev/null; then
+    swaymsg "[title=\"^${TITLE}$\"] kill"
+elif swaymsg "[title=\"^${TITLE}$\"] focus" 2>/dev/null; then
     :
 else
     env -u AGENTDECK_INSTANCE_ID -u TMUX -u TMUX_PANE alacritty --title "$TITLE" -e bash --login -c "$BINARY" &
