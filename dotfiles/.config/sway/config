@@ -150,8 +150,8 @@ bindsym $mod+Shift+o exec swaylock
 bindsym $mod+Shift+s exec systemctl suspend
 
 # Screenshots
-bindsym Print       exec mkdir -p "$HOME/Pictures" && grim - | tee "$HOME/Pictures/screenshot-$(date +%Y%m%d-%H%M%S).png" | wl-copy -t image/png
-bindsym Ctrl+Print  exec mkdir -p "$HOME/Pictures" && grim -g "$(slurp)" - | tee "$HOME/Pictures/screenshot-$(date +%Y%m%d-%H%M%S).png" | wl-copy -t image/png
+bindsym Print       exec sh -c 'f="$HOME/Pictures/screenshot-$(date +%Y%m%d-%H%M%S).png"; mkdir -p "$HOME/Pictures"; grim "$f" && wl-copy -t image/png < "$f"'
+bindsym Ctrl+Print  exec sh -c 'f="$HOME/Pictures/screenshot-$(date +%Y%m%d-%H%M%S).png"; mkdir -p "$HOME/Pictures"; grim -g "$(slurp)" "$f" && wl-copy -t image/png < "$f"'
 
 # Audio (same as XMonad)
 bindsym XF86AudioMute        exec wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle
