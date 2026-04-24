@@ -182,6 +182,7 @@ apt-get install -y \
   pipewire-pulse \
   wireplumber \
   pwgen \
+  rclone \
   python3 \
   python3-all \
   python3-all-dev \
