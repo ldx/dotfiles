@@ -50,6 +50,7 @@ apt-get install -y \
   acpica-tools \
   acpi-support \
   acpitool \
+  age \
   autoconf \
   automake \
   autorandr \
