@@ -48,3 +48,6 @@ dotfiles/.xmonad/xmonad.hi
 
 # Claude Code local settings
 .claude/settings.local.json
+
+# Machine-local 1Password source list for ~/.setenv (never check in)
+dotfiles/.setenv.local

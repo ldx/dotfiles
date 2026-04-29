@@ -14,7 +14,7 @@ if [[ ! -d "$DST" ]]; then
 fi
 
 # Shell configs
-for f in .bashrc .bash_profile .common.sh .complete_alias .inputrc .profile; do
+for f in .bashrc .bash_profile .common.sh .complete_alias .inputrc .profile .setenv; do
   cp -v "$SRC/$f" "$DST/$f"
 done
 

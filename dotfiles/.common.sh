@@ -62,12 +62,17 @@ ulimit -c 0
 # Try to bump max number of open fds.
 ulimit -n 9999
 
-# Check for files with local environment settings.
-for f in .setenv setenv setenv.sh; do
-  if [ -f "$HOME/$f" ]; then
-    . "$HOME/$f"
-  fi
-done
+# Local env settings — load on demand with `loadenv` to avoid 1Password popup on every shell.
+loadenv() {
+  for f in .setenv setenv setenv.sh; do
+    if [ -f "$HOME/$f" ]; then
+      . "$HOME/$f"
+      return
+    fi
+  done
+  echo "loadenv: no .setenv/setenv/setenv.sh in \$HOME" >&2
+  return 1
+}
 
 # Aliases.
 case $(uname -s) in

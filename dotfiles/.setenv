@@ -1,0 +1,25 @@
+# Loads secret env vars from 1Password. Fields are auto-discovered — every
+# concealed field on the configured item(s) becomes an env var with the same
+# name. Sourced manually via `loadenv` (~/.common.sh) to avoid the 1P popup
+# on every shell.
+#
+# Sources are listed in ~/.setenv.local (NOT checked in). Each line calls:
+#   __load_op_item ACCOUNT VAULT ITEM
+# where ACCOUNT="" uses the default signed-in account, otherwise pin to e.g.
+# "brainco" or "my.1password.com".
+# Add/remove vars: `op item edit ITEM --vault VAULT 'NAME[password]=...'`
+
+__load_op_item() {
+  local account="$1" vault="$2" item="$3" args=()
+  [[ -n "$account" ]] && args+=(--account "$account")
+  args+=(item get "$item" --vault "$vault" --format json)
+  eval "$(op "${args[@]}" | jq -r '.fields[] | select(.value and .purpose != "NOTES") | "export \(.label)=\(.value | @sh)"')"
+}
+
+if [[ -f "$HOME/.setenv.local" ]]; then
+  . "$HOME/.setenv.local"
+else
+  echo "loadenv: ~/.setenv.local not found — no 1P sources configured" >&2
+fi
+
+unset -f __load_op_item
