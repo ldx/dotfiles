@@ -55,6 +55,7 @@ unshift_path "/opt"
 unshift_path "$HOME"
 unshift_path "$LOCAL_PREFIX"
 unshift_path "$HOME/.krew"
+unshift_path "$HOME/.bun"
 
 # Create core files.
 ulimit -c 0
