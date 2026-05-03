@@ -1,0 +1,88 @@
+#!/bin/sh
+# Launch OMP namespaced to the current agent-deck instance (stable across restarts).
+#
+# Each agent-deck *instance* gets its own OMP --session-dir, so:
+#   - New agent-deck instance       -> empty dir -> fresh OMP convo
+#   - Restart/respawn same instance -> same dir  -> resume newest OMP session
+#   - Different agent-deck instances -> isolated, no collision
+#
+# We deliberately avoid `omp -c`: -c reads a TTY-keyed breadcrumb that ignores
+# --session-dir, so reusing a pts pane that previously ran omp elsewhere would
+# resume the wrong session. Resolving the session file ourselves and passing
+# `-r <path>` bypasses the breadcrumb entirely.
+#
+# Resolution order for the instance key:
+#
+#   1. $AGENTDECK_INSTANCE_ID from the process env. agent-deck inlines this on
+#      the command for built-in tools with hooks (claude, codex), but for
+#      custom [tools.*] entries (us) it is not inlined — see point 2.
+#
+#   2. `tmux show-environment -t <session> AGENTDECK_INSTANCE_ID`. agent-deck
+#      always sets this on the tmux session env via `set-environment` after
+#      starting/respawning a pane (instance.go: SetEnvironment("AGENTDECK_-
+#      INSTANCE_ID", i.ID)). The variable is not in tmux's update-environment
+#      allowlist, so it does NOT auto-export into the pane's process env, but
+#      it is reliably retrievable through the tmux server. We poll briefly
+#      because SetEnvironment runs immediately after `tmux new-session`, which
+#      can race the pane's first command.
+#
+#   3. Fall back to `tmux #S` only if neither of the above resolves. The tmux
+#      session name carries a generateShortID() suffix that agent-deck rotates
+#      on every fallback restart (recreateTmuxSession), so this fallback is
+#      strictly worse than #2 — but better than nothing for sessions started
+#      outside agent-deck.
+#
+#   4. If we are not under tmux at all, defer to OMP's default behavior.
+set -e
+
+key=""
+
+# Step 1: process env (set by agent-deck for hook-bearing tools).
+if [ -n "$AGENTDECK_INSTANCE_ID" ]; then
+    key="$AGENTDECK_INSTANCE_ID"
+fi
+
+# Step 2: tmux session env. Poll up to ~1s to absorb the new-session/SetEnv
+# race on initial start. On respawn the var is already set and the first probe
+# returns immediately.
+if [ -z "$key" ] && [ -n "$TMUX" ]; then
+    sess=$(tmux display-message -p '#S' 2>/dev/null || true)
+    if [ -n "$sess" ]; then
+        i=0
+        while [ "$i" -lt 10 ]; do
+            line=$(tmux show-environment -t "$sess" AGENTDECK_INSTANCE_ID 2>/dev/null || true)
+            case "$line" in
+                AGENTDECK_INSTANCE_ID=*)
+                    key="${line#AGENTDECK_INSTANCE_ID=}"
+                    break
+                    ;;
+                # `-AGENTDECK_INSTANCE_ID` means the var is explicitly unset;
+                # treat as not-yet-set and keep polling.
+                *)
+                    ;;
+            esac
+            i=$((i + 1))
+            sleep 0.1
+        done
+
+        # Step 3: fall back to the (unstable) tmux session name.
+        [ -z "$key" ] && key="$sess"
+    fi
+fi
+
+# Step 4: no tmux -> default OMP behavior.
+if [ -z "$key" ]; then
+    exec omp "$@"
+fi
+
+dir="$HOME/.omp/agent-deck/$key"
+mkdir -p "$dir"
+
+# Pick newest .jsonl in $dir, if any. -t sorts by mtime desc; head -n1 = newest.
+newest=$(ls -1t "$dir"/*.jsonl 2>/dev/null | head -n1 || true)
+
+if [ -n "$newest" ] && [ -f "$newest" ]; then
+    exec omp -r "$newest" --session-dir "$dir" "$@"
+fi
+
+exec omp --session-dir "$dir" "$@"
