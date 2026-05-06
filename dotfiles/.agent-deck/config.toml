@@ -9,7 +9,6 @@ mcp_default_scope = ""
 
 [tools.omp]
   command = "omp-deck"
-  icon = "🥧"
   busy_patterns = ["Thinking", "Working", "Streaming"]
 
 [mcps]
@@ -19,7 +18,7 @@ mcp_default_scope = ""
   config_dir = ""
   dangerous_mode = false
   allow_dangerous_mode = false
-  auto_mode = false
+  auto_mode = true
   env_file = ""
 
 [gemini]
