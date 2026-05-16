@@ -42,14 +42,11 @@ pipx = "latest"
 azure-cli = "latest"
 uv = "latest"
 zellij = "latest"
-
-# MCP replacements
 "github:googleworkspace/cli" = { version = "latest", exe = "gws" }
 "github:DataDog/pup" = "latest"
 "github:schpet/linear-cli" = { version = "latest", exe = "linear" }
 "github:open-cli-collective/slack-chat-api" = { version = "latest", asset_pattern = "slck_v*_linux_amd64.tar.gz" }
 "npm:ntn" = "latest"
-1password = "latest"
 
 [env]
 DD_SITE = "us3.datadoghq.com"
