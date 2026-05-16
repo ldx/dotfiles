@@ -42,3 +42,12 @@ pipx = "latest"
 azure-cli = "latest"
 uv = "latest"
 zellij = "latest"
+
+# MCP replacements
+"github:googleworkspace/cli" = { version = "latest", exe = "gws" }
+"github:DataDog/pup" = "latest"
+"github:schpet/linear-cli" = { version = "latest", exe = "linear" }
+"npm:ntn" = "latest"
+
+[env]
+DD_SITE = "us3.datadoghq.com"

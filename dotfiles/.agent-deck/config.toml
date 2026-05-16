@@ -1,17 +1,28 @@
 # Agent Deck Configuration
 # Edit this file or use Settings (press S) in the TUI
 
-default_tool = "claude"
+default_tool = "omp"
 theme = "system"
 mcp_default_scope = ""
 
 [tools]
-
-[tools.omp]
-  command = "omp-deck"
-  busy_patterns = ["Thinking", "Working", "Streaming"]
+  [tools.omp]
+    command = "omp-deck"
+    compatible_with = ""
+    wrapper = ""
+    icon = ""
+    busy_patterns = ["Thinking", "Working", "Streaming"]
+    resume_flag = ""
+    session_id_env = ""
+    dangerous_mode = false
+    dangerous_flag = ""
+    output_format_flag = ""
+    session_id_json_path = ""
+    env_file = ""
 
 [mcps]
+
+[plugins]
 
 [claude]
   command = ""
@@ -19,6 +30,8 @@ mcp_default_scope = ""
   dangerous_mode = false
   allow_dangerous_mode = false
   auto_mode = true
+  use_chrome = false
+  use_teammate_mode = false
   env_file = ""
 
 [gemini]
@@ -32,6 +45,7 @@ mcp_default_scope = ""
   env_file = ""
 
 [codex]
+  command = ""
   yolo_mode = false
 
 [copilot]
@@ -132,6 +146,7 @@ mcp_default_scope = ""
   window_style_override = ""
   clear_on_restart = false
   detach_key = ""
+  socket_name = ""
 
 [docker]
   default_image = ""
@@ -177,3 +192,7 @@ mcp_default_scope = ""
 
 [feedback]
   disabled = false
+
+[terminal]
+
+[web]
