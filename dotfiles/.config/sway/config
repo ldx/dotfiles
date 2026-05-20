@@ -33,12 +33,14 @@ exec_always sh -c '[ -x "$HOME/.dropbox-dist/dropboxd" ] && (pgrep -x dropbox ||
 exec_always sh -c 'pgrep -x pasystray || pasystray &'
 exec_always sh -c 'pgrep -x lxpolkit || lxpolkit &'
 
-# Auto-lock after 5 min, screen off after 10 min
-exec swayidle -w \
-    timeout 300  'swaylock -f' \
-    timeout 600  'swaymsg "output * dpms off"' \
-    resume       'swaymsg "output * dpms on"' \
-    before-sleep 'swaylock -f'
+# Auto-lock after 5 min, screen off after 10 min.
+# sway-lock locks 1Password first when it is installed; otherwise just locks Sway.
+exec_always sh -c 'pkill -x swayidle; exec swayidle -w \
+    timeout 300  "$HOME/.local/bin/sway-lock" \
+    timeout 600  "swaymsg \"output * dpms off\"" \
+    resume       "swaymsg \"output * dpms on\"" \
+    before-sleep "$HOME/.local/bin/sway-lock" \
+    lock         "$HOME/.local/bin/sway-lock"'
 
 # Input
 input type:keyboard {
@@ -146,8 +148,8 @@ bindsym $mod+Shift+8 move container to workspace number 8
 bindsym $mod+Shift+9 move container to workspace number 9
 
 # Lock and suspend (matching XMonad)
-bindsym $mod+Shift+o exec swaylock
-bindsym $mod+Shift+s exec systemctl suspend
+bindsym $mod+Shift+o exec ~/.local/bin/sway-lock
+bindsym $mod+Shift+s exec sh -c '~/.local/bin/sway-lock --1password-only; systemctl suspend'
 
 # Screenshots
 bindsym Print       exec sh -c 'f="$HOME/Pictures/screenshot-$(date +%Y%m%d-%H%M%S).png"; mkdir -p "$HOME/Pictures"; grim "$f" && wl-copy -t image/png < "$f"'

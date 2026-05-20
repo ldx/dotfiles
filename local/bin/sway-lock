@@ -1,0 +1,17 @@
+#!/bin/sh
+
+lock_1password_if_present() {
+    if command -v 1password >/dev/null 2>&1; then
+        1password --lock
+    fi
+}
+
+case "${1:-}" in
+    --1password-only)
+        lock_1password_if_present
+        exit 0
+        ;;
+esac
+
+lock_1password_if_present
+exec swaylock -f "$@"
