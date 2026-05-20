@@ -24,6 +24,9 @@ cp -v "$SRC/.config/mise/config.toml" "$DST/.config/mise/config.toml"
 
 cp -v "$SRC/.config/starship.toml" "$DST/.config/starship.toml"
 
+mkdir -p "$DST/.omp/agent"
+cp -v "$SRC/.omp/agent/config.yml" "$DST/.omp/agent/config.yml"
+
 # Neovim config
 mkdir -p "$DST/.config/nvim"
 cp -rv "$SRC/.config/nvim/." "$DST/.config/nvim/"
