@@ -20,6 +20,20 @@ mcp_default_scope = ""
     session_id_json_path = ""
     env_file = ""
 
+  [tools.pi]
+    command = "pi"
+    compatible_with = ""
+    wrapper = ""
+    icon = "π"
+    busy_patterns = ["Thinking", "Working", "Streaming"]
+    resume_flag = ""
+    session_id_env = ""
+    dangerous_mode = false
+    dangerous_flag = ""
+    output_format_flag = ""
+    session_id_json_path = ""
+    env_file = ""
+
 [mcps]
 
 [plugins]
