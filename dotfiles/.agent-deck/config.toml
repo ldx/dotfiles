@@ -1,7 +1,7 @@
 # Agent Deck Configuration
 # Edit this file or use Settings (press S) in the TUI
 
-default_tool = "omp"
+default_tool = "pi"
 theme = "system"
 mcp_default_scope = ""
 
