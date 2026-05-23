@@ -21,7 +21,7 @@ default_floating_border pixel 2
 xwayland enable
 
 # Wayland environment for portals and D-Bus
-exec dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP=sway
+exec dbus-update-activation-environment --systemd WAYLAND_DISPLAY SWAYSOCK DISPLAY XDG_CURRENT_DESKTOP=sway
 
 # Autostart
 exec_always sh -c 'pgrep -x swaync || swaync &'
@@ -34,13 +34,13 @@ exec_always sh -c 'pgrep -x pasystray || pasystray &'
 exec_always sh -c 'pgrep -x lxpolkit || lxpolkit &'
 
 # Auto-lock after 5 min, screen off after 10 min.
-# sway-lock locks 1Password first when it is installed; otherwise just locks Sway.
-exec_always sh -c 'pkill -x swayidle; exec swayidle -w \
+# Keep swayidle owned by Sway, but restart it if it exits.
+exec_always sh -c 'pkill -x swayidle; while true; do swayidle -w \
     timeout 300  "$HOME/.local/bin/sway-lock" \
-    timeout 600  "swaymsg \"output * dpms off\"" \
-    resume       "swaymsg \"output * dpms on\"" \
+    timeout 600  swaymsg\ output\ \*\ dpms\ off \
+    resume       swaymsg\ output\ \*\ dpms\ on \
     before-sleep "$HOME/.local/bin/sway-lock" \
-    lock         "$HOME/.local/bin/sway-lock"'
+    lock         "$HOME/.local/bin/sway-lock"; sleep 5; done'
 
 # Input
 input type:keyboard {
