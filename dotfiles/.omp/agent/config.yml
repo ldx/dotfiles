@@ -1,4 +1,3 @@
-lastChangelogVersion: 15.1.7
 modelRoles: 
   default: openai-codex/gpt-5.5:high
 tools: 
