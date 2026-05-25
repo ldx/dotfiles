@@ -63,7 +63,11 @@ ulimit -c 0
 # Try to bump max number of open fds.
 ulimit -n 9999
 
-# Local env settings — load on demand with `loadenv` to avoid 1Password popup on every shell.
+# Load local environment variables on demand.
+# Create a secret with envvars e.g.:
+#     op item create --category=password --vault=Private --title=my-secrets
+#     op item edit my-secrets --vault=Private 'MY_SECRET_KEY[password]=my-secret-value'
+# Then use "loadenv my-secrets" in a shell session.
 loadenv() {
   # Args:
   # $1: 1Password item with secrets (default: "dev-secrets")
@@ -82,7 +86,9 @@ loadenv() {
   # Load secrets from vault.
   local item=${1:-"dev-secrets"} account=${2:-""} vault=${3:-"Private"} args=()
   [[ -n "$account" ]] && args+=(--account "$account")
-  args+=(item get --vault "$vault" "$item" --format json)
+  args+=(item get --vault "$vault" "$item")
+  op "${args[@]}" >/dev/null 2>&1 || return
+  args+=(--format json)
   eval "$(op "${args[@]}" | jq -r '.fields[] | select(.value and .purpose != "NOTES") | "export \(.label)=\(.value | @sh)"')"
 }
 
