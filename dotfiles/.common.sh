@@ -65,14 +65,25 @@ ulimit -n 9999
 
 # Local env settings — load on demand with `loadenv` to avoid 1Password popup on every shell.
 loadenv() {
+  # Args:
+  # $1: 1Password item with secrets (default: "dev-secrets")
+  # $2: 1Password account (default: "")
+  # $3: 1Password vault (default: "Private")
+
+  # First, load static envvars.
   for f in .setenv setenv setenv.sh; do
-    if [ -f "$HOME/$f" ]; then
-      . "$HOME/$f"
-      return
-    fi
+    [[ -f "$HOME/$f" ]] && . "$HOME/$f"
   done
-  echo "loadenv: no .setenv/setenv/setenv.sh in \$HOME" >&2
-  return 1
+
+  # If 1Password cmd line helper or jq is not installed, return.
+  command -v op >/dev/null 2>&1 || return
+  command -v jq >/dev/null 2>&1 || return
+
+  # Load secrets from vault.
+  local item=${1:-"dev-secrets"} account=${2:-""} vault=${3:-"Private"} args=()
+  [[ -n "$account" ]] && args+=(--account "$account")
+  args+=(item get --vault "$vault" "$item" --format json)
+  eval "$(op "${args[@]}" | jq -r '.fields[] | select(.value and .purpose != "NOTES") | "export \(.label)=\(.value | @sh)"')"
 }
 
 # Aliases.
