@@ -63,8 +63,13 @@ ulimit -c 0
 # Try to bump max number of open fds.
 ulimit -n 9999
 
-# Load local environment variables on demand.
-# Create a secret with envvars e.g.:
+# Load static envvars.
+for f in .setenv .setenv.local setenv setenv.sh; do
+  [[ -f "$HOME/$f" ]] && . "$HOME/$f"
+done
+
+# Load secrets from 1Password on demand.
+# To set this up, first create a secret with envvars e.g.:
 #     op item create --category=password --vault=Private --title=my-secrets
 #     op item edit my-secrets --vault=Private 'MY_SECRET_KEY[password]=my-secret-value'
 # Then use "loadenv my-secrets" in a shell session.
@@ -73,11 +78,6 @@ loadenv() {
   # $1: 1Password item with secrets (default: "dev-secrets")
   # $2: 1Password account (default: "")
   # $3: 1Password vault (default: "Private")
-
-  # First, load static envvars.
-  for f in .setenv setenv setenv.sh; do
-    [[ -f "$HOME/$f" ]] && . "$HOME/$f"
-  done
 
   # If 1Password cmd line helper or jq is not installed, return.
   command -v op >/dev/null 2>&1 || return
