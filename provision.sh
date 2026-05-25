@@ -333,6 +333,11 @@ usermod -d "/home/${greetd_user}" -aG input "${greetd_user}"
 mkdir -p /etc/tlp.d
 cp "$cur_dir/config/tlp.d/10-laptop.conf" /etc/tlp.d/
 
+# Kernel/sysctl tuning.
+mkdir -p /etc/sysctl.d
+cp "$cur_dir/config/sysctl.d/99-inotify.conf" /etc/sysctl.d/
+sysctl --system
+
 # Deploy XMonad wayland session entry for tuigreet.
 # Also install the xmonad-x11 wrapper system-wide so greetd can find it
 # without sourcing the user's PATH.
