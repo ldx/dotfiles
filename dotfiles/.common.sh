@@ -84,7 +84,13 @@ loadenv() {
   command -v jq >/dev/null 2>&1 || return
 
   # Load secrets from vault.
-  local item=${1:-"dev-secrets"} account=${2:-""} vault=${3:-"Private"} args=()
+  local default_item=${LOADENV_DEFAULT_ITEM:-"dev-secrets"}
+  local item=${1:-"$default_item"}
+  local default_account=${LOADENV_DEFAULT_ACCOUNT:-""}
+  local account=${2:-"$default_account"}
+  local default_vault=${LOADENV_DEFAULT_VAULT:-""}
+  local vault=${3:-"Private"}
+  local args=()
   [[ -n "$account" ]] && args+=(--account "$account")
   args+=(item get --vault "$vault" "$item")
   op "${args[@]}" >/dev/null 2>&1 || return
