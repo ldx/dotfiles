@@ -46,6 +46,7 @@ zellij = "latest"
 "github:DataDog/pup" = "latest"
 "github:schpet/linear-cli" = { version = "latest", exe = "linear" }
 "github:open-cli-collective/slack-chat-api" = { version = "latest", asset_pattern = "slck_v*_linux_amd64.tar.gz" }
+"github:1broseidon/ketch" = "latest"
 "npm:ntn" = "latest"
 
 [env]
