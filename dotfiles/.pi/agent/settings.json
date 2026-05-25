@@ -1,4 +1,5 @@
 {
+  "_comment_lastChangelogVersion": "Do not persist lastChangelogVersion in this repo; Pi updates it locally.",
   "defaultProvider": "openai-codex",
   "defaultModel": "gpt-5.5",
   "defaultThinkingLevel": "high",
