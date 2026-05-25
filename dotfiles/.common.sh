@@ -64,7 +64,7 @@ ulimit -c 0
 ulimit -n 9999
 
 # Load static envvars.
-for f in .setenv .setenv.local setenv setenv.sh; do
+for f in .env .env.local .setenv .setenv.local setenv setenv.sh; do
   [[ -f "$HOME/$f" ]] && . "$HOME/$f"
 done
 
