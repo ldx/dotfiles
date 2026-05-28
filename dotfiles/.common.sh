@@ -93,7 +93,10 @@ loadenv() {
   local args=()
   [[ -n "$account" ]] && args+=(--account "$account")
   args+=(item get --vault "$vault" "$item")
-  op "${args[@]}" >/dev/null 2>&1 || return
+  op "${args[@]}" >/dev/null 2>&1 || {
+    echo "Password item \"$item\" in vault \"$vault\" (account: \"$account\") not found"
+    return
+  }
   args+=(--format json)
   eval "$(op "${args[@]}" | jq -r '.fields[] | select(.value and .purpose != "NOTES") | "export \(.label)=\(.value | @sh)"')"
 }
