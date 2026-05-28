@@ -1,0 +1,78 @@
+#!/bin/sh
+# Launch Pi namespaced to the current agent-deck instance (stable across restarts).
+#
+# Each agent-deck *instance* gets its own Pi --session-dir, so:
+#   - New agent-deck instance        -> empty dir -> fresh Pi convo
+#   - Restart/respawn same instance -> same dir  -> continue newest Pi session
+#   - Different agent-deck instances -> isolated, no collision
+#
+# Pi's --continue honors --session-dir, so unlike omp-deck we do not need to
+# locate a concrete JSONL file. We only need a stable per-instance directory.
+#
+# Resolution order for the instance key matches omp-deck:
+#   1. $AGENTDECK_INSTANCE_ID from the process env.
+#   2. tmux session env AGENTDECK_INSTANCE_ID, with a short race-absorbing poll.
+#   3. tmux session name fallback.
+#   4. Outside tmux, defer to Pi's default behavior.
+set -e
+
+key=""
+
+if [ -n "${AGENTDECK_INSTANCE_ID:-}" ]; then
+    key="$AGENTDECK_INSTANCE_ID"
+fi
+
+if [ -z "$key" ] && [ -n "${TMUX:-}" ]; then
+    sess=$(tmux display-message -p '#S' 2>/dev/null || true)
+    if [ -n "$sess" ]; then
+        i=0
+        while [ "$i" -lt 10 ]; do
+            line=$(tmux show-environment -t "$sess" AGENTDECK_INSTANCE_ID 2>/dev/null || true)
+            case "$line" in
+                AGENTDECK_INSTANCE_ID=*)
+                    key="${line#AGENTDECK_INSTANCE_ID=}"
+                    break
+                    ;;
+                *)
+                    ;;
+            esac
+            i=$((i + 1))
+            sleep 0.1
+        done
+
+        [ -z "$key" ] && key="$sess"
+    fi
+fi
+
+if [ -z "$key" ]; then
+    exec pi "$@"
+fi
+
+dir="$HOME/.pi/agent-deck/$key"
+mkdir -p "$dir"
+
+# If the caller explicitly chose a session mode, only scope lookup to this deck
+# instance and do not also inject --continue. If they explicitly chose a session
+# directory or ephemeral mode, leave the arguments untouched.
+explicit_session_dir=0
+explicit_session_mode=0
+for arg in "$@"; do
+    case "$arg" in
+        --session-dir|--session-dir=*|--no-session)
+            explicit_session_dir=1
+            ;;
+        --continue|-c|--resume|-r|--session|--session=*|--fork|--fork=*)
+            explicit_session_mode=1
+            ;;
+    esac
+done
+
+if [ "$explicit_session_dir" -eq 1 ]; then
+    exec pi "$@"
+fi
+
+if [ "$explicit_session_mode" -eq 1 ]; then
+    exec pi --session-dir "$dir" "$@"
+fi
+
+exec pi --continue --session-dir "$dir" "$@"
