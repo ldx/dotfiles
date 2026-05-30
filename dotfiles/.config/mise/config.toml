@@ -50,6 +50,7 @@ zellij = "latest"
 "github:open-cli-collective/slack-chat-api" = { version = "latest", asset_pattern = "slck_v*_linux_amd64.tar.gz" }
 "github:1broseidon/ketch" = "latest"
 "npm:ntn" = "latest"
+"npm:wrangler" = "latest"
 
 [env]
 DD_SITE = "us3.datadoghq.com"
