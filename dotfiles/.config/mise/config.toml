@@ -51,6 +51,7 @@ zellij = "latest"
 "github:1broseidon/ketch" = "latest"
 "npm:ntn" = "latest"
 "npm:wrangler" = "latest"
+"github:render-oss/cli" = { version = "latest", rename_exe = "render" }
 
 [env]
 DD_SITE = "us3.datadoghq.com"
