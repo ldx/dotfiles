@@ -51,3 +51,6 @@ tags.temp
 
 # Claude Code local settings
 .claude/settings.local.json
+
+# Pi local settings
+.pi/
