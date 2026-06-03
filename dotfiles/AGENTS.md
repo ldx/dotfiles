@@ -29,7 +29,8 @@ Prefer local CLI tools over MCP servers when they are available and authenticate
 | Browser automation | built-in browser tool or `agent-browser` |
 | Datadog | `pup` |
 | Linear | `linear` |
-| Notion | `notion` and `ntn` |
+| Notion | `notion` |
+| Agents in Notion | `ntn` |
 | Slack | `slck` |
 
 For other use cases, check available CLI tools on the system.
@@ -56,6 +57,7 @@ When adding tests, prefer externally observable behavior and regression-prone bo
 
 ## Browser automation
 
+- Prefer CLI tools over browser usage.
 - When logged-in browser state is needed, if available, prefer attaching to an existing Chrome DevTools Protocol (CDP) session using the WebSocket-based CDP transport. Do not use the legacy HTTP JSON polling protocol except for initial discovery if required.
 - Do not ask for passwords or 2FA codes.
 - Use a separate browser session or profile if isolation is needed.
