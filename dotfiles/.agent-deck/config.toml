@@ -1,7 +1,7 @@
 # Agent Deck Configuration
 # Edit this file or use Settings (press S) in the TUI
 
-default_tool = "pi-deck"
+default_tool = "pi"
 theme = "system"
 mcp_default_scope = ""
 
@@ -11,22 +11,6 @@ mcp_default_scope = ""
     compatible_with = ""
     wrapper = ""
     icon = ""
-    busy_patterns = ["Thinking", "Working", "Streaming"]
-    resume_flag = ""
-    session_id_env = ""
-    dangerous_mode = false
-    dangerous_flag = ""
-    output_format_flag = ""
-    session_id_json_path = ""
-    env_file = ""
-
-  # Custom Pi launcher. Do not name this [tools.pi]: "pi" is a built-in
-  # Agent Deck tool, and its configured command is not read from [tools.pi].
-  [tools.pi-deck]
-    command = "pi-deck"
-    compatible_with = ""
-    wrapper = ""
-    icon = "π"
     busy_patterns = ["Thinking", "Working", "Streaming"]
     resume_flag = ""
     session_id_env = ""
