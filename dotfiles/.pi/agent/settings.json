@@ -5,8 +5,7 @@
   "packages": [
     "npm:@juicesharp/rpiv-ask-user-question",
     "npm:pi-subagents",
-    "npm:pi-web-access",
-    "npm:@aliou/pi-guardrails"
+    "npm:pi-web-access"
   ],
   "showHardwareCursor": true
 }

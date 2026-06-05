@@ -6,7 +6,7 @@
 - Prefer precise, minimal changes over broad rewrites.
 - Keep going until the requested task is actually complete, but stop and ask when requirements are genuinely ambiguous or a risky decision needs user input.
 - Always ask before commit, push, publish, deploy, purchase, transfer, or any irreversible actions unless explicitly asked to perform the action.
-- Use Conventional Commit format for commit messages and PR titles, e.g. `chore: update codeowners`.
+- Use Conventional Commit format for all commit messages and PR titles, e.g. `chore: update codeowners`.
 - Before finishing coding work, check what changed and report the verification performed.
 - If something could not be verified, say so clearly.
 
