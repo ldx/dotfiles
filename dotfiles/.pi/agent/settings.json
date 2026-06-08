@@ -5,7 +5,8 @@
   "packages": [
     "npm:@juicesharp/rpiv-ask-user-question",
     "npm:pi-subagents",
-    "npm:pi-web-access"
+    "npm:pi-web-access",
+    "../../src/pi-extensions"
   ],
   "showHardwareCursor": true
 }
