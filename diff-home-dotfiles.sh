@@ -8,8 +8,12 @@ SRC="${1:-dotfiles}"
 DST="${2:-$HOME}"
 
 rsync -avni --checksum "$SRC/" "$DST/" \
-  | awk '$1 ~ /^>fc/ {print $2}' \
+  | awk '$1 ~ /^>f/ {print $2}' \
   | while read -r f; do
       echo "===== $f ====="
-      diff -u "$SRC/$f" "$DST/$f" || true
+      if [[ ! -e "$DST/$f" ]]; then
+        echo "Missing from destination: $DST/$f"
+      else
+        diff -u "$SRC/$f" "$DST/$f" || true
+      fi
     done
