@@ -1,0 +1,209 @@
+{
+  "enabled": true,
+  "sandboxBash": true,
+  "defaultOutsideCwd": "ask",
+  "noUiDefault": "block",
+  "sandboxUnavailable": "allow",
+  "trustProjectConfig": true,
+  "allowProjectConfigToLoosenOutsideCwd": false,
+  "rules": [
+    {
+      "path": ".",
+      "access": "write",
+      "comment": "current workspace"
+    },
+    {
+      "path": "/tmp",
+      "access": "write",
+      "comment": "temporary files"
+    },
+    {
+      "path": ".env",
+      "access": "deny"
+    },
+    {
+      "path": ".env.*",
+      "access": "deny"
+    },
+    {
+      "path": "*.pem",
+      "access": "deny"
+    },
+    {
+      "path": "*.key",
+      "access": "deny"
+    },
+    {
+      "path": "*.p12",
+      "access": "deny"
+    },
+    {
+      "path": "*.pfx",
+      "access": "deny"
+    },
+    {
+      "path": "~/.ssh/**",
+      "access": "deny"
+    },
+    {
+      "path": "~/.aws/**",
+      "access": "deny"
+    },
+    {
+      "path": "~/.gnupg/**",
+      "access": "deny"
+    },
+    {
+      "path": "~/.kube/**",
+      "access": "deny"
+    },
+    {
+      "path": "~/.azure/**",
+      "access": "deny"
+    },
+    {
+      "path": "~/.config/gcloud/**",
+      "access": "deny"
+    },
+    {
+      "path": "~/.docker/config.json",
+      "access": "deny"
+    },
+    {
+      "path": "~/.npmrc",
+      "access": "deny"
+    },
+    {
+      "path": "~/.pypirc",
+      "access": "deny"
+    },
+    {
+      "path": "~/.netrc",
+      "access": "deny"
+    },
+    {
+      "path": "~/.git-credentials",
+      "access": "deny"
+    },
+    {
+      "path": "~/.config/gh/hosts.yml",
+      "access": "deny"
+    },
+    {
+      "path": "~/.config/sops/age/keys.txt",
+      "access": "deny"
+    },
+    {
+      "path": "~/.age/**",
+      "access": "deny"
+    },
+    {
+      "path": "~/.password-store/**",
+      "access": "deny"
+    },
+    {
+      "path": "~/.local/share/keyrings/**",
+      "access": "deny"
+    },
+    {
+      "path": "~/.pi/agent/auth.json",
+      "access": "deny"
+    },
+    {
+      "path": "~/.pi/agent/sessions/**",
+      "access": "deny"
+    },
+    {
+      "path": "~/.config/google-chrome/**",
+      "access": "deny"
+    },
+    {
+      "path": "~/.config/chromium/**",
+      "access": "deny"
+    },
+    {
+      "path": "~/.config/BraveSoftware/**",
+      "access": "deny"
+    },
+    {
+      "path": "~/.mozilla/firefox/**",
+      "access": "deny"
+    },
+    {
+      "path": "/root/**",
+      "access": "deny"
+    },
+    {
+      "path": "/boot/**",
+      "access": "deny"
+    },
+    {
+      "path": "/etc/shadow",
+      "access": "deny"
+    },
+    {
+      "path": "/etc/gshadow",
+      "access": "deny"
+    },
+    {
+      "path": "/etc/sudoers",
+      "access": "deny"
+    },
+    {
+      "path": "/etc/sudoers.d/**",
+      "access": "deny"
+    },
+    {
+      "path": "/etc/ssh/ssh_host_*_key",
+      "access": "deny"
+    },
+    {
+      "path": "/etc/wireguard/**",
+      "access": "deny"
+    },
+    {
+      "path": "/etc/NetworkManager/system-connections/**",
+      "access": "deny"
+    },
+    {
+      "path": "/var/lib/docker/**",
+      "access": "deny"
+    },
+    {
+      "path": "/var/lib/kubelet/**",
+      "access": "deny"
+    },
+    {
+      "path": "/var/log/**",
+      "access": "deny"
+    },
+    {
+      "path": "/proc/*/environ",
+      "access": "deny"
+    },
+    {
+      "path": "/proc/*/cmdline",
+      "access": "deny"
+    },
+    {
+      "path": "/run/user/*/keyring/**",
+      "access": "deny"
+    },
+    {
+      "path": "/dev/null",
+      "access": "read"
+    },
+    {
+      "path": "/opt",
+      "access": "read"
+    },
+    {
+      "path": "/usr",
+      "access": "read"
+    },
+    {
+      "path": "/var",
+      "access": "read"
+    }
+  ]
+}
