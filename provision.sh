@@ -309,7 +309,11 @@ umask 0022
 sed -r -i 's/\s?#?(\s*)SendEnv (.*)$/#   SendEnv \2/g' /etc/ssh/ssh_config
 sed -r -i 's/\s?#?(\s*)ForwardAgent\s+.*$/    ForwardAgent yes/g' /etc/ssh/ssh_config
 
-echo 'KERNEL=="intel_backlight", SUBSYSTEM=="backlight", RUN+="/bin/chmod 0666 /sys/class/backlight/%k/brightness"' >/etc/udev/rules.d/97-intel_backlight.rules
+# udev rules for local hardware conveniences.
+mkdir -p /etc/udev/rules.d
+cp "$cur_dir"/config/udev/rules.d/*.rules /etc/udev/rules.d/
+udevadm control --reload-rules
+udevadm trigger
 
 cat <<EOF >/etc/sudoers.d/50-utils
 %sudo  ALL=(ALL) NOPASSWD: /usr/bin/resolvectl

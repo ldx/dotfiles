@@ -1,0 +1,1 @@
+SUBSYSTEM=="thunderbolt", ATTR{vendor_name}=="Apple Inc.", ATTR{device_name}=="Studio Display", ATTR{authorized}="1"
