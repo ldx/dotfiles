@@ -8,10 +8,10 @@
   "allowProjectConfigToLoosenOutsideCwd": false,
   "network": {
     "allowedDomains": [
+      "*.blob.core.windows.net",
       "github.com",
       "*.github.com",
-      "api.github.com",
-      "raw.githubusercontent.com",
+      "*.githubusercontent.com",
       "npmjs.org",
       "*.npmjs.org",
       "registry.npmjs.org",
@@ -38,7 +38,8 @@
       "fonts.googleapis.com",
       "fonts.gstatic.com"
     ],
-    "deniedDomains": []
+    "deniedDomains": [],
+    "allowAllUnixSockets": true
   },
   "rules": [
     {
@@ -96,6 +97,10 @@
       "access": "deny"
     },
     {
+      "path": "~/.config/gh/hosts.yml",
+      "access": "read"
+    },
+    {
       "path": "~/.config/gcloud/**",
       "access": "deny"
     },
@@ -117,10 +122,6 @@
     },
     {
       "path": "~/.git-credentials",
-      "access": "deny"
-    },
-    {
-      "path": "~/.config/gh/hosts.yml",
       "access": "deny"
     },
     {
@@ -238,6 +239,11 @@
     {
       "path": "/var",
       "access": "read"
+    },
+    {
+      "path": "~/.local/share/keyrings/**",
+      "access": "read",
+      "comment": "allow gh/libsecret keyring reads for sandboxed commands"
     }
   ]
 }
