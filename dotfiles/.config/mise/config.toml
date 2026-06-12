@@ -24,6 +24,7 @@ helm = "latest"
 jq = "latest"
 jwt = "latest"
 kafkactl = "latest"
+kubeconform = "latest"
 kubectl = "latest"
 # Use npm backend: aqua currently looks for pnpm-linux-x64 without the .tar.gz suffix.
 "npm:pnpm" = "latest"
