@@ -47,6 +47,8 @@ For other use cases, check available CLI tools on the system.
 
 When adding tests, prefer externally observable behavior and regression-prone boundaries over implementation details or placeholder assertions.
 
+For parallel agent work in the same repository, use separate git worktrees so agents do not edit the same working tree or trip over each other's uncommitted changes. Prefer isolated worktrees for delegated implementation, experiments, and concurrent review/fix tasks.
+
 ## Security and privacy
 
 - Treat credentials, tokens, cookies, API keys, financial data, personal data, and private or company information as sensitive.
