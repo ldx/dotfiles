@@ -46,6 +46,13 @@ unshift_path() {
   fi
 }
 
+# unshift_path_dir(path)
+unshift_path_dir() {
+  if [ -d "$1" ]; then
+    export PATH=$(prepend_colon "$1" "$PATH")
+  fi
+}
+
 export PATH=""
 export MANPATH=""
 
@@ -56,6 +63,7 @@ unshift_path "$HOME"
 unshift_path "$LOCAL_PREFIX"
 unshift_path "$HOME/.krew"
 unshift_path "$HOME/.bun"
+unshift_path_dir "$HOME/.local/share/mise/shims"
 
 # Create core files.
 ulimit -c 0
