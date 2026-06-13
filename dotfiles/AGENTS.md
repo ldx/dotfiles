@@ -27,6 +27,7 @@ Prefer local CLI tools over MCP servers when they are available and authenticate
 | GitHub | `gh` |
 | Google Workspace / Gmail | `gws` |
 | Web search | `bx` |
+| Web research/extraction | `tvly` |
 | Browser automation | built-in browser tool or `agent-browser` |
 | Datadog | `pup` |
 | Linear | `linear` |
