@@ -47,6 +47,7 @@ uv = "latest"
 zellij = "latest"
 "github:googleworkspace/cli" = { version = "latest", exe = "gws" }
 "github:DataDog/pup" = "latest"
+"github:brave/brave-search-cli" = { version = "latest", bin = "bx" }
 "github:schpet/linear-cli" = { version = "latest", exe = "linear" }
 "github:open-cli-collective/slack-chat-api" = { version = "latest", asset_pattern = "slck_v*_linux_amd64.tar.gz" }
 "github:1broseidon/ketch" = "latest"
