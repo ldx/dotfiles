@@ -8,5 +8,6 @@
     "npm:pi-web-access",
     "../../src/pi-extensions"
   ],
-  "showHardwareCursor": true
+  "showHardwareCursor": true,
+  "shellCommandPrefix": "source ~/.common.sh"
 }
