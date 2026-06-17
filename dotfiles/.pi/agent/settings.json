@@ -9,5 +9,6 @@
     "../../src/pi-extensions"
   ],
   "showHardwareCursor": true,
-  "shellCommandPrefix": "source ~/.common.sh"
+  "shellCommandPrefix": "source ~/.common.sh",
+  "theme": "dark"
 }
