@@ -1,21 +1,79 @@
 #!/usr/bin/env bash
 # Toggle agent-deck window: focus if unfocused, close if focused, launch if absent.
+# Supports Sway and Hyprland.
+
+set -euo pipefail
 
 TITLE="agent-deck"
 BINARY="$HOME/.local/bin/agent-deck"
+JQ="${JQ:-/usr/bin/jq}"
 
-focused=$(swaymsg -t get_tree | /usr/bin/jq -r '
-  .. | objects | select(
-    has("focused") and .focused == true and ((.nodes? // []) | length) == 0
-  ) | .name // empty
-' 2>/dev/null | head -1)
-
-if [ "$focused" = "$TITLE" ]; then
-    swaymsg "[title=\"^${TITLE}$\"] kill"
-elif swaymsg "[title=\"^${TITLE}$\"] focus" 2>/dev/null; then
-    :
-else
+launch_agentdeck() {
     env -u AGENTDECK_INSTANCE_ID -u TMUX -u TMUX_PANE alacritty --title "$TITLE" -e bash --login -c "$BINARY" &
+}
+
+signal_waybar() {
+    pkill -RTMIN+8 waybar 2>/dev/null || true
+}
+
+pid_has_descendant_named() {
+    local root="$1"
+    local wanted="$2"
+    local child comm
+
+    for child in $(pgrep -P "$root" 2>/dev/null || true); do
+        comm=$(ps -o comm= -p "$child" 2>/dev/null | awk '{print $1}')
+        if [ "$comm" = "$wanted" ]; then
+            return 0
+        fi
+        if pid_has_descendant_named "$child" "$wanted"; then
+            return 0
+        fi
+    done
+
+    return 1
+}
+
+if [ -n "${HYPRLAND_INSTANCE_SIGNATURE:-}" ] && command -v hyprctl >/dev/null 2>&1; then
+    active_pid=$(hyprctl activewindow -j 2>/dev/null | "$JQ" -r '.pid // empty' 2>/dev/null || true)
+
+    if [ -n "$active_pid" ] && pid_has_descendant_named "$active_pid" agent-deck; then
+        hyprctl dispatch killactive >/dev/null
+        signal_waybar
+        exit 0
+    fi
+
+    while IFS=$'\t' read -r address pid; do
+        if [ -n "$address" ] && [ -n "$pid" ] && pid_has_descendant_named "$pid" agent-deck; then
+            hyprctl dispatch focuswindow "address:$address" >/dev/null
+            signal_waybar
+            exit 0
+        fi
+    done < <(hyprctl clients -j 2>/dev/null | "$JQ" -r '.[] | select((.class == "Alacritty" or .initialClass == "Alacritty") and .pid != null) | [.address, .pid] | @tsv' 2>/dev/null)
+
+    launch_agentdeck
+    signal_waybar
+    exit 0
 fi
 
-pkill -RTMIN+8 waybar
+if command -v swaymsg >/dev/null 2>&1; then
+    focused=$(swaymsg -t get_tree | "$JQ" -r '
+      .. | objects | select(
+        has("focused") and .focused == true and ((.nodes? // []) | length) == 0
+      ) | .name // empty
+    ' 2>/dev/null | head -1)
+
+    if [ "$focused" = "$TITLE" ]; then
+        swaymsg "[title=\"^${TITLE}$\"] kill" >/dev/null
+    elif swaymsg "[title=\"^${TITLE}$\"] focus" >/dev/null 2>&1; then
+        :
+    else
+        launch_agentdeck
+    fi
+
+    signal_waybar
+    exit 0
+fi
+
+launch_agentdeck
+signal_waybar
