@@ -1,0 +1,37 @@
+#!/usr/bin/env bash
+# Waybar status script for mako notifications.
+# Outputs JSON compatible with Waybar custom modules.
+
+set -euo pipefail
+
+icon_notification=$'\uf0f3'      # nf-fa-bell
+icon_none=$'\uf0a2'              # nf-fa-bell_o
+icon_dnd=$'\uf186'               # nf-fa-moon_o
+
+if ! command -v makoctl >/dev/null 2>&1; then
+    jq -cn --arg text "$icon_none" --arg class "none" --arg tooltip "makoctl unavailable" \
+        '{text: $text, class: $class, tooltip: $tooltip}'
+    exit 0
+fi
+
+modes=$(makoctl mode 2>/dev/null || true)
+list=$(makoctl list 2>/dev/null || true)
+count=$(printf '%s\n' "$list" | grep -c '^Notification ' || true)
+
+if printf '%s\n' "$modes" | grep -Eq '(^|[[:space:]])(do-not-disturb|dnd)([[:space:]]|$)'; then
+    if [ "$count" -gt 0 ]; then
+        class="dnd-notification"
+        tooltip="Do not disturb on • ${count} notification(s)"
+    else
+        class="dnd-none"
+        tooltip="Do not disturb on"
+    fi
+    jq -cn --arg text "$icon_dnd" --arg class "$class" --arg tooltip "$tooltip" \
+        '{text: $text, class: $class, tooltip: $tooltip}'
+elif [ "$count" -gt 0 ]; then
+    jq -cn --arg text "$icon_notification" --arg class "notification" --arg tooltip "${count} notification(s)" \
+        '{text: $text, class: $class, tooltip: $tooltip}'
+else
+    jq -cn --arg text "$icon_none" --arg class "none" --arg tooltip "No notifications" \
+        '{text: $text, class: $class, tooltip: $tooltip}'
+fi

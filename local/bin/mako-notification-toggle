@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+# Toggle mako do-not-disturb mode and refresh Waybar.
+
+set -euo pipefail
+
+if ! command -v makoctl >/dev/null 2>&1; then
+    exit 0
+fi
+
+makoctl mode -t do-not-disturb >/dev/null 2>&1 || true
+pkill -RTMIN+9 waybar 2>/dev/null || true
