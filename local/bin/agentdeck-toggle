@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Toggle agent-deck window: focus if unfocused, close if focused, launch if absent.
+# Toggle agent-deck window and web UI: focus if unfocused, close if focused, launch if absent.
 # Supports Sway and Hyprland.
 
 set -euo pipefail
@@ -9,7 +9,7 @@ BINARY="$HOME/.local/bin/agent-deck"
 JQ="${JQ:-/usr/bin/jq}"
 
 launch_agentdeck() {
-    env -u AGENTDECK_INSTANCE_ID -u TMUX -u TMUX_PANE alacritty --title "$TITLE" -e bash --login -c "$BINARY" &
+    env -u AGENTDECK_INSTANCE_ID -u TMUX -u TMUX_PANE alacritty --title "$TITLE" -e bash --login -c "$BINARY web" &
 }
 
 signal_waybar() {
