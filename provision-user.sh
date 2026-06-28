@@ -45,4 +45,12 @@ PATH="$PATH:$BINDIR" mise install
 # Symlink vim to neovim installed by mise.
 ln -snf "$(PATH="$PATH:$BINDIR" "$BINDIR/mise" which nvim)" "$BINDIR/vim"
 
+# Expose Agent Deck web UI on the tailnet when Tailscale Serve is available.
+# This is best-effort because Tailscale may not be authenticated yet, and Serve
+# must be enabled in the tailnet admin console.
+if command -v tailscale >/dev/null 2>&1 && [ -x "$BINDIR/agent-deck" ]; then
+  timeout 10s tailscale serve --bg --yes 8420 || \
+    echo "Skipping Tailscale Serve for Agent Deck; run: tailscale serve --bg --yes 8420" >&2
+fi
+
 chmod 0755 "$BINDIR/"*
