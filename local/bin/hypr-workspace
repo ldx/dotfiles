@@ -1,0 +1,19 @@
+#!/usr/bin/env bash
+# Switch to workspace N on the currently focused Hyprland monitor.
+# This mirrors local/bin/sway-workspace behavior for Sway/XMonad-style workspace use.
+
+set -euo pipefail
+
+workspace="${1:?usage: hypr-workspace WORKSPACE}"
+
+focused_monitor=$(hyprctl monitors -j | jq -r '.[] | select(.focused) | .name' | head -1)
+
+if [ -z "$focused_monitor" ]; then
+    hyprctl dispatch workspace "$workspace" >/dev/null
+    exit 0
+fi
+
+# If the workspace already exists on another monitor, move it to the focused monitor first.
+# If it does not exist yet, this is harmless; the following workspace dispatch creates it there.
+hyprctl dispatch moveworkspacetomonitor "$workspace" "$focused_monitor" >/dev/null 2>&1 || true
+hyprctl dispatch workspace "$workspace" >/dev/null
