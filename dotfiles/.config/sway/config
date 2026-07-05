@@ -25,7 +25,7 @@ exec dbus-update-activation-environment --systemd WAYLAND_DISPLAY SWAYSOCK DISPL
 
 # Autostart
 exec_always sh -c 'pgrep -x swaync || swaync &'
-exec_always sh -c 'pgrep -x copyq || copyq &'
+exec_always sh -c 'command -v copyq >/dev/null && copyq --start-server config disable_tray false && copyq --start-server config tray_images false'
 exec_always sh -c 'pgrep -x nm-applet || nm-applet --indicator &'
 exec_always sh -c 'pgrep -x blueman-applet || blueman-applet &'
 exec_always sh -c 'pgrep -x udiskie || udiskie --tray &'
