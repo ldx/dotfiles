@@ -51,3 +51,6 @@ dotfiles/.xmonad/xmonad.hi
 
 # Machine-local 1Password source list for ~/.setenv (never check in)
 dotfiles/.setenv.local
+
+# Pi MCP OAuth credentials
+dotfiles/.pi/agent/mcp-oauth/

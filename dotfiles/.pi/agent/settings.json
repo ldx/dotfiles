@@ -6,6 +6,7 @@
     "npm:@juicesharp/rpiv-ask-user-question",
     "npm:pi-subagents",
     "npm:pi-web-access",
+    "npm:pi-mcp-adapter",
     "../../src/pi-extensions"
   ],
   "showHardwareCursor": true,
