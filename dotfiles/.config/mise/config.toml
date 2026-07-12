@@ -37,6 +37,7 @@ rust = "latest"
 # Pin temporal: v1.30.4.1 is currently selected as latest by mise/aqua but has no Linux assets.
 temporal = "1.31.0"
 terraform = "latest"
+ttyd = "latest"
 bun = "latest"
 sops = "latest"
 "npm:agent-browser" = "latest"
