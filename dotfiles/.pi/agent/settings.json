@@ -1,15 +1,70 @@
 {
   "defaultProvider": "openai-codex",
-  "defaultModel": "gpt-5.6-sol",
+  "defaultModel": "gpt-5.6-terra",
   "defaultThinkingLevel": "high",
   "packages": [
     "npm:@juicesharp/rpiv-ask-user-question",
     "npm:pi-subagents",
     "npm:pi-web-access",
-    "npm:pi-mcp-adapter",
-    "../../src/pi-extensions"
+    "../../src/pi-extensions",
+    "npm:pi-mcp-adapter"
   ],
   "showHardwareCursor": true,
   "shellCommandPrefix": "source ~/.common.sh",
-  "theme": "dark"
+  "theme": "dark",
+  "lastChangelogVersion": "0.80.6",
+  "subagents": {
+    "defaultModel": "openai-codex/gpt-5.6-terra",
+    "modelScope": {
+      "enforce": true,
+      "allow": [
+        "openai-codex/gpt-5.6-*"
+      ]
+    },
+    "agentOverrides": {
+      "scout": {
+        "model": "openai-codex/gpt-5.6-terra",
+        "thinking": "medium"
+      },
+      "delegate": {
+        "model": "openai-codex/gpt-5.6-terra",
+        "thinking": "medium"
+      },
+      "researcher": {
+        "model": "openai-codex/gpt-5.6-terra",
+        "thinking": "medium"
+      },
+      "context-builder": {
+        "model": "openai-codex/gpt-5.6-terra",
+        "thinking": "high"
+      },
+      "reviewer": {
+        "model": "openai-codex/gpt-5.6-terra",
+        "thinking": "high"
+      },
+      "planner": {
+        "model": "openai-codex/gpt-5.6-sol",
+        "thinking": "high",
+        "defaultContext": "fresh",
+        "fallbackModels": [
+          "openai-codex/gpt-5.6-terra"
+        ]
+      },
+      "worker": {
+        "model": "openai-codex/gpt-5.6-terra",
+        "thinking": "high",
+        "defaultContext": "fresh",
+        "fallbackModels": [
+          "openai-codex/gpt-5.6-sol"
+        ]
+      },
+      "oracle": {
+        "model": "openai-codex/gpt-5.6-sol",
+        "thinking": "high",
+        "fallbackModels": [
+          "openai-codex/gpt-5.6-terra"
+        ]
+      }
+    }
+  }
 }
