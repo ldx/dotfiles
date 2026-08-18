@@ -4,7 +4,7 @@
 
 # Environment setup — runs for all bash sessions (interactive and non-interactive).
 source "$HOME/.common.sh"
-[[ -x "$HOME/.local/bin/mise" ]] && eval "$($HOME/.local/bin/mise activate bash)"
+command -v mise >/dev/null 2>&1 && eval "$(mise activate bash)"
 
 # If not running interactively, stop here.
 case $- in
@@ -39,6 +39,8 @@ if ! shopt -oq posix; then
     . /usr/share/bash-completion/bash_completion
   elif [ -f /etc/bash_completion ]; then
     . /etc/bash_completion
+  elif [[ -n ${HOMEBREW_PREFIX:-} && -f "$HOMEBREW_PREFIX/etc/profile.d/bash_completion.sh" ]]; then
+    . "$HOMEBREW_PREFIX/etc/profile.d/bash_completion.sh"
   elif [ -f /usr/local/etc/profile.d/bash_completion.sh ]; then
     . /usr/local/etc/profile.d/bash_completion.sh
   fi
@@ -57,7 +59,7 @@ alias ks="k -n kube-system"
 alias kse="k -n kube-system exec -ti"
 alias kk="k kustomize"
 
-if [[ -f "$HOME/.complete_alias" ]]; then
+if (( BASH_VERSINFO[0] >= 4 )) && [[ -f "$HOME/.complete_alias" ]]; then
   source "$HOME/.complete_alias"
   complete -F _complete_alias k
   complete -F _complete_alias ke
