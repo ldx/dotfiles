@@ -27,6 +27,16 @@
     },
     "cloudflare-observability": {
       "url": "https://observability.mcp.cloudflare.com/mcp"
+    },
+    "notion": {
+      "url": "https://mcp.notion.com/mcp",
+      "auth": "oauth",
+      "lifecycle": "lazy"
+    },
+    "linear": {
+      "url": "https://mcp.linear.app/mcp",
+      "auth": "oauth",
+      "lifecycle": "lazy"
     }
   }
 }
