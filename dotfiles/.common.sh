@@ -17,7 +17,17 @@ export _JAVA_AWT_WM_NONREPARENTING=1
 
 case $(uname -s) in
 [Dd][Aa][Rr][Ww][Ii][Nn])
-  export JAVA_HOME=/System/Library/Frameworks/JavaVM.framework/Home
+  export BASH_SILENCE_DEPRECATION_WARNING=1
+  if [[ -x /opt/homebrew/bin/brew ]]; then
+    eval "$(/opt/homebrew/bin/brew shellenv)"
+  elif [[ -x /usr/local/bin/brew ]]; then
+    eval "$(/usr/local/bin/brew shellenv)"
+  fi
+  if [[ -x /usr/libexec/java_home ]] && JAVA_HOME=$(/usr/libexec/java_home 2>/dev/null); then
+    export JAVA_HOME
+  else
+    unset JAVA_HOME
+  fi
   export MallocBadFreeAbort=1
   alias sed="sed -E"
   ;;
@@ -57,8 +67,11 @@ export PATH=""
 export MANPATH=""
 
 unshift_path "/usr"
+unshift_path_dir "/bin"
+unshift_path_dir "/sbin"
 unshift_path "/usr/local"
 unshift_path "/opt"
+[[ -n ${HOMEBREW_PREFIX:-} ]] && unshift_path "$HOMEBREW_PREFIX"
 unshift_path "$HOME"
 unshift_path "$LOCAL_PREFIX"
 unshift_path "$HOME/.krew"
@@ -68,8 +81,10 @@ unshift_path_dir "$HOME/.local/share/mise/shims"
 # Create core files.
 ulimit -c 0
 
-# Try to bump max number of open fds.
-ulimit -n 9999
+# Try to bump max number of open fds without lowering a larger existing limit.
+if [[ $(ulimit -Sn) != unlimited ]] && (( $(ulimit -Sn) < 9999 )); then
+  ulimit -n 9999
+fi
 
 # Load static envvars.
 for f in .env .env.local .setenv .setenv.local setenv setenv.sh; do
