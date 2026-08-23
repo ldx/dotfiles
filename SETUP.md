@@ -41,12 +41,15 @@ Install and keep current stable versions of:
 
 Respect project-pinned versions where present. Install other developer tools when a project or task requires them.
 
-## Verification
+## Verification and completion
+
+Do not mark setup complete until every applicable automated check and every available manual check below passes. Report each unavailable, hardware-dependent, authentication-dependent, or user-interaction check separately rather than treating it as complete.
 
 After setup:
 
 1. A new Ghostty window starts the intended Bash and renders the Starship prompt.
 2. `git`, `terraform`, `pi`, and `herdr` are available in a new shell.
-3. Chrome, Dropbox, 1Password, Slack, Zoom, and Tailscale are installed. Complete their interactive authentication only when the user is present.
-4. Pi loads its non-secret configuration and MCP servers without extension errors.
+3. Chrome, Dropbox, 1Password, Slack, Zoom, and Tailscale are installed. Verify Chrome is the default HTTP and HTTPS handler. Complete their interactive authentication only when the user is present.
+4. Pi loads its non-secret configuration and configured MCP servers without extension errors. Report lazy MCP servers that were not connected as unverified, not passing.
 5. The platform-specific verification checklist passes.
+6. Completion report lists passed checks, failed checks, and checks that still require user interaction or hardware verification.

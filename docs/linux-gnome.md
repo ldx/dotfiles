@@ -5,14 +5,14 @@ Read [`../SETUP.md`](../SETUP.md) first.
 ## Desktop
 
 - Use stock GNOME on Wayland.
-- Enable the native three-finger horizontal touchpad gesture for workspace switching when the hardware supports it.
 - Use the Activities Overview for window and workspace switching.
 - Use normal touchpad/trackpad scroll direction. Disable natural scrolling.
+- Stock GNOME couples the vertical three-finger Overview direction to natural scrolling: with normal scrolling, three fingers down opens the Overview. If three fingers up must open the Overview while normal scrolling remains enabled, obtain explicit approval for a compatible gesture extension before installing it; record its exact source and version.
 - Use the system's native notification, lock-screen, display, network, power, and clipboard behavior.
 - Set Ghostty as the preferred terminal and Chrome as the default browser when supported by the desktop settings.
 - Configure the keyboard so Caps Lock sends Escape.
 - On PC keyboards, configure both Alt keys as AltGr for easy access to characters such as `[]`, `{}`, and `;`.
-- If a supported fingerprint reader is detected, configure fingerprint authentication using the platform-supported stack. Enroll fingerprints only in an interactive user session, retain password fallback, and never make fingerprint authentication the sole recovery method.
+- If a supported fingerprint reader is detected, configure fingerprint authentication using the platform-supported stack. On Debian, install `fprintd`, its required `libfprint` package, and `libpam-fprintd`; enable the `fprintd` PAM profile with `pam-auth-update --enable fprintd` before enrollment. Enroll fingerprints only in an interactive user session, retain password fallback, and never make fingerprint authentication the sole recovery method.
 
 ## Debian notes
 
@@ -20,12 +20,18 @@ Read [`../SETUP.md`](../SETUP.md) first.
 - If Ghostty is not available from the current Debian repositories, use a current AppImage or other maintained upstream/community binary rather than Flatpak.
 - Dropbox's Debian package may add an apt source whose signing key is rejected by current Debian policy. If that breaks `apt update`, disable the Dropbox apt source after installing the desktop package.
 - After installing Docker, add the user to the `docker` group and start a new login session before expecting unprivileged `docker` commands to work.
+- Approved exception for this environment: install [Touchpad Gesture Customization version 23](https://extensions.gnome.org/extension/7850/touchpad-gesture-customization/) from the GNOME Extensions catalog. It supports GNOME 45--48 and is the only enabled extension. Keep normal scrolling, set three-finger vertical swipe to Overview navigation with its default Overview direction enabled, and disable its other swipe and pinch actions. Log out and in after installation so GNOME Shell discovers it, then run `gnome-extensions enable touchpad-gesture-customization@coooolapps.com` and require `gnome-extensions info` to report `Enabled: Yes` and `State: ACTIVE`. Revalidate the gesture after every GNOME Shell update.
 
-## Verification
+## Verification and completion
+
+Do not mark Linux desktop setup complete until every applicable item below passes. Record hardware-dependent and interactive checks separately when they cannot be performed in the current session.
 
 - The login session is GNOME on Wayland.
-- Three-finger horizontal swipes change workspaces when the touchpad supports them.
-- Touchpad/trackpad scrolling uses normal direction, not natural scrolling.
-- GNOME's Activities Overview opens and can switch windows and workspaces.
-- Caps Lock sends Escape, and both Alt keys act as AltGr on PC keyboards.
-- When a supported fingerprint reader is present, the enrolled user can authenticate with it while password authentication remains available.
+- Chrome is the default handler for both HTTP and HTTPS URLs. Verify with `xdg-mime query default x-scheme-handler/http` and `xdg-mime query default x-scheme-handler/https`.
+- Ghostty is installed and a new window starts the intended Bash and Starship prompt.
+- `org.gnome.desktop.peripherals.touchpad natural-scroll` is `false`.
+- With no gesture extension, three fingers down opens the Activities Overview when natural scrolling is disabled. Confirm this manually after a fresh GNOME login.
+- When the approved Touchpad Gesture Customization version 23 is configured to preserve normal scrolling and map three fingers up to the Overview, verify that exact behavior manually after a fresh GNOME login. Confirm `gnome-extensions info touchpad-gesture-customization@coooolapps.com` reports version 23, `Enabled: Yes`, and `State: ACTIVE`, and confirm it is the only enabled extension. If it fails, leave setup incomplete and record the GNOME Shell version and relevant `overview` or gesture errors.
+- GNOME's Activities Overview can switch windows and workspaces. Confirm this manually.
+- `org.gnome.desktop.input-sources xkb-options` includes `caps:escape`, `lv3:lalt_switch`, and `lv3:ralt_switch`; then confirm the keys work in an application.
+- When a supported fingerprint reader is present, `fprintd`, `libfprint`, and `libpam-fprintd` are installed; `common-auth` has a `pam_fprintd.so` entry before `pam_unix.so`; the user is enrolled; fingerprint authentication succeeds; and password authentication remains available. Enrollment and authentication must be confirmed interactively.
