@@ -4,7 +4,6 @@
 
 # Environment setup — runs for all bash sessions (interactive and non-interactive).
 source "$HOME/.common.sh"
-command -v mise >/dev/null 2>&1 && eval "$(mise activate bash)"
 
 # If not running interactively, stop here.
 case $- in
@@ -58,14 +57,6 @@ alias ke="k exec -ti"
 alias ks="k -n kube-system"
 alias kse="k -n kube-system exec -ti"
 alias kk="k kustomize"
-
-if (( BASH_VERSINFO[0] >= 4 )) && [[ -f "$HOME/.complete_alias" ]]; then
-  source "$HOME/.complete_alias"
-  complete -F _complete_alias k
-  complete -F _complete_alias ke
-  complete -F _complete_alias ks
-  complete -F _complete_alias kse
-fi
 
 command -v kubecolor >/dev/null 2>&1 && complete -F __start_kubectl kubecolor
 

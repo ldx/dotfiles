@@ -1,8 +1,0 @@
-# Focus follows the pointer without raising or restacking windows.
-pollMillis=50
-delay=0
-focusDelay=1
-requireMouseStop=false
-ignoreSpaceChanged=true
-disableKey="control"
-mouseDelta=0.1

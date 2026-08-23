@@ -1,5 +1,0 @@
-# Mako notification configuration.
-# Used by ~/.local/bin/mako-notification-toggle for Waybar DND support.
-
-[mode=do-not-disturb]
-invisible=1

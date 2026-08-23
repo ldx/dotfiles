@@ -12,9 +12,6 @@ export LOCAL_PREFIX=$HOME/.local
 export CPPFLAGS=-I$LOCAL_PREFIX/include
 export LDFLAGS=-L$LOCAL_PREFIX/lib
 
-# Workaround for https://wiki.archlinux.org/title/Java#Gray_window,_applications_not_resizing_with_WM,_menus_immediately_closing.
-export _JAVA_AWT_WM_NONREPARENTING=1
-
 case $(uname -s) in
 [Dd][Aa][Rr][Ww][Ii][Nn])
   export BASH_SILENCE_DEPRECATION_WARNING=1
@@ -76,7 +73,6 @@ unshift_path "$HOME"
 unshift_path "$LOCAL_PREFIX"
 unshift_path "$HOME/.krew"
 unshift_path "$HOME/.bun"
-unshift_path_dir "$HOME/.local/share/mise/shims"
 
 # Create core files.
 ulimit -c 0

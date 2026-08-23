@@ -3,6 +3,7 @@
 ## Principles
 
 - Inspect before editing. Read the relevant files, docs, config, and existing patterns before making changes.
+- Before changing machine state, read `SETUP.md` and the matching platform document under `docs/`. Prefer stock GNOME or macOS capabilities. Do not add desktop extensions, background daemons, custom scripts, launch agents, or system-level configuration without explicit user approval.
 - Prefer precise, minimal changes over broad rewrites.
 - Keep going until the requested task is actually complete, but stop and ask when requirements are genuinely ambiguous or a risky decision needs user input.
 - Always ask before commit, push, publish, deploy, purchase, transfer, or any irreversible actions unless explicitly asked to perform the action.
