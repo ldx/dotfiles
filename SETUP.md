@@ -4,7 +4,7 @@ This repository describes the desired user environment. It does not contain prov
 
 ## Operating model
 
-- Detect the operating system and use its current supported installation method. Do not preserve obsolete package-manager commands solely because they worked on an older machine.
+- Detect the operating system and use its current supported installation method. Do not preserve obsolete package-manager commands solely because they worked on an older machine. Do not use Flatpak.
 - Install current stable releases unless a project supplies a version requirement.
 - Prefer stock GNOME and macOS capabilities. Do not add desktop extensions, replacement bars, tiling window managers, clipboard managers, background daemons, custom launch agents, or system-level tuning unless the user explicitly approves a documented need.
 - Merge the contents of `dotfiles/` into the user's home directory. Do not restore removed legacy desktop configuration.
@@ -18,12 +18,13 @@ Merge `dotfiles/` recursively into the user's home directory. On a new machine, 
 
 Install and configure these for the user:
 
+- Sudo access for the user when needed to complete setup tasks.
 - A current stable Bash. Use that Bash for interactive shells on both Linux and macOS. On macOS, do not rely on the system Bash 3.2. Add the resolved Bash path to `/etc/shells` and change the login shell only with user approval.
 - Ghostty as the terminal emulator.
 - Starship as the shell prompt.
 - Git.
 - Google Chrome, Dropbox, 1Password, Slack, Zoom, and Tailscale.
-- Pi and Herdr, configured to use Pi without repository-local wrappers.
+- Pi and Herdr, configured to use Pi without repository-local wrappers. Use the `ldx/pi-extensions` repository for the Pi setup.
 
 ## Required developer tools
 
@@ -36,7 +37,7 @@ Install and keep current stable versions of:
 - Cloudflare Wrangler.
 - PostgreSQL client tools and database clients required by active projects.
 - SOPS and age.
-- Neovim, GitHub CLI, 1Password CLI, jq, gawk, direnv, ripgrep, fd, and fzf.
+- Neovim configured with LazyVim, with `vim` invoking Neovim rather than regular Vim, GitHub CLI, 1Password CLI, jq, gawk, direnv, ripgrep, fd, and fzf.
 
 Respect project-pinned versions where present. Install other developer tools when a project or task requires them.
 
