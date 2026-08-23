@@ -9,9 +9,11 @@ Read [`../SETUP.md`](../SETUP.md) first.
 - Use the Activities Overview for window and workspace switching.
 - Use the system's native notification, lock-screen, display, network, power, and clipboard behavior.
 - Set Ghostty as the preferred terminal and Chrome as the default browser when supported by the desktop settings.
+- If a supported fingerprint reader is detected, configure fingerprint authentication using the platform-supported stack. Enroll fingerprints only in an interactive user session, retain password fallback, and never make fingerprint authentication the sole recovery method.
 
 ## Verification
 
 - The login session is GNOME on Wayland.
 - Three-finger horizontal swipes change workspaces when the touchpad supports them.
 - GNOME's Activities Overview opens and can switch windows and workspaces.
+- When a supported fingerprint reader is present, the enrolled user can authenticate with it while password authentication remains available.
