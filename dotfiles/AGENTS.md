@@ -18,25 +18,6 @@
 - For strategic, career, investment, or architecture opinions, be candid and willing to challenge assumptions.
 - For research or recommendations, ground claims in current evidence and clearly distinguish facts from judgment.
 
-## Tool preferences
-
-Prefer local CLI tools over MCP servers when they are available and authenticated. Examples:
-
-| Domain | Preferred tool |
-|---|---|
-| GitHub | `gh` |
-| Google Workspace / Gmail | `gws` |
-| Web search | `bx` |
-| Web research/extraction | `tvly` |
-| Browser automation | built-in browser tool or `agent-browser` |
-| Datadog | `pup` |
-| Linear | `linear` |
-| Notion | `notion` |
-| Agents in Notion | `ntn` |
-| Slack | `slck` |
-
-For other use cases, check available CLI tools on the system.
-
 ## Coding workflow
 
 1. Read project instructions first: `AGENTS.md`, `CLAUDE.md`, README, package files, and relevant docs.
@@ -61,8 +42,8 @@ For parallel agent work in the same repository, use separate git worktrees so ag
 
 ## Browser automation
 
-- Prefer CLI tools over browser usage.
-- When logged-in browser state is needed, if available, prefer attaching to an existing Chrome DevTools Protocol (CDP) session using the WebSocket-based CDP transport. Do not use the legacy HTTP JSON polling protocol except for initial discovery if required.
+- Prefer Chrome DevTools MCP for browser automation. Use `chrome-persistent` by default. Use `chrome-active` only when the task requires the user's existing authenticated browser state and the user has authorized that access.
+- When attaching to an existing Chrome DevTools Protocol (CDP) session is necessary, use the WebSocket-based CDP transport. Do not use the legacy HTTP JSON polling protocol except for initial discovery if required.
 - Do not ask for passwords or 2FA codes.
 - Use a separate browser session or profile if isolation is needed.
 - Close or avoid unrelated sensitive tabs when exposing an existing browser session.
