@@ -52,5 +52,13 @@ tags.temp
 # Claude Code local settings
 .claude/settings.local.json
 
-# Pi local settings
-.pi/
+# Pi runtime state. Track only the reviewed, non-secret Pi configuration.
+!.pi/
+.pi/*
+!.pi/agent/
+.pi/agent/*
+!.pi/agent/mcp.json
+!.pi/agent/permissions.json
+!.pi/agent/settings.json
+!.pi/agent/settings.github-copilot-codex.json
+!.pi/agent/settings.codex-opencode-go.json

@@ -14,6 +14,31 @@ This repository describes the desired user environment. It does not contain prov
 
 Merge `dotfiles/` recursively into the user's home directory. On a new machine, it is a clean home-directory overlay. On an existing machine, do not use a destructive mirror or delete unrelated files. Copy configuration only; never copy credentials, browser profiles, OAuth state, sessions, caches, history, or other runtime state.
 
+## Select a Pi subscription profile
+
+`dotfiles/.pi/agent/settings.json` is the canonical Codex-only profile. The
+following tracked alternatives are templates and are not loaded by Pi until
+copied over `~/.pi/agent/settings.json`:
+
+- `settings.github-copilot-codex.json` -- select when both GitHub Copilot and
+  ChatGPT Codex subscriptions are available.
+- `settings.codex-opencode-go.json` -- select when both ChatGPT Codex and
+  OpenCode Go subscriptions are available.
+
+Applying the dotfiles means recursively copying the contents of `dotfiles/`
+into the user's home directory. It is a home-directory overlay, not a Git
+merge: `dotfiles/.pi/agent/*` becomes `~/.pi/agent/*`, and unrelated home files
+are not deleted. After that overlay is applied, copy the selected local template
+to the active Pi settings path, for example:
+
+```sh
+cp ~/.pi/agent/settings.codex-opencode-go.json ~/.pi/agent/settings.json
+```
+
+Restart Pi after changing profiles. Authenticate each selected provider locally
+with `/login`; never copy `auth.json`, sessions, caches, or other runtime data.
+Confirm the active routing with `/subagents-models` before relying on it.
+
 ## Common baseline
 
 Install and configure these for the user:

@@ -1,0 +1,89 @@
+{
+  "defaultProvider": "openai-codex",
+  "defaultModel": "gpt-5.6-terra",
+  "defaultThinkingLevel": "high",
+  "packages": [
+    "npm:@juicesharp/rpiv-ask-user-question",
+    "npm:pi-subagents",
+    "npm:pi-web-access",
+    "git:github.com/ldx/pi-extensions",
+    "npm:pi-mcp-adapter"
+  ],
+  "showHardwareCursor": true,
+  "shellCommandPrefix": "source ~/.common.sh",
+  "theme": "dark",
+  "lastChangelogVersion": "0.80.6",
+  "subagents": {
+    "defaultModel": "openai-codex/gpt-5.6-luna",
+    "defaultThinking": "medium",
+    "modelScope": {
+      "enforce": true,
+      "allow": [
+        "openai-codex/gpt-5.6-*",
+        "opencode-go/glm-5.3",
+        "opencode-go/kimi-k2.7-code",
+        "opencode-go/kimi-k3"
+      ]
+    },
+    "agentOverrides": {
+      "scout": {
+        "model": "openai-codex/gpt-5.6-luna",
+        "thinking": "low",
+        "fallbackModels": [
+          "opencode-go/kimi-k2.7-code"
+        ]
+      },
+      "delegate": {
+        "model": "opencode-go/kimi-k2.7-code",
+        "thinking": "medium",
+        "fallbackModels": [
+          "openai-codex/gpt-5.6-luna"
+        ]
+      },
+      "researcher": {
+        "model": "openai-codex/gpt-5.6-luna",
+        "thinking": "medium",
+        "fallbackModels": [
+          "opencode-go/kimi-k2.7-code"
+        ]
+      },
+      "context-builder": {
+        "model": "openai-codex/gpt-5.6-luna",
+        "thinking": "medium",
+        "fallbackModels": [
+          "openai-codex/gpt-5.6-terra"
+        ]
+      },
+      "reviewer": {
+        "model": "opencode-go/glm-5.3",
+        "thinking": "high",
+        "fallbackModels": [
+          "openai-codex/gpt-5.6-terra"
+        ]
+      },
+      "planner": {
+        "model": "openai-codex/gpt-5.6-terra",
+        "thinking": "high",
+        "defaultContext": "fresh",
+        "fallbackModels": [
+          "opencode-go/glm-5.3"
+        ]
+      },
+      "worker": {
+        "model": "opencode-go/kimi-k2.7-code",
+        "thinking": "medium",
+        "defaultContext": "fresh",
+        "fallbackModels": [
+          "openai-codex/gpt-5.6-terra"
+        ]
+      },
+      "oracle": {
+        "model": "openai-codex/gpt-5.6-sol",
+        "thinking": "high",
+        "fallbackModels": [
+          "openai-codex/gpt-5.6-terra"
+        ]
+      }
+    }
+  }
+}
