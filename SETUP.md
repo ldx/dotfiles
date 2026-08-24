@@ -16,23 +16,25 @@ Merge `dotfiles/` recursively into the user's home directory. On a new machine, 
 
 ## Select a Pi subscription profile
 
-`dotfiles/.pi/agent/settings.json` is the canonical Codex-only profile. The
-following tracked alternatives are templates and are not loaded by Pi until
-copied over `~/.pi/agent/settings.json`:
+Pi loads `~/.pi/agent/settings.json`. The repository keeps selectable profile
+templates instead of tracking that active path:
 
-- `settings.github-copilot-codex.json` -- select when both GitHub Copilot and
-  ChatGPT Codex subscriptions are available.
-- `settings.codex-opencode-go.json` -- select when both ChatGPT Codex and
-  OpenCode Go subscriptions are available.
+- `settings.default.json` -- canonical Codex-only profile.
+- `settings.github-copilot-codex.json` -- GitHub Copilot primary with ChatGPT
+  Codex fallbacks; use for this MacBook.
+- `settings.codex-opencode-go.json` -- ChatGPT Codex primary with OpenCode Go
+  fallbacks.
 
 Applying the dotfiles means recursively copying the contents of `dotfiles/`
 into the user's home directory. It is a home-directory overlay, not a Git
 merge: `dotfiles/.pi/agent/*` becomes `~/.pi/agent/*`, and unrelated home files
-are not deleted. After that overlay is applied, copy the selected local template
-to the active Pi settings path, for example:
+are not deleted. Select a profile with a symlink after the overlay, substituting
+the checkout path as needed:
 
 ```sh
-cp ~/.pi/agent/settings.codex-opencode-go.json ~/.pi/agent/settings.json
+DOTFILES_REPO="$HOME/Source/dotfiles"
+ln -sfn "$DOTFILES_REPO/dotfiles/.pi/agent/settings.github-copilot-codex.json" \
+  "$HOME/.pi/agent/settings.json"
 ```
 
 Restart Pi after changing profiles. Authenticate each selected provider locally
@@ -47,11 +49,15 @@ Install and configure these for the user:
 - A current stable Bash. Use that Bash for interactive shells on both Linux and macOS. On macOS, do not rely on the system Bash 3.2. Add the resolved Bash path to `/etc/shells` and change the login shell only with user approval.
 - Ghostty as the terminal emulator.
 - Starship as the shell prompt.
-- Git.
+- Git and Git LFS. Run `git lfs install` after installing Git LFS so repositories that use LFS can use the configured filters.
 - Google Chrome, Dropbox, 1Password, Slack, Zoom, and Tailscale.
 - Pi and Herdr, configured to use Pi without repository-local wrappers. Use the `ldx/pi-extensions` repository for the Pi setup.
 
 ## Required developer tools
+
+On macOS, install developer tools and approved applications with Homebrew where
+Homebrew provides a current supported package. Keep the exact package selection
+in the platform setup notes rather than a repository Brewfile.
 
 Install and keep current stable versions of:
 
