@@ -10,6 +10,7 @@ Read [`../SETUP.md`](../SETUP.md) first.
 - Stock GNOME couples the vertical three-finger Overview direction to natural scrolling: with normal scrolling, three fingers down opens the Overview. If three fingers up must open the Overview while normal scrolling remains enabled, obtain explicit approval for a compatible gesture extension before installing it; record its exact source and version.
 - Use the system's native notification, lock-screen, display, network, power, and clipboard behavior.
 - Set Ghostty as the preferred terminal and Chrome as the default browser when supported by the desktop settings.
+- When Ghostty is installed from a standalone upstream binary, install the matching release's official `images/gnome` assets in `~/.local/share/icons/hicolor/` under the `com.mitchellh.ghostty` icon ID. Add `Icon=com.mitchellh.ghostty` to `~/.local/share/applications/com.mitchellh.ghostty.desktop`, then refresh the local GTK icon cache and desktop database. Do not use a generic terminal icon or third-party artwork.
 - Configure the keyboard so Caps Lock sends Escape.
 - On PC keyboards, configure both Alt keys as AltGr for easy access to characters such as `[]`, `{}`, and `;`.
 - If a supported fingerprint reader is detected, configure fingerprint authentication using the platform-supported stack. On Debian, install `fprintd`, its required `libfprint` package, and `libpam-fprintd`; enable the `fprintd` PAM profile with `pam-auth-update --enable fprintd` before enrollment. Enroll fingerprints only in an interactive user session, retain password fallback, and never make fingerprint authentication the sole recovery method.
@@ -28,7 +29,7 @@ Do not mark Linux desktop setup complete until every applicable item below passe
 
 - The login session is GNOME on Wayland.
 - Chrome is the default handler for both HTTP and HTTPS URLs. Verify with `xdg-mime query default x-scheme-handler/http` and `xdg-mime query default x-scheme-handler/https`.
-- Ghostty is installed and a new window starts the intended Bash and Starship prompt.
+- Ghostty is installed, displays its official icon in Activities Overview, and a new window starts the intended Bash and Starship prompt.
 - `org.gnome.desktop.peripherals.touchpad natural-scroll` is `false`.
 - With no gesture extension, three fingers down opens the Activities Overview when natural scrolling is disabled. Confirm this manually after a fresh GNOME login.
 - When the approved Touchpad Gesture Customization version 23 is configured to preserve normal scrolling and map three fingers up to the Overview, verify that exact behavior manually after a fresh GNOME login. Confirm `gnome-extensions info touchpad-gesture-customization@coooolapps.com` reports version 23, `Enabled: Yes`, and `State: ACTIVE`, and confirm it is the only enabled extension. If it fails, leave setup incomplete and record the GNOME Shell version and relevant `overview` or gesture errors.
