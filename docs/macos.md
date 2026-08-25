@@ -8,6 +8,7 @@ Read [`../SETUP.md`](../SETUP.md) first.
 - Use Ghostty as the terminal emulator and Chrome as the default browser when the user wants those defaults.
 - Install a current stable external Bash and use it for interactive shells. Do not rely on macOS's bundled Bash 3.2.
 - Use normal touchpad/trackpad scroll direction. Disable natural scrolling.
+- When a connected mouse has a middle or clickable scroll-wheel button, map that button to Mission Control using **System Settings -> Desktop & Dock -> Mission Control -> Shortcuts**. Select the middle/wheel-click entry in the Mission Control mouse-shortcut menu, commonly shown as **Mouse Button 3**. Availability and naming depend on the connected mouse. If macOS does not expose the button there, report the hardware limitation; do not install a remapper or background utility without explicit approval.
 - Use the native workspace and window-management features unless the user explicitly approves an additional tool.
 
 ## Hungarian Windows ANSI keyboard layout
@@ -41,6 +42,7 @@ because it is not a keyboard layout.
 - A new Ghostty window starts the configured external Bash and Starship prompt.
 - Required applications from [`../SETUP.md`](../SETUP.md) are installed.
 - Touchpad/trackpad scrolling uses normal direction, not natural scrolling.
+- With a compatible mouse connected, pressing its middle/wheel-click button opens Mission Control. Confirm this manually because the shortcut control is hardware-dependent.
 - `defaults read com.apple.HIToolbox AppleEnabledInputSources` lists no U.S.
   keyboard source; all listed keyboard layouts are Hungarian.
 - **Magyar - Windows (ANSI)** remains selected after a fresh login, input-source
