@@ -17,7 +17,7 @@ Read [`../SETUP.md`](../SETUP.md) first.
 
 ## Debian notes
 
-- If sudo is not yet usable in the current session but graphical authorization works, use `pkexec` for privileged setup and then add the user to the required groups. Group membership changes require a new login session.
+- If `sudo` cannot authenticate in the current agent session but graphical authorization works, agents may use `pkexec` for already user-approved privileged setup. Do not request or handle passwords or 2FA codes. Then add the user to the required groups. Group membership changes require a new login session.
 - If Ghostty is not available from the current Debian repositories, use a current AppImage or other maintained upstream/community binary rather than Flatpak.
 - Dropbox's Debian package may add an apt source whose signing key is rejected by current Debian policy. If that breaks `apt update`, disable the Dropbox apt source after installing the desktop package.
 - After installing Docker, add the user to the `docker` group and start a new login session before expecting unprivileged `docker` commands to work.
