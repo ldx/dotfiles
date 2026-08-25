@@ -7,14 +7,16 @@ This repository describes the desired user environment. It does not contain prov
 - Detect the operating system and use its current supported installation method. Do not preserve obsolete package-manager commands solely because they worked on an older machine. Do not use Flatpak.
 - Install current stable releases unless a project supplies a version requirement.
 - Prefer stock GNOME and macOS capabilities. Do not add desktop extensions, replacement bars, tiling window managers, clipboard managers, background daemons, custom launch agents, or system-level tuning unless the user explicitly approves a documented need.
-- Merge the contents of `dotfiles/` into the user's home directory. Do not restore removed legacy desktop configuration.
+- Merge the tracked files under `dotfiles/` into the user's home directory. Do not restore removed legacy desktop configuration.
 - Do not store credentials, tokens, browser profiles, OAuth state, session data, or machine-specific caches in this repository. The user completes sign-in, password, and 2FA steps.
 
 ## Apply dotfiles
 
-Merge `dotfiles/` recursively into the user's home directory. On a new machine, it is a clean home-directory overlay. On an existing machine, do not use a destructive mirror or delete unrelated files. Copy configuration only; never copy credentials, browser profiles, OAuth state, sessions, caches, history, or other runtime state.
+Merge the tracked files under `dotfiles/` recursively into the user's home directory. On a new machine, it is a clean home-directory overlay. On an existing machine, do not use a destructive mirror or delete unrelated files. Copy configuration only; never copy credentials, browser profiles, OAuth state, sessions, caches, history, ignored files, untracked files, or other runtime state.
 
-Use regular copies for all managed files. Do not use symlinks as a repository-wide deployment strategy. When updating an existing overlay, reconcile local drift before overwriting a managed file. The sole exception is the selected Pi profile: after copying all profile templates, `~/.pi/agent/settings.json` is a local symlink to the selected `settings.<profile>.json` in that directory, as described below.
+Use regular copies for every managed file. The repository records desired configuration; it is not a live runtime dependency. A Git pull, branch switch, checkout move, or checkout deletion must not immediately change or break the active environment. Do not create symlinks from managed home paths into the repository, and do not symlink managed directories. The sole exception is the selected Pi profile: after copying all profile templates, `~/.pi/agent/settings.json` is a local, relative symlink to the selected `settings.<profile>.json` in that same home directory, as described below.
+
+Before replacing an existing managed destination, compare it with the repository version and reconcile any local drift. When converting a repository-backed symlink to a regular copy, do not use a copy operation that follows the destination symlink and writes through to the repository. Create the regular file separately and atomically replace the symlink. After applying the overlay, verify that every managed destination is a regular file, that its content matches the repository, and that only the Pi profile selector remains a symlink.
 
 ## Local Git identity
 
@@ -37,10 +39,10 @@ templates instead of tracking that active path:
 - `settings.codex-opencode-go.json` -- ChatGPT Codex primary with OpenCode Go
   fallbacks.
 
-Applying the dotfiles means recursively copying the contents of `dotfiles/`
-into the user's home directory. It is a home-directory overlay, not a Git
-merge: `dotfiles/.pi/agent/*` becomes `~/.pi/agent/*`, and unrelated home files
-are not deleted. This copies all profile templates. Select one with a local,
+Applying the dotfiles means recursively copying the tracked files under
+`dotfiles/` into the user's home directory. It is a home-directory overlay, not
+a Git merge: `dotfiles/.pi/agent/*` becomes `~/.pi/agent/*`, and unrelated home
+files are not deleted. This copies all profile templates. Select one with a local,
 relative symlink after the overlay:
 
 ```sh

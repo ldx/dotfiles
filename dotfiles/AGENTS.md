@@ -19,6 +19,13 @@
 - For strategic, career, investment, or architecture opinions, be candid and willing to challenge assumptions.
 - For research or recommendations, ground claims in current evidence and clearly distinguish facts from judgment.
 
+## Dotfile deployment
+
+- Treat tracked files under a dotfiles repository's `dotfiles/` directory as desired configuration and deploy them to the home directory as regular copies. The checkout must not be a runtime dependency.
+- Never create repository-backed symlinks for managed home files or directories. The only approved symlink is a local, relative `~/.pi/agent/settings.json` selector pointing to a copied `settings.<profile>.json` in the same home directory.
+- Before overwriting a managed destination, compare it with the repository version and reconcile local drift. Copy only tracked managed files; never copy secrets, credentials, ignored or untracked files, sessions, caches, history, or other runtime state.
+- Do not use a destructive mirror or delete unrelated home files. After deployment, verify that managed destinations are regular files with matching content and that only the approved Pi selector remains a symlink.
+
 ## Coding workflow
 
 1. Read project instructions first: `AGENTS.md`, `CLAUDE.md`, README, package files, and relevant docs.
