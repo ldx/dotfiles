@@ -37,6 +37,46 @@
       "url": "https://mcp.linear.app/mcp",
       "auth": "oauth",
       "lifecycle": "lazy"
+    },
+    "google-gmail": {
+      "url": "https://gmailmcp.googleapis.com/mcp/v1",
+      "auth": "oauth",
+      "lifecycle": "lazy",
+      "oauth": {
+        "clientId": "!op read op://Automation/google-mcp/clientId",
+        "clientSecret": "!op read op://Automation/google-mcp/password",
+        "redirectUri": "http://localhost:19876/callback"
+      }
+    },
+    "google-drive": {
+      "url": "https://drivemcp.googleapis.com/mcp/v1",
+      "auth": "oauth",
+      "lifecycle": "lazy",
+      "oauth": {
+        "clientId": "!op read op://Automation/google-mcp/clientId",
+        "clientSecret": "!op read op://Automation/google-mcp/password",
+        "redirectUri": "http://localhost:19876/callback"
+      }
+    },
+    "google-docs": {
+      "url": "https://docsmcp.googleapis.com/mcp/v1",
+      "auth": "oauth",
+      "lifecycle": "lazy",
+      "oauth": {
+        "clientId": "!op read op://Automation/google-mcp/clientId",
+        "clientSecret": "!op read op://Automation/google-mcp/password",
+        "redirectUri": "http://localhost:19876/callback"
+      }
+    },
+    "google-calendar": {
+      "url": "https://calendarmcp.googleapis.com/mcp/v1",
+      "auth": "oauth",
+      "lifecycle": "lazy",
+      "oauth": {
+        "clientId": "!op read op://Automation/google-mcp/clientId",
+        "clientSecret": "!op read op://Automation/google-mcp/password",
+        "redirectUri": "http://localhost:19876/callback"
+      }
     }
   }
 }

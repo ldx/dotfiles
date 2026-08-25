@@ -20,3 +20,5 @@ fi
 if [ -d "$HOME/bin" ] ; then
     PATH="$HOME/bin:$PATH"
 fi
+
+[ -r "$HOME/.local/bin/env" ] && . "$HOME/.local/bin/env"

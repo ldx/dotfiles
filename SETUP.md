@@ -16,6 +16,16 @@ Merge `dotfiles/` recursively into the user's home directory. On a new machine, 
 
 Use regular copies for all managed files. Do not use symlinks as a repository-wide deployment strategy. When updating an existing overlay, reconcile local drift before overwriting a managed file. The sole exception is the selected Pi profile: after copying all profile templates, `~/.pi/agent/settings.json` is a local symlink to the selected `settings.<profile>.json` in that directory, as described below.
 
+## Local Git identity
+
+`dotfiles/.gitconfig` includes `~/.gitconfig.local`. Keep the machine-local Git
+email in that untracked file rather than in the repository:
+
+```sh
+git config --file "$HOME/.gitconfig.local" user.email "you@example.com"
+chmod 600 "$HOME/.gitconfig.local"
+```
+
 ## Select a Pi subscription profile
 
 Pi loads `~/.pi/agent/settings.json`. The repository keeps selectable profile
