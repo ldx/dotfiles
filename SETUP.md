@@ -14,6 +14,8 @@ This repository describes the desired user environment. It does not contain prov
 
 Merge `dotfiles/` recursively into the user's home directory. On a new machine, it is a clean home-directory overlay. On an existing machine, do not use a destructive mirror or delete unrelated files. Copy configuration only; never copy credentials, browser profiles, OAuth state, sessions, caches, history, or other runtime state.
 
+Use regular copies for all managed files. Do not use symlinks as a repository-wide deployment strategy. When updating an existing overlay, reconcile local drift before overwriting a managed file. The sole exception is the selected Pi profile: after copying all profile templates, `~/.pi/agent/settings.json` is a local symlink to the selected `settings.<profile>.json` in that directory, as described below.
+
 ## Select a Pi subscription profile
 
 Pi loads `~/.pi/agent/settings.json`. The repository keeps selectable profile
@@ -28,13 +30,11 @@ templates instead of tracking that active path:
 Applying the dotfiles means recursively copying the contents of `dotfiles/`
 into the user's home directory. It is a home-directory overlay, not a Git
 merge: `dotfiles/.pi/agent/*` becomes `~/.pi/agent/*`, and unrelated home files
-are not deleted. Select a profile with a symlink after the overlay, substituting
-the checkout path as needed:
+are not deleted. This copies all profile templates. Select one with a local,
+relative symlink after the overlay:
 
 ```sh
-DOTFILES_REPO="$HOME/Source/dotfiles"
-ln -sfn "$DOTFILES_REPO/dotfiles/.pi/agent/settings.github-copilot-codex.json" \
-  "$HOME/.pi/agent/settings.json"
+ln -sfn "settings.github-copilot-codex.json" "$HOME/.pi/agent/settings.json"
 ```
 
 Restart Pi after changing profiles. Authenticate each selected provider locally
