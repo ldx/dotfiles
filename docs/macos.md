@@ -24,12 +24,26 @@ home-directory overlay installs it at:
 
 After applying the overlay, log out and back in so macOS refreshes its input
 source registry. Then open **System Settings -> Keyboard -> Text Input -> Edit**
-and add **Magyar - Windows (ANSI)**. The layout puts `0` on the physical
-backtick key, preserves Windows-style AltGr behavior through Option, and moves
-`í` to Option+I because ANSI keyboards lack the ISO key left of Z.
+and add and select **Magyar - Windows (ANSI)**. The layout puts `0` on the
+physical backtick key, preserves Windows-style AltGr behavior through Option,
+and moves `í` to Option+I because ANSI keyboards lack the ISO key left of Z.
+
+Remove **U.S.** so macOS cannot switch typing back to it. If macOS requires an
+Apple-provided fallback before it will remove U.S., add the built-in
+**Hungarian** layout first; every remaining keyboard source is then Hungarian.
+Turn off automatic switching to a document's input source, disable both input
+source shortcuts under **Keyboard Shortcuts -> Input Sources**, and set the
+Fn/Globe key action to **Do Nothing**. Character Viewer may remain enabled
+because it is not a keyboard layout.
 
 ## Verification
 
 - A new Ghostty window starts the configured external Bash and Starship prompt.
 - Required applications from [`../SETUP.md`](../SETUP.md) are installed.
 - Touchpad/trackpad scrolling uses normal direction, not natural scrolling.
+- `defaults read com.apple.HIToolbox AppleEnabledInputSources` lists no U.S.
+  keyboard source; all listed keyboard layouts are Hungarian.
+- **Magyar - Windows (ANSI)** remains selected after a fresh login, input-source
+  keyboard shortcuts are disabled, and Fn/Globe does not change input source.
+- After a restart, verify the FileVault preboot screen separately uses its
+  built-in Hungarian layout; do not infer this from the logged-in user session.
