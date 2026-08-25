@@ -12,7 +12,7 @@
   "showHardwareCursor": true,
   "shellCommandPrefix": "source ~/.common.sh",
   "theme": "dark",
-  "lastChangelogVersion": "0.80.6",
+  "lastChangelogVersion": "0.84.3",
   "subagents": {
     "defaultModel": "openai-codex/gpt-5.6-terra",
     "modelScope": {
