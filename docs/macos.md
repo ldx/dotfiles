@@ -11,6 +11,22 @@ Read [`../SETUP.md`](../SETUP.md) first.
 - When a connected mouse has a middle or clickable scroll-wheel button, map that button to Mission Control using **System Settings -> Desktop & Dock -> Mission Control -> Shortcuts**. Select the middle/wheel-click entry in the Mission Control mouse-shortcut menu, commonly shown as **Mouse Button 3**. Availability and naming depend on the connected mouse. If macOS does not expose the button there, report the hardware limitation; do not install a remapper or background utility without explicit approval.
 - Use the native workspace and window-management features unless the user explicitly approves an additional tool.
 
+## AutoRaise focus follows pointer
+
+Use AutoRaise as the approved focus-follows-pointer utility. It runs as a
+menu-bar application with macOS Accessibility permission and focuses and raises
+the window under a stationary pointer. Install the current stable
+DMG from its [official GitHub releases](https://github.com/sbmpost/AutoRaise/releases),
+not the unpinned `dimentium/autoraise` Homebrew cask. Do not enable its
+experimental focus-without-raise mode because it uses private APIs.
+
+Configure AutoRaise through its Preferences UI. Use a stationary-pointer delay
+of about 200 ms, disable cursor warping, set Control to suspend activation, and
+enable ignoring Space changes. Launch AutoRaise manually from Applications and
+grant it Accessibility access in **System Settings -> Privacy & Security ->
+Accessibility**. Do not configure automatic startup until a manual trial
+confirms it works with the primary applications.
+
 ## Hungarian Windows ANSI keyboard layout
 
 `dotfiles/Library/Keyboard Layouts/Magyar - Windows (ANSI).keylayout` is a
@@ -43,6 +59,7 @@ because it is not a keyboard layout.
 - Required applications from [`../SETUP.md`](../SETUP.md) are installed.
 - Touchpad/trackpad scrolling uses normal direction, not natural scrolling.
 - With a compatible mouse connected, pressing its middle/wheel-click button opens Mission Control. Confirm this manually because the shortcut control is hardware-dependent.
+- With AutoRaise running and Accessibility access granted, a stationary pointer over an eligible window focuses and raises it after approximately 200 ms; Control suppresses the action; and cursor warping is disabled. Confirm manually in the primary editor, browser, terminal, video-call, and remote-desktop applications before enabling automatic startup.
 - `defaults read com.apple.HIToolbox AppleEnabledInputSources` lists no U.S.
   keyboard source; all listed keyboard layouts are Hungarian.
 - **Magyar - Windows (ANSI)** remains selected after a fresh login, input-source
