@@ -43,9 +43,10 @@ When adding tests, prefer externally observable behavior and regression-prone bo
 
 - Prefer subagents when fresh context, parallel recon or review, isolated implementation, or external research would improve the result.
 - Handle only trivial, single-step tasks directly.
-- Keep one writer per worktree. Use read-only subagents for planning and review.
-
-For parallel agent work in the same repository, use separate git worktrees so agents do not edit the same working tree or trip over each other's uncommitted changes. Prefer isolated worktrees for delegated implementation, experiments, and concurrent review/fix tasks.
+- Subagents default to managed Git worktrees. Use `worktree: false` only for read-only work against the primary checkout.
+- A reviewer must use the checkout containing the target diff. Keep one writer per worktree, with non-overlapping ownership for parallel writers.
+- Writers validate and return a handoff. The handoff patch is authoritative because successful worktrees are cleaned up.
+- Writers do not commit, merge, push, or delete worktrees without explicit approval. The parent integrates approved work serially, then asks before committing or pushing.
 
 ## Security and privacy
 
