@@ -38,6 +38,11 @@
       "auth": "oauth",
       "lifecycle": "lazy"
     },
+    "granola": {
+      "url": "https://mcp.granola.ai/mcp",
+      "auth": "oauth",
+      "lifecycle": "lazy"
+    },
     "google-gmail": {
       "url": "https://gmailmcp.googleapis.com/mcp/v1",
       "auth": "oauth",
