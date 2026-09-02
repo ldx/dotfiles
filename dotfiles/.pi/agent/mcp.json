@@ -3,12 +3,12 @@
     "autoAuth": true
   },
   "mcpServers": {
-    "chrome-active": {
+    "chrome-user-profile": {
       "command": "npx",
       "args": ["-y", "chrome-devtools-mcp@latest", "--autoConnect"],
       "lifecycle": "lazy"
     },
-    "chrome-persistent": {
+    "chrome-isolated": {
       "command": "npx",
       "args": ["-y", "chrome-devtools-mcp@latest"],
       "lifecycle": "lazy"

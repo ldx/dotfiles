@@ -58,10 +58,11 @@ For parallel agent work in the same repository, use separate git worktrees so ag
 ## Browser automation
 
 - When the user asks to "open" a page, link, or URL, use the platform opener: `/usr/bin/open` on macOS or `xdg-open` on Linux. Do not use browser automation for this action.
-- Prefer Chrome DevTools MCP for browser automation. Use `chrome-persistent` by default. Use `chrome-active` only when the task requires the user's existing authenticated browser state and the user has authorized that access.
+- `chrome-isolated` launches an agent-owned Chrome profile with no access to the user's sessions. Use it only for public pages and unauthenticated testing.
+- `chrome-user-profile` attaches to the user's existing Chrome profile, including signed-in sessions, cookies, and open tabs. With the user's authorization, use it for pages likely to require sign-in or after `chrome-isolated` reaches a sign-in wall.
+- Do not use `chrome-isolated` for login, SSO, or any task that needs the user's existing session. Do not use `chrome-user-profile` when the task can be completed publicly or the user has not authorized access to their browser state.
 - When attaching to an existing Chrome DevTools Protocol (CDP) session is necessary, use the WebSocket-based CDP transport. Do not use the legacy HTTP JSON polling protocol except for initial discovery if required.
-- Do not ask for passwords or 2FA codes.
-- Use a separate browser session or profile if isolation is needed.
+- Do not ask for passwords or 2FA codes. Let the user complete authentication in Chrome.
 - Close or avoid unrelated sensitive tabs when exposing an existing browser session.
 
 ## Reviews and delegated analysis
