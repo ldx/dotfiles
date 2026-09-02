@@ -57,6 +57,7 @@ For parallel agent work in the same repository, use separate git worktrees so ag
 
 ## Browser automation
 
+- When the user asks to "open" a page, link, or URL, use the platform opener: `/usr/bin/open` on macOS or `xdg-open` on Linux. Do not use browser automation for this action.
 - Prefer Chrome DevTools MCP for browser automation. Use `chrome-persistent` by default. Use `chrome-active` only when the task requires the user's existing authenticated browser state and the user has authorized that access.
 - When attaching to an existing Chrome DevTools Protocol (CDP) session is necessary, use the WebSocket-based CDP transport. Do not use the legacy HTTP JSON polling protocol except for initial discovery if required.
 - Do not ask for passwords or 2FA codes.
