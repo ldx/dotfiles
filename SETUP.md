@@ -73,7 +73,7 @@ in the platform setup notes rather than a repository Brewfile.
 
 Install and keep current stable versions of:
 
-- Node.js LTS, Go, Python with uv, and Bun.
+- Node.js LTS, Go, Python with uv, Bun, and Rust.
 - Docker and Docker Compose.
 - Terraform, kubectl, Helm, and kubeconform.
 - AWS CLI, Google Cloud CLI, and Azure CLI.
@@ -81,6 +81,7 @@ Install and keep current stable versions of:
 - PostgreSQL client tools and database clients required by active projects.
 - SOPS and age.
 - Neovim configured with LazyVim, with `vim` invoking Neovim rather than regular Vim, GitHub CLI, 1Password CLI, jq, gawk, direnv, ripgrep, fd, and fzf.
+- Sessiongrep, built from source with Cargo. Configure its local Pi MCP server so agents can search session history.
 
 Respect project-pinned versions where present. Install other developer tools when a project or task requires them.
 
@@ -94,5 +95,6 @@ After setup:
 2. `git`, `terraform`, `pi`, and `herdr` are available in a new shell.
 3. Chrome, Dropbox, 1Password, Slack, Zoom, and Tailscale are installed. Verify Chrome is the default HTTP and HTTPS handler. Complete their interactive authentication only when the user is present.
 4. Pi loads its non-secret configuration and configured MCP servers without extension errors. Report lazy MCP servers that were not connected as unverified, not passing.
-5. The platform-specific verification checklist passes.
-6. Completion report lists passed checks, failed checks, and checks that still require user interaction or hardware verification.
+5. `sessiongrep doctor` reports local Pi sessions and `sessiongrep search` returns results.
+6. The platform-specific verification checklist passes.
+7. Completion report lists passed checks, failed checks, and checks that still require user interaction or hardware verification.

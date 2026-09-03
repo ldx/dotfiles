@@ -73,6 +73,7 @@ unshift_path "$HOME"
 unshift_path "$LOCAL_PREFIX"
 unshift_path "$HOME/.krew"
 unshift_path "$HOME/.bun"
+unshift_path "$HOME/.cargo"
 
 # Create core files.
 ulimit -c 0

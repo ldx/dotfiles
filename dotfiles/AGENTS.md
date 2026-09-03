@@ -40,6 +40,8 @@
 
 When adding tests, prefer externally observable behavior and regression-prone boundaries over implementation details or placeholder assertions.
 
+When prior agent work is relevant, use the Sessiongrep MCP to search local session history before asking the user to repeat context.
+
 ## Delegation
 
 - Prefer subagents when fresh context, parallel recon or review, isolated implementation, or external research would improve the result.

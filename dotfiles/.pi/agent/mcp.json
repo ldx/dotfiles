@@ -13,6 +13,10 @@
       "args": ["-y", "chrome-devtools-mcp@latest"],
       "lifecycle": "lazy"
     },
+    "sessiongrep": {
+      "command": "sessiongrep-mcp",
+      "lifecycle": "lazy"
+    },
     "cloudflare": {
       "url": "https://mcp.cloudflare.com/mcp"
     },
