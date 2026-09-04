@@ -42,14 +42,15 @@ When adding tests, prefer externally observable behavior and regression-prone bo
 
 When prior agent work is relevant, use the Sessiongrep MCP to search local session history before asking the user to repeat context.
 
-## Delegation
+## Delegation and worktrees
 
 - Prefer subagents when fresh context, parallel recon or review, isolated implementation, or external research would improve the result.
-- Handle only trivial, single-step tasks directly.
-- Subagents default to managed Git worktrees. Use `worktree: false` only for read-only work against the primary checkout.
-- A reviewer must use the checkout containing the target diff. Keep one writer per worktree, with non-overlapping ownership for parallel writers.
+- The primary checkout is read-only for agents. Never create, switch, or check out a feature branch there.
+- Delegate every file mutation to the builtin `worker` subagent with `worktree: true`. The parent agent must not use `edit`, `write`, or mutating shell commands in the primary checkout.
+- Read-only agents may use `worktree: false` against the primary checkout.
+- A reviewer must use the worktree containing the target diff. Keep one writer per worktree, with non-overlapping ownership for parallel writers.
 - Writers validate and return a handoff. The handoff patch is authoritative because successful worktrees are cleaned up.
-- Writers do not commit, merge, push, or delete worktrees without explicit approval. The parent integrates approved work serially, then asks before committing or pushing.
+- Writers do not commit, merge, push, or delete worktrees without explicit approval. The parent integrates an approved handoff serially only after explicit user approval, then asks before committing or pushing.
 
 ## Security and privacy
 
