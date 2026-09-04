@@ -82,7 +82,7 @@ Install and keep current stable versions of:
 - Cloudflare Wrangler.
 - PostgreSQL client tools and database clients required by active projects.
 - SOPS and age.
-- Neovim configured with LazyVim, with `vim` invoking Neovim rather than regular Vim, GitHub CLI, 1Password CLI, jq, gawk, direnv, ripgrep, fd, and fzf.
+- Neovim configured with LazyVim, with `vim` invoking Neovim rather than regular Vim, GitHub CLI, 1Password CLI, jq, gawk, direnv, ripgrep, fd, fzf, and Worktrunk.
 - Sessiongrep, built from source with Cargo. Configure its local Pi MCP server so agents can search session history.
 
 Respect project-pinned versions where present. Install other developer tools when a project or task requires them.
