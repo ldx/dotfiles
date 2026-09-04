@@ -4,6 +4,7 @@
 	status = auto
 [push]
 	default = current
+	autoSetupRemote = true
 [core]
 	excludesfile = ~/.gitignore
 [filter "lfs"]

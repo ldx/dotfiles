@@ -2,3 +2,6 @@ worktree-path = "~/Source/.worktrees/{{ repo }}-{{ branch | sanitize }}"
 
 [list]
 json-schema = 2
+
+[aliases]
+dashboard = "wt list --full"

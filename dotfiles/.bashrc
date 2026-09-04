@@ -60,6 +60,33 @@ alias kk="k kustomize"
 
 command -v kubecolor >/dev/null 2>&1 && complete -F __start_kubectl kubecolor
 
+# Create and open a personal Worktrunk worktree.
+wtn() {
+  if [[ $# -ne 1 ]]; then
+    echo "usage: wtn <name>" >&2
+    return 2
+  fi
+
+  wt switch --create "vilmos/$1"
+}
+
+# Create a personal Worktrunk worktree and launch Pi in it.
+wtp() {
+  if [[ $# -eq 0 ]]; then
+    echo "usage: wtp <name> [prompt...]" >&2
+    return 2
+  fi
+
+  local name=$1
+  shift
+  wt switch --create --execute pi "vilmos/$name" -- "$@"
+}
+
+# Launch Pi in a selected or named existing worktree.
+wta() {
+  wt switch --execute pi "$@"
+}
+
 for kc in "$HOME"/.kube/configs/*; do
   if [[ ! -f $kc ]]; then
     continue
