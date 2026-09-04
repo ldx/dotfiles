@@ -18,6 +18,8 @@ Use regular copies for every managed file. The repository records desired config
 
 Before replacing an existing managed destination, compare it with the repository version and reconcile any local drift. When converting a repository-backed symlink to a regular copy, do not use a copy operation that follows the destination symlink and writes through to the repository. Create the regular file separately and atomically replace the symlink. After applying the overlay, verify that every managed destination is a regular file, that its content matches the repository, and that only the Pi profile selector remains a symlink.
 
+Treat `lastChangelogVersion` and `hideThinkingBlock` in Pi settings files as local runtime preferences. Ignore their differences during deployment and never commit them as configuration changes.
+
 ## Local Git identity
 
 `dotfiles/.gitconfig` includes `~/.gitconfig.local`. Keep the machine-local Git
