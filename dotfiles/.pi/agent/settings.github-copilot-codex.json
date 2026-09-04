@@ -1,7 +1,7 @@
 {
   "defaultProvider": "github-copilot",
-  "defaultModel": "gpt-5.6-terra",
-  "defaultThinkingLevel": "high",
+  "defaultModel": "gpt-5.6-sol",
+  "defaultThinkingLevel": "medium",
   "packages": [
     "npm:@juicesharp/rpiv-ask-user-question",
     "npm:pi-subagents",
@@ -27,7 +27,7 @@
     "agentOverrides": {
       "scout": {
         "model": "github-copilot/gpt-5.6-luna",
-        "thinking": "low",
+        "thinking": "medium",
         "fallbackModels": [
           "openai-codex/gpt-5.6-luna"
         ]
@@ -41,10 +41,10 @@
         ]
       },
       "researcher": {
-        "model": "github-copilot/gpt-5.6-luna",
+        "model": "github-copilot/gpt-5.6-terra",
         "thinking": "medium",
         "fallbackModels": [
-          "openai-codex/gpt-5.6-luna"
+          "openai-codex/gpt-5.6-terra"
         ]
       },
       "context-builder": {
@@ -56,10 +56,10 @@
         ]
       },
       "reviewer": {
-        "model": "github-copilot/gpt-5.6-terra",
+        "model": "github-copilot/gpt-5.6-sol",
         "thinking": "high",
         "fallbackModels": [
-          "openai-codex/gpt-5.6-terra"
+          "openai-codex/gpt-5.6-sol"
         ]
       },
       "planner": {
