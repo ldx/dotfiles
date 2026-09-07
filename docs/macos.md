@@ -11,6 +11,16 @@ Read [`../SETUP.md`](../SETUP.md) first.
 - When a connected mouse has a middle or clickable scroll-wheel button, map that button to Mission Control using **System Settings -> Desktop & Dock -> Mission Control -> Shortcuts**. Select the middle/wheel-click entry in the Mission Control mouse-shortcut menu, commonly shown as **Mouse Button 3**. Availability and naming depend on the connected mouse. If macOS does not expose the button there, report the hardware limitation; do not install a remapper or background utility without explicit approval.
 - Use the native workspace and window-management features unless the user explicitly approves an additional tool.
 
+## Clipboard history
+
+Use [Maccy](https://maccy.app/) as the approved clipboard history manager. Install its current stable Homebrew cask:
+
+```bash
+brew install --cask maccy
+```
+
+Launch Maccy from Applications and use `Shift+Command+C` to open clipboard history. Grant Accessibility permission only if automatic paste is enabled. Retain Maccy's default handling for concealed clipboard content so password-manager values are not stored in history.
+
 ## Worktrunk
 
 Install current Homebrew Git and Worktrunk releases:
@@ -71,6 +81,7 @@ because it is not a keyboard layout.
 - Required applications from [`../SETUP.md`](../SETUP.md) are installed.
 - `git --version` reports Git 2.43.0 or newer, `wt --version` succeeds, and a new interactive Bash reports `wt` as a shell function.
 - Touchpad/trackpad scrolling uses normal direction, not natural scrolling.
+- `/Applications/Maccy.app` is installed, Maccy is running, and `Shift+Command+C` opens clipboard history. Confirm copied text appears and can be pasted, while concealed content copied from 1Password does not appear in history.
 - With a compatible mouse connected, pressing its middle/wheel-click button opens Mission Control. Confirm this manually because the shortcut control is hardware-dependent.
 - With AutoRaise running and Accessibility access granted, a stationary pointer over an eligible window focuses and raises it after approximately 200 ms; Control suppresses the action; and cursor warping is disabled. Confirm manually in the primary editor, browser, terminal, video-call, and remote-desktop applications before enabling automatic startup.
 - `defaults read com.apple.HIToolbox AppleEnabledInputSources` lists no U.S.
