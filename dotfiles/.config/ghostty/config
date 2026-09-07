@@ -1,0 +1,21 @@
+# XMonad-like split management
+
+# Create and close splits
+keybind = shift+super+enter=new_split:auto
+keybind = shift+super+c=close_surface
+
+# Focus splits with Vim directions
+keybind = shift+super+h=goto_split:left
+keybind = shift+super+j=goto_split:down
+keybind = shift+super+k=goto_split:up
+keybind = shift+super+l=goto_split:right
+
+# Hold Ctrl as well to resize
+keybind = ctrl+shift+super+h=resize_split:left,10
+keybind = ctrl+shift+super+j=resize_split:down,10
+keybind = ctrl+shift+super+k=resize_split:up,10
+keybind = ctrl+shift+super+l=resize_split:right,10
+
+# Layout controls
+keybind = shift+super+f=toggle_split_zoom
+keybind = shift+super+e=equalize_splits
