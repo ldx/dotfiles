@@ -62,6 +62,9 @@ tags.temp
 !.pi/agent/settings.json
 !.pi/agent/settings.github-copilot-codex.json
 !.pi/agent/settings.codex-opencode-go.json
+!.pi/agent/prompts/
+.pi/agent/prompts/*
+!.pi/agent/prompts/ship.md
 !.pi/agent/extensions/
 .pi/agent/extensions/*
 !.pi/agent/extensions/subagent/
