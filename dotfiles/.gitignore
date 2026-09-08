@@ -65,6 +65,7 @@ tags.temp
 !.pi/agent/prompts/
 .pi/agent/prompts/*
 !.pi/agent/prompts/ship.md
+!.pi/agent/prompts/ticket.md
 !.pi/agent/extensions/
 .pi/agent/extensions/*
 !.pi/agent/extensions/subagent/
