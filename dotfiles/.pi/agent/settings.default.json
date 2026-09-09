@@ -20,7 +20,8 @@
       "enforce": true,
       "strict": true,
       "allow": [
-        "openai-codex/gpt-5.6-*"
+        "openai-codex/gpt-5.6-*",
+        "openai-codex/gpt-6-astra"
       ]
     },
     "agentOverrides": {
@@ -61,9 +62,10 @@
         ]
       },
       "oracle": {
-        "model": "openai-codex/gpt-5.6-sol",
+        "model": "openai-codex/gpt-6-astra",
         "thinking": "high",
         "fallbackModels": [
+          "openai-codex/gpt-5.6-sol",
           "openai-codex/gpt-5.6-terra"
         ]
       }

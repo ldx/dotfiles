@@ -1,4 +1,4 @@
 {
   "worktreeBaseDir": "~/Source/.worktrees",
-  "worktree": true
+  "worktree": false
 }
