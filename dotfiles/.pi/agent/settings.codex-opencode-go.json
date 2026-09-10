@@ -31,7 +31,8 @@
         "thinking": "low",
         "fallbackModels": [
           "opencode-go/kimi-k2.7-code"
-        ]
+        ],
+        "defaultContext": "fresh"
       },
       "delegate": {
         "model": "opencode-go/kimi-k2.7-code",
@@ -45,28 +46,14 @@
         "thinking": "medium",
         "fallbackModels": [
           "opencode-go/kimi-k2.7-code"
-        ]
-      },
-      "context-builder": {
-        "model": "openai-codex/gpt-5.6-luna",
-        "thinking": "medium",
-        "fallbackModels": [
-          "openai-codex/gpt-5.6-terra"
-        ]
+        ],
+        "defaultContext": "fresh"
       },
       "reviewer": {
         "model": "opencode-go/glm-5.3",
         "thinking": "high",
         "fallbackModels": [
           "openai-codex/gpt-5.6-terra"
-        ]
-      },
-      "planner": {
-        "model": "openai-codex/gpt-5.6-terra",
-        "thinking": "high",
-        "defaultContext": "fresh",
-        "fallbackModels": [
-          "opencode-go/glm-5.3"
         ]
       },
       "worker": {
@@ -83,6 +70,21 @@
         "fallbackModels": [
           "openai-codex/gpt-5.6-terra"
         ]
+      },
+      "validator": {
+        "thinking": "medium",
+        "defaultContext": "fresh",
+        "acceptanceRole": "read-only"
+      },
+      "skypilot": {
+        "inheritProjectContext": true,
+        "disabled": true
+      },
+      "cursor-agent": {
+        "disabled": true
+      },
+      "cursor-agent-writer": {
+        "disabled": true
       }
     }
   }

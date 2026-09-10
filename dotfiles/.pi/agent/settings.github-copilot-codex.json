@@ -30,7 +30,8 @@
         "thinking": "medium",
         "fallbackModels": [
           "openai-codex/gpt-5.6-luna"
-        ]
+        ],
+        "defaultContext": "fresh"
       },
       "delegate": {
         "model": "github-copilot/kimi-k2.7-code",
@@ -45,29 +46,14 @@
         "thinking": "medium",
         "fallbackModels": [
           "openai-codex/gpt-5.6-terra"
-        ]
-      },
-      "context-builder": {
-        "model": "github-copilot/gpt-5.6-luna",
-        "thinking": "medium",
-        "fallbackModels": [
-          "github-copilot/gpt-5.6-terra",
-          "openai-codex/gpt-5.6-terra"
-        ]
+        ],
+        "defaultContext": "fresh"
       },
       "reviewer": {
         "model": "github-copilot/gpt-5.6-sol",
         "thinking": "high",
         "fallbackModels": [
           "openai-codex/gpt-5.6-sol"
-        ]
-      },
-      "planner": {
-        "model": "github-copilot/gpt-5.6-terra",
-        "thinking": "high",
-        "defaultContext": "fresh",
-        "fallbackModels": [
-          "openai-codex/gpt-5.6-terra"
         ]
       },
       "worker": {
@@ -86,6 +72,21 @@
           "openai-codex/gpt-5.6-sol",
           "openai-codex/gpt-5.6-terra"
         ]
+      },
+      "validator": {
+        "thinking": "medium",
+        "defaultContext": "fresh",
+        "acceptanceRole": "read-only"
+      },
+      "skypilot": {
+        "inheritProjectContext": true,
+        "disabled": true
+      },
+      "cursor-agent": {
+        "disabled": true
+      },
+      "cursor-agent-writer": {
+        "disabled": true
       }
     }
   }

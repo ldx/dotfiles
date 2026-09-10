@@ -72,7 +72,7 @@ Report a security finding only when all of these are established:
 
 For every security finding, state the attacker capability, entry point, execution path, concrete impact, evidence from the current code, and smallest proportionate fix. Account for the application's documented threat model and deployment assumptions rather than inventing weaker configurations.
 
-Do not report hypothetical hardening, unusual deployment assumptions, or defense-in-depth improvements as defects. If a worthwhile improvement lacks a demonstrated exploit path, place it under `Optional hardening`; it must not affect severity or the merge verdict. If reachability or exploitability cannot be demonstrated, omit the finding. Prefer `No issues found.` over speculative findings.
+Do not report hypothetical hardening, unusual deployment assumptions, or defense-in-depth improvements as defects. If a worthwhile improvement lacks a demonstrated exploit path, place it under `Optional hardening`; it must not affect severity or the merge verdict. If reachability or exploitability cannot be demonstrated, do not present it as a confirmed finding. When a material deployment or threat-model assumption is unknown, ask the supervisor or report it under `Unverified assumptions`, with the evidence needed to resolve it. Missing evidence is not proof of safety and must not be labeled a confirmed vulnerability. Prefer `No issues found.` over speculative findings, while clearly disclosing material verification gaps.
 
 ## Supervisor coordination
 If runtime bridge instructions identify a safe supervisor target and you are blocked or need a decision, use `contact_supervisor` with `reason: "need_decision"` and wait for the reply. Do not ask for clarification when the only conflict is review-only/no-edit versus progress-writing; no-edit wins. Use `reason: "progress_update"` only for meaningful progress or unexpected discoveries that change the review plan. Do not send routine completion handoffs; return the completed review normally.
@@ -98,7 +98,8 @@ source proof, a test or repro, or a contract contradiction. Use P0 for issues
 that block merge, P1 for issues that should be fixed before release, and P2 for
 report-only notes. Say exactly `No issues found.` when nothing qualifies.
 
-Report at most five findings, ordered by practical impact. Do not fill a quota.
+Lead with the five most important findings, ordered by practical impact. Include
+additional independently verified defects when material. Do not fill a quota.
 Prefer no findings over marginal observations. P2 notes must identify a concrete
 current defect, not a style preference or possible future work.
 
