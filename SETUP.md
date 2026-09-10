@@ -35,20 +35,21 @@ chmod 600 "$HOME/.gitconfig.local"
 Pi loads `~/.pi/agent/settings.json`. The repository keeps selectable profile
 templates instead of tracking that active path:
 
-- `settings.default.json` -- canonical Codex-only profile.
+- `settings.default.json` -- Codex-only profile.
 - `settings.github-copilot-codex.json` -- GitHub Copilot primary with ChatGPT
-  Codex fallbacks; use for this MacBook.
+  Codex fallbacks.
 - `settings.codex-opencode-go.json` -- ChatGPT Codex primary with OpenCode Go
   fallbacks.
 
 Applying the dotfiles means recursively copying the tracked files under
 `dotfiles/` into the user's home directory. It is a home-directory overlay, not
 a Git merge: `dotfiles/.pi/agent/*` becomes `~/.pi/agent/*`, and unrelated home
-files are not deleted. This copies all profile templates. Select one with a local,
-relative symlink after the overlay:
+files are not deleted. This copies all profile templates. Preserve the machine's
+existing local profile selection unless the user explicitly asks to change it.
+To select a profile, use a local, relative symlink after the overlay:
 
 ```sh
-ln -sfn "settings.github-copilot-codex.json" "$HOME/.pi/agent/settings.json"
+ln -sfn "settings.<profile>.json" "$HOME/.pi/agent/settings.json"
 ```
 
 Restart Pi after changing profiles. Authenticate each selected provider locally
