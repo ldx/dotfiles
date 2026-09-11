@@ -64,6 +64,7 @@ tags.temp
 !.pi/agent/settings.codex-opencode-go.json
 !.pi/agent/prompts/
 .pi/agent/prompts/*
+!.pi/agent/prompts/capture.md
 !.pi/agent/prompts/ship.md
 !.pi/agent/prompts/ticket.md
 !.pi/agent/extensions/
