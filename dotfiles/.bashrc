@@ -70,6 +70,42 @@ wtn() {
   wt switch --create "vilmos/$1"
 }
 
+_herdr_pi_workspace() {
+  local name=$1
+  local cwd=$2
+  shift 2
+
+  if ! command -v herdr >/dev/null 2>&1; then
+    echo "herdr is not installed" >&2
+    return 1
+  fi
+  if ! command -v jq >/dev/null 2>&1; then
+    echo "jq is not installed" >&2
+    return 1
+  fi
+  if [[ ! -d $cwd ]]; then
+    echo "directory does not exist: $cwd" >&2
+    return 1
+  fi
+  cwd=$(builtin cd -- "$cwd" && pwd -P) || return
+
+  local response pane_id agent_name
+  response=$(herdr workspace create --cwd "$cwd" --label "$name" --no-focus) || return
+  pane_id=$(jq -r '.result.root_pane.pane_id' <<<"$response")
+
+  if [[ -z $pane_id || $pane_id == null ]]; then
+    echo "could not read the new Herdr pane ID" >&2
+    return 1
+  fi
+
+  agent_name="pi-$(tr '[:upper:]' '[:lower:]' <<<"${pane_id//:/-}")"
+  if (( $# )); then
+    herdr agent start "$agent_name" --kind pi --pane "$pane_id" -- "$@" || return
+  else
+    herdr agent start "$agent_name" --kind pi --pane "$pane_id"
+  fi
+}
+
 # Create a personal Worktrunk worktree and launch Pi in a Herdr workspace.
 wtp() {
   if [[ $# -eq 0 ]]; then
@@ -86,25 +122,17 @@ wtp() {
   fi
 
   wt switch --create "vilmos/$name" || return
+  _herdr_pi_workspace "$name" "$PWD" "$@"
+}
 
-  local response workspace_id pane_id agent_name
-  response=$(herdr workspace create --cwd "$PWD" --label "$name" --no-focus) || return
-  workspace_id=$(jq -r '.result.workspace.workspace_id' <<<"$response")
-  pane_id=$(jq -r '.result.root_pane.pane_id' <<<"$response")
-
-  if [[ -z $workspace_id || $workspace_id == null || -z $pane_id || $pane_id == null ]]; then
-    echo "wtp: could not read the new Herdr workspace IDs" >&2
-    return 1
+# Create a Herdr workspace and launch Pi in it.
+hw() {
+  if (( $# < 1 || $# > 2 )); then
+    echo "usage: hw <name> [cwd]" >&2
+    return 2
   fi
 
-  agent_name="pi-$(tr '[:upper:]' '[:lower:]' <<<"${pane_id//:/-}")"
-  if (( $# )); then
-    herdr agent start "$agent_name" --kind pi --pane "$pane_id" -- "$@" || return
-  else
-    herdr agent start "$agent_name" --kind pi --pane "$pane_id" || return
-  fi
-
-  herdr workspace focus "$workspace_id"
+  _herdr_pi_workspace "$1" "${2:-$PWD}"
 }
 
 # Launch Pi in a selected or named existing worktree.
