@@ -70,7 +70,7 @@ wtn() {
   wt switch --create "vilmos/$1"
 }
 
-# Create a personal Worktrunk worktree and launch Pi in it.
+# Create a personal Worktrunk worktree and launch Pi in a Herdr workspace.
 wtp() {
   if [[ $# -eq 0 ]]; then
     echo "usage: wtp <name> [prompt...]" >&2
@@ -79,7 +79,32 @@ wtp() {
 
   local name=$1
   shift
-  wt switch --create --execute pi "vilmos/$name" -- "$@"
+
+  if [[ ${HERDR_ENV:-} == 1 ]] || ! command -v herdr >/dev/null 2>&1; then
+    wt switch --create --execute pi "vilmos/$name" -- "$@"
+    return
+  fi
+
+  wt switch --create "vilmos/$name" || return
+
+  local response workspace_id pane_id agent_name
+  response=$(herdr workspace create --cwd "$PWD" --label "$name" --no-focus) || return
+  workspace_id=$(jq -r '.result.workspace.workspace_id' <<<"$response")
+  pane_id=$(jq -r '.result.root_pane.pane_id' <<<"$response")
+
+  if [[ -z $workspace_id || $workspace_id == null || -z $pane_id || $pane_id == null ]]; then
+    echo "wtp: could not read the new Herdr workspace IDs" >&2
+    return 1
+  fi
+
+  agent_name="pi-$(tr '[:upper:]' '[:lower:]' <<<"${pane_id//:/-}")"
+  if (( $# )); then
+    herdr agent start "$agent_name" --kind pi --pane "$pane_id" -- "$@" || return
+  else
+    herdr agent start "$agent_name" --kind pi --pane "$pane_id" || return
+  fi
+
+  herdr workspace focus "$workspace_id"
 }
 
 # Launch Pi in a selected or named existing worktree.
