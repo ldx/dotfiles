@@ -33,6 +33,14 @@ The tracked Bash integration lets `wt switch` change the current shell's
 directory. The tracked user configuration stores worktrees under
 `~/Source/.worktrees` with predictable repository and branch-based names.
 
+## Watch
+
+Install the `watch` command with Homebrew:
+
+```bash
+brew install watch
+```
+
 ## AutoRaise focus follows pointer
 
 Use AutoRaise as the approved focus-follows-pointer utility. It runs as a
@@ -79,7 +87,7 @@ because it is not a keyboard layout.
 
 - A new Ghostty window starts the configured external Bash and Starship prompt.
 - Required applications from [`../SETUP.md`](../SETUP.md) are installed.
-- `git --version` reports Git 2.43.0 or newer, `wt --version` succeeds, and a new interactive Bash reports `wt` as a shell function.
+- `git --version` reports Git 2.43.0 or newer, `wt --version` succeeds, `watch --version` succeeds, and a new interactive Bash reports `wt` as a shell function.
 - Touchpad/trackpad scrolling uses normal direction, not natural scrolling.
 - `/Applications/Maccy.app` is installed, Maccy is running, and `Shift+Command+C` opens clipboard history. Confirm copied text appears and can be pasted, while concealed content copied from 1Password does not appear in history.
 - With a compatible mouse connected, pressing its middle/wheel-click button opens Mission Control. Confirm this manually because the shortcut control is hardware-dependent.
