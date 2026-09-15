@@ -53,7 +53,7 @@
       },
       "reviewer": {
         "model": "opencode-go/glm-5.3",
-        "thinking": "high",
+        "thinking": "medium",
         "fallbackModels": [
           "openai-codex/gpt-5.6-terra"
         ]

@@ -53,7 +53,7 @@
       },
       "reviewer": {
         "model": "github-copilot/gpt-5.6-sol",
-        "thinking": "high",
+        "thinking": "medium",
         "fallbackModels": [
           "openai-codex/gpt-5.6-sol"
         ]

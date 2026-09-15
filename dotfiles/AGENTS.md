@@ -30,6 +30,17 @@
 
 When adding tests, prefer externally observable behavior and regression-prone boundaries over implementation details or placeholder assertions.
 
+## Delegation
+
+- Handle small, well-understood changes directly.
+- Delegate when independent review or parallel work provides clear value.
+- Give children a bounded task, relevant file paths, acceptance criteria, and specific checks. Avoid open-ended implementation or review requests.
+- Use medium thinking for routine implementation and review. Request high explicitly for complex or high-risk work.
+- Default to one independent, read-only review pass.
+- The parent applies small review fixes directly after children finish.
+- Re-review only substantive correctness or security fixes, scoped to those fixes. Do not repeat full reviews for formatting or wording.
+- Run independent review and validation in parallel when safe.
+
 ## Security and privacy
 
 - Treat credentials, tokens, cookies, API keys, financial data, personal data, and private or company information as sensitive.

@@ -50,14 +50,14 @@
       },
       "reviewer": {
         "model": "openai-codex/gpt-5.6-sol",
-        "thinking": "high",
+        "thinking": "medium",
         "fallbackModels": [
           "openai-codex/gpt-5.6-terra"
         ]
       },
       "worker": {
         "model": "openai-codex/gpt-5.6-terra",
-        "thinking": "high",
+        "thinking": "medium",
         "defaultContext": "fresh",
         "fallbackModels": [
           "openai-codex/gpt-5.6-sol"
