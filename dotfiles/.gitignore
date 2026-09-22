@@ -57,7 +57,7 @@ tags.temp
 .pi/*
 !.pi/agent/
 .pi/agent/*
-!.pi/agent/mcp.json
+# .pi/agent/mcp.json stays machine-local; shared config lives in .config/mcp/.
 !.pi/agent/permissions.json
 !.pi/agent/settings.json
 !.pi/agent/settings.github-copilot-codex.json
