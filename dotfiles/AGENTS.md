@@ -1,53 +1,34 @@
-# AGENTS.md
+# Communication and authorization
 
-## Principles
+- Be concise and use plain language. State material uncertainty and distinguish evidence from judgment. Do not use em dashes.
+- Ask when requirements are genuinely ambiguous or a risky decision needs user input.
+- Ask before committing, pushing, publishing, deploying, purchasing, transferring, changing account security, or taking irreversible actions unless explicitly authorized.
+- Use Conventional Commits for commit messages and PR titles.
+- Keep PR descriptions short: scope, implementation summary, and verification.
 
-- Keep going until the requested task is actually complete, but stop and ask when requirements are genuinely ambiguous or a risky decision needs user input.
-- Ask before commit, push, publish, deploy, purchase, transfer, or any irreversible actions unless explicitly asked to perform the action.
-- Use Conventional Commit format for all commit messages and PR titles, e.g. `chore: update codeowners`.
+# Coding
 
-## Communication style
+- Read applicable instructions and relevant code before editing.
+- Make the smallest safe change that solves the request. Follow existing conventions without copying unnecessary complexity or doing unrelated cleanup.
+- Do not add abstractions, dependencies, configuration, or defensive logic for hypothetical needs. Handle edge cases when required by established contracts or justified by their likelihood and impact.
+- Validate untrusted input at boundaries; internally, rely on established contracts. Preserve required security and error handling.
+- Keep testing and verification proportional to risk. Test affected behavior and meaningful failure cases, not implementation details or every conceivable edge case.
+- Stop when the requested behavior works, relevant checks pass, and the diff has been reviewed. Further investigation or hardening needs concrete evidence of a problem.
+- Summarize changes, verification, and anything not verified.
 
-- Be clear, concise and practical. Use simple words and omit filler and repetition.
-- Explain material caveats and uncertainty. Ground recommendations in evidence and distinguish facts from judgment.
-- Don't use em dashes.
+# Delegation
 
-## Coding workflow
+- Handle small, well-understood tasks directly. Delegate only when the expected benefit outweighs coordination cost. Do not use multiple agents or review rounds for straightforward changes.
+- Give subagents bounded tasks, relevant paths, acceptance criteria, and specific checks.
 
-1. Read applicable project instructions before editing. Inspect the files, configuration, and docs relevant to the change.
-2. Make the smallest safe change, following the project's existing style, test patterns, and architecture.
-3. Run targeted checks/tests and review the diff.
-4. Summarize changed files, verification performed, and anything that could not be verified.
+# Security and privacy
 
-Test observable behavior and realistic failure boundaries, not implementation details.
+- Never expose secrets or unnecessary personal or confidential data in prompts, repositories, docs, or tool output.
+- Use least-privilege access and established secret storage. Check repositories for secrets before pushing or publishing.
+- Never ask for passwords or 2FA codes, let the user authenticate.
 
-## Implementation simplicity
+# Browser use
 
-- Reuse existing code and conventions when they fit. Do not reproduce unnecessary complexity just for consistency.
-- Do not add abstractions, configuration, extension points, or dependencies for hypothetical future needs.
-- Prefer straightforward code. A little duplication is better than an abstraction that obscures behavior or couples unrelated code.
-- Validate untrusted input at system boundaries and preserve required security and error handling. Internally, rely on established contracts rather than adding speculative checks or silent fallbacks.
-- Keep unrelated refactoring, renaming, and cleanup out of the change.
-- Before finishing, inspect the diff for unnecessary helpers, indirection, fallback paths, and configuration. Remove what the task does not need.
-
-## Delegation
-
-- Handle small, well-understood changes directly.
-- Delegate when independent review or parallel work provides clear value.
-- Give children a bounded task, relevant file paths, acceptance criteria, and specific checks. Avoid open-ended implementation or review requests.
-- Review for removal and simplification as well as correctness. Distinguish necessary safeguards from speculative generality; do not expand scope with extra features or unrelated cleanup.
-
-## Security and privacy
-
-- Treat credentials, tokens, cookies, API keys, financial data, personal data, and private or company information as sensitive.
-- Never paste secrets into prompts, write them into repos, or include them in docs.
-- Prefer read-only scopes, local stores, OS keyring, environment variables, or secret managers for managing sensitive data and secrets.
-- Scrutinize repositories for secrets before creating public/private remotes or publishing.
-- For sensitive browser actions such as payments, account security, production deploys, or destructive admin changes, stop before the final confirmation unless explicitly authorized.
-
-## Browser automation
-
-- When the user asks to "open" a page, link, or URL, use the platform opener: `/usr/bin/open` on macOS or `xdg-open` on Linux. Do not use browser automation for this action.
-- Use `chrome-isolated` for public pages and unauthenticated testing, never for login or SSO. Use `chrome-user-profile`, which accesses the user's existing sessions, cookies, and tabs, only when authenticated access is needed and the user has authorized it.
-- Do not ask for passwords or 2FA codes. Let the user complete authentication in Chrome.
-- Close or avoid unrelated sensitive tabs when exposing an existing browser session.
+- To "open" a URL, use `/usr/bin/open` on macOS or `xdg-open` on Linux, not browser automation.
+- Use `chrome-isolated` for public pages and unauthenticated testing, never login or SSO.
+- Use `chrome-user-profile` only for authorized authenticated access. Avoid exposing unrelated sensitive tabs.
