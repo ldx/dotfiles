@@ -1,4 +1,7 @@
 {
   "worktreeBaseDir": "~/Source/.worktrees",
-  "worktree": false
+  "worktree": false,
+  "modelExclusions": {
+    "defaultTtlMs": 300000
+  }
 }
