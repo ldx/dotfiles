@@ -28,48 +28,29 @@
       "scout": {
         "model": "openai-codex/gpt-5.6-luna",
         "thinking": "medium",
-        "fallbackModels": [
-          "openai-codex/gpt-5.6-terra"
-        ],
         "defaultContext": "fresh"
       },
       "delegate": {
         "model": "openai-codex/gpt-5.6-luna",
-        "thinking": "medium",
-        "fallbackModels": [
-          "openai-codex/gpt-5.6-terra"
-        ]
+        "thinking": "medium"
       },
       "researcher": {
         "model": "openai-codex/gpt-5.6-terra",
         "thinking": "medium",
-        "fallbackModels": [
-          "openai-codex/gpt-5.6-sol"
-        ],
         "defaultContext": "fresh"
       },
       "reviewer": {
         "model": "openai-codex/gpt-5.6-sol",
-        "thinking": "medium",
-        "fallbackModels": [
-          "openai-codex/gpt-5.6-terra"
-        ]
+        "thinking": "medium"
       },
       "worker": {
         "model": "openai-codex/gpt-5.6-terra",
         "thinking": "medium",
-        "defaultContext": "fresh",
-        "fallbackModels": [
-          "openai-codex/gpt-5.6-sol"
-        ]
+        "defaultContext": "fresh"
       },
       "oracle": {
         "model": "openai-codex/gpt-6-astra",
-        "thinking": "high",
-        "fallbackModels": [
-          "openai-codex/gpt-5.6-sol",
-          "openai-codex/gpt-5.6-terra"
-        ]
+        "thinking": "high"
       },
       "validator": {
         "thinking": "medium",

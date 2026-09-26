@@ -30,51 +30,29 @@
       "scout": {
         "model": "github-copilot/gpt-5.6-luna",
         "thinking": "medium",
-        "fallbackModels": [
-          "openai-codex/gpt-5.6-luna"
-        ],
         "defaultContext": "fresh"
       },
       "delegate": {
         "model": "github-copilot/kimi-k2.7-code",
-        "thinking": "medium",
-        "fallbackModels": [
-          "github-copilot/gpt-5.6-luna",
-          "openai-codex/gpt-5.6-luna"
-        ]
+        "thinking": "medium"
       },
       "researcher": {
         "model": "github-copilot/gpt-5.6-terra",
         "thinking": "medium",
-        "fallbackModels": [
-          "openai-codex/gpt-5.6-terra"
-        ],
         "defaultContext": "fresh"
       },
       "reviewer": {
         "model": "github-copilot/gpt-5.6-sol",
-        "thinking": "medium",
-        "fallbackModels": [
-          "openai-codex/gpt-5.6-sol"
-        ]
+        "thinking": "medium"
       },
       "worker": {
         "model": "github-copilot/kimi-k2.7-code",
         "thinking": "medium",
-        "defaultContext": "fresh",
-        "fallbackModels": [
-          "github-copilot/gpt-5.6-terra",
-          "openai-codex/gpt-5.6-terra"
-        ]
+        "defaultContext": "fresh"
       },
       "oracle": {
         "model": "github-copilot/gpt-6-astra",
-        "thinking": "high",
-        "fallbackModels": [
-          "github-copilot/gpt-5.6-sol",
-          "openai-codex/gpt-5.6-sol",
-          "openai-codex/gpt-5.6-terra"
-        ]
+        "thinking": "high"
       },
       "validator": {
         "thinking": "medium",
