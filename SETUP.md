@@ -23,8 +23,8 @@ Treat `lastChangelogVersion` and `hideThinkingBlock` in Pi settings files as loc
 ## MCP configuration and machine-local secrets
 
 The shared MCP configuration is tracked at `dotfiles/.config/mcp/mcp.json`
-and copied to `~/.config/mcp/mcp.json`. Pi loads machine-specific overrides
-from `~/.pi/agent/mcp.json` afterward. That override file is not managed by
+and copied to `~/.config/mcp/mcp.json`. The Pi MCP adapter loads machine-specific
+overrides from `~/.pi/agent/mcp-adapter.json` afterward. That override file is not managed by
 this repository: preserve it during every overlay and never copy it back here.
 
 See [`docs/mcp.md`](docs/mcp.md) for first-time migration, the 1Password and

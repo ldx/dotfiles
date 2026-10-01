@@ -10,7 +10,7 @@
    chmod 700 "$HOME/.local/share/workspace-mcp" "$HOME/.local/share/workspace-mcp/credentials"
    ```
 
-4. Create or merge `~/.pi/agent/mcp.json` using the example below. Replace all
+4. Create or merge `~/.pi/agent/mcp-adapter.json` using the example below. Replace all
    `EXAMPLE_*` values and the email locally. Never commit this file or tokens.
 
    ```json
@@ -36,7 +36,7 @@
    using the corresponding account for the client ID or secret.
 
    ```sh
-   chmod 600 "$HOME/.pi/agent/mcp.json"
+   chmod 600 "$HOME/.pi/agent/mcp-adapter.json"
    ```
 
 5. In the intended Google Cloud project, enable the standard Gmail, Drive, Docs,
@@ -50,10 +50,23 @@
 ## Keep the split
 
 The shared file defines the read-only server. The local file selects credentials
-and takes precedence. Pi replaces the entire `env` object, so keep all its fields
+and takes precedence. The adapter replaces the entire `env` object, so keep all its fields
 in the local override. Tokens stay in the private runtime directory; do not sync it.
 
 On an existing laptop, privately back up and compare configs first. Preserve
 local-only servers, remove duplicated shared settings and obsolete Google preview
 connectors, and keep only the Workspace `env` override locally. Future dotfile
-updates must preserve `~/.pi/agent/mcp.json`. See [SETUP.md](../SETUP.md).
+updates must preserve `~/.pi/agent/mcp-adapter.json`. See [SETUP.md](../SETUP.md).
+
+## Migrate older adapter overrides
+
+Pi now reserves `~/.pi/agent/mcp.json` for its built-in MCP loader. The adapter
+reads `~/.pi/agent/mcp-adapter.json` instead. If the old file contains only
+adapter settings, rename it when the new path does not exist; otherwise merge
+its adapter entries into the new file. Keep any intentional built-in MCP entries
+in `mcp.json`, and remove migrated adapter entries from that file.
+
+Adapter settings such as `auth: "oauth"` and partial `env` overrides are not
+valid standalone built-in server definitions. Do not convert them or duplicate
+servers across both loaders merely to suppress warnings. Run `/reload` after
+migration, then use `/mcp-adapter` to check server status and connections.

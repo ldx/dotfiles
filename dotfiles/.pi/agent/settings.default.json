@@ -2,6 +2,7 @@
   "defaultProvider": "openai-codex",
   "defaultModel": "gpt-6-astra",
   "defaultThinkingLevel": "medium",
+  "defaultTools": ["+codemode"],
   "packages": [
     "npm:@juicesharp/rpiv-ask-user-question",
     "npm:pi-subagents",
