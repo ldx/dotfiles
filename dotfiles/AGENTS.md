@@ -15,6 +15,7 @@
 - Keep testing and verification proportional to risk. Test affected behavior and meaningful failure cases, not implementation details or every conceivable edge case.
 - Stop when the requested behavior works, relevant checks pass, and the diff has been reviewed. Further investigation or hardening needs concrete evidence of a problem.
 - Summarize changes, verification, and anything not verified.
+- Do not automatically add runbooks or expand READMEs. Update docs only to correct inaccuracies or explain non-obvious, durable usage or operational requirements. Keep implementation history and verification evidence in the PR or issue.
 
 # Delegation
 
