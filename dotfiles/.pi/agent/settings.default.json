@@ -7,8 +7,7 @@
     "npm:@juicesharp/rpiv-ask-user-question",
     "npm:pi-subagents",
     "npm:pi-web-access",
-    "git:github.com/ldx/pi-extensions",
-    "npm:pi-mcp-adapter"
+    "git:github.com/ldx/pi-extensions"
   ],
   "showHardwareCursor": true,
   "shellCommandPrefix": "source ~/.common.sh",

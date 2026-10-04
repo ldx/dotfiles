@@ -1,8 +1,12 @@
 # MCP setup on a new laptop
 
+Pi uses its built-in MCP support. Do not load `pi-mcp-adapter` alongside it.
+
 1. Install `uv` and ensure `uvx` is on Pi's PATH.
-2. Copy `dotfiles/.config/mcp/mcp.json` to `~/.config/mcp/mcp.json` as a regular
-   file. Preserve any existing local configuration.
+2. Use `dotfiles/.config/mcp/mcp.json` as the non-secret template for
+   `~/.pi/agent/mcp.json`. On an existing machine, merge server definitions into
+   that file, preserving local-only servers, credentials, and other local settings.
+   Pi does not automatically load `~/.config/mcp/mcp.json`.
 3. Create the private runtime directory:
 
    ```sh
@@ -10,23 +14,19 @@
    chmod 700 "$HOME/.local/share/workspace-mcp" "$HOME/.local/share/workspace-mcp/credentials"
    ```
 
-4. Create or merge `~/.pi/agent/mcp-adapter.json` using the example below. Replace all
-   `EXAMPLE_*` values and the email locally. Never commit this file or tokens.
+4. Add this `env` object to the complete `google-workspace` entry in
+   `~/.pi/agent/mcp.json`. Keep its `command`, `args`, and `cwd` from the template.
+   Replace all `EXAMPLE_*` values and the email locally. Never commit local
+   credentials or tokens.
 
    ```json
    {
-     "mcpServers": {
-       "google-workspace": {
-         "env": {
-           "GOOGLE_OAUTH_CLIENT_ID": "!op read 'op://EXAMPLE_VAULT/EXAMPLE_ITEM/EXAMPLE_ID_FIELD'",
-           "GOOGLE_OAUTH_CLIENT_SECRET": "!op read 'op://EXAMPLE_VAULT/EXAMPLE_ITEM/EXAMPLE_SECRET_FIELD'",
-           "GOOGLE_OAUTH_REDIRECT_URI": "http://localhost:8000/oauth2callback",
-           "WORKSPACE_MCP_PORT": "8000",
-           "WORKSPACE_MCP_CREDENTIALS_DIR": "${HOME}/.local/share/workspace-mcp/credentials",
-           "USER_GOOGLE_EMAIL": "you@example.com"
-         }
-       }
-     }
+     "GOOGLE_OAUTH_CLIENT_ID": "!op read 'op://EXAMPLE_VAULT/EXAMPLE_ITEM/EXAMPLE_ID_FIELD'",
+     "GOOGLE_OAUTH_CLIENT_SECRET": "!op read 'op://EXAMPLE_VAULT/EXAMPLE_ITEM/EXAMPLE_SECRET_FIELD'",
+     "GOOGLE_OAUTH_REDIRECT_URI": "http://localhost:8000/oauth2callback",
+     "WORKSPACE_MCP_PORT": "8000",
+     "WORKSPACE_MCP_CREDENTIALS_DIR": "${HOME}/.local/share/workspace-mcp/credentials",
+     "USER_GOOGLE_EMAIL": "you@example.com"
    }
    ```
 
@@ -36,7 +36,7 @@
    using the corresponding account for the client ID or secret.
 
    ```sh
-   chmod 600 "$HOME/.pi/agent/mcp-adapter.json"
+   chmod 600 "$HOME/.pi/agent/mcp.json"
    ```
 
 5. In the intended Google Cloud project, enable the standard Gmail, Drive, Docs,
@@ -44,29 +44,26 @@
    URI above, and store its matching client ID and secret in your chosen password
    store. If port `8000` is occupied, change it in both the local config and
    registered redirect.
-6. Run `/reload`, ask Pi to connect `google-workspace`, and complete Google
-   authorization in your browser. Test inbox, file, document, and calendar reads.
+6. Restart Pi after removing the adapter, or use `/reload` for subsequent config
+   changes. Run `pi mcp list` or `/mcp` to check connections. Complete Google
+   authorization in your browser when requested by Workspace tools, then test
+   inbox, file, document, and calendar reads.
 
-## Keep the split
+## Local configuration and migration
 
-The shared file defines the read-only server. The local file selects credentials
-and takes precedence. The adapter replaces the entire `env` object, so keep all its fields
-in the local override. Tokens stay in the private runtime directory; do not sync it.
+The shared template defines the read-only Workspace command. The complete runtime
+configuration at `~/.pi/agent/mcp.json` is machine-local and must be preserved
+when applying dotfiles. Tokens stay in the private runtime directory; do not sync
+it. See [SETUP.md](../SETUP.md).
 
-On an existing laptop, privately back up and compare configs first. Preserve
-local-only servers, remove duplicated shared settings and obsolete Google preview
-connectors, and keep only the Workspace `env` override locally. Future dotfile
-updates must preserve `~/.pi/agent/mcp-adapter.json`. See [SETUP.md](../SETUP.md).
+When migrating from the adapter, merge shared server definitions and any local
+`mcp-adapter.json` overrides into `~/.pi/agent/mcp.json`. Every server needs a
+`command` or `url`; a standalone `env` override is not sufficient. Remove adapter
+fields such as `lifecycle` and `auth: "oauth"`. Built-in MCP discovers HTTP OAuth
+automatically and connects enabled servers at startup rather than lazily.
 
-## Migrate older adapter overrides
-
-Pi now reserves `~/.pi/agent/mcp.json` for its built-in MCP loader. The adapter
-reads `~/.pi/agent/mcp-adapter.json` instead. If the old file contains only
-adapter settings, rename it when the new path does not exist; otherwise merge
-its adapter entries into the new file. Keep any intentional built-in MCP entries
-in `mcp.json`, and remove migrated adapter entries from that file.
-
-Adapter settings such as `auth: "oauth"` and partial `env` overrides are not
-valid standalone built-in server definitions. Do not convert them or duplicate
-servers across both loaders merely to suppress warnings. Run `/reload` after
-migration, then use `/mcp-adapter` to check server status and connections.
+Remove `npm:pi-mcp-adapter` from all selectable Pi profiles. Built-in MCP is enabled
+by default; check Built-in extensions in `pi config` if it was explicitly disabled.
+Remote servers may need a fresh sign-in with `/mcp` or `pi mcp login <server>` because
+the built-in loader uses a separate OAuth credential store. Preserve existing
+Workspace credentials; switching loaders does not require deleting them.

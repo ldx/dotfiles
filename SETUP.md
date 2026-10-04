@@ -22,15 +22,15 @@ Treat `lastChangelogVersion` and `hideThinkingBlock` in Pi settings files as loc
 
 ## MCP configuration and machine-local secrets
 
-The shared MCP configuration is tracked at `dotfiles/.config/mcp/mcp.json`
-and copied to `~/.config/mcp/mcp.json`. The Pi MCP adapter loads machine-specific
-overrides from `~/.pi/agent/mcp-adapter.json` afterward. That override file is not managed by
-this repository: preserve it during every overlay and never copy it back here.
+The shared MCP template is tracked at `dotfiles/.config/mcp/mcp.json`.
+Pi's built-in MCP loader reads `~/.pi/agent/mcp.json`, not the shared template
+path. Merge the template into that runtime file, preserving local-only servers,
+credentials, and settings. The runtime file is machine-local: preserve it during
+every overlay and never copy it back here. Do not load `pi-mcp-adapter`.
 
-See [`docs/mcp.md`](docs/mcp.md) for first-time migration, the 1Password and
-macOS Keychain variants, and verification. On an existing machine, migrate the
-old full Pi config before reloading; otherwise its higher-precedence entries
-can retain obsolete Google preview servers or mask shared settings.
+See [`docs/mcp.md`](docs/mcp.md) for migration, the 1Password and macOS Keychain
+variants, and verification. Each runtime server must have a complete `command`
+or `url` definition; partial adapter overrides must be merged before reloading.
 
 ## Local Git identity
 

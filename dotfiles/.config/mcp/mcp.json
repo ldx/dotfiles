@@ -1,21 +1,15 @@
 {
-  "settings": {
-    "autoAuth": true
-  },
   "mcpServers": {
     "chrome-user-profile": {
       "command": "npx",
-      "args": ["-y", "chrome-devtools-mcp@latest", "--autoConnect"],
-      "lifecycle": "lazy"
+      "args": ["-y", "chrome-devtools-mcp@latest", "--autoConnect"]
     },
     "chrome-isolated": {
       "command": "npx",
-      "args": ["-y", "chrome-devtools-mcp@latest"],
-      "lifecycle": "lazy"
+      "args": ["-y", "chrome-devtools-mcp@latest"]
     },
     "sessiongrep": {
-      "command": "sessiongrep-mcp",
-      "lifecycle": "lazy"
+      "command": "sessiongrep-mcp"
     },
     "cloudflare": {
       "url": "https://mcp.cloudflare.com/mcp"
@@ -33,19 +27,13 @@
       "url": "https://observability.mcp.cloudflare.com/mcp"
     },
     "notion": {
-      "url": "https://mcp.notion.com/mcp",
-      "auth": "oauth",
-      "lifecycle": "lazy"
+      "url": "https://mcp.notion.com/mcp"
     },
     "linear": {
-      "url": "https://mcp.linear.app/mcp",
-      "auth": "oauth",
-      "lifecycle": "lazy"
+      "url": "https://mcp.linear.app/mcp"
     },
     "granola": {
-      "url": "https://mcp.granola.ai/mcp",
-      "auth": "oauth",
-      "lifecycle": "lazy"
+      "url": "https://mcp.granola.ai/mcp"
     },
     "google-workspace": {
       "command": "/bin/sh",
@@ -53,8 +41,7 @@
         "-c",
         "umask 077; exec uvx --from workspace-mcp==1.28.0 workspace-mcp --transport stdio --read-only --tools gmail drive docs calendar"
       ],
-      "cwd": "~/.local/share/workspace-mcp",
-      "lifecycle": "lazy"
+      "cwd": "~/.local/share/workspace-mcp"
     }
   }
 }
