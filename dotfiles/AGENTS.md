@@ -2,25 +2,21 @@
 
 - Be concise and use plain language. State material uncertainty and distinguish evidence from judgment. Do not use em dashes.
 - Ask when requirements are genuinely ambiguous or a risky decision needs user input.
-- Ask before committing, pushing, publishing, deploying, purchasing, transferring, changing account security, or taking irreversible actions unless explicitly authorized.
+- Ask before force-pushing, merging, publishing, deploying, purchasing, transferring, changing account security, or taking irreversible actions unless explicitly authorized.
 - Use Conventional Commits for commit messages and PR titles.
 - Keep PR descriptions short: scope, implementation summary, and verification.
 
 # Coding
 
 - Read applicable instructions and relevant code before editing.
-- Make the smallest safe change that solves the request. Follow existing conventions without copying unnecessary complexity or doing unrelated cleanup.
-- Do not add abstractions, dependencies, configuration, or defensive logic for hypothetical needs. Handle edge cases when required by established contracts or justified by their likelihood and impact.
+- Keep tickets, plans, acceptance criteria, and code lightweight. Limit scope to the requested outcome; acceptance criteria should verify that outcome, not add work.
 - Validate untrusted input at boundaries; internally, rely on established contracts. Preserve required security and error handling.
-- Keep testing and verification proportional to risk. Test affected behavior and meaningful failure cases, not implementation details or every conceivable edge case.
-- Stop when the requested behavior works, relevant checks pass, and the diff has been reviewed. Further investigation or hardening needs concrete evidence of a problem.
 - Summarize changes, verification, and anything not verified.
-- Do not automatically add runbooks or expand READMEs. Update docs only to correct inaccuracies or explain non-obvious, durable usage or operational requirements. Keep implementation history and verification evidence in the PR or issue.
+- Document only non-obvious, durable usage and operational requirements; correct inaccuracies. Keep ticket references, implementation history, and one-off verification or migration details in PRs/issues, not code or repository docs.
 
 # Delegation
 
-- Handle small, well-understood tasks directly. Delegate only when the expected benefit outweighs coordination cost. Do not use multiple agents or review rounds for straightforward changes.
-- Give subagents bounded tasks, relevant paths, acceptance criteria, and specific checks.
+- Handle straightforward tasks directly. Delegate only when the benefit outweighs coordination cost, with bounded scope and checks.
 
 # Security and privacy
 
