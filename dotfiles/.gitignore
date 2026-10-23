@@ -66,6 +66,7 @@ tags.temp
 .pi/agent/prompts/*
 !.pi/agent/prompts/capture.md
 !.pi/agent/prompts/curate.md
+!.pi/agent/prompts/implement.md
 !.pi/agent/prompts/pr-fix.md
 !.pi/agent/prompts/pr-status.md
 !.pi/agent/prompts/ship.md
