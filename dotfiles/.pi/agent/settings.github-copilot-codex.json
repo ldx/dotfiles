@@ -6,7 +6,8 @@
     "npm:@juicesharp/rpiv-ask-user-question",
     "npm:pi-subagents",
     "npm:pi-web-access",
-    "git:github.com/ldx/pi-extensions"
+    "git:github.com/ldx/pi-extensions",
+    "npm:@juicesharp/rpiv-todo"
   ],
   "showHardwareCursor": true,
   "shellCommandPrefix": "source ~/.common.sh",
