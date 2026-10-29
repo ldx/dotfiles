@@ -9,7 +9,8 @@
 # Coding
 
 - Read applicable instructions and relevant code before editing.
-- Keep tickets, plans, acceptance criteria, and code lightweight. Limit scope to the requested outcome; acceptance criteria should verify that outcome, not add work.
+- Choose the lowest-effort solution that meets the requested outcome, including ongoing maintenance. Check what already exists before proposing work. Treat extra scope, abstractions, checks, and documentation as costs to justify, not defaults.
+- Define done by the requested outcome; leave adjacent problems unsolved. Acceptance criteria must verify that outcome, not introduce requirements. Respect requested brevity and artifact limits. Before handing off, remove anything that does not strengthen the outcome.
 - Validate untrusted input at boundaries; internally, rely on established contracts. Preserve required security and error handling.
 - Summarize changes, verification, and anything not verified.
 - Document only non-obvious, durable usage and operational requirements; correct inaccuracies. Keep ticket references, implementation history, and one-off verification or migration details in PRs/issues, not code or repository docs.
