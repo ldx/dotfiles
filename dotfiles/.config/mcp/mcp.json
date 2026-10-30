@@ -42,6 +42,16 @@
         "umask 077; exec uvx --from workspace-mcp==1.28.0 workspace-mcp --transport stdio --read-only --tools gmail drive docs calendar"
       ],
       "cwd": "~/.local/share/workspace-mcp"
+    },
+    "eraser": {
+      "url": "https://app.eraser.io/api/mcp"
+    },
+    "sentry": {
+      "url": "https://mcp.sentry.dev/mcp",
+      "description": "Search Sentry errors, inspect and triage issues, and analyze performance"
+    },
+    "runpod": {
+      "url": "https://mcp.getrunpod.io/"
     }
   }
 }
