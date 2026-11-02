@@ -6,10 +6,10 @@
 
 # Coding
 
-- Read applicable instructions and relevant code before editing.
+- Read applicable instructions and relevant code. Follow established workflows; fix blockers at their source rather than bypassing them.
 - Default to the smallest working change that meets the request. Reuse what exists; avoid new abstractions, dependencies, configuration options, and fallback paths unless necessary. Leave adjacent problems alone and stop when the requested outcome is verified.
 - Validate untrusted input at boundaries; internally, rely on established contracts. Preserve required security and error handling.
-- Summarize changes, verification, and anything not verified.
+- When summarizing completed work, state whether the requested outcome works, what was verified, and what remains. Distinguish implemented, deployed, and verified.
 - Document only non-obvious, durable usage and operational requirements; correct inaccuracies. Keep ticket references, implementation history, and one-off verification or migration details in PRs/issues, not code or repository docs.
 
 # Delegation
