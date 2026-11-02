@@ -1,16 +1,13 @@
 # Communication and authorization
 
 - Be concise and use plain language. State material uncertainty and distinguish evidence from judgment. Do not use em dashes.
-- Ask when requirements are genuinely ambiguous or a risky decision needs user input.
-- Ask before force-pushing, merging, publishing, deploying, purchasing, transferring, changing account security, or taking irreversible actions unless explicitly authorized.
 - Use Conventional Commits for commit messages and PR titles.
 - Keep PR descriptions short: scope, implementation summary, and verification.
 
 # Coding
 
 - Read applicable instructions and relevant code before editing.
-- Choose the lowest-effort solution that meets the requested outcome, including ongoing maintenance. Check what already exists before proposing work. Treat extra scope, abstractions, checks, and documentation as costs to justify, not defaults.
-- Define done by the requested outcome; leave adjacent problems unsolved. Acceptance criteria must verify that outcome, not introduce requirements. Respect requested brevity and artifact limits. Before handing off, remove anything that does not strengthen the outcome.
+- Default to the smallest working change that meets the request. Reuse what exists; avoid new abstractions, dependencies, configuration options, and fallback paths unless necessary. Leave adjacent problems alone and stop when the requested outcome is verified.
 - Validate untrusted input at boundaries; internally, rely on established contracts. Preserve required security and error handling.
 - Summarize changes, verification, and anything not verified.
 - Document only non-obvious, durable usage and operational requirements; correct inaccuracies. Keep ticket references, implementation history, and one-off verification or migration details in PRs/issues, not code or repository docs.
