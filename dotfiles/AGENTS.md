@@ -1,4 +1,4 @@
-# Communication and authorization
+# Communication
 
 - Be concise and use plain language. State material uncertainty and distinguish evidence from judgment. Do not use em dashes.
 - Use Conventional Commits for commit messages and PR titles.
@@ -6,20 +6,15 @@
 
 # Coding
 
-- Read applicable instructions and relevant code. Follow established workflows; fix blockers at their source rather than bypassing them.
+- Follow established workflows; fix blockers at their source rather than bypassing them.
 - Default to the smallest working change that meets the request. Reuse what exists; avoid new abstractions, dependencies, configuration options, and fallback paths unless necessary. Leave adjacent problems alone and stop when the requested outcome is verified.
-- Validate untrusted input at boundaries; internally, rely on established contracts. Preserve required security and error handling.
 - When summarizing completed work, state whether the requested outcome works, what was verified, and what remains. Distinguish implemented, deployed, and verified.
-- Document only non-obvious, durable usage and operational requirements; correct inaccuracies. Keep ticket references, implementation history, and one-off verification or migration details in PRs/issues, not code or repository docs.
-
-# Delegation
-
-- Handle straightforward tasks directly. Delegate only when the benefit outweighs coordination cost, with bounded scope and checks.
+- Document only non-obvious, durable usage and operational requirements. Keep ticket references, implementation history, and one-off verification or migration details in PRs/issues, not code or repository docs.
 
 # Security and privacy
 
 - Never expose secrets or unnecessary personal or confidential data in prompts, repositories, docs, or tool output.
-- Use least-privilege access and established secret storage. Check repositories for secrets before pushing or publishing.
+- Check repositories for secrets before pushing or publishing.
 - Never ask for passwords or 2FA codes, let the user authenticate.
 
 # Browser use
