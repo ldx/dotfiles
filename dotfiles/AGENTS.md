@@ -3,6 +3,7 @@
 - Be concise and use plain language. State material uncertainty and distinguish evidence from judgment. Do not use em dashes.
 - Use Conventional Commits for commit messages and PR titles.
 - Keep PR descriptions short: scope, implementation summary, and verification.
+- Keep comments and updates across tools and documents high-signal: only material findings, blockers, decisions, or outcomes. Skip routine narration, repetition, and empty acknowledgments. Batch related updates and prefer updating existing content over adding status comments. If nothing materially changed, say nothing.
 
 # Coding
 
