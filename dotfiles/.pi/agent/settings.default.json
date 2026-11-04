@@ -10,6 +10,12 @@
     "git:github.com/ldx/pi-extensions",
     "npm:@juicesharp/rpiv-todo"
   ],
+  "retry": {
+    "enabled": true,
+    "maxRetries": 10,
+    "baseDelayMs": 3000,
+    "maxAgentDelayMs": 30000
+  },
   "showHardwareCursor": true,
   "shellCommandPrefix": "source ~/.common.sh",
   "theme": "dark",
