@@ -60,8 +60,6 @@ tags.temp
 # .pi/agent/mcp.json stays machine-local; shared config lives in .config/mcp/.
 !.pi/agent/permissions.json
 !.pi/agent/settings.json
-!.pi/agent/settings.github-copilot-codex.json
-!.pi/agent/settings.codex-opencode-go.json
 !.pi/agent/prompts/
 .pi/agent/prompts/*
 !.pi/agent/prompts/capture.md
@@ -71,6 +69,11 @@ tags.temp
 !.pi/agent/prompts/pr-status.md
 !.pi/agent/prompts/ship.md
 !.pi/agent/prompts/ticket.md
+!.pi/agent/skills/
+.pi/agent/skills/*
+!.pi/agent/skills/thermo-nuclear-code-quality-review/
+.pi/agent/skills/thermo-nuclear-code-quality-review/*
+!.pi/agent/skills/thermo-nuclear-code-quality-review/SKILL.md
 !.pi/agent/extensions/
 .pi/agent/extensions/*
 !.pi/agent/extensions/subagent/

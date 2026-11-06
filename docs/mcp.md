@@ -62,7 +62,7 @@ When migrating from the adapter, merge shared server definitions and any local
 fields such as `lifecycle` and `auth: "oauth"`. Built-in MCP discovers HTTP OAuth
 automatically and connects enabled servers at startup rather than lazily.
 
-Remove `npm:pi-mcp-adapter` from all selectable Pi profiles. Built-in MCP is enabled
+Remove `npm:pi-mcp-adapter` from Pi's `settings.json`. Built-in MCP is enabled
 by default; check Built-in extensions in `pi config` if it was explicitly disabled.
 Remote servers may need a fresh sign-in with `/mcp` or `pi mcp login <server>` because
 the built-in loader uses a separate OAuth credential store. Preserve existing

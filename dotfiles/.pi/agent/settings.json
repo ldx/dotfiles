@@ -1,7 +1,10 @@
 {
   "defaultProvider": "openai-codex",
   "defaultModel": "gpt-6-astra",
-  "defaultThinkingLevel": "high",
+  "defaultThinkingLevel": "medium",
+  "defaultTools": [
+    "+codemode"
+  ],
   "packages": [
     "npm:@juicesharp/rpiv-ask-user-question",
     "npm:pi-subagents",
@@ -18,19 +21,15 @@
   "showHardwareCursor": true,
   "shellCommandPrefix": "source ~/.common.sh",
   "theme": "dark",
-  "lastChangelogVersion": "0.80.6",
   "subagents": {
-    "defaultModel": "openai-codex/gpt-5.6-luna",
+    "defaultModel": "openai-codex/gpt-5.6-terra",
     "defaultThinking": "medium",
     "modelScope": {
       "enforce": true,
       "strict": true,
       "allow": [
         "openai-codex/gpt-5.6-*",
-        "openai-codex/gpt-6-astra",
-        "opencode-go/glm-5.3",
-        "opencode-go/kimi-k2.7-code",
-        "opencode-go/kimi-k3"
+        "openai-codex/gpt-6-astra"
       ]
     },
     "agentOverrides": {
@@ -40,20 +39,20 @@
         "defaultContext": "fresh"
       },
       "delegate": {
-        "model": "opencode-go/kimi-k2.7-code",
+        "model": "openai-codex/gpt-5.6-luna",
         "thinking": "medium"
       },
       "researcher": {
-        "model": "openai-codex/gpt-5.6-luna",
+        "model": "openai-codex/gpt-5.6-terra",
         "thinking": "medium",
         "defaultContext": "fresh"
       },
       "reviewer": {
-        "model": "opencode-go/glm-5.3",
+        "model": "openai-codex/gpt-5.6-sol",
         "thinking": "medium"
       },
       "worker": {
-        "model": "opencode-go/kimi-k2.7-code",
+        "model": "openai-codex/gpt-5.6-terra",
         "thinking": "medium",
         "defaultContext": "fresh"
       },
@@ -77,5 +76,9 @@
         "disabled": true
       }
     }
-  }
+  },
+  "enabledModels": [
+    "openai-codex/gpt-6.1-sol",
+    "openai-codex/gpt-6-astra"
+  ]
 }

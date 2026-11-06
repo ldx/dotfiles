@@ -14,9 +14,9 @@ This repository describes the desired user environment. It does not contain prov
 
 Merge the tracked files under `dotfiles/` recursively into the user's home directory. On a new machine, it is a clean home-directory overlay. On an existing machine, do not use a destructive mirror or delete unrelated files. Copy configuration only; never copy credentials, browser profiles, OAuth state, sessions, caches, history, ignored files, untracked files, or other runtime state.
 
-Use regular copies for every managed file. The repository records desired configuration; it is not a live runtime dependency. A Git pull, branch switch, checkout move, or checkout deletion must not immediately change or break the active environment. Do not create symlinks from managed home paths into the repository, and do not symlink managed directories. The sole exception is the selected Pi profile: after copying all profile templates, `~/.pi/agent/settings.json` is a local, relative symlink to the selected `settings.<profile>.json` in that same home directory, as described below.
+Use regular copies for every managed file. The repository records desired configuration; it is not a live runtime dependency. A Git pull, branch switch, checkout move, or checkout deletion must not immediately change or break the active environment. Do not create symlinks from managed home paths into the repository, and do not symlink managed directories.
 
-Before replacing an existing managed destination, compare it with the repository version and reconcile any local drift. When converting a repository-backed symlink to a regular copy, do not use a copy operation that follows the destination symlink and writes through to the repository. Create the regular file separately and atomically replace the symlink. After applying the overlay, verify that every managed destination is a regular file, that its content matches the repository, and that only the Pi profile selector remains a symlink.
+Before replacing an existing managed destination, compare it with the repository version and reconcile any local drift. When converting a symlink to a regular copy, do not use a copy operation that follows the destination symlink and writes through to its target. Create the regular file separately and atomically replace the symlink. After applying the overlay, verify that every managed destination is a regular file, that its configuration matches the repository apart from local runtime preferences, and that no managed destination remains a symlink.
 
 Treat `lastChangelogVersion` and `hideThinkingBlock` in Pi settings files as local runtime preferences. Ignore their differences during deployment and never commit them as configuration changes.
 
@@ -42,31 +42,38 @@ git config --file "$HOME/.gitconfig.local" user.email "you@example.com"
 chmod 600 "$HOME/.gitconfig.local"
 ```
 
-## Select a Pi subscription profile
+## Pi configuration
 
-Pi loads `~/.pi/agent/settings.json`. The repository keeps selectable profile
-templates instead of tracking that active path:
+Track the shared Pi configuration in `dotfiles/.pi/agent/settings.json` and copy
+it to `~/.pi/agent/settings.json` as a regular file using the normal overlay.
+Preserve local runtime preferences when reconciling settings.
 
-- `settings.default.json` -- Codex-only profile.
-- `settings.github-copilot-codex.json` -- GitHub Copilot primary with ChatGPT
-  Codex fallbacks.
-- `settings.codex-opencode-go.json` -- ChatGPT Codex primary with OpenCode Go
-  fallbacks.
+Restart Pi after changing configuration. Authenticate providers locally with
+`/login`; never copy `auth.json`, sessions, caches, or other runtime data.
+Confirm the active routing with `/subagents-models` before relying on it.
 
-Applying the dotfiles means recursively copying the tracked files under
-`dotfiles/` into the user's home directory. It is a home-directory overlay, not
-a Git merge: `dotfiles/.pi/agent/*` becomes `~/.pi/agent/*`, and unrelated home
-files are not deleted. This copies all profile templates. Preserve the machine's
-existing local profile selection unless the user explicitly asks to change it.
-To select a profile, use a local, relative symlink after the overlay:
+## Pi skills
+
+The custom `thermo-nuclear-code-quality-review` skill is tracked under
+`dotfiles/.pi/agent/skills/` and copied by the normal overlay.
+
+Install upstream skills with the [skills CLI](https://github.com/vercel-labs/skills)
+rather than copying their contents or installer-created symlinks into this
+repository. Review upstream instructions before installing:
 
 ```sh
-ln -sfn "settings.<profile>.json" "$HOME/.pi/agent/settings.json"
+npx skills add github/gh-stack -g -a pi --skill gh-stack
+npx skills add cloudflare/skills -g -a pi --skill \
+  agents-sdk cloudflare cloudflare-email-service cloudflare-one \
+  cloudflare-one-migrations durable-objects sandbox-migrate-to-next \
+  sandbox-next sandbox-stable turnstile-spin web-perf workers-best-practices wrangler
 ```
 
-Restart Pi after changing profiles. Authenticate each selected provider locally
-with `/login`; never copy `auth.json`, sessions, caches, or other runtime data.
-Confirm the active routing with `/subagents-models` before relying on it.
+The `gh-stack` skill also requires `gh extension install github/gh-stack`.
+The current skills CLI installs global Pi skills under `~/.agents/skills/`;
+older installations may have links from `~/.pi/agent/skills/`. Leave these
+installer-managed files outside the dotfiles overlay. After installation,
+restart Pi and verify the skills are available with `/skill:<name>`.
 
 ## Common baseline
 
