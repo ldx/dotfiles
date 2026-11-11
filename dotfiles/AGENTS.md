@@ -7,6 +7,8 @@
 
 # Coding
 
+- Keep solutions and the process lightweight and low-lift, and don't overengineer. Optimize for minimal user effort and maintenance, not hypothetical future needs.
+
 - Follow established workflows; fix blockers at their source rather than bypassing them.
 - Default to the smallest working change that meets the request. Reuse what exists; avoid new abstractions, dependencies, configuration options, and fallback paths unless necessary. Leave adjacent problems alone and stop when the requested outcome is verified.
 - When summarizing completed work, state whether the requested outcome works, what was verified, and what remains. Distinguish implemented, deployed, and verified.
