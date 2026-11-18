@@ -117,6 +117,9 @@ remaining phases, and the originating agent must not implement in parallel.
   is reachable with `herdr status server`. Never launch Herdr just to detect it
   or control another focused session from outside Herdr. If unavailable, continue
   in this Pi using explicit worktree paths and report that no workspace was made.
+- For `<task-label>`, use the lowercase ticket ID followed by a short kebab-case
+  description of the work, e.g. `uagi-4035-lambda-runpod-tags`. If there is no
+  ticket, use the short description alone.
 - Inspect workspace/agent state for an earlier partial handoff before creating
   anything. Create one top-level workspace, never a child of the source or any
   other workspace. Use `herdr workspace create --cwd <worktree>
